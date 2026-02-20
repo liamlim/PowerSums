@@ -314,3 +314,6 @@ It's not difficult to show that these identities hold:
 
 When we substitute this to the formula from section 14 then we get
 - **A(n+2) = e₁·A(n+1) - e₂·A(n) + e₃·A(n-1) + W(n)**
+- **B(n+2) = e₁·B(n+1) - e₂·B(n) + e₃·B(n-1) + W(n+1) - e₁·W(n)**
+- **C(n+2) = e₁·C(n+1) - e₂·C(n) + e₃·C(n-1) - (1/3)e₁·W(n+1) + (2/3)e₂·W(n)**
+
