@@ -257,6 +257,8 @@ Since the right-hand side at each step introduces exactly one new power sum s_n,
 
 for some coefficients W_m(n). We are building W_m backwards, because that will be more convenient later.
 
+---
+
 ## 13. Expressing K via Power Sums - Part 2
 
 By substituting the expression for K into the recurrence from Section 12, we obtain (for each fixed m) the following recurrence relation for the coefficients W_m(j):
@@ -276,3 +278,36 @@ Remarkably, this recurrence is the same for every m including the initial condit
 - **K(n+2) = Σ_{m=0}^{n} W(m) s_{n-m}**
 
 where now W(m) is the coefficient of s_{n-m}
+
+---
+
+## 14. Three New Sequences from the Convolution
+
+The convolution formula for **K(n+2)** expresses K in terms of the ordinary power sums **s_n**. A natural question is whether the same approach applies when s_n is itself replaced by its universal representation **s_n = K(n) s_2 + L(n) s_1 + M(n) s_0**. Substituting this into the convolution gives:
+
+- **K(n+2) = A(n) s_2 + B(n) s_1 + C(n) s_0**
+
+where the three new sequences are defined as the convolutions of W against K, L, and M respectively:
+
+- **A(n) = Σ_{m=0}^{n} W(m) K(n-m)**
+- **B(n) = Σ_{m=0}^{n} W(m) L(n-m)**
+- **C(n) = Σ_{m=0}^{n} W(m) M(n-m)**
+
+This identity holds for all n ≥ 0. Their initial values are:
+
+- **A(0)=0, A(1)=0**
+- **B(0)=0, B(1)=W(0)**
+- **C(0)=W(0), C(1)=W(1)**
+
+The formulas below can be proven by math induction:
+- **A(n) - (2/3)e₁·A(n-1) + (1/3)e₂·A(n-2) = K(n)/3**
+- **B(n) - (2/3)e₁·B(n-1) + (1/3)e₂·B(n-2) = L(n)/3**
+- **C(n) - (2/3)e₁·C(n-1) + (1/3)e₂·C(n-2) = M(n)/3**
+
+---
+
+## 15. Master sequence A
+
+TODO: comment this
+- **B(n) = A(n+1) - e_1 A(n)**
+- **C(n) = W(n) + e_3 A(n-1)**
