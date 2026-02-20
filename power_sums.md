@@ -308,6 +308,9 @@ The formulas below can be proven by math induction:
 
 ## 15. Master sequence A
 
-TODO: comment this
+It's not difficult to show that these identities hold:
 - **B(n) = A(n+1) - e_1 A(n)**
 - **C(n) = W(n) + e_3 A(n-1)**
+
+When we substitute this to the formula from section 14 then we get
+- **A(n+2) = e₁·A(n+1) - e₂·A(n) + e₃·A(n-1) + W(n)**
