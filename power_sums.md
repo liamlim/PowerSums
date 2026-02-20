@@ -234,7 +234,7 @@ Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying us
 
 These express the classical power sums entirely in terms of the master sequences K and P.
 
-Multiplying the g_n formula through by **e_3^n** and using **e_3^n = (xyz)^n = x^n y^n z^n**, each term (y-z)/x^n · e_3^n becomes (y-z) y^n z^n and so on, giving:
+Multiplying the g_n formula through by **e_3^n** and using **e_3^n = (xyz)^n = x^n y^n z^n** gives:
 - **x^ny^n+y^nz^n+z^nx^n = 3e_3^n P(n+2) - 2e_2 e_3^{n-1} P(n+1) + e_1 e_3^{n-1} P(n)**
 
 ---
@@ -271,10 +271,8 @@ Remarkably, this recurrence is the same for every m including the initial condit
 - **W(1) = 2/9 e_1**
 - **W(j+2) = (2/3)e_1 W(j+1) - (1/3)e_2 W(j)**
 
-**Reindexing.** In the sum K(n+2) = Σ_{m=0}^{n} W_m(n-m) s_m from Section 12, each W_m depends only on the lag j = n-m, not on m itself. Relabelling by setting the summation index to the lag m gives the equivalent form:
+**Reindexing.** In the sum for **K(n+2)** from Section 12, each W_m depends only on the lag j = n-m, not on m itself. Relabelling gives the equivalent form:
 
 - **K(n+2) = Σ_{m=0}^{n} W(m) s_{n-m}**
 
-where now W(m) is the coefficient of s_{n-m}, the power sum at lag m behind s_n.
-
-**Remark.** This formula has the structure of a discrete convolution: K(n+2) is the inner product of the fixed sequence W(0), W(1), W(2), ... with the reversed window of power sums s_n, s_{n-1}, ..., s_0. The same weights W apply at every level n — each new power sum s_n that enters contributes to all future values of K with the same decaying profile W(0), W(1), W(2), .... Notice also that the W recurrence involves only **e_1 and e_2**, not e_3. This is not obvious from the definition of K, which depends on all three elementary symmetric polynomials, and reflects a genuine structural feature of the relationship between K and the power sums.
+where now W(m) is the coefficient of s_{n-m}
