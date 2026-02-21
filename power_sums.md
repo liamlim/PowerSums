@@ -183,6 +183,9 @@ From the explicit formulas it's immediately visible that:
 - **-(x-y)(y-z)(z-x) K(n) = f_n(y-z, z-x, x-y)**
 - **-(x-y)(y-z)(z-x) P(n) = g_n(y-z, z-x, x-y)**
 
+Given the fact that **f_n = g_{-n}** we also obtain
+- **K(n) = P(-n)**
+
 ---
 
 ## 8. Relationships Between the Coefficients
