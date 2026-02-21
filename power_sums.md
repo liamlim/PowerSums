@@ -256,7 +256,7 @@ Multiplying the g_n formula through by **e_3^n** and using **e_3^n = (xyz)^n = x
 
 By substitution of the formulas from this section back to the formula connecting the master sequences, we obtain:
 
-- **P(n)⋅sn​+e3​⋅K(n+1)⋅s−n​=K(n)⋅(3e3​P(n+1)−e2​P(n))−K(n+1)⋅(e2​P(n+1)−e1​P(n))**
+- **P(n) s_n + e_3 K(n+1) s_{-n} = e_2 K(n) P(n) - 3 e_3 K(n) P(n+1) - e_1 K(n+1) P(n) + e_2 K(n+1) P(n+1)**
 
 ---
 
