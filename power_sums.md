@@ -162,7 +162,7 @@ The coefficients K(n) and P(n) have closed-form expressions. These can be derive
 
 The factor **-(x-y)(y-z)(z-x)** is a non-zero constant (since x, y, z are distinct), so these formulas uniquely determine K(n) and P(n) for all integers n.
 
-Substituting n=2 into the formula for K(n) and simplifying, one finds that **K(2) = 1** which is consistent with the already estabilished fact.
+Substituting n=2 into the formula for K(n) and simplifying, one finds that **K(2) = 1** which is consistent with the already established fact.
 
 **Relation between f_n, g_n and K(n), P(n)**:
 From the explicit formulas it's immediately visible that:
@@ -312,21 +312,20 @@ This identity holds for all n ≥ 0. Their initial values are:
 - **B(0)=0, B(1)=W(0)**
 - **C(0)=W(0), C(1)=W(1)**
 
-The formulas below can be proven by math induction:
-- **3A(n+2) - 2e₁·A(n+1) + e₂·A(n) = K(n+2)**
-- **3B(n+2) - 2e₁·B(n+1) + e₂·B(n) = L(n+2)**
-- **3C(n+2) - 2e₁·C(n+1) + e₂·C(n) = M(n+2)**
+The formulas below can be proven by mathematical induction:
+- **3A(n+2) - 2e_1 A(n+1) + e_2 A(n) = K(n+2)**
+- **3B(n+2) - 2e_1 B(n+1) + e_2 B(n) = L(n+2)**
+- **3C(n+2) - 2e_1 C(n+1) + e_2 C(n) = M(n+2)**
 
 ---
 
-## 15. Master sequence A
+## 15. Master Sequence A
 
 It's not difficult to show that these identities hold:
 - **B(n) = A(n+1) - e_1 A(n)**
 - **C(n+1) = W(n+1) + e_3 A(n)**
 
-When we substitute this to the formula from section 14 then we get
-- **A(n+2) = e₁·A(n+1) - e₂·A(n) + e₃·A(n-1) + W(n)**
-- **B(n+2) = e₁·B(n+1) - e₂·B(n) + e₃·B(n-1) + W(n+1) - e₁·W(n)**
-- **C(n+2) = e₁·C(n+1) - e₂·C(n) + e₃·C(n-1) - (1/3)e₁·W(n+1) + (2/3)e₂·W(n)**
-
+When we substitute this into the formula from Section 14 then we get
+- **A(n+2) = e_1 A(n+1) - e_2 A(n) + e_3 A(n-1) + W(n)**
+- **B(n+2) = e_1 B(n+1) - e_2 B(n) + e_3 B(n-1) + W(n+1) - e_1 W(n)**
+- **C(n+2) = e_1 C(n+1) - e_2 C(n) + e_3 C(n-1) - (1/3)e_1 W(n+1) + (2/3)e_2 W(n)**
