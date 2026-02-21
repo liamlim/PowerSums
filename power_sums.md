@@ -164,6 +164,12 @@ The factor **-(x-y)(y-z)(z-x)** is a non-zero constant (since x, y, z are distin
 
 Substituting n=2 into the formula for K(n) and simplifying, one finds that **K(2) = 1** which is consistent with the already estabilished fact.
 
+**Relation between f_n, g_n and K(n), P(n)**:
+From the explicit formulas it's immediately visible that:
+
+- **-(x-y)(y-z)(z-x) K(n) = f_n(y-z, z-x, x-y)**
+- **-(x-y)(y-z)(z-x) P(n) = g_n(y-z, z-x, x-y)**
+
 ---
 
 ## 8. Relationships Between the Coefficients
@@ -209,10 +215,8 @@ Fix any integer **s** and define the shifted sequence **h_n = f_{n+s}**. Then h_
 
 - **k+l+m = P(n) f_{n-2} + Q(n) f_{n-1} + R(n) f_n**
 - **k+l+m = K(n) g_{n-2} + L(n) g_{n-1} + M(n) g_n**
-- **kx+ly+mz = P(n) f_{n-1} + Q(n) f_n + R(n) f_{n+1}**
-- **k/x+l/y+m/z = K(n) g_{n-1} + L(n) g_n + M(n) g_{n+1}**
 
-All four identities can be derived using shift invariance and **f_n = g_{-n}**. The identities hold for all integers **n** and any weights **k, l, m**.
+Both identities can be derived using shift invariance for **s = -n** and **f_n = g_{-n}**. The identities hold for all integers **n** and any weights **k, l, m**.
 
 ### 10.2 The Case k+l+m = 0
 
@@ -221,7 +225,16 @@ When the weights sum to zero, the identities become:
 - **P(n) f_{n-2} + Q(n) f_{n-1} + R(n) f_n = 0**
 - **K(n) g_{n-2} + L(n) g_{n-1} + M(n) g_n = 0**
 
-This is a non-trivial linear relation among three consecutive values of f that holds for **all** integers n. It means that for such weights, any single value f_n is determined by the two preceding ones.
+This is a linear relation among three consecutive values of f that holds for **all** integers n. 
+
+### 10.3 The formula for K and P
+
+We already know the relation between **K** and **f_n** with the right weights, so we also immediately obtain:
+
+- **P(n+2) K(n) + Q(n+2) K(n+1) + R(n+2) K(n+2) = 0**
+- **K(n+2) P(n) + L(n+2) P(n+1) + M(n+2) P(n+2) = 0**
+
+
 
 ---
 
