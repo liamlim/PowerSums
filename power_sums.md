@@ -252,6 +252,12 @@ These express the classical power sums entirely in terms of the master sequences
 Multiplying the g_n formula through by **e_3^n** and using **e_3^n = (xyz)^n = x^n y^n z^n** gives:
 - **x^ny^n+y^nz^n+z^nx^n = 3e_3^n P(n+2) - 2e_2 e_3^{n-1} P(n+1) + e_1 e_3^{n-1} P(n)**
 
+**Relation between s_{-n} and s_n**
+
+By substitution of the formulas from this section back to the formula connecting the master sequences, we obtain:
+
+- **P(n)⋅sn​+e3​⋅K(n+1)⋅s−n​=K(n)⋅(3e3​P(n+1)−e2​P(n))−K(n+1)⋅(e2​P(n+1)−e1​P(n))**
+
 ---
 
 ## 12. Expressing K via Power Sums - Part 1
