@@ -125,7 +125,7 @@ The same coefficients work for every choice of weights — only the initial valu
 
 ## 6. Recursive Computation of Universal Coefficients
 
-### Coefficients K, L, M
+### 6.1 Coefficients K, L, M
 
 The sequences **K(n), L(n), M(n)** each satisfy the same recurrence as **f_n**:
 
@@ -139,7 +139,7 @@ with initial conditions chosen so that the three sequences act as a basis:
 
 It can be verified by induction that **f_n = K(n) f_2 + L(n) f_1 + M(n) f_0** holds for all n given these definitions.
 
-### Coefficients P, Q, R
+### 6.2 Coefficients P, Q, R
 
 The sequences **P(n), Q(n), R(n)** each satisfy the same recurrence as **g_n**:
 
@@ -150,6 +150,17 @@ with the same pattern of initial conditions:
 - **P(0)=0, P(1)=0, P(2)=1**
 - **Q(0)=0, Q(1)=1, Q(2)=0**
 - **R(0)=1, R(1)=0, R(2)=0**
+
+### 6.3 Helper sequence Q
+
+Define the sequence Q by this definition:
+- **Q(0) = 0**
+- **Q(1) = 0**
+- **Q(2) = e_3^2**
+- **Q(n) = e_2 Q(n−1) − e_1 Q(n−2) + Q(n−3)**
+
+By induction it's possible to prove the relation:
+- **Q(n) = e_3^n P(n)**
 
 ---
 
