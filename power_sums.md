@@ -234,7 +234,9 @@ We already know the relation between **K** and **f_n** with the right weights, s
 - **P(n+2) K(n) + Q(n+2) K(n+1) + R(n+2) K(n+2) = 0**
 - **K(n+2) P(n) + L(n+2) P(n+1) + M(n+2) P(n+2) = 0**
 
+Using the formulas above, we get relation between master sequences P and Q:
 
+- **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
 
 ---
 
