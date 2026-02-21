@@ -154,10 +154,10 @@ with the same pattern of initial conditions:
 ### 6.3 Helper sequence Px
 
 Define the sequence Px by this definition:
-- **Px0) = 0**
+- **Px(0) = 0**
 - **Px(1) = 0**
 - **Px(2) = e_3^2**
-- **Px(n) = e_2 Px(n−1) − e_1 Px(n−2) + Px(n−3)**
+- **Px(n) = e_2 Px(n-1) - e_1 e_3 Px(n-2) + e_3^2 Px(n-3)**
 
 By induction it's possible to prove the relation:
 - **Px(n) = e_3^n P(n)**
