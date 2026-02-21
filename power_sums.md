@@ -194,10 +194,19 @@ Since K(n) and P(n) are the primary sequences, all other coefficients can be exp
 
 ### 8.1 Fundamental Relations
 
+**Relations for L and M:**
 - **L(n) = K(n+1) - e_1 K(n)**
 - **M(n+1) = e_3 K(n)**
+
+**Relations for Q and R:**
 - **Q(n) = P(n+1) - (e_2/e_3) P(n)**
 - **R(n+1) = (1/e_3) P(n)**
+
+Note that:
+- **e_3^{n+1} R(n+1) = Px(n)**
+- **e_3^{n+1} Q(n) = Px(n+1) - e_2 Px(n)**
+
+These identifies show that if we have integers x,y,z then we transform R and Q into integers by multiplying by the right power of e_3.
 
 ### 8.2 Compact Forms for f_n and g_n
 
