@@ -236,14 +236,14 @@ Fix any integer **s** and define the shifted sequence **h_n = f_{n+s}**. Then h_
 
 ## 10. The Weight-Sum Identity and Its Consequences
 
-### 10.1 The Main Identities
+By using shift invariance for **s = -n** and the relation **f_{-n} = g_n** we obtain these relations:
 
 - **k+l+m = P(n) f_{n-2} + Q(n) f_{n-1} + R(n) f_n**
 - **k+l+m = K(n) g_{n-2} + L(n) g_{n-1} + M(n) g_n**
 
-Both identities can be derived using shift invariance for **s = -n** and **f_n = g_{-n}**. The identities hold for all integers **n** and any weights **k, l, m**.
+The identities hold for all integers **n** and any weights **k, l, m**.
 
-### 10.2 The Case k+l+m = 0
+### 10.1 The Case k+l+m = 0
 
 When the weights sum to zero, the identities become:
 
@@ -252,7 +252,7 @@ When the weights sum to zero, the identities become:
 
 This is a linear relation among three consecutive values of f that holds for **all** integers n. 
 
-### 10.3 The formula for K and P
+### 10.2 The formula for K and P
 
 We already know the relation between **K** and **f_n** with the right weights, so we also immediately obtain:
 
@@ -263,11 +263,16 @@ Using the formulas above, we get relation between master sequences P and Q:
 
 - **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
 
-### 10.4 The formula for K and Px
+### 10.3 The formula for K and Px
 
 By simple multiplication of the previous formula with **e_3^{n+1}** we obtain:
 - **e_3 Px(n) K(n+2) + Px(n+2) K(n+1) + e_3 Px(n+1) K(n) = e_2 K(n+1) Px(n+1)**
 
+### 10.4 The formula for single power
+
+By applying the formula for **k = 1, l = 0, m = 0** we obtain:
+- **1 = P(n)x^{n-2} + Q(n)x^{n-1} + R(n)x^n**
+- **1 = K(n)/x^{n-2} + L(n)/x^{n-1} + M(n)/x^n**
 
 ---
 
