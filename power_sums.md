@@ -151,16 +151,16 @@ with the same pattern of initial conditions:
 - **Q(0)=0, Q(1)=1, Q(2)=0**
 - **R(0)=1, R(1)=0, R(2)=0**
 
-### 6.3 Helper sequence Q
+### 6.3 Helper sequence Px
 
 Define the sequence Q by this definition:
-- **Q(0) = 0**
-- **Q(1) = 0**
-- **Q(2) = e_3^2**
-- **Q(n) = e_2 Q(n−1) − e_1 Q(n−2) + Q(n−3)**
+- **Px0) = 0**
+- **Px(1) = 0**
+- **Px(2) = e_3^2**
+- **Px(n) = e_2 Px(n−1) − e_1 Px(n−2) + Px(n−3)**
 
 By induction it's possible to prove the relation:
-- **Q(n) = e_3^n P(n)**
+- **Px(n) = e_3^n P(n)**
 
 As a consequence of this definition we know that if x,y,z are integers, then the way how to turn P(n) into an integer is simply multiplication by **e_3^n**
 
@@ -251,6 +251,10 @@ Using the formulas above, we get relation between master sequences P and Q:
 
 - **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
 
+### 10.4 The formula for K and Px
+- **Px(n) K(n+2) + e₃ Px(n+2) K(n+1) + e₃ Px(n+1) K(n) = e₂ e₃ K(n+1) Px(n+1)**
+
+
 ---
 
 ## 11. Compact Formulas for the Ordinary Power Sum
@@ -262,8 +266,8 @@ Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying us
 
 These express the classical power sums entirely in terms of the master sequences K and P.
 
-Multiplying the g_n formula through by **e_3^{n+2}** and using helper sequence **Q** gives:
-- **e_3^2 f_n(y^n,z^n,x^n) = 3 e_3^2 Q(n+2) - 2e_2 e_3 Q(n+1) + e_1 e_3 Q(n)**
+Multiplying the g_n formula through by **e_3^{n+2}** and using helper sequence **Px** gives:
+- **e_3^2 f_n(y^n,z^n,x^n) = 3 e_3^2 Px(n+2) - 2e_2 e_3 Px(n+1) + e_1 e_3 Px(n)**
 
 Where f_n(y^n,z^n,x^n) is a way how to write x^ny^n+y^nz^n+z^nx^n.
 
