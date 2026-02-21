@@ -267,12 +267,6 @@ Multiplying the g_n formula through by **e_3^{n+2}** and using helper sequence *
 
 Where f_n(y^n,z^n,x^n) is a way how to write x^ny^n+y^nz^n+z^nx^n.
 
-**Relation between s_{-n} and s_n**
-
-By substitution of the formulas from this section back to the formula connecting the master sequences, we obtain:
-
-- **P(n) s_n + e_3 K(n+1) s_{-n} = e_2 K(n) P(n) - 3 e_3 K(n) P(n+1) - e_1 K(n+1) P(n) + e_2 K(n+1) P(n+1)**
-
 ---
 
 ## 12. Expressing K via Power Sums - Part 1
