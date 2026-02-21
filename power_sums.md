@@ -300,9 +300,9 @@ This identity holds for all n ≥ 0. Their initial values are:
 - **C(0)=W(0), C(1)=W(1)**
 
 The formulas below can be proven by math induction:
-- **A(n) - (2/3)e₁·A(n-1) + (1/3)e₂·A(n-2) = K(n)/3**
-- **B(n) - (2/3)e₁·B(n-1) + (1/3)e₂·B(n-2) = L(n)/3**
-- **C(n) - (2/3)e₁·C(n-1) + (1/3)e₂·C(n-2) = M(n)/3**
+- **3A(n+2) - 2e₁·A(n+1) + e₂·A(n) = K(n+2)**
+- **3B(n+2) - 2e₁·B(n+1) + e₂·B(n) = L(n+2)**
+- **3C(n+2) - 2e₁·C(n+1) + e₂·C(n) = M(n+2)**
 
 ---
 
@@ -310,15 +310,10 @@ The formulas below can be proven by math induction:
 
 It's not difficult to show that these identities hold:
 - **B(n) = A(n+1) - e_1 A(n)**
-- **C(n) = W(n) + e_3 A(n-1)**
+- **C(n+1) = W(n+1) + e_3 A(n)**
 
 When we substitute this to the formula from section 14 then we get
 - **A(n+2) = e₁·A(n+1) - e₂·A(n) + e₃·A(n-1) + W(n)**
 - **B(n+2) = e₁·B(n+1) - e₂·B(n) + e₃·B(n-1) + W(n+1) - e₁·W(n)**
 - **C(n+2) = e₁·C(n+1) - e₂·C(n) + e₃·C(n-1) - (1/3)e₁·W(n+1) + (2/3)e₂·W(n)**
 
-By substitution of W(n) from the formula for **A(n+2)** we obtain
-- **K(n+2)= 3A(n+2) - 2e_1 A(n+1) + e_2 A(n)**
-
-which is a very similar formula as the one we already know:
-- **s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n)**
