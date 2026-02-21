@@ -162,6 +162,8 @@ Define the sequence Q by this definition:
 By induction it's possible to prove the relation:
 - **Q(n) = e_3^n P(n)**
 
+As a consequence of this definition we know that if x,y,z are integers, then the way how to turn P(n) into an integer is simply multiplication by **e_3^n**
+
 ---
 
 ## 7. Explicit Formulas for K(n) and P(n)
