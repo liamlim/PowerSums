@@ -153,7 +153,7 @@ with the same pattern of initial conditions:
 
 ### 6.3 Helper sequence Px
 
-Define the sequence Q by this definition:
+Define the sequence Px by this definition:
 - **Px0) = 0**
 - **Px(1) = 0**
 - **Px(2) = e_3^2**
