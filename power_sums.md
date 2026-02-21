@@ -252,7 +252,9 @@ Using the formulas above, we get relation between master sequences P and Q:
 - **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
 
 ### 10.4 The formula for K and Px
-- **Px(n) K(n+2) + e₃ Px(n+2) K(n+1) + e₃ Px(n+1) K(n) = e₂ e₃ K(n+1) Px(n+1)**
+
+By simple multiplication of the previous formula with **e_3^{n+1}** we obtain:
+- **e_3 Px(n) K(n+2) + Px(n+2) K(n+1) + e_3 Px(n+1) K(n) = e_2 K(n+1) Px(n+1)**
 
 
 ---
