@@ -272,7 +272,7 @@ Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying us
 These express the classical power sums entirely in terms of the master sequences K and P.
 
 Multiplying the g_n formula through by **e_3^{n+2}** and using helper sequence **Px** gives:
-- **e_3^2 f_n(y^n,z^n,x^n) = 3 e_3^2 Px(n+2) - 2e_2 e_3 Px(n+1) + e_1 e_3 Px(n)**
+- **e_3^2 f_n(y^n,z^n,x^n) = 3 Px(n+2) - 2e_2 Px(n+1) + e_1 e_3 Px(n)**
 
 Where where f_n(y^n, z^n, x^n) stands for y^n x^n + z^n y^n + x^n z^n.
 
