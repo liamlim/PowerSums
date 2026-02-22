@@ -106,23 +106,12 @@ The coefficients **K(n), L(n), M(n)** and **P(n), Q(n), R(n)**:
 - depend only on **s, t, u**,
 - **do not depend** on **k, l, m**.
 
-### Initial values
+### Expressing single powers with K,L,M
 
-For f_n:
-- **f_0 = k+l+m**
-- **f_1 = kx+ly+mz**
-- **f_2 = kx^2+ly^2+mz^2**
-
-Similarly for g_n:
-- **g_0 = k+l+m**
-- **g_1 = k/x+l/y+m/z**
-- **g_2 = k/x^2+l/y^2+m/z^2**
-
-The same coefficients work for every choice of weights — only the initial values change. For example:
-
-- **f_n(1,1,1) = K(n)(x^2+y^2+z^2) + L(n)(x+y+z) + 3M(n)**
-- **f_n(2,1,1) = K(n)(2x^2+y^2+z^2) + L(n)(2x+y+z) + 4M(n)**
-- **f_n(1,0,0) = K(n)x^2 + L(n)x + M(n)**
+The special case of the formulas above is:
+- **x^n = f_n(1,0,0) = K(n) x^2 + L(n) x + M(n)**
+- **y^n = f_n(0,1,0) = K(n) y^2 + L(n) y + M(n)**
+- **z^n = f_n(0,0,1) = K(n) z^2 + L(n) z + M(n)**
 
 ---
 ## 6. Recursive Computation of Universal Coefficients
