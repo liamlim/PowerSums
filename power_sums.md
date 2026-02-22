@@ -206,7 +206,7 @@ Fix any integer **j** and define the shifted sequence **h_n = f_{n+j}**. Then h_
 ---
 ## 10. The Weight-Sum Identity and Its Consequences
 
-By using shift invariance for **s = -n** and the relation **f_{-n} = g_n** we obtain these relations:
+By using shift invariance for **j = -n** and the relation **f_{-n} = g_n** we obtain these relations:
 
 - **k+l+m = P(n) f_{n-2} + Q(n) f_{n-1} + R(n) f_n**
 - **k+l+m = K(n) g_{n-2} + L(n) g_{n-1} + M(n) g_n**
