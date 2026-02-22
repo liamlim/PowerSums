@@ -9,7 +9,7 @@ Our goal is to understand how expressions built from powers of these numbers beh
 For coefficients k, l, m, define the weighted power sum as follows. We explicitly allow n to be any integer, including negative values.
 
 - **f_n(k,l,m) = kx^n + ly^n + mz^n**
-- **g_n(k,l,m) = k/x^{-n} + l/y^{-n} + m/z^{-n}**
+- **g_n(k,l,m) = k/x^{n} + l/y^{n} + m/z^{n}**
 
 The two functions are related by:
 
