@@ -1,56 +1,111 @@
 # Universal Recurrence Relations for Weighted Power Sums
 
-## Introduction
+Throughout this document, let x, y, z be distinct non-zero real numbers.
 
-Throughout this document, let **x, y, z** be distinct non-zero real numbers.
-
-Our goal is to understand how expressions built from powers of these numbers behave, and to show that they follow universal recurrence rules that work in many situations.
+Our goal is to understand how expressions built from powers of these numbers behave, and to show that they satisfy universal recurrence rules that apply across a wide range of situations.
 
 ---
-
-## Part 1: Setup
-
----
-
-## 1. Definitions and Notation
-
-For coefficients **k, l, m**, define the weighted power sum. We explicitly allow **n** to be any integer, including negative values.
+## 1. Definition of Weighted Power Sum Functions
+For coefficients k, l, m, define the weighted power sum as follows. We explicitly allow n to be any integer, including negative values.
 
 - **f_n(k,l,m) = kx^n + ly^n + mz^n**
-- **g_n(k,l,m) = kx^{-n} + ly^{-n} + mz^{-n}**
+- **g_n(k,l,m) = k/x^{-n} + l/y^{-n} + m/z^{-n}**
 
 The two functions are related by:
 
 - **f_{-n}(k,l,m) = g_n(k,l,m)**
+- **g_{-n}(k,l,m) = f_n(k,l,m)**
 
-So **g** is simply **f** evaluated at negative index. We keep both names for convenience, as each arises naturally in different contexts.
+So g is simply f evaluated at a negative index. We keep both names for convenience, as each arises naturally in different contexts.
 
-When there is no risk of confusion we will write **f_n** rather than **f_n(k,l,m)**.
+When there is no risk of confusion, we will write f_n rather than f_n(k,l,m).
 
-### Examples
+### Isolating a Single Power
+By the definition of the weighted power sum function, it is possible to isolate individual powers:
 
-- **f_n(1,1,1) = x^n + y^n + z^n**
-- **f_n(2,1,1) = 2x^n + y^n + z^n**
-- **f_n(1,0,0) = x^n**
-- **f_n(0,1,0) = y^n**
-- **f_n(0,0,1) = z^n**
+- **x^n = f_n(1,0,0)**
+- **y^n = f_n(0,1,0)**
+- **z^n = f_n(0,0,1)**
+
+We will make use of this fact later.
 
 ---
+## 2. Elementary Symmetric Polynomials
+The three numbers x, y, z determine three fundamental combinations called the elementary symmetric polynomials:
+
+- **s_n = x^n + y^n + z^n**
+- **t_n = (xy)^n + (yz)^n + (zx)^n**
+- **u_n = (xyz)^n**
+
+A key fact from algebra is that x^n, y^n, z^n are exactly the three roots of the cubic equation:
+
+- **t^3 - s_n t^2 + t_n t - u_n = 0**
+
+This equation is the engine behind everything that follows.
+
+### Case n = 1 for Elementary Polynomials
+We also define the special symmetric polynomials s,t,u:
+
+- **s = s_1**
+- **t = t_1**
+- **u = u_1**
+
+There is a useful relation, which we will use throughout:
+
+- **u_n = u^n**
+
+### Expressing Symmetric Polynomials as Weighted Power Sum Functions
+
+By the definitions of the elementary symmetric polynomials and the weighted power sum functions, we can write:
+
+- **s_n = f_n(1,1,1)**
+- **t_n = f_n(y^n,z^n,x^n) = f_n(z^n,x^n,y^n)**
+- **u_n = (1/3) f_n(y^nz^n, z^nx^n, x^ny^n)**
+
+---
+## 3. Linearity Properties
+The functions f_n and g_n are linear in their coefficients:
+
+Homogenity:
+- **f_n(ak, al, am) = a f_n(k,l,m)**
+- **g_n(ak, al, am) = a g_n(k,l,m)**
+
+Additivity:
+- **f_n(k_1+k_2, l_1+l_2, m_1+m_2) = f_n(k_1,l_1,m_1) + f_n(k_2,l_2,m_2)**
+- **g_n(k_1+k_2, l_1+l_2, m_1+m_2) = g_n(k_1,l_1,m_1) + g_n(k_2,l_2,m_2)**
+
+This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n, f_n(0,1,0) = y^n, and f_n(0,0,1) = z^n. They serve as the building blocks for everything.
 
 ## 2. Elementary Symmetric Polynomials
 
 The three numbers **x, y, z** determine three fundamental combinations called the elementary symmetric polynomials:
 
-- **e_1 = x + y + z**
-- **e_2 = xy + yz + zx**
-- **e_3 = xyz**
+- **s_n = x^n + y^n + z^n**
+- **t_n = (xy)^n + (yz)^n + (zx)^n**
+- **u_n = (xyz)^n**
 
-A key fact from algebra is that **x, y, z** are exactly the three roots of the cubic equation:
+A key fact from algebra is that **x^n, y^n, z^n** are exactly the three roots of the cubic equation:
 
-- **t^3 - e_1 t^2 + e_2 t - e_3 = 0**
+- **t^3 - s_n t^2 + t_n t - u_n = 0**
 
-This equation is the engine behind everything that follows. Because each of x, y, z satisfies it, we can always replace a cube of any variable with a combination of lower powers, which is what drives the recurrences in Part 2.
+This equation is the engine behind everything that follows
 
+### Case n = 1 for elementary polynomials
+
+Let's also define special symmetric polynomials
+- **s = s_1**
+- **t = t_1**
+- **u = u_1**
+
+There is also a trivial relation **u_n = u^n** that we will be using:
+- **u_n = u^n**
+
+### Expressing symmetric as weighted power sum function
+
+By definition of elementary symmetric polynomials and the definition of weighted power sum functions we can conclude:
+- **s_n = f_n(1,1,1)**
+- **t_n = f_n(y^n,z^n,x^n) = f_n(z^n,x^n,y^n)**
+- **u_n = 1/3 f_n(y^nz^n,z^nx^n,x^ny^n)**
 ---
 
 ## 3. Linearity Properties
@@ -63,10 +118,6 @@ The functions **f_n** and **g_n** are linear in their coefficients:
 - **g_n(k_1+k_2, l_1+l_2, m_1+m_2) = g_n(k_1,l_1,m_1) + g_n(k_2,l_2,m_2)**
 
 This means any weighted sum can be built by combining simpler ones. In particular, the single-variable cases **f_n(1,0,0) = x^n**, **f_n(0,1,0) = y^n**, **f_n(0,0,1) = z^n** are the building blocks for everything.
-
----
-
-## Part 2: The Recurrence and Coefficients
 
 ---
 
