@@ -212,7 +212,7 @@ The universal representation is not tied to the base indices 0, 1, 2. For any in
 
 ### Why This Works
 
-Fix any integer **j** and define the shifted sequence **h_n = f_{n+j}**. Then h_n satisfies exactly the same recurrence as f_n, since the recurrence only involves differences of indices. The universal representation therefore applies to h_n with base values h_0 = f_s, h_1 = f_{j+1}, h_2 = f_{j+2}, giving the result. The argument for g is identical.
+Fix any integer **j** and define the shifted sequence **h_n = f_{n+j}**. Then h_n satisfies exactly the same recurrence as f_n, since the recurrence only involves differences of indices. The universal representation therefore applies to h_n with base values h_0 = f_j, h_1 = f_{j+1}, h_2 = f_{j+2}, giving the result. The argument for g is identical.
 
 ---
 ## 10. The Weight-Sum Identity and Its Consequences
