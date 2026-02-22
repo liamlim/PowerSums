@@ -31,11 +31,11 @@ All equalities in this section are understood modulo t_n.
 ### Basic relations for s_n modulo t_n:**
 
 This follows immediately from definition of s_n, u_n:
-- **z^n s_n = u_n f_n(-y^n,0,z^n)**
-- **x^n s_n = u_n f_n(x^n,-z^n,0)**
-- **y^n s_n = u_n f_n(0,y^n,-x^n)**
+- **z^n s_n = f_n(-y^n,0,z^n)**
+- **x^n s_n = f_n(x^n,-z^n,0)**
+- **y^n s_n = f_n(0,y^n,-x^n)**
 
 ### Main relation for t_n modulo s_n:
 Apply the universal linear representation **f_k = K(k) f_2 + L(k) f_1 + M(k) f_0** to each of the three basic relations above and add them together:
 
-- **s_n^2 = u_n K(n) f_n(x^2-y^2, y^2-z^2, z^2-x^2) + u_n L(n) f_n(x-y, y-z, z-x)**
+- **s_n^2 = K(n) f_n(x^2-y^2, y^2-z^2, z^2-x^2) + L(n) f_n(x-y, y-z, z-x)**
