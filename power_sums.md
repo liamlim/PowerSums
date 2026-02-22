@@ -260,13 +260,7 @@ Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying us
 
 These express the classical power sums entirely in terms of the master sequences K and P.
 
-Multiplying the g_n formula through by **e_3^{n+2}** and using helper sequence **Px** gives:
-- **e_3^2 f_n(y^n,z^n,x^n) = 3 Px(n+2) - 2e_2 Px(n+1) + e_1 e_3 Px(n)**
-
-Where where f_n(y^n, z^n, x^n) stands for y^n x^n + z^n y^n + x^n z^n.
-
 ---
-
 ## 12. Expressing K via Power Sums - Part 1
 
 From Section 11, the ordinary power sums **s_n = x^n + y^n + z^n** satisfy:
@@ -277,7 +271,7 @@ Rearranging gives an alternative recurrence for K driven by the power sums:
 
 - **K(0) = 0**
 - **K(1) = 0**
-- **K(n+2) = (2/3)e_1 K(n+1) - (1/3)e_2 K(n) + (1/3)s_n**
+- **K(n+2) = (2/3)s K(n+1) - (1/3)t K(n) + (1/3)s_n**
 
 Since the right-hand side at each step introduces exactly one new power sum s_n, iterating this recurrence shows that K(n+2) is always a linear combination of s_0, s_1, ..., s_n. We can therefore write:
 
@@ -292,55 +286,17 @@ for some coefficients W_m(n). We are building W_m backwards, because that will b
 By substituting the expression for K into the recurrence from Section 12, we obtain (for each fixed m) the following recurrence relation for the coefficients W_m(j):
 
 - **W_m(0) = 1/3**
-- **W_m(1) = 2/9 e_1**
-- **W_m(j+2) = (2/3)e_1 W_m(j+1) - (1/3)e_2 W_m(j)**
+- **W_m(1) = (2/9)s**
+- **W_m(j+2) = (2/3)s W_m(j+1) - (1/3)t W_m(j)**
 
-Remarkably, this recurrence is the same for every m including the initial conditions. Therefore, the shape of the recurrence is universal, and we may drop the subscript m and simply write W(j) to refer to the general sequence satisfying:
+This recurrence is the same for every m including the initial conditions. Therefore, the shape of the recurrence is universal, and we may drop the subscript and simply write:
 
 - **W(0) = 1/3**
-- **W(1) = 2/9 e_1**
-- **W(j+2) = (2/3)e_1 W(j+1) - (1/3)e_2 W(j)**
+- **W(1) = (2/9)s**
+- **W(j+2) = (2/3)s W(j+1) - (1/3)t W(j)**
 
 **Reindexing.** In the sum for **K(n+2)** from Section 12, each W_m depends only on the lag j = n-m, not on m itself. Relabelling gives the equivalent form:
 
 - **K(n+2) = Σ_{m=0}^{n} W(m) s_{n-m}**
 
 where now W(m) is the coefficient of s_{n-m}
-
----
-
-## 14. Three New Sequences from the Convolution
-
-The convolution formula for **K(n+2)** expresses K in terms of the ordinary power sums **s_n**. A natural question is whether the same approach applies when s_n is itself replaced by its universal representation **s_n = K(n) s_2 + L(n) s_1 + M(n) s_0**. Substituting this into the convolution gives:
-
-- **K(n+2) = A(n) s_2 + B(n) s_1 + C(n) s_0**
-
-where the three new sequences are defined as the convolutions of W against K, L, and M respectively:
-
-- **A(n) = Σ_{m=0}^{n} W(m) K(n-m)**
-- **B(n) = Σ_{m=0}^{n} W(m) L(n-m)**
-- **C(n) = Σ_{m=0}^{n} W(m) M(n-m)**
-
-This identity holds for all n ≥ 0. Their initial values are:
-
-- **A(0)=0, A(1)=0**
-- **B(0)=0, B(1)=W(0)**
-- **C(0)=W(0), C(1)=W(1)**
-
-The formulas below can be proven by mathematical induction:
-- **3A(n+2) - 2e_1 A(n+1) + e_2 A(n) = K(n+2)**
-- **3B(n+2) - 2e_1 B(n+1) + e_2 B(n) = L(n+2)**
-- **3C(n+2) - 2e_1 C(n+1) + e_2 C(n) = M(n+2)**
-
----
-
-## 15. Master Sequence A
-
-It's not difficult to show that these identities hold:
-- **B(n) = A(n+1) - e_1 A(n)**
-- **C(n+1) = W(n+1) + e_3 A(n)**
-
-When we substitute this into the formula from Section 14 then we get
-- **A(n+2) = e_1 A(n+1) - e_2 A(n) + e_3 A(n-1) + W(n)**
-- **B(n+2) = e_1 B(n+1) - e_2 B(n) + e_3 B(n-1) + W(n+1) - e_1 W(n)**
-- **C(n+2) = e_1 C(n+1) - e_2 C(n) + e_3 C(n-1) - (1/3)e_1 W(n+1) + (2/3)e_2 W(n)**
