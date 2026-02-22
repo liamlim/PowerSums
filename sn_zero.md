@@ -36,3 +36,6 @@ This follows immediately from definition of s_n, u_n:
 - **y^n s_n = u_n f_n(0,y^n,-x^n)**
 
 ### Main relation for t_n modulo s_n:
+Apply the universal linear representation **f_k = K(k) f_2 + L(k) f_1 + M(k) f_0** to each of the three basic relations above and add them together:
+
+- **s_n^2 = u_n K(n) f_n(x^2-y^2, y^2-z^2, z^2-x^2) + u_n L(n) f_n(x-y, y-z, z-x)**
