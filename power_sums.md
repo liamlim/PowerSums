@@ -39,7 +39,7 @@ The three numbers x, y, z determine three fundamental combinations called the el
 
 A key fact from algebra is that x^n, y^n, z^n are exactly the three roots of the cubic equation:
 
-- **t^3 - s_n t^2 + t_n t - u_n = 0**
+- **X^3 - s_n X^2 + t_n X - u_n = 0**
 
 This equation is the engine behind everything that follows.
 
@@ -78,20 +78,17 @@ This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n
 
 ## 4. The Generalized Newton Identity
 
-Because each of x, y, z satisfies the the same cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = e_1 t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
+Because each of x, y, z satisfies the the same cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = s t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
 
-- **f_n = e_1 f_{n-1} - e_2 f_{n-2} + e_3 f_{n-3}**
-- **g_n = (e_2/e_3) g_{n-1} - (e_1/e_3) g_{n-2} + (1/e_3) g_{n-3}**
+- **f_n = s f_{n-1} - t f_{n-2} + u f_{n-3}**
+- **g_n = (t/u) g_{n-1} - (s/u) g_{n-2} + (1/u) g_{n-3}**
 
 Both hold for **any** choice of weights **k, l, m** and for all integers **n**. 
 
-**Inversion symmetry**
- Replacing x, y, z by 1/x, 1/y, 1/z transforms f_n into g_n and sends the elementary symmetric polynomials as e_1 → e_2/e_3, e_2 → e_1/e_3, e_3 → 1/e_3. Therefore every result stated for g_n throughout this document follows from the corresponding f_n result by this substitution, without any separate derivation.
+The recurrences can also be rearranged to step backwards:
 
- The recurrences can also be rearranged to step backwards:
-
-- **f_{n-3} = (1/e_3) f_n - (e_1/e_3) f_{n-1} + (e_2/e_3) f_{n-2}**
-- **g_{n-3} = e_3 g_n - e_2 g_{n-1} + e_1 g_{n-2}**
+- **f_{n-3} = (1/u) f_n - (s/u) f_{n-1} + (t/u) f_{n-2}**
+- **g_{n-3} = u g_n - t g_{n-1} + s g_{n-2}**
 
 This lets us compute f and g at negative indices from initial values without any issues.
 
@@ -106,7 +103,7 @@ Because each term depends on the previous three, every value of **f_n** is compl
 
 The coefficients **K(n), L(n), M(n)** and **P(n), Q(n), R(n)**:
 
-- depend only on **e_1, e_2, e_3**,
+- depend only on **s, t, u**,
 - **do not depend** on **k, l, m**.
 
 ### Initial values
@@ -125,7 +122,7 @@ The same coefficients work for every choice of weights — only the initial valu
 
 - **f_n(1,1,1) = K(n)(x^2+y^2+z^2) + L(n)(x+y+z) + 3M(n)**
 - **f_n(2,1,1) = K(n)(2x^2+y^2+z^2) + L(n)(2x+y+z) + 4M(n)**
-- **f_n(1,0,0) = x^n = K(n)x^2 + L(n)x + M(n)**
+- **f_n(1,0,0) = K(n)x^2 + L(n)x + M(n)**
 
 ---
 
@@ -135,7 +132,9 @@ The same coefficients work for every choice of weights — only the initial valu
 
 The sequences **K(n), L(n), M(n)** each satisfy the same recurrence as **f_n**:
 
-- **X(n) = e_1 X(n-1) - e_2 X(n-2) + e_3 X(n-3)**
+- **K(n) = s K(n-1) - t K(n-2) + u K(n-3)**
+- **L(n) = s L(n-1) - t L(n-2) + u L(n-3)**
+- **M(n) = s M(n-1) - t M(n-2) + u M(n-3)**
 
 with initial conditions chosen so that the three sequences act as a basis:
 
@@ -143,32 +142,21 @@ with initial conditions chosen so that the three sequences act as a basis:
 - **L(0)=0, L(1)=1, L(2)=0**
 - **M(0)=1, M(1)=0, M(2)=0**
 
-It can be verified by induction that **f_n = K(n) f_2 + L(n) f_1 + M(n) f_0** holds for all n given these definitions.
+These recurrences can be verified by induction.
 
 ### 6.2 Coefficients P, Q, R
 
 The sequences **P(n), Q(n), R(n)** each satisfy the same recurrence as **g_n**:
 
-- **X(n) = (e_2/e_3) X(n-1) - (e_1/e_3) X(n-2) + (1/e_3) X(n-3)**
+- **P(n) = (t/u) P(n-1) - (s/u) P(n-2) + (1/u) P(n-3)**
+- **Q(n) = (t/u) Q(n-1) - (s/u) Q(n-2) + (1/u) Q(n-3)**
+- **R(n) = (t/u) R(n-1) - (s/u) R(n-2) + (1/u) R(n-3)**
 
 with the same pattern of initial conditions:
 
 - **P(0)=0, P(1)=0, P(2)=1**
 - **Q(0)=0, Q(1)=1, Q(2)=0**
 - **R(0)=1, R(1)=0, R(2)=0**
-
-### 6.3 Helper sequence Px
-
-Define the sequence Px by this definition:
-- **Px(0) = 0**
-- **Px(1) = 0**
-- **Px(2) = e_3^2**
-- **Px(n) = e_2 Px(n-1) - e_1 e_3 Px(n-2) + e_3^2 Px(n-3)**
-
-By induction it's possible to prove the relation:
-- **Px(n) = e_3^n P(n)**
-
-As a consequence of this definition we know that if x,y,z are integers, then the way how to turn P(n) into an integer is simply multiplication by **e_3^n**
 
 ---
 
@@ -181,8 +169,6 @@ The coefficients K(n) and P(n) have closed-form expressions. These can be derive
 
 The factor **-(x-y)(y-z)(z-x)** is a non-zero constant (since x, y, z are distinct), so these formulas uniquely determine K(n) and P(n) for all integers n.
 
-Substituting n=2 into the formula for K(n) and simplifying, one finds that **K(2) = 1** which is consistent with the already established fact.
-
 **Relation between f_n, g_n and K(n), P(n)**:
 From the explicit formulas it's immediately visible that:
 
@@ -191,6 +177,7 @@ From the explicit formulas it's immediately visible that:
 
 Given the fact that **f_n = g_{-n}** we also obtain
 - **K(n) = P(-n)**
+- **P(n) = K(-n)**
 
 ---
 
