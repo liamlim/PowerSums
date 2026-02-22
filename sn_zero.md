@@ -28,7 +28,7 @@ Apply the universal linear representation **f_k = K(k) f_2 + L(k) f_1 + M(k) f_0
 
 All equalities in this section are understood modulo t_n.
 
-### Basic relations for s_n modulo t_n:**
+### Basic relations for s_n modulo t_n:
 
 This follows immediately from definition of s_n, u_n:
 - **z^n s_n = f_n(-y^n,0,z^n)**
@@ -39,3 +39,16 @@ This follows immediately from definition of s_n, u_n:
 Apply the universal linear representation **f_k = K(k) f_2 + L(k) f_1 + M(k) f_0** to each of the three basic relations above and add them together:
 
 - **s_n^2 = K(n) f_n(x^2-y^2, y^2-z^2, z^2-x^2) + L(n) f_n(x-y, y-z, z-x)**
+
+---
+
+## 3.  Modulo G = GCD(s_n, t_n)
+
+All equalities in this section are understood modulo t_n.
+
+Simply by summing up the results of chapters 1 and 2 and using the linearity we obtain:
+
+- **0 = K(n) f_n(z^2 - y^2, x^2 - z^2, y^2 - x^2) - L(n) f_n(y - z, z - x, x - y)**
+
+now by using the known relation for K(n) we obtain
+- **0 = K(n) [f_n(z^2 - y^2, x^2 - z^2, y^2 - x^2) + L(n)(x - y)(y - z)(z - x)]**
