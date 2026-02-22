@@ -199,7 +199,7 @@ These relations can be proven by induction. The result is that K and P are maste
 
 Substituting the relations above into the universal representation gives formulas that depend only on K and P:
 
-- **f_n = K(n) f_2 + (K(n+1) - e_1 K(n)) f_1 + u K(n-1) f_0**
+- **f_n = K(n) f_2 + (K(n+1) - s K(n)) f_1 + u K(n-1) f_0**
 - **g_n = P(n) g_2 + (P(n+1) - (t/u) P(n)) g_1 + (1/u) P(n-1) g_0**
 
 ---
@@ -242,7 +242,7 @@ We already know the relation between **K** and **f_n(y-z, z-x, x-y)**, so we als
 
 Using the formulas above, we get relation between master sequences P and Q:
 
-- **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
+- **P(n)K(n+2) + u P(n+2) K(n+1) + u P(n+1) K(n) = t K(n+1) P(n+1)**
 
 ### 10.3 The formula for single power
 
@@ -255,8 +255,8 @@ By applying the formula for **k = 1, l = 0, m = 0** we obtain:
 
 Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying using the definitions of K, L, M (and P, Q, R) gives clean identities involving only K and P:
 
-- **f_n(1,1,1) = x^n+y^n+z^n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n)**
-- **g_n(1,1,1) = 1/x^n+1/y^n+1/z^n = 3P(n+2) - 2(e_2/e_3) P(n+1) + (e_1/e_3) P(n)**
+- **f_n(1,1,1) = x^n+y^n+z^n = 3K(n+2) - 2s K(n+1) + t K(n)**
+- **g_n(1,1,1) = 1/x^n+1/y^n+1/z^n = 3P(n+2) - 2(t/u) P(n+1) + (s/u) P(n)**
 
 These express the classical power sums entirely in terms of the master sequences K and P.
 
@@ -265,7 +265,7 @@ These express the classical power sums entirely in terms of the master sequences
 
 From Section 11, the ordinary power sums **s_n = x^n + y^n + z^n** satisfy:
 
-- **s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n)**
+- **s_n = 3K(n+2) - 2s K(n+1) + t K(n)**
 
 Rearranging gives an alternative recurrence for K driven by the power sums:
 
