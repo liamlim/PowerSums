@@ -76,6 +76,7 @@ Additivity:
 
 This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n, f_n(0,1,0) = y^n, and f_n(0,0,1) = z^n. They serve as the building blocks for everything.
 
+---
 ## 4. The Generalized Newton Identity
 
 Because each of x, y, z satisfies the the same cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = s t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
@@ -93,7 +94,6 @@ The recurrences can also be rearranged to step backwards:
 This lets us compute f and g at negative indices from initial values without any issues.
 
 ---
-
 ## 5. Universal Linear Representation
 
 Because each term depends on the previous three, every value of **f_n** is completely determined by any three consecutive values. In particular, using f_0, f_1, f_2 as the base:
@@ -125,7 +125,6 @@ The same coefficients work for every choice of weights — only the initial valu
 - **f_n(1,0,0) = K(n)x^2 + L(n)x + M(n)**
 
 ---
-
 ## 6. Recursive Computation of Universal Coefficients
 
 ### 6.1 Coefficients K, L, M
@@ -159,7 +158,6 @@ with the same pattern of initial conditions:
 - **R(0)=1, R(1)=0, R(2)=0**
 
 ---
-
 ## 7. Explicit Formulas for K(n) and P(n)
 
 The coefficients K(n) and P(n) have closed-form expressions. These can be derived by applying the universal representation to the three single-variable cases **f_n(1,0,0)**, **f_n(0,1,0)**, **f_n(0,0,1)** and solving the resulting system:
@@ -188,32 +186,23 @@ Since K(n) and P(n) are the primary sequences, all other coefficients can be exp
 ### 8.1 Fundamental Relations
 
 **Relations for L and M:**
-- **L(n) = K(n+1) - e_1 K(n)**
-- **M(n+1) = e_3 K(n)**
+- **L(n) = K(n+1) - s K(n)**
+- **M(n+1) = u K(n)**
 
 **Relations for Q and R:**
-- **Q(n) = P(n+1) - (e_2/e_3) P(n)**
-- **R(n+1) = (1/e_3) P(n)**
+- **Q(n) = P(n+1) - (t/u) P(n)**
+- **R(n+1) = (1/u) P(n)**
 
-Note that:
-- **e_3^{n+1} R(n+1) = Px(n)**
-- **e_3^{n+1} Q(n) = Px(n+1) - e_2 Px(n)**
-
-These identifies show that if we have integers x,y,z then we transform R and Q into integers by multiplying by the right power of e_3.
+These relations can be proven by induction. The result is that K and P are master sequences and the other sequences can be expressed using it.
 
 ### 8.2 Compact Forms for f_n and g_n
 
 Substituting the relations above into the universal representation gives formulas that depend only on K and P:
 
-- **f_n = K(n) f_2 + (K(n+1) - e_1 K(n)) f_1 + e_3 K(n-1) f_0**
-- **g_n = P(n) g_2 + (P(n+1) - (e_2/e_3) P(n)) g_1 + (1/e_3) P(n-1) g_0**
+- **f_n = K(n) f_2 + (K(n+1) - e_1 K(n)) f_1 + u K(n-1) f_0**
+- **g_n = P(n) g_2 + (P(n+1) - (t/u) P(n)) g_1 + (1/u) P(n-1) g_0**
 
 ---
-
-## Part 3: Identities and Applications
-
----
-
 ## 9. Shift Invariance
 
 The universal representation is not tied to the base indices 0, 1, 2. For any integers **n** and **s**, the same coefficients allow us to shift the base:
@@ -226,7 +215,6 @@ The universal representation is not tied to the base indices 0, 1, 2. For any in
 Fix any integer **s** and define the shifted sequence **h_n = f_{n+s}**. Then h_n satisfies exactly the same recurrence as f_n, since the recurrence only involves differences of indices. The universal representation therefore applies to h_n with base values h_0 = f_s, h_1 = f_{s+1}, h_2 = f_{s+2}, giving the result. The argument for g is identical.
 
 ---
-
 ## 10. The Weight-Sum Identity and Its Consequences
 
 By using shift invariance for **s = -n** and the relation **f_{-n} = g_n** we obtain these relations:
@@ -247,7 +235,7 @@ This is a linear relation among three consecutive values of f that holds for **a
 
 ### 10.2 The formula for K and P
 
-We already know the relation between **K** and **f_n** with the right weights, so we also immediately obtain:
+We already know the relation between **K** and **f_n(y-z, z-x, x-y)**, so we also immediately obtain:
 
 - **P(n+2) K(n) + Q(n+2) K(n+1) + R(n+2) K(n+2) = 0**
 - **K(n+2) P(n) + L(n+2) P(n+1) + M(n+2) P(n+2) = 0**
@@ -256,19 +244,13 @@ Using the formulas above, we get relation between master sequences P and Q:
 
 - **P(n)K(n+2) + e_3 P(n+2) K(n+1) + e_3 P(n+1) K(n) = e_2 K(n+1) P(n+1)**
 
-### 10.3 The formula for K and Px
-
-By simple multiplication of the previous formula with **e_3^{n+1}** we obtain:
-- **e_3 Px(n) K(n+2) + Px(n+2) K(n+1) + e_3 Px(n+1) K(n) = e_2 K(n+1) Px(n+1)**
-
-### 10.4 The formula for single power
+### 10.3 The formula for single power
 
 By applying the formula for **k = 1, l = 0, m = 0** we obtain:
 - **1 = P(n)x^{n-2} + Q(n)x^{n-1} + R(n)x^n**
 - **1 = K(n)/x^{n-2} + L(n)/x^{n-1} + M(n)/x^n**
 
 ---
-
 ## 11. Compact Formulas for the Ordinary Power Sum
 
 Setting **(k,l,m) = (1,1,1)** in the universal representation and simplifying using the definitions of K, L, M (and P, Q, R) gives clean identities involving only K and P:
