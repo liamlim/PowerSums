@@ -76,51 +76,6 @@ Additivity:
 
 This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n, f_n(0,1,0) = y^n, and f_n(0,0,1) = z^n. They serve as the building blocks for everything.
 
-## 2. Elementary Symmetric Polynomials
-
-The three numbers **x, y, z** determine three fundamental combinations called the elementary symmetric polynomials:
-
-- **s_n = x^n + y^n + z^n**
-- **t_n = (xy)^n + (yz)^n + (zx)^n**
-- **u_n = (xyz)^n**
-
-A key fact from algebra is that **x^n, y^n, z^n** are exactly the three roots of the cubic equation:
-
-- **t^3 - s_n t^2 + t_n t - u_n = 0**
-
-This equation is the engine behind everything that follows
-
-### Case n = 1 for elementary polynomials
-
-Let's also define special symmetric polynomials
-- **s = s_1**
-- **t = t_1**
-- **u = u_1**
-
-There is also a trivial relation **u_n = u^n** that we will be using:
-- **u_n = u^n**
-
-### Expressing symmetric as weighted power sum function
-
-By definition of elementary symmetric polynomials and the definition of weighted power sum functions we can conclude:
-- **s_n = f_n(1,1,1)**
-- **t_n = f_n(y^n,z^n,x^n) = f_n(z^n,x^n,y^n)**
-- **u_n = 1/3 f_n(y^nz^n,z^nx^n,x^ny^n)**
----
-
-## 3. Linearity Properties
-
-The functions **f_n** and **g_n** are linear in their coefficients:
-
-- **f_n(ak, al, am) = a f_n(k,l,m)**
-- **g_n(ak, al, am) = a g_n(k,l,m)**
-- **f_n(k_1+k_2, l_1+l_2, m_1+m_2) = f_n(k_1,l_1,m_1) + f_n(k_2,l_2,m_2)**
-- **g_n(k_1+k_2, l_1+l_2, m_1+m_2) = g_n(k_1,l_1,m_1) + g_n(k_2,l_2,m_2)**
-
-This means any weighted sum can be built by combining simpler ones. In particular, the single-variable cases **f_n(1,0,0) = x^n**, **f_n(0,1,0) = y^n**, **f_n(0,0,1) = z^n** are the building blocks for everything.
-
----
-
 ## 4. The Generalized Newton Identity
 
 Because each of x, y, z satisfies the cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = e_1 t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
