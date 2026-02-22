@@ -79,7 +79,7 @@ This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n
 ---
 ## 4. The Generalized Newton Identity
 
-Because each of x, y, z satisfies the the same cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = s t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
+Using the cubic that each x,y,z satisfies and summing up with the right weights gives:
 
 - **f_n = s f_{n-1} - t f_{n-2} + u f_{n-3}**
 - **g_n = (t/u) g_{n-1} - (s/u) g_{n-2} + (1/u) g_{n-3}**
