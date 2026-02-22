@@ -55,3 +55,13 @@ now by using the known relation for K(n) we obtain
 
 now by expressing f_n using K, L and M the formula simplifies a lot
 - **0 = 2K(n)L(n)(x - y)(y - z)(z - x)**
+
+### Examples
+
+Example **(x,y,z) = (1,2,4)** for n = 3:
+- **s_3 = 73**
+- **t_3 = 584**
+- **GCD(s_2, t_2) = 73**
+- **K(3) = 7**
+- **L(3) = -14**
+something doesn't work...
