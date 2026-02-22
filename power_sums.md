@@ -44,7 +44,7 @@ A key fact from algebra is that x^n, y^n, z^n are exactly the three roots of the
 This equation is the engine behind everything that follows.
 
 ### Case n = 1 for Elementary Polynomials
-We also define the special symmetric polynomials s,t,u:
+We also define the special symmetric polynomials s, t, u:
 
 - **s = s_1**
 - **t = t_1**
@@ -78,7 +78,7 @@ This means any weighted sum can be built by using single powers f_n(1,0,0) = x^n
 
 ## 4. The Generalized Newton Identity
 
-Because each of x, y, z satisfies the cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = e_1 t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
+Because each of x, y, z satisfies the the same cubic from Section 2, multiplying through by **t^{n-3}** gives **t^n = e_1 t^{n-1} - e_2 t^{n-2} + e_3 t^{n-3}** for each variable. Summing with weights k, l, m yields the recurrence for **f_n**, and a similar argument for **g_n**:
 
 - **f_n = e_1 f_{n-1} - e_2 f_{n-2} + e_3 f_{n-3}**
 - **g_n = (e_2/e_3) g_{n-1} - (e_1/e_3) g_{n-2} + (1/e_3) g_{n-3}**
