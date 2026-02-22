@@ -52,3 +52,6 @@ Simply by summing up the results of chapters 1 and 2 and using the linearity we 
 
 now by using the known relation for K(n) we obtain
 - **0 = K(n) [f_n(z^2 - y^2, x^2 - z^2, y^2 - x^2) + L(n)(x - y)(y - z)(z - x)]**
+
+now by expressing f_n using K, L and M the formula simplifies a lot
+- **0 = 2K(n)L(n)(x - y)(y - z)(z - x)**
