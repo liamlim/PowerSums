@@ -82,6 +82,23 @@
 		This is well-defined for all integers $n$ because $x, y, z \neq 0$.
 	\end{definition}
 	
+	\begin{lemma}[Linearity]
+		For any integer $n$, $f_n$ is linear in its weights:
+		\begin{align*}
+			f_n(ak, al, am) &= a\, f_n(k, l, m), \\
+			f_n(k_1+k_2,\, l_1+l_2,\, m_1+m_2) &= f_n(k_1,l_1,m_1) + f_n(k_2,l_2,m_2).
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		Both identities follow immediately from the definition $f_n(k,l,m) = kx^n + ly^n + mz^n$.
+	\end{proof}
+	
+	In particular, individual powers are recovered by unit weights:
+	\[
+	x^n = f_n(1,0,0), \qquad y^n = f_n(0,1,0), \qquad z^n = f_n(0,0,1).
+	\]
+	Any weighted sum is therefore a linear combination of these three building blocks.
+	
 	\begin{theorem}[Recurrence for $f_n$]
 		For any integer $n$ and any fixed weights $k, l, m$,
 		\[
@@ -120,6 +137,18 @@
 		K(n) = \frac{f_n(w_x, w_y, w_z)}{f_2(w_x, w_y, w_z)}.
 		\]
 	\end{definition}
+	
+	\begin{corollary}[Closed form for $K(n)$]
+		For all integers $n$,
+		\[
+		K(n) = \frac{x^n(y-z) + y^n(z-x) + z^n(x-y)}{(y-z)(z-x)(x-y)}.
+		\]
+	\end{corollary}
+	\begin{proof}
+		Expanding the numerator gives $f_n(w_x, w_y, w_z)$, and the
+		denominator is $f_2(w_x, w_y, w_z) = -(y-z)(z-x)(x-y)$ with a sign
+		absorbed into the ordering of factors.
+	\end{proof}
 	
 	\subsection{Initial values and recurrence}
 	
@@ -201,6 +230,21 @@
 		Both sides satisfy the same recurrence. At $n = 0, 1, 2$ both sides
 		agree by the initial values of $K, L, M$. Equality for all integers
 		$n$ follows from uniqueness of recurrence solutions.
+	\end{proof}
+	
+	\begin{corollary}[Shift invariance]
+		For any weights $k, l, m$ and any integers $n$, $j$,
+		\[
+		f_{n+j}(k,l,m) = K(n)\, f_{j+2}(k,l,m) + L(n)\, f_{j+1}(k,l,m)
+		+ M(n)\, f_j(k,l,m).
+		\]
+	\end{corollary}
+	\begin{proof}
+		Fix $j$ and define the shifted sequence $h_n = f_{n+j}(k,l,m)$.
+		Since the recurrence involves only differences of indices, $h_n$
+		satisfies the same recurrence as $f_n$. Applying the decomposition
+		theorem to $h_n$ with base values $h_0 = f_j$, $h_1 = f_{j+1}$,
+		$h_2 = f_{j+2}$ gives the result.
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
