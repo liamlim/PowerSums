@@ -62,8 +62,14 @@
 		f_n(k,l,m) = k x^n + l y^n + m z^n.
 		\]
 		This is well-defined for all integers $n$ because $x, y, z \neq 0$.
-		We write $s_n = f_n(1,1,1) = x^n + y^n + z^n$ for the standard power
-		sums.
+	\end{definition}
+	
+	\begin{definition}
+		For any integer $n$ and weights $k, l, m$, define
+		\[
+		s_n = f_n(1,1,1) = x^n + y^n + z^n.
+		\]
+		This is well-defined for all integers $n$ because $x, y, z \neq 0$.
 	\end{definition}
 	
 	\begin{theorem}[Recurrence for $f_n$]
@@ -146,9 +152,10 @@
 	
 	\begin{theorem}[Recurrences for $L$ and $M$]
 		Both $L$ and $M$ satisfy
-		\[
-		a(n+3) = e_1\, a(n+2) - e_2\, a(n+1) + e_3\, a(n).
-		\]
+		\begin{align*}
+		L(n+3) &= e_1\, L(n+2) - e_2\, L(n+1) + e_3\, L(n),\\
+		M(n+3) &= e_1\, M(n+2) - e_2\, M(n+1) + e_3\, M(n)
+		\end{align*}
 	\end{theorem}
 	\begin{proof}
 		Both are linear combinations of shifts of $K$, so they inherit the
@@ -195,6 +202,14 @@
 		T_n(k,l,m) = k\, K(n+2) + l\, L(n+1) + m\, M(n).
 		\]
 		We write $t_n = T_n(1,1,1) = K(n+2) + L(n+1) + M(n)$.
+	\end{definition}
+	
+	\begin{definition}
+		For any weights $k, l, m$ and any integer $n$, define
+		\[
+		t_n = T_n(1,1,1) = k\, K(n+2) + l\, L(n+1) + m\, M(n).
+		\]
+		By definition of $T_n$ we get $t_n = K(n+2) + L(n+1) + M(n)$.
 	\end{definition}
 	
 	\begin{theorem}[Recurrence for $T_n$]
