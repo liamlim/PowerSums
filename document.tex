@@ -20,6 +20,16 @@
 	\tableofcontents
 	\newpage
 	
+	This document develops a theory of weighted power sums
+	$f_n(k,l,m) = kx^n + ly^n + mz^n$ for distinct nonzero reals $x, y, z$.
+	The central objects are three canonical basis sequences $K(n)$, $L(n)$,
+	$M(n)$, each satisfying the same linear recurrence as $f_n$, whose
+	initial values at $n = 0, 1, 2$ form the identity matrix. Together they
+	decompose any weighted power sum in a basis-independent way. We then
+	introduce $T_n(k,l,m)$, a natural repackaging of the basis sequences,
+	and show it equals the ordinary power sum $s_n = x^n + y^n + z^n$ when
+	the weights are $(1,1,1)$.
+	
 	% -----------------------------------------------------------------------
 	\section{Setup and Assumptions}
 	
@@ -153,8 +163,8 @@
 	\begin{theorem}[Recurrences for $L$ and $M$]
 		Both $L$ and $M$ satisfy
 		\begin{align*}
-		L(n+3) &= e_1\, L(n+2) - e_2\, L(n+1) + e_3\, L(n),\\
-		M(n+3) &= e_1\, M(n+2) - e_2\, M(n+1) + e_3\, M(n)
+			L(n+3) &= e_1\, L(n+2) - e_2\, L(n+1) + e_3\, L(n),\\
+			M(n+3) &= e_1\, M(n+2) - e_2\, M(n+1) + e_3\, M(n).
 		\end{align*}
 	\end{theorem}
 	\begin{proof}
@@ -204,13 +214,24 @@
 		We write $t_n = T_n(1,1,1) = K(n+2) + L(n+1) + M(n)$.
 	\end{definition}
 	
-	\begin{definition}
-		For any weights $k, l, m$ and any integer $n$, define
-		\[
-		t_n = T_n(1,1,1) = k\, K(n+2) + l\, L(n+1) + m\, M(n).
-		\]
-		By definition of $T_n$ we get $t_n = K(n+2) + L(n+1) + M(n)$.
-	\end{definition}
+	\subsection{Explicit values at $n = 0, 1, 2$}
+	
+	We compute $T_0$, $T_1$, $T_2$ directly from the definition, using the
+	known values of $K$, $L$, $M$ at small indices:
+	\begin{align*}
+	K(2)=1,\; K(3)=e_1,\; K(4)=e_1^2-e_2,\\
+	L(1)=1,\; L(2)=0,\; L(3)=-e_2,\\
+	M(0)=1,\; M(1)=0,\; M(2)=0.
+	\end{align*}
+	\begin{align*}
+		T_0(k,l,m) &= k\cdot 1 + l\cdot 1 + m\cdot 1 = k+l+m,\\
+		T_1(k,l,m) &= k\,e_1 + l\cdot 0 + m\cdot 0 = k\,e_1,\\
+		T_2(k,l,m) &= k(e_1^2-e_2) + l(-e_2) + m\cdot 0 = k(e_1^2-e_2) - l\,e_2.
+	\end{align*}
+	Note that the terms in $l$ and $m$ vanish in $T_1$ because $L(2) = M(1) = 0$,
+	and the term in $m$ vanishes in $T_2$ because $M(2) = 0$.
+	
+	\subsection{Recurrence and decomposition}
 	
 	\begin{theorem}[Recurrence for $T_n$]
 		\[
@@ -218,6 +239,11 @@
 		+ e_3\, T_n(k,l,m).
 		\]
 	\end{theorem}
+	\begin{proof}
+		$T_n(k,l,m) = k\,K(n+2) + l\,L(n+1) + m\,M(n)$ is a fixed linear
+		combination of $K$, $L$, and $M$, each of which satisfies the
+		recurrence. Hence $T_n$ inherits it by linearity.
+	\end{proof}
 	
 	\begin{theorem}[Decomposition of $T_n$]
 		\[
@@ -226,29 +252,22 @@
 		\]
 	\end{theorem}
 	\begin{proof}
-		Same argument as for $f_n$: both sides satisfy the recurrence and
-		agree at $n = 0, 1, 2$.
+		Both sides satisfy the same recurrence (the left side by the theorem
+		above; the right side since $K$, $L$, $M$ do). At $n = 0, 1, 2$
+		both sides agree by direct inspection using the explicit values
+		computed above and the initial values of $K$, $L$, $M$. Equality
+		for all integers $n$ follows from uniqueness of recurrence solutions.
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
-	\section{Explicit Values of $T_0, T_1, T_2$ and the Identity $s_n = t_n$}
-	
-	\subsection{Computing $T_0$, $T_1$, $T_2$}
-	
-	Using $K(3) = e_1$, $K(4) = e_1^2 - e_2$, $L(3) = -e_2$:
-	
-	\begin{align*}
-		T_0(k,l,m) &= k + l + m, \\
-		T_1(k,l,m) &= k\, e_1, \\
-		T_2(k,l,m) &= k(e_1^2 - e_2) - l\, e_2.
-	\end{align*}
+	\section{Explicit Values of $t_n$ and the Identity $s_n = t_n$}
 	
 	\subsection{Specializing to $t_n = T_n(1,1,1)$}
 	
+	Setting $k = l = m = 1$ in the explicit values from the previous section:
 	\[
 	t_0 = 3, \qquad t_1 = e_1, \qquad t_2 = e_1^2 - 2e_2.
 	\]
-	
 	These coincide with $s_0, s_1, s_2$.
 	
 	\begin{theorem}
@@ -264,45 +283,6 @@
 		x^n + y^n + z^n = K(n+2) + L(n+1) + M(n).
 		\]
 	\end{corollary}
-	
-	% -----------------------------------------------------------------------
-	\section{When Does $f_n(k,l,m) = T_n(k,l,m)$?}
-	
-	Since both $f_n$ and $T_n$ satisfy the same recurrence, equality for all
-	$n$ is equivalent to equality at $n = 0, 1, 2$.
-	
-	\begin{itemize}
-		\item $n=0$: $f_0 = T_0$ always holds (both equal $k+l+m$).
-		\item $n=1$: $f_1 = T_1$ requires $kx + ly + mz = k\,e_1$, i.e.
-		\[
-		ly + mz = k(y+z).
-		\]
-		\item $n=2$: given the $n=1$ condition, $f_2 = T_2$ reduces (after
-		substituting $l = k + \lambda$, $m = k - \lambda y/z$) to
-		\[
-		y^2 + xy + zx = 0.
-		\]
-	\end{itemize}
-	
-	\begin{theorem}
-		Suppose $y + z \neq 0$. Set
-		\[
-		x = -\frac{y^2}{y+z}, \qquad k = \frac{ly + mz}{y+z}.
-		\]
-		Then $f_n(k,l,m) = T_n(k,l,m)$ for all integers $n$.
-	\end{theorem}
-	\begin{proof}
-		The two conditions above are satisfied by construction, so $f_n = T_n$
-		holds at $n = 0, 1, 2$, and hence for all $n$ by the recurrence.
-	\end{proof}
-	
-	\begin{remark}
-		$y, z, l, m$ are free parameters (with $y + z \neq 0$); $x$ and $k$
-		are then uniquely determined. Note that $x \neq z$ is automatic for
-		real $y, z$ (it would require $y^2 + yz + z^2 = 0$, which has no real
-		nonzero solutions). The asymmetry in $x$ is by design: $T_n$ privileges
-		the weight $k$ (associated to $x$).
-	\end{remark}
 	
 	% -----------------------------------------------------------------------
 	\section{Matching $T_n$ to $K$, $L$, $M$}
