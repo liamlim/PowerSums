@@ -7,6 +7,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
@@ -415,53 +416,113 @@
 	\]
 	which is exactly Theorem~\ref{thm:squaring}.
 	
+	
 	% -----------------------------------------------------------------------
-	\section{Exploring FLT counter-examples}
-	In this section let's assume $x$,$y$,$z$ are distinct and non-zero integers such that
-	$$s_n = 0$$
+	\section{Constraints on a hypothetical FLT counter-example}
+	\label{sec:flt}
 	
-	According to the general power substitution theorem, we have
+	Throughout this section we assume that $x$, $y$, $z$ are pairwise coprime
+	nonzero integers satisfying $s_n = x^n + y^n + z^n = 0$ for a fixed integer
+	$n \geq 3$: the hypothesis of a primitive counter-example to Fermat's Last
+	Theorem.
+	
+	\subsection*{The ratio identity}
+	
+	Setting $k = n$ and $m = 3$ in Theorem~\ref{thm:power}, and using
+	$K_3(x^n, y^n, z^n) = s_n = 0$, gives immediately:
+	
+	\begin{corollary}
+		\label{cor:flt-ratio}
+		If $s_n = 0$ then $K(3n)\,K(n+1) = K(3n+1)\,K(n)$.
+	\end{corollary}
+	
+	\subsection*{Bounding $d = \gcd(K(n),\, K(n+1))$}
+	
+	We use the two identities
+	\begin{align}
+		s_n     &= e_1\,K(n+1) - 2e_2\,K(n) + 3e_3\,K(n-1), \label{eq:sn}\\
+		3K(n+2) &= 3e_1\,K(n+1) - 3e_2\,K(n) + 3e_3\,K(n-1). \label{eq:3Kn2}
+	\end{align}
+	The first is Lemma~\ref{lem:sn-formula}; the second is the recurrence
+	multiplied by~$3$.  Since $s_n=0$ and $d \mid K(n),\,K(n+1)$,
+	equation~\eqref{eq:sn} gives
+	\begin{equation}
+		\label{eq:d-3e3}
+		d \;\mid\; 3e_3\,K(n-1).
+	\end{equation}
+	Substituting into~\eqref{eq:3Kn2} then gives $d \mid 3K(n+2)$.  So $d$
+	divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of $3$.
+	Applying the recurrence inductively forward, $d \mid 3K(m)$ for all
+	$m \geq n$, and in particular $d \mid 3K(2n-1)$, $3K(2n)$, $3K(2n+1)$.
+	
+	Applying~\eqref{eq:sn} at index $2n$, and using $d \mid 3K(2n)$ and
+	$d \mid 3K(2n+1)$, gives $d \mid s_{2n}$.  Since $s_n = 0$,
 	\[
-	\frac{\Delta_n}{\Delta}\, s_n
-	\;=\;
-	K(3n)\,K(n+1) - K(3n+1)\,K(n).
+	s_{2n} = s_n^2 - 2(x^ny^n + y^nz^n + z^nx^n) = -2(x^ny^n + y^nz^n + z^nx^n),
 	\]
+	so
+	\begin{equation}
+		\label{eq:d-cross}
+		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
+	\end{equation}
 	
-	So our choice of $x$,$y$,$z$ satisfies the simple formula 
-	$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
+	We now show that every prime $p$ dividing $d$ must equal $3$.
 	
-	Let's now investigate what are requirements on $d = \gcd(K(n), K(n+1))$
+	\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
+	Let $a = p^k$ be the exact power of $p$ dividing $d$.  Since $x$, $y$, $z$
+	are pairwise coprime, $p$ divides exactly one of them, say $p \mid x$, so
+	$a \mid x^n$.  From~\eqref{eq:d-cross}, $a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.
+	Since $a \mid x^n$, the first and third cross terms vanish mod $a$, leaving
+	$a \mid 2y^nz^n$.  But $\gcd(x,y)=\gcd(x,z)=1$ implies $\gcd(a,\,y^nz^n)=1$,
+	so $a \mid 2$, hence $p^k \mid 2$, giving $p = 2$ and $k = 1$.  But then
+	$2 \mid d$ implies $2 \mid K(n)$ and $2 \mid K(n+1)$, so $2 \mid 3K(n+2)$
+	by~\eqref{eq:3Kn2}, and since $\gcd(2,3)=1$ we get $2 \mid K(n+2)$.  The
+	forward recurrence then gives $2 \mid K(m)$ for all $m \geq n$, and in
+	particular $2 \mid K(2) = 1$: contradiction.  Therefore \emph{no} prime
+	factor of $d$ divides $e_3$.
 	
-	We know that
-	$$s_n = 0 = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$$
+	\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
+	From~\eqref{eq:d-3e3}, $p \mid 3e_3K(n-1)$.  Since $p$ is prime and
+	$p \nmid e_3$, we get $p \mid 3K(n-1)$.  Together with $p \mid 3K(n)$ and
+	$p \mid 3K(n+1)$, we apply the recurrence backwards:
+	\[
+	3K(m) = 3e_1\,K(m+1) - 3e_2\,K(m+2) + 3e_3\,K(m+3).
+	\]
+	Since $p \nmid e_3$, at each backward step we can conclude $p \mid 3K(m)$
+	from $p \mid 3K(m+1)$, $3K(m+2)$, $3K(m+3)$.  Descending to $m=2$ gives
+	$p \mid 3K(2) = 3$, hence $p = 3$.
 	
-	Also we know that $d$ doesn't divide $K(n-1)$ because otherwise there would be a common divisor of three consecutive $K$, which would result in $d$ dividing $K(k)$ for every $k$ including $K(2) = 1$ which is a contradiction.
+	\medskip
+	So every prime factor of $d$ equals $3$.  If $9 \mid d$ then $9 \mid 3K(n-1)$,
+	$3K(n)$, $3K(n+1)$, hence $3 \mid K(n-1)$, $K(n)$, $K(n+1)$; the forward
+	recurrence then gives $3 \mid K(m)$ for all $m \geq n-1$, and in particular
+	$3 \mid K(2) = 1$: contradiction.  Therefore $9 \nmid d$, giving:
 	
-	As such we can conclude that $d$ divides $3e_3$
+	\begin{proposition}
+		\label{prop:d-divides-3}
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$,
+		then $\gcd(K(n),\, K(n+1))$ divides $3$.
+	\end{proposition}
 	
-	Also we know that
-	$$K(2n+1) = K(n) K(n+3) + L(n) K(n+2) + M(n) K(n+1)$$
-	$$K(2n) = K(n) K(n+2) + L(n) K(n+1) + M(n) K(n)$$
+	\begin{remark}
+		In Case~2 the backward recurrence step requires $p \nmid e_3$, not merely
+		$d \nmid e_3$: for a composite $d$ these differ.  Working prime-by-prime,
+		as above, is essential.
+	\end{remark}
 	
-	It's trivial that $d$ divides $L(n) = K(n+1) - e_1 K(n)$ thus $d$ divides both $K(2n)$ and $K(2n+1)$
+	\subsection*{Conclusion}
 	
-	Also we know that
-	$$s_{2n} = 0 = e_1 K(2n+1) - 2e_2 K(2n) + 3e_3 K(2n-1)$$
+	Combining Corollary~\ref{cor:flt-ratio} with Proposition~\ref{prop:d-divides-3}
+	and the divisibility $d \mid K(3n)$, $d \mid K(3n+1)$ from the addition
+	formula:
 	
-	Together with the fact that $d$ divides $3e_3$ which we found earlier, we know that $d$ divides $s_{2n}$.
-	
-	Using $s_n = 0$ we know that
-	
-	$$s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n)\equiv 0 \mod d$$
-	$$3e_3 = 3xyz\equiv 0 \mod d$$
-	
-	It immediately follows that $x^ny^n + y^nz^n + z^nx^n$ and $xyz$ are coprime. As such we know that $d$ divides $6$.
-	
-	Now let's look back at formula 
-	$$K(3n) K(n+1) = K(3n+1) K(n)$$
-	
-	Now that we know $\gcd(K(n), K(n+1))$ divides 6, we can conclude:
-	$$6K(3n) \equiv 0 \mod K(n)$$
-	$$6K(3n+1) \equiv 0 \mod K(n+1)$$
+	\begin{corollary}
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$, then
+		\[
+		3\,K(3n) \;\equiv\; 0 \pmod{K(n)},
+		\qquad
+		3\,K(3n+1) \;\equiv\; 0 \pmod{K(n+1)}.
+		\]
+	\end{corollary}
 	
 \end{document}
