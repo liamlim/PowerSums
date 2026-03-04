@@ -466,16 +466,34 @@
 		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
 	\end{equation}
 	
-	We now analyse which prime powers can divide $d$.  Let $p$ be any prime
-	dividing $d$, and let $a = p^k$ be the exact power of $p$ in $d$.
+	\medskip\noindent\textbf{Parity.}
+	Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, they cannot all
+	be odd (odd$+$odd$+$odd is odd, never zero), so exactly one is even.
+	Therefore $e_1 = x+y+z$ and $e_3 = xyz$ are both even, while
+	$e_2 = xy+yz+zx$ is odd.  The recurrence mod~$2$ then becomes
+	\[
+	K(m+3) \;\equiv\; e_1 K(m+2) - e_2 K(m+1) + e_3 K(m)
+	\;\equiv\; K(m+1) \pmod{2},
+	\]
+	since $e_1 \equiv e_3 \equiv 0$ and $e_2 \equiv 1$.  Starting from
+	$K(2) = 1$, $K(3) = e_1 \equiv 0$, this gives the strict alternating
+	pattern $K(\text{even}) \equiv 1$, $K(\text{odd}) \equiv 0 \pmod{2}$.
+	Since $n$ is an odd prime, $K(n)$ is even and $K(n+1)$ is odd, so
+	$2 \nmid d$.  Likewise $K(3n)$ is even and $K(3n+1)$ is odd.
+	
+	\medskip
+	We now analyse which odd prime powers can divide $d$.  Let $p$ be any
+	odd prime dividing $d$, and let $a = p^k$ be the exact power of $p$ in $d$.
+	Since $p$ is odd, either $p \mid e_3$ or $p \nmid e_3$.
 	
 	\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
 	Since $x$, $y$, $z$ are pairwise coprime, $p$ divides exactly one of them,
 	say $p \mid x$, so $a \mid x^n$.  From~\eqref{eq:d-cross},
 	$a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.  Since $a \mid x^n$, the first and
-	third cross terms vanish mod $a$, leaving $a \mid 2y^nz^n$.  But
-	$\gcd(x,y)=\gcd(x,z)=1$ implies $\gcd(a,\,y^nz^n)=1$, so $a \mid 2$,
-	hence $p^k \mid 2$, giving $p = 2$ and $k = 1$.
+	third cross terms vanish mod $a$, leaving $a \mid 2y^nz^n$.  Since $p$ is
+	odd, $\gcd(a, 2) = 1$, and $\gcd(x,y)=\gcd(x,z)=1$ gives
+	$\gcd(a,\,y^nz^n)=1$, so $a \mid 1$: contradiction.  No odd prime factor
+	of $d$ divides $e_3$.
 	
 	\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
 	From~\eqref{eq:d-3e3}, $a \mid 3e_3K(n-1)$.  Since $p$ is prime and
@@ -489,35 +507,38 @@
 	$a \mid 3K(2) = 3$, so $p^k \mid 3$, hence $p = 3$ and $k = 1$.
 	
 	\medskip
-	In both cases $p^k$ is either $2$ or $3$, so every prime power in $d$
-	divides $6$, and therefore:
+	Combining parity with the two cases: $d$ is odd (from the parity argument),
+	Case~1 is vacuous for odd primes, and Case~2 forces every prime power in
+	$d$ to divide $3$.  Therefore:
 	
 	\begin{proposition}
-		\label{prop:d-divides-6}
-		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$,
-		then $\gcd(K(n),\, K(n+1))$ divides $6$.
+		\label{prop:d-divides-3}
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
+		and $n$ an odd prime, then $\gcd(K(n),\, K(n+1))$ divides $3$.
 	\end{proposition}
 	
 	\begin{remark}
-		Working with the exact prime power $a = p^k$ is essential: it handles
-		higher powers such as $4$ and $9$ in the same stroke as the primes
-		themselves, and it avoids the error of passing from $d \nmid e_3$ to
-		$d \mid 3K(n-1)$, which is only valid prime-by-prime.
+		Working with the exact prime power $a = p^k$ handles higher powers such
+		as $9$ in the same stroke: $p^k \mid 3$ forces $k = 1$ immediately,
+		with no separate argument needed.
 	\end{remark}
 	
 	\subsection*{Conclusion}
 	
-	Combining Corollary~\ref{cor:flt-ratio} with Proposition~\ref{prop:d-divides-6}
+	Combining Corollary~\ref{cor:flt-ratio} with Proposition~\ref{prop:d-divides-3}
 	and the divisibility $d \mid K(3n)$, $d \mid K(3n+1)$ from the addition
 	formula:
 	
 	\begin{corollary}
-		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$, then
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
+		and $n$ an odd prime, then
 		\[
-		6\,K(3n) \;\equiv\; 0 \pmod{K(n)},
+		3\,K(3n) \;\equiv\; 0 \pmod{K(n)},
 		\qquad
-		6\,K(3n+1) \;\equiv\; 0 \pmod{K(n+1)}.
+		3\,K(3n+1) \;\equiv\; 0 \pmod{K(n+1)}.
 		\]
+		In particular, writing $A = 3K(3n)/K(n)$ and $B = 3K(3n+1)/K(n+1)$,
+		we have $A = B$.
 	\end{corollary}
 	
 \end{document}
