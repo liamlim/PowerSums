@@ -215,6 +215,10 @@
 		recurrence.
 	\end{proof}
 	
+	\begin{theorem}
+		$s_n \;=\; e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$ for all integers $n$.
+	\end{theorem}
+	
 	\subsection{A relation between $K$, $L$, $M$}
 	
 	Matching $T_n(k,l,m) = K(n)$ at $n=0,1,2$ uniquely determines
@@ -412,5 +416,52 @@
 	which is exactly Theorem~\ref{thm:squaring}.
 	
 	% -----------------------------------------------------------------------
+	\section{Exploring FLT counter-examples}
+	In this section let's assume $x$,$y$,$z$ are distinct and non-zero integers such that
+	$$s_n = 0$$
+	
+	According to the general power substitution theorem, we have
+	\[
+	\frac{\Delta_n}{\Delta}\, s_n
+	\;=\;
+	K(3n)\,K(n+1) - K(3n+1)\,K(n).
+	\]
+	
+	So our choice of $x$,$y$,$z$ satisfies the simple formula 
+	$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
+	
+	Let's now investigate what are requirements on $d = \gcd(K(n), K(n+1))$
+	
+	We know that
+	$$s_n = 0 = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$$
+	
+	Also we know that $d$ doesn't divide $K(n-1)$ because otherwise there would be a common divisor of three consecutive $K$, which would result in $d$ dividing $K(k)$ for every $k$ including $K(2) = 1$ which is a contradiction.
+	
+	As such we can conclude that $d$ divides $3e_3$
+	
+	Also we know that
+	$$K(2n+1) = K(n) K(n+3) + L(n) K(n+2) + M(n) K(n+1)$$
+	$$K(2n) = K(n) K(n+2) + L(n) K(n+1) + M(n) K(n)$$
+	
+	It's trivial that $d$ divides $L(n) = K(n+1) - e_1 K(n)$ thus $d$ divides both $K(2n)$ and $K(2n+1)$
+	
+	Also we know that
+	$$s_{2n} = 0 = e_1 K(2n+1) - 2e_2 K(2n) + 3e_3 K(2n-1)$$
+	
+	Together with the fact that $d$ divides $3e_3$ which we found earlier, we know that $d$ divides $s_{2n}$.
+	
+	Using $s_n = 0$ we know that
+	
+	$$s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n)\equiv 0 \mod d$$
+	$$3e_3 = 3xyz\equiv 0 \mod d$$
+	
+	It immediately follows that $x^ny^n + y^nz^n + z^nx^n$ and $xyz$ are coprime. As such we know that $d$ divides $6$.
+	
+	Now let's look back at formula 
+	$$K(3n) K(n+1) = K(3n+1) K(n)$$
+	
+	Now that we know $\gcd(K(n), K(n+1))$ divides 6, we can conclude:
+	$$6K(3n) \equiv 0 \mod K(n)$$
+	$$6K(3n+1) \equiv 0 \mod K(n+1)$$
 	
 \end{document}
