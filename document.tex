@@ -324,48 +324,31 @@
 	Note $e_3 - e_1 e_2 = -(x+y)(y+z)(z+x)$, the product of pairwise sums.
 	
 	% -----------------------------------------------------------------------
-	\section{Doubling Formulas}
-	\label{sec:doubling}
+	\section{General Power Substitution}
 	
-	Setting the shift $j = n$ in the Shift-Invariance Corollary
-	(Corollary~\ref{cor:shift}) evaluates any sequence at $2n$ in terms of
-	its values near $n$.
+	Recall that
+	\[
+	K(n) = \frac{\cyc x^n (y-z)}{\Delta},
+	\qquad
+	\Delta = (y-z)(z-x)(x-y).
+	\]
 	
-	\begin{theorem}[Doubling formula for $K$]
-		\label{thm:doubleK}
-		For all integers $n$,
-		\[
-		K(2n) \;=\; K(n)\,K(n+2) + L(n)\,K(n+1) + M(n)\,K(n).
-		\]
-		Equivalently,
-		\[
-		K(2n) \;=\; K(n+1)^2 - e_2\,K(n)^2 + 2\,e_3\,K(n)\,K(n-1).
-		\]
-	\end{theorem}
-	\begin{proof}
-		Apply Corollary~\ref{cor:shift} with weights $(w_x,w_y,w_z)$ and $j=n$.
-		Since $f_{n+j}(w_x,w_y,w_z) = K(n+j)\cdot\Delta$, dividing by $\Delta$
-		gives the first form.  The second follows by substituting the recurrence
-		for $K(n+2)$ and the definitions of $L(n)$, $M(n)$.
-	\end{proof}
+	Define
+	\[
+	\Delta_k = (y^k - z^k)(z^k - x^k)(x^k - y^k).
+	\]
 	
-	\begin{theorem}[Doubling formula for $s_n$]
-		\label{thm:doubles}
-		For all integers $n$,
+	\begin{theorem}[General Power Substitution]
+		For every integer $k$ and $n$,
 		\[
-		s_{2n} \;=\; K(n)\,s_{n+2} + L(n)\,s_{n+1} + M(n)\,s_n.
+		\frac{\Delta_k}{\Delta}\, K_n(x^k,y^k,z^k)
+		=
+		K(kn)\,K(k+1)
+		-
+		K(kn+1)\,K(k).
 		\]
 	\end{theorem}
-	\begin{proof}
-		Apply Corollary~\ref{cor:shift} with weights $(1,1,1)$ and $j=n$.
-	\end{proof}
 	
-	\begin{remark}
-		Both formulas are instances of the same principle: for \emph{any}
-		weighted power sum $f_n(k,l,m)$, the shift-invariance corollary gives
-		$f_{2n}(k,l,m) = K(n)\,f_{n+2} + L(n)\,f_{n+1} + M(n)\,f_n$.
-		Choosing different weights recovers $K(2n)$, $s_{2n}$, $L(2n)$, and
-		any other instance.
-	\end{remark}
-	
+	% -----------------------------------------------------------------------
+
 \end{document}
