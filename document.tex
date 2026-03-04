@@ -296,12 +296,12 @@
 	\end{corollary}
 	
 	\begin{remark}
-		This mirrors the classical Cassini identity $F_n^2 - F_{n+1}F_{n-1}=(-1)^{n-1}$ for
-		Fibonacci numbers.  There the right-hand side is a sign; here it is the
-		richer object $K_n(yz,zx,xy)$, which satisfies its own recurrence with
-		coefficients $(e_2, e_1e_3, e_3^2)$.  Note also that $K(n)^2 - K(n+1)K(n-1)$
-		involves $e_1$ only through $e_2$, $e_1 e_3$, and $e_3^2$ — never $e_1$
-		alone.
+		This mirrors the classical Cassini identity $F_n^2 - F_{n+1}F_{n-1}=(-1)^{n-1}$
+		for Fibonacci numbers, where the right-hand side is a constant (up to sign).
+		Here the right-hand side is the richer object $K_n(yz,zx,xy)$,
+		which satisfies its own third-order recurrence with coefficients
+		$(e_2, e_1e_3, e_3^2)$.  In particular, $K(n)^2 - K(n+1)K(n-1)$
+		is a polynomial in $e_2$, $e_1 e_3$, $e_3^2$ only — $e_1$ never appears alone.
 	\end{remark}
 	
 	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
@@ -326,64 +326,91 @@
 	% -----------------------------------------------------------------------
 	\section{General Power Substitution}
 	
-	Recall that
+	For an integer $k \geq 1$, write the \emph{$k$-th difference discriminant} as
 	\[
-	K(n) = \frac{\cyc {x^n (y-z)}}{\Delta},
-	\qquad
-	\Delta = (y-z)(z-x)(x-y).
+	\Delta_k \;=\; -(y^k-z^k)(z^k-x^k)(x^k-y^k),
 	\]
+	consistently with the sign convention $\Delta = \Delta_1 = -(y-z)(z-x)(x-y)$.
+	The ratio $\Delta_k/\Delta$ is a symmetric polynomial in $x,y,z$; for
+	example $\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3 - e_1 e_2)$.
 	
-	Define
-	\[
-	\Delta_k = (y^k - z^k)(z^k - x^k)(x^k - y^k).
-	\]
-	
-	\begin{theorem}[General Power Substitution]
-		For every integer $k$ and $n$,
+	\begin{theorem}[General power substitution]
+		\label{thm:power}
+		For all integers $k \geq 1$ and $n$,
 		\[
 		\frac{\Delta_k}{\Delta}\, K_n(x^k,y^k,z^k)
-		=
-		K(kn)\,K(k+1)
-		-
-		K(kn+1)\,K(k).
+		\;=\;
+		K(kn)\,K(k+1) - K(kn+1)\,K(k).
 		\]
 	\end{theorem}
+	\begin{proof}
+		By definition, the numerator of $K_n(x^k,y^k,z^k)$ is
+		\[
+		\cyc{(x^k)^n(y^k-z^k)} \;=\; f_{kn}(y^k-z^k,\, z^k-x^k,\, x^k-y^k),
+		\]
+		since $(x^k)^n \cdot (y^k - z^k)$ is the $x$-term of $f_{kn}$ with weights
+		$(y^k-z^k, z^k-x^k, x^k-y^k)$.  Denote these weights $(p,q,r)$.
+		We evaluate $f_0, f_1, f_2$ at $(p,q,r)$:
+		\begin{itemize}
+			\item $f_0(p,q,r) = 0$, since $p+q+r = 0$.
+			\item $f_1(p,q,r) = \cyc{x(y^k-z^k)}$. Regrouping by $x^k$:
+			$\cyc{x^k(z-y)} = -\cyc{x^k(y-z)} = -K(k)\,\Delta$.
+			\item $f_2(p,q,r) = \cyc{x^2(y^k-z^k)} = -\cyc{x^k(y^2-z^2)}$.
+			Writing $y^2-z^2 = (y-z)(y+z) = -w_x(y+z)$ and expanding,
+			$\cyc{x^k(y^2-z^2)} = e_1\,f_k(w_x,w_y,w_z) - f_{k+1}(w_x,w_y,w_z)
+			= (e_1 K(k) - K(k+1))\Delta = -L(k)\,\Delta$,
+			so $f_2(p,q,r) = L(k)\,\Delta$.
+		\end{itemize}
+		Applying the Decomposition Theorem (with $kn$ in place of $n$):
+		\[
+		f_{kn}(p,q,r) \;=\; K(kn)\cdot L(k)\,\Delta \;+\; L(kn)\cdot(-K(k))\,\Delta,
+		\]
+		and since $f_{kn}(p,q,r) = K_n(x^k,y^k,z^k)\cdot\Delta_k$, dividing by $\Delta$:
+		\[
+		\frac{\Delta_k}{\Delta}\,K_n(x^k,y^k,z^k) = K(kn)\,L(k) - L(kn)\,K(k).
+		\]
+		Substituting $L(m) = K(m+1) - e_1 K(m)$ into both $L(k)$ and $L(kn)$ and
+		expanding, the $e_1$ terms cancel, leaving $K(kn)\,K(k+1) - K(kn+1)\,K(k)$.
+	\end{proof}
 	
-	\subsection*{Special Case n = 2}
+	\subsection*{Special case $n=1$}
 	
-	For $n=2$ we use that $K(2)=1$ for any triple of variables.
-	Hence
-	\[
-	K_2(x^k,y^k,z^k)=1,
-	\]
-	and the theorem gives the closed formula
+	Since $K_1(a,b,c) = 0$ for any triple, the left-hand side vanishes, and
+	the theorem gives $K(k)\,K(k+1) - K(k+1)\,K(k) = 0$: trivially true, and
+	a consistency check.
+	
+	\subsection*{Special case $n=2$}
+	
+	Since $K_2(a,b,c) = 1$ for any triple, the theorem gives the closed formula
 	\[
 	\frac{\Delta_k}{\Delta}
-	=
-	K(2k)\,K(k+1)
-	-
-	K(2k+1)\,K(k).
+	\;=\;
+	K(2k)\,K(k+1) - K(2k+1)\,K(k).
 	\]
 	
-		\subsection*{Special Case n = 3}
-	For $n=3$ we use that $K(3)=x+y+z$.
-	Thus
-	\[
-	K_3(x^k,y^k,z^k)
-	=
-	x^k+y^k+z^k
-	=
-	s_k,
-	\]
-	and we obtain
+	\subsection*{Special case $n=3$}
+	
+	For any triple $(a,b,c)$ one has $K_3(a,b,c) = a+b+c$ directly from the
+	closed form: the numerator $\cyc{a^3(b-c)}$ factors as
+	$(a+b+c)\cdot\cyc{a^2(b-c)}$.  Applied to $(x^k,y^k,z^k)$ this gives
+	$K_3(x^k,y^k,z^k) = s_k$, and the theorem yields
 	\[
 	\frac{\Delta_k}{\Delta}\, s_k
-	=
-	K(3k)\,K(k+1)
-	-
-	K(3k+1)\,K(k).
+	\;=\;
+	K(3k)\,K(k+1) - K(3k+1)\,K(k).
 	\]
 	
+	\subsection*{Recovery of the squaring identity (Theorem~\ref{thm:squaring})}
+	
+	Set $k=2$.  Then $K(2)=1$ and $L(2)=K(3)-e_1K(2)=e_1-e_1=0$, so
+	$K(kn)\,L(k) - L(kn)\,K(k) = -L(2n)$.  Since
+	$\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3-e_1e_2)$,
+	Theorem~\ref{thm:power} gives
+	\[
+	-(e_3 - e_1 e_2)\cdot K_n(x^2,y^2,z^2) \;=\; -L(2n),
+	\]
+	which is exactly Theorem~\ref{thm:squaring}.
+	
 	% -----------------------------------------------------------------------
-
+	
 \end{document}
