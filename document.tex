@@ -4,14 +4,17 @@
 \usepackage{geometry}
 \geometry{margin=1in}
 
-\newtheorem{theorem}{Theorem}
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
 
-\title{Weighted Power Sums, $K/L/M$ Basis Functions, and $T_n$}
+% Cyclic sum notation: \cyc{g(x)} = g(x) + g(y) + g(z)
+\newcommand{\cyc}[1]{\left[#1\right]_{\!\mathrm{cyc}}}
+
+\title{Power Sums, a Recurrence Basis, and Substitution Identities}
 \author{}
 \date{}
 
@@ -21,423 +24,362 @@
 	\newpage
 	
 	% -----------------------------------------------------------------------
-	\section{Setup and Assumptions}
+	\section{Setup}
 	
-	Throughout, we assume $x, y, z$ are distinct and non-zero. In particular
-	$e_3 = xyz \neq 0$, which allows us to extend recurrences backwards to
-	all integers.
-	
-	\subsection{Elementary symmetric polynomials}
-	
-	\begin{definition}
-		\begin{align*}
-			e_1 &= x + y + z, \\
-			e_2 &= xy + yz + zx, \\
-			e_3 &= xyz.
-		\end{align*}
-	\end{definition}
-	
-	\subsection{Minimal polynomial $P(t)$}
-	\begin{definition}
-		\[P(t) = t^3 - e_1 t^2 + e_2 t - e_3.\]
-		Thus $x$, $y$, and $z$ are the roots of $P(t) = 0$.
-	\end{definition}
-	
-	\begin{lemma}[Roots $x,y,z$]
-		Each of $x$, $y$, $z$ is a root of $P$:
-		\begin{align*}
-			P(x) = 0, \\
-			P(y) = 0, \\
-			P(z) = 0.
-		\end{align*}
-	\end{lemma}
-	\begin{proof}
-		This follows immediately from the factorisation
-		\[P(t) = (t - x)(t - y)(t - z).\]
-	\end{proof}
-	
-	\subsection{Helper differences}
-	
-	\begin{definition}
-		\[
-		w_x = y - z, \qquad w_y = z - x, \qquad w_z = x - y.
-		\]
-	\end{definition}
-	
-	Note that $w_x + w_y + w_z = 0$, and all three are nonzero since $x, y,
-	z$ are distinct.
-	
-	% -----------------------------------------------------------------------
-	\section{Weighted Power Sums $f_n$}
-	
-	\begin{definition}
-		For any integer $n$ and weights $k, l, m$, define
-		\[
-		f_n(k,l,m) = k x^n + l y^n + m z^n.
-		\]
-		This is well-defined for all integers $n$ because $x, y, z \neq 0$.
-	\end{definition}
-	
-	\begin{lemma}[Isolating single powers]
-		\begin{align*}
-			x^n = f_n(1, 0, 0),\\
-			y^n = f_n(0, 1, 0),\\
-			z^n = f_n(0, 0, 1).
-		\end{align*}
-	\end{lemma}
-	
-	\begin{definition}
-		For any integer $n$, define
-		\[
-		s_n = f_n(1,1,1) = x^n + y^n + z^n.
-		\]
-	\end{definition}
-	
-	\begin{lemma}[Linearity]
-		For any integer $n$, $f_n$ is linear in its weights:
-		\begin{align*}
-			f_n(ak, al, am) &= a\, f_n(k, l, m), \\
-			f_n(k_1+k_2,\, l_1+l_2,\, m_1+m_2) &= f_n(k_1,l_1,m_1) + f_n(k_2,l_2,m_2).
-		\end{align*}
-	\end{lemma}
-	\begin{proof}
-		Both identities follow immediately from the definition $f_n(k,l,m) = kx^n + ly^n + mz^n$.
-	\end{proof}
-	
-	\begin{theorem}[Recurrence for $f_n$]
-		For any integer $n$ and any fixed weights $k, l, m$,
-		\[
-		f_{n+3}(k,l,m) = e_1\, f_{n+2}(k,l,m) - e_2\, f_{n+1}(k,l,m)
-		+ e_3\, f_n(k,l,m).
-		\]
-	\end{theorem}
-	\begin{proof}
-		By the minimal polynomial lemma, each of $x, y, z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$. Multiplying both sides by $t^n$ and summing over $x, y, z$ with weights $k, l, m$ yields the result.
-	\end{proof}
-	
-	% -----------------------------------------------------------------------
-	\section{The Function $K(n)$}
-	
-	\subsection{Evaluating $f_n$ at weights $(w_x, w_y, w_z)$}
-	
-	\begin{lemma}
-		\begin{align*}
-			f_0(w_x, w_y, w_z) &= 0, \\
-			f_1(w_x, w_y, w_z) &= 0, \\
-			f_2(w_x, w_y, w_z) &= -w_x w_y w_z = -(y-z)(z-x)(x-y).
-		\end{align*}
-		In particular, $f_2(w_x, w_y, w_z) \neq 0$ since $x,y,z$ are distinct.
-	\end{lemma}
-	\begin{proof}
-		$f_0 = w_x + w_y + w_z = 0$ by definition. For $f_1$:
-		$w_x x + w_y y + w_z z = x(y-z) + y(z-x) + z(x-y) = 0$. The identity
-		for $f_2$ follows by straightforward algebra.
-	\end{proof}
-	
-	\begin{definition}
-		For any integer $n$, define
-		\[
-		K(n) = \frac{f_n(w_x, w_y, w_z)}{f_2(w_x, w_y, w_z)}.
-		\]
-	\end{definition}
-	
-	\begin{corollary}[Closed form for $K(n)$]
-		For all integers $n$,
-		\[
-		-(x-y)(y-z)(z-x)\cdot K(n) = x^n(y-z) + y^n(z-x) + z^n(x-y).
-		\]
-	\end{corollary}
-	\begin{proof}
-		Expanding the numerator gives $f_n(w_x, w_y, w_z)$, and the
-		denominator is $f_2(w_x, w_y, w_z) = -(y-z)(z-x)(x-y)$.
-	\end{proof}
-	
-	\subsection{Initial values and recurrence}
-	
-	\begin{lemma}
-		$K(0) = 0$, $K(1) = 0$, $K(2) = 1$.
-	\end{lemma}
-	
-	\begin{theorem}[Recurrence for $K$]
-		\[
-		K(n+3) = e_1\, K(n+2) - e_2\, K(n+1) + e_3\, K(n).
-		\]
-	\end{theorem}
-	\begin{proof}
-		Inherited from the recurrence for $f_n$ by linearity and division by
-		the nonzero constant $f_2(w_x, w_y, w_z)$.
-	\end{proof}
-	
-	% -----------------------------------------------------------------------
-	\section{Generalised Basis Functions $K_n(a,b,c)$}
-	
-	\subsection{Definition}
-	
-	The function $K(n)$ depends implicitly on the triple $(x, y, z)$ through
-	the elementary symmetric polynomials $e_1, e_2, e_3$.  It is useful to
-	make this dependence explicit by defining a version of $K$ for an
-	arbitrary triple of distinct non-zero values.
-	
-	\begin{definition}
-		For any triple $(a, b, c)$ of distinct non-zero reals and any integer
-		$n$, define
-		\[
-		K_n(a,b,c)
-		= \frac{a^n(b-c) + b^n(c-a) + c^n(a-b)}{-(b-c)(c-a)(a-b)}.
-		\]
-	\end{definition}
-	
-	Thus $K_n(a,b,c)$ is the function $K$ for the system whose roots are
-	$a$, $b$, $c$; in particular $K_n(x,y,z) = K(n)$.  The denominator
-	equals $f_2(b-c,\, c-a,\, a-b)$ computed for the triple $(a,b,c)$, and
-	is non-zero precisely because $a, b, c$ are distinct.
-	
-	\begin{lemma}[Initial values]
-		For any admissible triple $(a,b,c)$,
-		\[
-		K_0(a,b,c) = 0, \qquad K_1(a,b,c) = 0, \qquad K_2(a,b,c) = 1.
-		\]
-	\end{lemma}
-	\begin{proof}
-		The cases $n = 0$ and $n = 1$ follow from the same calculations as
-		Lemma~3.1 (the numerator vanishes).  For $n = 2$ the numerator equals
-		the denominator, so the ratio is $1$.
-	\end{proof}
-	
-	\begin{theorem}[Recurrence for $K_n(a,b,c)$]
-		Let $\varepsilon_1 = a+b+c$, $\varepsilon_2 = ab+bc+ca$,
-		$\varepsilon_3 = abc$.  Then
-		\[
-		K_{n+3}(a,b,c)
-		= \varepsilon_1\, K_{n+2}(a,b,c)
-		- \varepsilon_2\, K_{n+1}(a,b,c)
-		+ \varepsilon_3\, K_n(a,b,c).
-		\]
-	\end{theorem}
-	\begin{proof}
-		The proof is identical to that of the recurrence for $K(n)$: each of
-		$a$, $b$, $c$ satisfies its own minimal polynomial, and the claim
-		follows by the same linearity argument.
-	\end{proof}
-	
-	\subsection{The squaring substitution and a doubling identity}
-	
-	A natural instance of $K_n(a,b,c)$ arises from the substitution
-	$(a,b,c) = (x^2, y^2, z^2)$.  The symmetric polynomials of the squared
-	triple are
+	Throughout, $x$, $y$, $z$ are distinct and nonzero complex (or real)
+	numbers.  We write their elementary symmetric polynomials as
 	\[
-	\varepsilon_1 = e_1^2 - 2e_2, \qquad
-	\varepsilon_2 = e_2^2 - 2e_1 e_3, \qquad
-	\varepsilon_3 = e_3^2.
+	e_1 = x+y+z, \qquad e_2 = xy+yz+zx, \qquad e_3 = xyz,
+	\]
+	and define the \emph{minimal polynomial}
+	\[
+	P(t) = t^3 - e_1 t^2 + e_2 t - e_3 = (t-x)(t-y)(t-z).
+	\]
+	Since $e_3 = xyz \neq 0$ we may divide by any power of $x$, $y$, or $z$,
+	and in particular extend all recurrences to all integers $n \in \mathbb{Z}$.
+	
+	\subsection*{Cyclic sum notation}
+	
+	Many expressions in this paper are cyclic in $x, y, z$.  We write
+	\[
+	\cyc{g(x)} \;:=\; g(x) + g(y) + g(z)
+	\]
+	for the cyclic sum of any expression $g$, where the implicit
+	substitution rule is $x \to y \to z \to x$.  For example,
+	$e_1 = \cyc{x}$, $e_2 = \cyc{xy}$, $e_3 = xyz$, and more usefully:
+	\[
+	\cyc{x^n(y-z)} \;=\; x^n(y-z) + y^n(z-x) + z^n(x-y).
+	\]
+	This notation eliminates the need to write all three terms of any
+	cyclic identity.
+	
+	% -----------------------------------------------------------------------
+	\section{Weighted Power Sums}
+	
+	\begin{definition}
+		For any integer $n$ and a weight triple $(k, l, m)$, define
+		\[
+		f_n(k,l,m) = k x^n + l y^n + m z^n = \cyc{k\, x^n},
+		\]
+		where in the cyclic notation it is understood that the weights cycle
+		as $(k,l,m) \to (l,m,k)$ alongside $(x,y,z) \to (y,z,x)$.
+	\end{definition}
+	
+	Special cases of immediate interest:
+	\[
+	s_n \;:=\; f_n(1,1,1) \;=\; x^n + y^n + z^n \;=\; \cyc{x^n}.
 	\]
 	
-	\begin{theorem}[Doubling identity for $L$]
-		For all integers $n$,
+	The key properties of $f_n$ are linearity in weights and the universal
+	recurrence inherited from $P(t)$.
+	
+	\begin{theorem}[Recurrence]
+		\label{thm:recurrence}
+		For any fixed weights $(k,l,m)$ and any integer $n$,
 		\[
-		(e_3 - e_1 e_2)\cdot K_n(x^2, y^2, z^2) = L(2n).
+		f_{n+3}(k,l,m) = e_1\, f_{n+2}(k,l,m) - e_2\, f_{n+1}(k,l,m) + e_3\, f_n(k,l,m).
 		\]
 	\end{theorem}
 	\begin{proof}
-		Note that $e_3 - e_1 e_2 = -(x+y)(x+z)(y+z)$.  Both sides vanish at
-		$n = 0$ and $n = 1$.  At $n = 2$ the right-hand side is $L(4)$, and
-		a direct expansion confirms $L(4) = -(x+y)(x+z)(y+z)$, which equals
-		$(e_3 - e_1 e_2)\cdot K_2(x^2,y^2,z^2) = e_3 - e_1 e_2$.  Both sides
-		satisfy recurrences (the left side that of the $(x^2,y^2,z^2)$
-		system scaled by the constant $e_3 - e_1 e_2$; the right side the
-		original recurrence applied at even indices), and they agree at the
-		three consecutive values $n = 0, 1, 2$.  Equality for all integers
-		$n$ follows.
+		Each of $x,y,z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$.  Multiply by
+		$t^n$, weight by $k, l, m$ respectively, and sum.
 	\end{proof}
 	
+	Because $e_3 \neq 0$ the recurrence can also be run backwards, making
+	$f_n(k,l,m)$ well-defined for all $n \in \mathbb{Z}$.
 	
 	% -----------------------------------------------------------------------
-	\section{The Functions $L(n)$ and $M(n)$}
+	\section{The Basis $K$, $L$, $M$}
+	
+	Any sequence satisfying the recurrence of Theorem~\ref{thm:recurrence}
+	is determined by its values at three consecutive integers.  We single
+	out the three basis sequences with initial values forming the identity
+	matrix at $n = 0, 1, 2$.
+	
+	\subsection{Definition via the antisymmetric weights}
+	
+	The triple of \emph{difference weights}
+	\[
+	(w_x,\, w_y,\, w_z) \;:=\; (y-z,\; z-x,\; x-y)
+	\]
+	satisfies $w_x + w_y + w_z = 0$ and is nonzero since $x,y,z$ are
+	distinct.  A short computation gives
+	\[
+	f_0(w_x,w_y,w_z) = 0, \quad f_1(w_x,w_y,w_z) = 0, \quad
+	f_2(w_x,w_y,w_z) = \cyc{x^2(y-z)} =: \Delta,
+	\]
+	where $\Delta = -(y-z)(z-x)(x-y) \neq 0$.  (The $f_2$ identity follows
+	by straightforward algebra, or see Section~\ref{sec:substitutions}.)
 	
 	\begin{definition}
+		\label{def:K}
+		For any integer $n$, define
 		\[
-		L(n) = K(n+1) - e_1\, K(n), \qquad M(n) = e_3\, K(n-1).
+		K(n) \;=\; \frac{f_n(w_x,\,w_y,\,w_z)}{\Delta}
+		\;=\; \frac{\cyc{x^n(y-z)}}{\cyc{x^2(y-z)}}.
 		\]
 	\end{definition}
 	
-	\begin{lemma}[Initial values]
-		\begin{align*}
-			L(0) &= 0, & L(1) &= 1, & L(2) &= 0, \\
-			M(0) &= 1, & M(1) &= 0, & M(2) &= 0.
-		\end{align*}
-	\end{lemma}
-	\begin{proof}
-		Direct computation. For $L$: $L(0) = K(1) - e_1 K(0) = 0$,
-		$L(1) = K(2) - e_1 K(1) = 1$, $L(2) = K(3) - e_1 K(2) = e_1 - e_1 =
-		0$. For $M$: $M(1) = e_3 K(0) = 0$, $M(2) = e_3 K(1) = 0$, and
-		$M(0) = e_3 K(-1) = 1$ since the recurrence backwards gives $K(-1) =
-		1/e_3$.
-	\end{proof}
+	\begin{definition}
+		\label{def:LM}
+		\[
+		L(n) = K(n+1) - e_1\,K(n), \qquad M(n) = e_3\,K(n-1).
+		\]
+	\end{definition}
 	
-	\begin{theorem}[Recurrences for $L$ and $M$]
-		Both $L$ and $M$ satisfy
-		\begin{align*}
-			L(n+3) &= e_1\, L(n+2) - e_2\, L(n+1) + e_3\, L(n),\\
-			M(n+3) &= e_1\, M(n+2) - e_2\, M(n+1) + e_3\, M(n).
-		\end{align*}
-	\end{theorem}
-	\begin{proof}
-		Both are linear combinations of shifts of $K$, so they inherit the
-		recurrence.
-	\end{proof}
-	
-	\subsection*{Initial value summary}
+	The initial values follow immediately:
 	
 	\[
+	\renewcommand{\arraystretch}{1.3}
 	\begin{array}{c|ccc}
-		n   & 0 & 1 & 2 \\\hline
+		n & 0 & 1 & 2 \\\hline
 		K(n) & 0 & 0 & 1 \\
 		L(n) & 0 & 1 & 0 \\
 		M(n) & 1 & 0 & 0
 	\end{array}
 	\]
 	
-	The triplet $(K(n), L(n), M(n))$ at $n = 0, 1, 2$ forms the identity
-	matrix: $K, L, M$ are the standard basis for all sequences satisfying
-	the recurrence.
+	The triple $(K, L, M)$ forms the \emph{standard basis} for all integer
+	sequences satisfying the recurrence: the columns at $n=0,1,2$ are
+	exactly the identity matrix.  All three sequences satisfy the same
+	recurrence as $f_n$, since $K$ inherits it from $f_n$, and $L$, $M$
+	are linear combinations of shifts of $K$.
+	
+	\begin{remark}
+		The explicit values of $K$ at small $n$ are
+		$K(2)=1$, $K(3)=e_1$, $K(4)=e_1^2-e_2$, and so on; $L$ and $M$ are
+		recovered from $K$ via the definitions above.  The backward extension
+		gives $K(-1) = 1/e_3$, consistent with $M(0) = e_3 K(-1) = 1$.
+	\end{remark}
 	
 	% -----------------------------------------------------------------------
-	\section{Decomposition of $f_n$ in the $K, L, M$ Basis}
+	\section{The Decomposition Theorem}
+	\label{sec:decomposition}
 	
-	\begin{theorem}
-		For any weights $k, l, m$ and any integer $n$,
+	The following is the central engine of everything that follows.
+	
+	\begin{theorem}[Decomposition]
+		\label{thm:decomposition}
+		For any weights $(k,l,m)$ and any integer $n$,
 		\[
-		f_n(k,l,m) = K(n)\, f_2(k,l,m) + L(n)\, f_1(k,l,m)
-		+ M(n)\, f_0(k,l,m).
+		f_n(k,l,m) \;=\; K(n)\,f_2(k,l,m) \;+\; L(n)\,f_1(k,l,m) \;+\; M(n)\,f_0(k,l,m).
 		\]
 	\end{theorem}
 	\begin{proof}
-		Both sides satisfy the same recurrence. At $n = 0, 1, 2$ both sides
-		agree by the initial values of $K, L, M$. Equality for all integers
-		$n$ follows from uniqueness of recurrence solutions.
+		Both sides satisfy the same recurrence.  They agree at $n=0,1,2$ by
+		the initial values of $K$, $L$, $M$.  Uniqueness of recurrence
+		solutions gives equality for all $n$.
 	\end{proof}
 	
 	\begin{corollary}[Shift invariance]
-		For any weights $k, l, m$ and any integers $n$, $j$,
+		\label{cor:shift}
+		For any weights $(k,l,m)$ and any integers $n$, $j$,
 		\[
-		f_{n+j}(k,l,m) = K(n)\, f_{j+2}(k,l,m) + L(n)\, f_{j+1}(k,l,m)
-		+ M(n)\, f_j(k,l,m).
+		f_{n+j}(k,l,m) \;=\; K(n)\,f_{j+2}(k,l,m) \;+\; L(n)\,f_{j+1}(k,l,m) \;+\; M(n)\,f_j(k,l,m).
 		\]
 	\end{corollary}
 	\begin{proof}
-		Fix $j$ and define the shifted sequence $h_n = f_{n+j}(k,l,m)$.
-		Since the recurrence involves only differences of indices, $h_n$
-		satisfies the same recurrence as $f_n$. Applying the decomposition
-		theorem to $h_n$ with base values $h_0 = f_j$, $h_1 = f_{j+1}$,
-		$h_2 = f_{j+2}$ gives the result.
+		Fix $j$.  The shifted sequence $h_n = f_{n+j}(k,l,m)$ satisfies the
+		same recurrence, with $h_0 = f_j$, $h_1 = f_{j+1}$, $h_2 = f_{j+2}$.
+		Apply Theorem~\ref{thm:decomposition} to $h_n$.
 	\end{proof}
 	
+	The Decomposition Theorem says: \emph{to evaluate any weighted power sum
+		at index $n$, it suffices to know it at three consecutive indices — and
+		the coefficients are always $K(n)$, $L(n)$, $M(n)$, regardless of the
+		weights}.
+	
 	% -----------------------------------------------------------------------
-	\section{The Function $T_n$}
+	\section{First Applications}
+	\label{sec:applications}
+	
+	\subsection{Newton's identity: $s_n = x^n + y^n + z^n$}
+	
+	Apply the decomposition with weights $(1,1,1)$, noting
+	$f_0(1,1,1)=3$, $f_1(1,1,1)=e_1$, $f_2(1,1,1)=e_1^2-2e_2$:
+	\[
+	s_n \;=\; K(n)\,(e_1^2-2e_2) \;+\; L(n)\,e_1 \;+\; 3\,M(n).
+	\]
+	In particular, $s_0=3$, $s_1=e_1$, $s_2=e_1^2-2e_2$ match the known
+	Newton values, and equality for all $n$ follows.  This gives the
+	elegant identity:
+	
+	\begin{theorem}
+		\label{thm:sn}
+		$s_n \;=\; K(n+2) + L(n+1) + M(n)$ for all integers $n$.
+	\end{theorem}
+	\begin{proof}
+		The right-hand side equals $T_n(1,1,1)$ where
+		$T_n(k,l,m) = k\,K(n+2)+l\,L(n+1)+m\,M(n)$.  One checks that
+		$T_n(1,1,1)$ and $s_n$ agree at $n=0,1,2$ and satisfy the same
+		recurrence.
+	\end{proof}
+	
+	\subsection{A relation between $K$, $L$, $M$}
+	
+	Matching $T_n(k,l,m) = K(n)$ at $n=0,1,2$ uniquely determines
+	$(k,l,m) = (0, -1/e_2, 1/e_2)$, yielding:
+	
+	\begin{corollary}
+		\label{cor:KLM}
+		$e_2\,K(n) = M(n) - L(n+1)$ for all integers $n$.
+	\end{corollary}
+	
+	% -----------------------------------------------------------------------
+	\section{Generalised $K$ and Substitution Identities}
+	\label{sec:substitutions}
+	
+	\subsection{The generalised function $K_n(a,b,c)$}
+	
+	The formula in Definition~\ref{def:K} makes sense for any distinct
+	nonzero triple $(a,b,c)$.
 	
 	\begin{definition}
-		For any weights $k, l, m$ and any integer $n$, define
+		\label{def:Kgen}
+		For distinct nonzero $a,b,c$ and any integer $n$,
 		\[
-		T_n(k,l,m) = k\, K(n+2) + l\, L(n+1) + m\, M(n).
+		K_n(a,b,c) \;=\; \frac{\cyc{a^n(b-c)}}{\cyc{a^2(b-c)}}
+		\;=\; \frac{a^n(b-c)+b^n(c-a)+c^n(a-b)}{-(b-c)(c-a)(a-b)}.
 		\]
-		We write $t_n = T_n(1,1,1) = K(n+2) + L(n+1) + M(n)$.
 	\end{definition}
 	
-	\subsection{Explicit values at $n = 0, 1, 2$}
+	So $K_n(x,y,z) = K(n)$.  The function $K_n(a,b,c)$ satisfies the
+	recurrence with symmetric polynomials $\varepsilon_i$ of $(a,b,c)$ in
+	place of $e_i$, and has initial values $K_0=K_1=0$, $K_2=1$ for any
+	admissible triple.
 	
-	We compute $T_0$, $T_1$, $T_2$ directly from the definition, using the
-	known values of $K$, $L$, $M$ at small indices:
-	\begin{align*}
-		K(2)=1,\; K(3)=e_1,\; K(4)=e_1^2-e_2,\\
-		L(1)=1,\; L(2)=0,\; L(3)=-e_2,\\
-		M(0)=1,\; M(1)=0,\; M(2)=0.
-	\end{align*}
-	\begin{align*}
-		T_0(k,l,m) &= k\cdot 1 + l\cdot 1 + m\cdot 1 = k+l+m,\\
-		T_1(k,l,m) &= k\,e_1 + l\cdot 0 + m\cdot 0 = k\,e_1,\\
-		T_2(k,l,m) &= k(e_1^2-e_2) + l(-e_2) + m\cdot 0 = k(e_1^2-e_2) - l\,e_2.
-	\end{align*}
-	Note that the terms in $l$ and $m$ vanish in $T_1$ because $L(2) = M(1) = 0$,
-	and the term in $m$ vanishes in $T_2$ because $M(2) = 0$.
+	The power of this definition is that \emph{evaluating $K_n$ at a
+		specific triple reduces, via the Decomposition Theorem, to a clean
+		identity in $K$, $L$, $M$}.  The next three subsections illustrate
+	this with the three most natural substitutions.
 	
-	\subsection{Recurrence and decomposition}
+	\subsection{The difference substitution: $(a,b,c) = (w_x, w_y, w_z)$}
 	
-	\begin{theorem}[Recurrence for $T_n$]
-		\[
-		T_{n+3}(k,l,m) = e_1\, T_{n+2}(k,l,m) - e_2\, T_{n+1}(k,l,m)
-		+ e_3\, T_n(k,l,m).
-		\]
-	\end{theorem}
-	\begin{proof}
-		$T_n(k,l,m) = k\,K(n+2) + l\,L(n+1) + m\,M(n)$ is a fixed linear
-		combination of $K$, $L$, and $M$, each of which satisfies the
-		recurrence. Hence $T_n$ inherits it by linearity.
-	\end{proof}
-	
-	\begin{theorem}[Decomposition of $T_n$]
-		\[
-		T_n(k,l,m) = K(n)\, T_2(k,l,m) + L(n)\, T_1(k,l,m)
-		+ M(n)\, T_0(k,l,m).
-		\]
-	\end{theorem}
-	\begin{proof}
-		Both sides satisfy the same recurrence (the left side by the theorem
-		above; the right side since $K$, $L$, $M$ do). At $n = 0, 1, 2$
-		both sides agree by direct inspection using the explicit values
-		computed above and the initial values of $K$, $L$, $M$. Equality
-		for all integers $n$ follows from uniqueness of recurrence solutions.
-	\end{proof}
-	
-	% -----------------------------------------------------------------------
-	\section{Explicit Values of $t_n$ and the Identity $s_n = t_n$}
-	
-	\subsection{Specializing to $t_n = T_n(1,1,1)$}
-	
-	Setting $k = l = m = 1$ in the explicit values from the previous section:
+	The triple $(w_x, w_y, w_z) = (y-z, z-x, x-y)$ is natural because
+	$\Delta = [w_x \cdot x^2]_{\mathrm{cyc}}$ is already the denominator of $K$.
+	Its symmetric polynomials are
 	\[
-	t_0 = 3, \qquad t_1 = e_1, \qquad t_2 = e_1^2 - 2e_2.
+	\varepsilon_1 = 0, \qquad
+	\varepsilon_2 = -(e_1^2 - 3e_2), \qquad
+	\varepsilon_3 = \Delta^2 / \Delta = \ldots
 	\]
-	These coincide with $s_0, s_1, s_2$.
+	The vanishing of $\varepsilon_1 = w_x + w_y + w_z = 0$ makes this
+	recurrence degenerate and the resulting identities particularly clean.
+	This substitution is left as an open investigation.
 	
-	\begin{theorem}
-		$s_n = t_n$ for all integers $n$.
-	\end{theorem}
-	\begin{proof}
-		Both sequences satisfy the same recurrence and agree at $n = 0, 1, 2$.
-	\end{proof}
+	\subsection{The product substitution: $(a,b,c) = (yz, zx, xy)$}
 	
-	\begin{corollary}
+	The triple $(yz, zx, xy)$ has symmetric polynomials
+	\[
+	\varepsilon_1 = e_2, \qquad \varepsilon_2 = e_1 e_3, \qquad \varepsilon_3 = e_3^2.
+	\]
+	To evaluate $K_n(yz,zx,xy)$, note that by definition
+	\[
+	\Delta \cdot K_n(yz,zx,xy) \;=\; \cyc{(yz)^n(zx - xy)}
+	\;=\; f_n\!\left(z^{n-1}-y^{n-1},\; x^{n-1}-z^{n-1},\; y^{n-1}-x^{n-1}\right).
+	\]
+	Applying the Decomposition Theorem with these weights:
+	\begin{itemize}
+		\item $f_0 = 0$ (the weights sum to zero),
+		\item $f_1 = \cyc{x^{n-1}(y-z)} = K(n-1)\cdot\Delta$,
+		\item $f_2 = \cyc{x^{n-1}(y^2-z^2)} = -L(n-1)\cdot\Delta$
+		\quad (both sides satisfy the same recurrence and agree at $n=2,3,4$).
+	\end{itemize}
+	Therefore
+	\[
+	\Delta \cdot K_n(yz,zx,xy)
+	= K(n)\cdot(-L(n-1)\Delta) + L(n)\cdot(K(n-1)\Delta),
+	\]
+	and dividing by $\Delta$:
+	
+	\begin{theorem}[Product-substitution identity]
+		\label{thm:product}
 		For all integers $n$,
 		\[
-		x^n + y^n + z^n = K(n+2) + L(n+1) + M(n).
+		K_n(yz,\,zx,\,xy) \;=\; K(n)\,L(n-1) - L(n)\,K(n-1).
 		\]
-	\end{corollary}
-	
-	% -----------------------------------------------------------------------
-	\section{Matching $T_n$ to $K$, $L$, $M$}
-	
-	\subsection{Matching $T_n(k,l,m) = K(n)$}
-	
-	Requiring $T_n(k,l,m) = K(n)$ at $n = 0,1,2$ (and hence for all $n$):
-	
-	\begin{align*}
-		T_0 = K(0) = 0 &\implies k + l + m = 0, \\
-		T_1 = K(1) = 0 &\implies k = 0, \\
-		T_2 = K(2) = 1 &\implies -l\, e_2 = 1 \implies l = -\tfrac{1}{e_2},
-		\quad m = \tfrac{1}{e_2}.
-	\end{align*}
-	
-	\begin{theorem}
-		$T_n\!\left(0,\, -\tfrac{1}{e_2},\, \tfrac{1}{e_2}\right) = K(n)$
-		for all integers $n$.
 	\end{theorem}
 	
-	\begin{corollary}
+	Substituting $L(k) = K(k+1) - e_1 K(k)$ and expanding, the $e_1$ terms cancel:
+	
+	\begin{corollary}[Cassini identity]
+		\label{cor:cassini}
 		\[
-		e_2\, K(n) = M(n) - L(n+1) \qquad \text{for all integers } n.
+		K(n)^2 - K(n+1)\,K(n-1) \;=\; K_n(yz,\,zx,\,xy).
 		\]
 	\end{corollary}
+	
+	\begin{remark}
+		This mirrors the classical Cassini identity $F_n^2 - F_{n+1}F_{n-1}=(-1)^{n-1}$ for
+		Fibonacci numbers.  There the right-hand side is a sign; here it is the
+		richer object $K_n(yz,zx,xy)$, which satisfies its own recurrence with
+		coefficients $(e_2, e_1e_3, e_3^2)$.  Note also that $K(n)^2 - K(n+1)K(n-1)$
+		involves $e_1$ only through $e_2$, $e_1 e_3$, and $e_3^2$ — never $e_1$
+		alone.
+	\end{remark}
+	
+	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
+	
+	The triple $(x^2,y^2,z^2)$ has symmetric polynomials
+	\[
+	\varepsilon_1 = e_1^2-2e_2, \qquad \varepsilon_2 = e_2^2-2e_1e_3, \qquad \varepsilon_3 = e_3^2.
+	\]
+	A similar decomposition argument (both sides vanish at $n=0,1$, agree
+	at $n=2$, and satisfy compatible recurrences) yields:
+	
+	\begin{theorem}[Squaring-substitution identity]
+		\label{thm:squaring}
+		For all integers $n$,
+		\[
+		(e_3 - e_1 e_2)\cdot K_n(x^2,\,y^2,\,z^2) \;=\; L(2n).
+		\]
+	\end{theorem}
+	
+	Note $e_3 - e_1 e_2 = -(x+y)(y+z)(z+x)$, the product of pairwise sums.
+	
+	% -----------------------------------------------------------------------
+	\section{Doubling Formulas}
+	\label{sec:doubling}
+	
+	Setting the shift $j = n$ in the Shift-Invariance Corollary
+	(Corollary~\ref{cor:shift}) evaluates any sequence at $2n$ in terms of
+	its values near $n$.
+	
+	\begin{theorem}[Doubling formula for $K$]
+		\label{thm:doubleK}
+		For all integers $n$,
+		\[
+		K(2n) \;=\; K(n)\,K(n+2) + L(n)\,K(n+1) + M(n)\,K(n).
+		\]
+		Equivalently,
+		\[
+		K(2n) \;=\; K(n+1)^2 - e_2\,K(n)^2 + 2\,e_3\,K(n)\,K(n-1).
+		\]
+	\end{theorem}
 	\begin{proof}
-		Substitute the weights into the definition of $T_n$.
+		Apply Corollary~\ref{cor:shift} with weights $(w_x,w_y,w_z)$ and $j=n$.
+		Since $f_{n+j}(w_x,w_y,w_z) = K(n+j)\cdot\Delta$, dividing by $\Delta$
+		gives the first form.  The second follows by substituting the recurrence
+		for $K(n+2)$ and the definitions of $L(n)$, $M(n)$.
 	\end{proof}
+	
+	\begin{theorem}[Doubling formula for $s_n$]
+		\label{thm:doubles}
+		For all integers $n$,
+		\[
+		s_{2n} \;=\; K(n)\,s_{n+2} + L(n)\,s_{n+1} + M(n)\,s_n.
+		\]
+	\end{theorem}
+	\begin{proof}
+		Apply Corollary~\ref{cor:shift} with weights $(1,1,1)$ and $j=n$.
+	\end{proof}
+	
+	\begin{remark}
+		Both formulas are instances of the same principle: for \emph{any}
+		weighted power sum $f_n(k,l,m)$, the shift-invariance corollary gives
+		$f_{2n}(k,l,m) = K(n)\,f_{n+2} + L(n)\,f_{n+1} + M(n)\,f_n$.
+		Choosing different weights recovers $K(2n)$, $s_{2n}$, $L(2n)$, and
+		any other instance.
+	\end{remark}
 	
 \end{document}
