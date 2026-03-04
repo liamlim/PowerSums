@@ -466,62 +466,57 @@
 		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
 	\end{equation}
 	
-	We now show that every prime $p$ dividing $d$ must equal $3$.
+	We now analyse which prime powers can divide $d$.  Let $p$ be any prime
+	dividing $d$, and let $a = p^k$ be the exact power of $p$ in $d$.
 	
 	\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
-	Let $a = p^k$ be the exact power of $p$ dividing $d$.  Since $x$, $y$, $z$
-	are pairwise coprime, $p$ divides exactly one of them, say $p \mid x$, so
-	$a \mid x^n$.  From~\eqref{eq:d-cross}, $a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.
-	Since $a \mid x^n$, the first and third cross terms vanish mod $a$, leaving
-	$a \mid 2y^nz^n$.  But $\gcd(x,y)=\gcd(x,z)=1$ implies $\gcd(a,\,y^nz^n)=1$,
-	so $a \mid 2$, hence $p^k \mid 2$, giving $p = 2$ and $k = 1$.  But then
-	$2 \mid d$ implies $2 \mid K(n)$ and $2 \mid K(n+1)$, so $2 \mid 3K(n+2)$
-	by~\eqref{eq:3Kn2}, and since $\gcd(2,3)=1$ we get $2 \mid K(n+2)$.  The
-	forward recurrence then gives $2 \mid K(m)$ for all $m \geq n$, and in
-	particular $2 \mid K(2) = 1$: contradiction.  Therefore \emph{no} prime
-	factor of $d$ divides $e_3$.
+	Since $x$, $y$, $z$ are pairwise coprime, $p$ divides exactly one of them,
+	say $p \mid x$, so $a \mid x^n$.  From~\eqref{eq:d-cross},
+	$a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.  Since $a \mid x^n$, the first and
+	third cross terms vanish mod $a$, leaving $a \mid 2y^nz^n$.  But
+	$\gcd(x,y)=\gcd(x,z)=1$ implies $\gcd(a,\,y^nz^n)=1$, so $a \mid 2$,
+	hence $p^k \mid 2$, giving $p = 2$ and $k = 1$.
 	
 	\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
-	From~\eqref{eq:d-3e3}, $p \mid 3e_3K(n-1)$.  Since $p$ is prime and
-	$p \nmid e_3$, we get $p \mid 3K(n-1)$.  Together with $p \mid 3K(n)$ and
-	$p \mid 3K(n+1)$, we apply the recurrence backwards:
+	From~\eqref{eq:d-3e3}, $a \mid 3e_3K(n-1)$.  Since $p$ is prime and
+	$p \nmid e_3$, we get $a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and
+	$a \mid 3K(n+1)$, we apply the recurrence backwards:
 	\[
 	3K(m) = 3e_1\,K(m+1) - 3e_2\,K(m+2) + 3e_3\,K(m+3).
 	\]
-	Since $p \nmid e_3$, at each backward step we can conclude $p \mid 3K(m)$
-	from $p \mid 3K(m+1)$, $3K(m+2)$, $3K(m+3)$.  Descending to $m=2$ gives
-	$p \mid 3K(2) = 3$, hence $p = 3$.
+	Since $p \nmid e_3$, at each backward step $a \mid 3K(m)$ follows from
+	$a \mid 3K(m+1)$, $3K(m+2)$, $3K(m+3)$.  Descending to $m = 2$ gives
+	$a \mid 3K(2) = 3$, so $p^k \mid 3$, hence $p = 3$ and $k = 1$.
 	
 	\medskip
-	So every prime factor of $d$ equals $3$.  If $9 \mid d$ then $9 \mid 3K(n-1)$,
-	$3K(n)$, $3K(n+1)$, hence $3 \mid K(n-1)$, $K(n)$, $K(n+1)$; the forward
-	recurrence then gives $3 \mid K(m)$ for all $m \geq n-1$, and in particular
-	$3 \mid K(2) = 1$: contradiction.  Therefore $9 \nmid d$, giving:
+	In both cases $p^k$ is either $2$ or $3$, so every prime power in $d$
+	divides $6$, and therefore:
 	
 	\begin{proposition}
-		\label{prop:d-divides-3}
+		\label{prop:d-divides-6}
 		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$,
-		then $\gcd(K(n),\, K(n+1))$ divides $3$.
+		then $\gcd(K(n),\, K(n+1))$ divides $6$.
 	\end{proposition}
 	
 	\begin{remark}
-		In Case~2 the backward recurrence step requires $p \nmid e_3$, not merely
-		$d \nmid e_3$: for a composite $d$ these differ.  Working prime-by-prime,
-		as above, is essential.
+		Working with the exact prime power $a = p^k$ is essential: it handles
+		higher powers such as $4$ and $9$ in the same stroke as the primes
+		themselves, and it avoids the error of passing from $d \nmid e_3$ to
+		$d \mid 3K(n-1)$, which is only valid prime-by-prime.
 	\end{remark}
 	
 	\subsection*{Conclusion}
 	
-	Combining Corollary~\ref{cor:flt-ratio} with Proposition~\ref{prop:d-divides-3}
+	Combining Corollary~\ref{cor:flt-ratio} with Proposition~\ref{prop:d-divides-6}
 	and the divisibility $d \mid K(3n)$, $d \mid K(3n+1)$ from the addition
 	formula:
 	
 	\begin{corollary}
 		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$, then
 		\[
-		3\,K(3n) \;\equiv\; 0 \pmod{K(n)},
+		6\,K(3n) \;\equiv\; 0 \pmod{K(n)},
 		\qquad
-		3\,K(3n+1) \;\equiv\; 0 \pmod{K(n+1)}.
+		6\,K(3n+1) \;\equiv\; 0 \pmod{K(n+1)}.
 		\]
 	\end{corollary}
 	
