@@ -20,16 +20,6 @@
 	\tableofcontents
 	\newpage
 	
-	This document develops a theory of weighted power sums
-	$f_n(k,l,m) = kx^n + ly^n + mz^n$ for distinct nonzero reals $x, y, z$.
-	The central objects are three canonical basis sequences $K(n)$, $L(n)$,
-	$M(n)$, each satisfying the same linear recurrence as $f_n$, whose
-	initial values at $n = 0, 1, 2$ form the identity matrix. Together they
-	decompose any weighted power sum in a basis-independent way. We then
-	introduce $T_n(k,l,m)$, a natural repackaging of the basis sequences,
-	and show it equals the ordinary power sum $s_n = x^n + y^n + z^n$ when
-	the weights are $(1,1,1)$.
-	
 	% -----------------------------------------------------------------------
 	\section{Setup and Assumptions}
 	
@@ -47,10 +37,25 @@
 		\end{align*}
 	\end{definition}
 	
-	These are the coefficients of the minimal polynomial of $x, y, z$:
-	\[
-	(t - x)(t - y)(t - z) = t^3 - e_1 t^2 + e_2 t - e_3.
-	\]
+	\subsection{Minimum polynom P(t)}
+	\begin{definition}
+	$$P(t) = t^3 - e_1 t^2 + e_2 t - e_3$$
+	
+	Then $x$, $y$ and $z$ are the solutions of equation $P(t) = 0$
+	\end{definition}
+	
+	\begin{lemma}[Roots x,y,z]
+		For any integer $n$, $f_n$ is linear in its weights:
+		\begin{align*}
+			P(x) = 0, \\
+			P(y) = 0, \\
+			P(z) = 0.
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		This is trivial by
+		$$P(t) = (t - x)(t - y)(t - z)$$.
+	\end{proof}
 	
 	\subsection{Helper differences}
 	
@@ -74,6 +79,14 @@
 		This is well-defined for all integers $n$ because $x, y, z \neq 0$.
 	\end{definition}
 	
+	\begin{lemma}[Isolating single powers]
+		\begin{align*}
+			x^n = f_n(1, 0, 0),\\
+			y^n = f_n(0, 1, 0),\\
+			z^n = f_n(0, 0, 1).
+		\end{align*}
+	\end{lemma}
+	
 	\begin{definition}
 		For any integer $n$ and weights $k, l, m$, define
 		\[
@@ -93,12 +106,6 @@
 		Both identities follow immediately from the definition $f_n(k,l,m) = kx^n + ly^n + mz^n$.
 	\end{proof}
 	
-	In particular, individual powers are recovered by unit weights:
-	\[
-	x^n = f_n(1,0,0), \qquad y^n = f_n(0,1,0), \qquad z^n = f_n(0,0,1).
-	\]
-	Any weighted sum is therefore a linear combination of these three building blocks.
-	
 	\begin{theorem}[Recurrence for $f_n$]
 		For any integer $n$ and any fixed weights $k, l, m$,
 		\[
@@ -107,9 +114,7 @@
 		\]
 	\end{theorem}
 	\begin{proof}
-		Each of $x, y, z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$, so the
-		same recurrence holds for $x^n, y^n, z^n$ individually, and hence for
-		any weighted sum.
+		From the lemma for the minimum polynom we get that each of $x, y, z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$. After multiplication by $t^n$ and using the lemma for isolating single power, we then obtain the result by linearity.
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
@@ -128,7 +133,7 @@
 	\begin{proof}
 		$f_0 = w_x + w_y + w_z = 0$ by definition. For $f_1$:
 		$w_x x + w_y y + w_z z = x(y-z) + y(z-x) + z(x-y) = 0$. The identity
-		for $f_2$ is a standard Vandermonde-type calculation.
+		for $f_2$ is just a simple algebra.
 	\end{proof}
 	
 	\begin{definition}
