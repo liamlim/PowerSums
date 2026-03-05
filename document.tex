@@ -214,25 +214,8 @@
 	s_n \;=\; K(n)\,(e_1^2-2e_2) \;+\; L(n)\,e_1 \;+\; 3\,M(n).
 	\]
 	In particular, $s_0=3$, $s_1=e_1$, $s_2=e_1^2-2e_2$ match the known
-	Newton values, and equality for all $n$ follows.  This gives the
-	elegant identity:
-	
-	\begin{theorem}
-		\label{thm:sn-basis}
-		$s_n \;=\; K(n+2) + L(n+1) + M(n)$ for all integers $n$.
-	\end{theorem}
-	\begin{proof}
-		By the Decomposition Theorem with weights $(1,1,1)$,
-		\[
-		s_n = K(n)\,(e_1^2-2e_2) + L(n)\,e_1 + 3M(n).
-		\]
-		Substituting $L(n) = K(n+1)-e_1 K(n)$ and $M(n) = e_3 K(n-1)$
-		and expanding, the $e_1^2 K(n)$ terms cancel, giving
-		$s_n = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$ (Lemma~\ref{lem:sn-formula}).
-		Adding $K(n+2) = e_1 K(n+1)-e_2 K(n)+e_3 K(n-1)$ and the definitions
-		$L(n+1) = K(n+2)-e_1 K(n+1)$ and $M(n) = e_3 K(n-1)$, one checks
-		that $K(n+2)+L(n+1)+M(n)$ agrees with this expression term by term.
-	\end{proof}
+	Newton values, and equality for all $n$ follows.  Expanding the
+	definitions yields the key formula:
 	
 	\begin{lemma}
 		\label{lem:sn-formula}
@@ -249,18 +232,16 @@
 		Expanding and cancelling the $e_1^2 K(n)$ terms gives the result.
 	\end{proof}
 	
-	\subsection{A relation between $K$, $L$, $M$}
-	
-	Applying the Decomposition Theorem with weights $(k,l,m)$ to the sequence
-	$K(n)$ itself (whose values at $n=0,1,2$ are $0,0,1$) gives
-	$K(n) = k\cdot 1 + l\cdot 0 + m\cdot 0$ at $n=2$,
-	$K(n) = k\cdot e_1 + l\cdot 1 + m\cdot 0$ at $n=3$, and so on;
-	matching at $n=0,1,2$ uniquely forces $(k,l,m)=(0,-1/e_2, 1/e_2)$, yielding:
-	
-	\begin{corollary}
-		\label{cor:KLM}
-		$e_2\,K(n) = M(n) - L(n+1)$ for all integers $n$.
-	\end{corollary}
+	\begin{theorem}
+		\label{thm:sn-basis}
+		$s_n \;=\; K(n+2) + L(n+1) + M(n)$ for all integers $n$.
+	\end{theorem}
+	\begin{proof}
+		By Lemma~\ref{lem:sn-formula}, $s_n = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$.
+		Substituting $K(n+2) = e_1 K(n+1)-e_2 K(n)+e_3 K(n-1)$,
+		$L(n+1) = K(n+2)-e_1 K(n+1)$, and $M(n) = e_3 K(n-1)$, one verifies
+		that $K(n+2)+L(n+1)+M(n) = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1) = s_n$.
+	\end{proof}
 	
 	% -----------------------------------------------------------------------
 	\section{Generalised $K$ and Substitution Identities}
@@ -369,7 +350,8 @@
 	
 	% -----------------------------------------------------------------------
 	\section{General Power Substitution}
-	\label{sec:power}	
+	\label{sec:power}
+	
 	For an integer $k \geq 1$, write the \emph{$k$-th difference discriminant} as
 	\[
 	\Delta_k \;=\; -(y^k-z^k)(z^k-x^k)(x^k-y^k),
@@ -679,7 +661,7 @@
 	Applying~\eqref{eq:sn} at index $2n$ gives $d \mid s_{2n}$.  Since
 	$s_n = 0$,
 	\[
-	s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n),
+	s_{2n} = s_n^2 - 2\cyc{(xy)^n} = -2(x^ny^n + y^nz^n + z^nx^n),
 	\]
 	so
 	\begin{equation}
