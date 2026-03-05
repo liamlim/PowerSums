@@ -25,6 +25,18 @@
 	\newpage
 	
 	% -----------------------------------------------------------------------
+	\section*{Introduction}
+	
+	This note develops a self-contained algebraic framework for power sums
+	$s_n = x^n + y^n + z^n$ and their relatives.  The central object is a
+	sequence $K(n)$ built from the antisymmetric weights of $x, y, z$; together
+	with two companion sequences $L$ and $M$, it forms a basis for all sequences
+	satisfying the same linear recurrence as the power sums.
+	
+	All arguments use only the recurrence and elementary algebra; no
+	advanced number theory or analysis is required.
+	
+	% -----------------------------------------------------------------------
 	\section{Setup}
 	
 	Throughout, $x$, $y$, $z$ are distinct and nonzero complex (or real)
@@ -191,7 +203,7 @@
 		weights}.
 	
 	% -----------------------------------------------------------------------
-	\section{First Applications}
+	\section{Applications and Key Lemmas}
 	\label{sec:applications}
 	
 	\subsection{Newton's identity: $s_n = x^n + y^n + z^n$}
@@ -210,10 +222,16 @@
 		$s_n \;=\; K(n+2) + L(n+1) + M(n)$ for all integers $n$.
 	\end{theorem}
 	\begin{proof}
-		The right-hand side equals $T_n(1,1,1)$ where
-		$T_n(k,l,m) = k\,K(n+2)+l\,L(n+1)+m\,M(n)$.  One checks that
-		$T_n(1,1,1)$ and $s_n$ agree at $n=0,1,2$ and satisfy the same
-		recurrence.
+		By the Decomposition Theorem with weights $(1,1,1)$,
+		\[
+		s_n = K(n)\,(e_1^2-2e_2) + L(n)\,e_1 + 3M(n).
+		\]
+		Substituting $L(n) = K(n+1)-e_1 K(n)$ and $M(n) = e_3 K(n-1)$
+		and expanding, the $e_1^2 K(n)$ terms cancel, giving
+		$s_n = e_1 K(n+1) - 2e_2 K(n) + 3e_3 K(n-1)$ (Lemma~\ref{lem:sn-formula}).
+		Adding $K(n+2) = e_1 K(n+1)-e_2 K(n)+e_3 K(n-1)$ and the definitions
+		$L(n+1) = K(n+2)-e_1 K(n+1)$ and $M(n) = e_3 K(n-1)$, one checks
+		that $K(n+2)+L(n+1)+M(n)$ agrees with this expression term by term.
 	\end{proof}
 	
 	\begin{lemma}
@@ -233,8 +251,11 @@
 	
 	\subsection{A relation between $K$, $L$, $M$}
 	
-	Matching $T_n(k,l,m) = K(n)$ at $n=0,1,2$ uniquely determines
-	$(k,l,m) = (0, -1/e_2, 1/e_2)$, yielding:
+	Applying the Decomposition Theorem with weights $(k,l,m)$ to the sequence
+	$K(n)$ itself (whose values at $n=0,1,2$ are $0,0,1$) gives
+	$K(n) = k\cdot 1 + l\cdot 0 + m\cdot 0$ at $n=2$,
+	$K(n) = k\cdot e_1 + l\cdot 1 + m\cdot 0$ at $n=3$, and so on;
+	matching at $n=0,1,2$ uniquely forces $(k,l,m)=(0,-1/e_2, 1/e_2)$, yielding:
 	
 	\begin{corollary}
 		\label{cor:KLM}
@@ -326,8 +347,6 @@
 	\[
 	\varepsilon_1 = e_1^2-2e_2, \qquad \varepsilon_2 = e_2^2-2e_1e_3, \qquad \varepsilon_3 = e_3^2.
 	\]
-	A similar decomposition argument (both sides vanish at $n=0,1$, agree
-	at $n=2$, and satisfy compatible recurrences) yields:
 	
 	\begin{theorem}[Squaring-substitution identity]
 		\label{thm:squaring}
@@ -336,12 +355,21 @@
 		(e_3 - e_1 e_2)\cdot K_n(x^2,\,y^2,\,z^2) \;=\; L(2n).
 		\]
 	\end{theorem}
+	\begin{proof}
+		This is the special case $k=2$ of Theorem~\ref{thm:power} in
+		Section~\ref{sec:power}, proved there in full.  We verify the
+		prefactor: $\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3-e_1e_2)$,
+		and at $k=2$ the right-hand side of Theorem~\ref{thm:power} is
+		$K(2n)\,K(3) - K(2n+1)\,K(2) = e_1 K(2n) - K(2n+1) = -L(2n)$,
+		since $K(2)=1$, $K(3)=e_1$, and $L(2n) = K(2n+1)-e_1 K(2n)$.
+		Combining signs gives the stated identity.
+	\end{proof}
 	
 	Note $e_3 - e_1 e_2 = -(x+y)(y+z)(z+x)$, the product of pairwise sums.
 	
 	% -----------------------------------------------------------------------
 	\section{General Power Substitution}
-	
+	\label{sec:power}	
 	For an integer $k \geq 1$, write the \emph{$k$-th difference discriminant} as
 	\[
 	\Delta_k \;=\; -(y^k-z^k)(z^k-x^k)(x^k-y^k),
@@ -369,8 +397,10 @@
 		We evaluate $f_0, f_1, f_2$ at $(p,q,r)$:
 		\begin{itemize}
 			\item $f_0(p,q,r) = 0$, since $p+q+r = 0$.
-			\item $f_1(p,q,r) = \cyc{x(y^k-z^k)}$. Regrouping by $x^k$:
-			$\cyc{x^k(z-y)} = -\cyc{x^k(y-z)} = -K(k)\,\Delta$.
+			\item $f_1(p,q,r) = \cyc{x(y^k-z^k)}$.  Expanding the cyclic sum
+			and collecting the $x^k$ terms (each $x \cdot y^k$ pairs with
+			$-y \cdot x^k$ from the next term):
+			$\cyc{x(y^k-z^k)} = \cyc{x^k(z-y)} = -\cyc{x^k(y-z)} = -K(k)\,\Delta$.
 			\item $f_2(p,q,r) = \cyc{x^2(y^k-z^k)} = -\cyc{x^k(y^2-z^2)}$.
 			Writing $y^2-z^2 = (y-z)(y+z) = -w_x(y+z)$ and expanding,
 			$\cyc{x^k(y^2-z^2)} = e_1\,f_k(w_x,w_y,w_z) - f_{k+1}(w_x,w_y,w_z)
@@ -502,7 +532,7 @@
 	
 	\begin{theorem}[Master identity]
 		\label{thm:master}
-		If $s_n = 0$, then for all integers $j$,
+		If $s_n = 0$ and $K(n) \neq 0$, then for all integers $j$,
 		\[
 		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j),
 		\]
@@ -659,11 +689,13 @@
 	
 	\medskip\noindent\textbf{Parity.}
 	Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, exactly one is
-	even.  Therefore $e_1, e_3$ are even and $e_2$ is odd.  The recurrence
-	mod~$2$ becomes $K(m+3) \equiv K(m+1) \pmod{2}$, giving the alternating
-	pattern $K(\text{even}) \equiv 1$, $K(\text{odd}) \equiv 0 \pmod{2}$.
-	Since $n$ is an odd prime, $K(n)$ is even and $K(n+1)$ is odd, so
-	$2 \nmid d$.
+	even: if all three were odd then $s_n \equiv 1+1+1 = 3 \equiv 1 \pmod{2}
+	\neq 0$, and if two were even they would share the factor~$2$,
+	contradicting coprimeness.  Therefore $e_1, e_3$ are even and $e_2$ is
+	odd.  The recurrence mod~$2$ becomes $K(m+3) \equiv K(m+1) \pmod{2}$,
+	giving the alternating pattern $K(\text{even}) \equiv 1$,
+	$K(\text{odd}) \equiv 0 \pmod{2}$.  Since $n$ is an odd prime, $K(n)$
+	is even and $K(n+1)$ is odd, so $2 \nmid d$.
 	
 	\medskip
 	We now analyse which odd prime powers can divide $d$.  Let $p$ be any
