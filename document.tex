@@ -272,62 +272,6 @@
 		identity in $K$, $L$, $M$}.  The next three subsections illustrate
 	this with the three most natural substitutions.
 	
-	\subsection{The product substitution: $(a,b,c) = (yz, zx, xy)$}
-	
-	The triple $(yz, zx, xy)$ has symmetric polynomials
-	\[
-	\varepsilon_1 = e_2, \qquad \varepsilon_2 = e_1 e_3, \qquad \varepsilon_3 = e_3^2.
-	\]
-	To evaluate $K_n(yz,zx,xy)$, note that by definition
-	\[
-	\Delta \cdot K_n(yz,zx,xy) \;=\; \cyc{(yz)^n(zx - xy)}
-	\;=\; f_n\!\left(z^{n-1}-y^{n-1},\; x^{n-1}-z^{n-1},\; y^{n-1}-x^{n-1}\right).
-	\]
-	Applying the Decomposition Theorem with these weights:
-	\begin{itemize}
-		\item $f_0 = 0$ (the weights sum to zero),
-		\item $f_1 = \cyc{x^{n-1}(y-z)} = K(n-1)\cdot\Delta$,
-		\item $f_2 = \cyc{x^{n-1}(y^2-z^2)}$.  Writing $y^2-z^2=(y-z)(y+z)=w_x(y+z)$
-		and regrouping, $\cyc{x^{n-1}(y^2-z^2)} = e_1\,f_{n-1}(w_x,w_y,w_z)
-		- f_n(w_x,w_y,w_z) = (e_1 K(n-1)-K(n))\Delta = -L(n-1)\cdot\Delta$.
-	\end{itemize}
-	Therefore
-	\[
-	\Delta \cdot K_n(yz,zx,xy)
-	= K(n)\cdot(-L(n-1)\Delta) + L(n)\cdot(K(n-1)\Delta),
-	\]
-	and dividing by $\Delta$:
-	
-	\begin{theorem}[Product-substitution identity]
-		\label{thm:product}
-		For all integers $n$,
-		\[
-		K_n(yz,\,zx,\,xy) \;=\; K(n)\,L(n-1) - L(n)\,K(n-1).
-		\]
-	\end{theorem}
-	
-	Substituting $L(k) = K(k+1) - e_1 K(k)$ and expanding, the $e_1$ terms cancel:
-	
-	\begin{corollary}[Cassini identity]
-		\label{cor:cassini}
-		\[
-		K(n)^2 - K(n+1)\,K(n-1) \;=\; K_n(yz,\,zx,\,xy).
-		\]
-	\end{corollary}
-	
-	\begin{remark}
-		This mirrors the classical Cassini identity $F_n^2 - F_{n+1}F_{n-1}=(-1)^{n-1}$
-		for Fibonacci numbers, where the right-hand side is a constant (up to sign).
-		Here the right-hand side is the richer object $K_n(yz,zx,xy)$,
-		which satisfies its own third-order recurrence with coefficients
-		$(\varepsilon_1, \varepsilon_2, \varepsilon_3) = (e_2, e_1 e_3, e_3^2)$.
-		In particular, for the special case $(x,y,z) = (1,\omega,\omega^2)$ with
-		$\omega$ a primitive cube root of unity one has $e_1 = 0$, $e_2 = -3$,
-		$e_3 = 1$, and the right-hand side reduces to a polynomial in $e_2 = -3$
-		alone; in general, however, $K_n(yz,zx,xy)$ depends on all three
-		symmetric polynomials.
-	\end{remark}
-	
 	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
 	
 	The triple $(x^2,y^2,z^2)$ has symmetric polynomials
