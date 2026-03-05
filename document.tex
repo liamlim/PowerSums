@@ -851,13 +851,14 @@
 	We now extract the two divisibility conditions that $K(n)$ must satisfy,
 	one from each value of $m$ in the cascade.
 	
-	\begin{proposition}
+	\begin{theorem}
 		\label{prop:Kn-divides-etilde}
 		Under the standing hypotheses,
-		\[
-		K(n) \;\mid\; 6\,\tilde{e}_2 \qquad \text{and} \qquad K(n) \;\mid\; 9\,\tilde{e}_3.
-		\]
-	\end{proposition}
+		\begin{align*}
+		&K(n) \;\mid\; 2\cdot 3^{n-1}\,\tilde{e}_2 \\
+		&K(n) \;\mid\; 3^n\,\tilde{e}_3.
+		\end{align*}
+	\end{theorem}
 	\begin{proof}
 		Apply the $s_m$ formula (Lemma~\ref{lem:sn-formula}) at $m = 2n$ and $m = 3n$:
 		\begin{align*}
@@ -891,38 +892,5 @@
 		$K(n) \mid 3^n\,\tilde{e}_3$.
 	\end{proof}
 	
-	\subsection{The main bound}
-	
-	\begin{theorem}
-		\label{thm:Kn-only-3}
-		Under the standing hypotheses, every prime factor of $K(n)$ equals $3$.
-		More precisely,
-		\[
-		K(n) \;\mid\; 3^n.
-		\]
-	\end{theorem}
-	\begin{proof}
-		Let $p$ be any prime dividing $K(n)$.  By
-		Proposition~\ref{prop:Kn-divides-etilde}, $p \mid 2\cdot 3^{n-1}\tilde{e}_2$
-		and $p \mid 3^n \tilde{e}_3$.
-		
-		Suppose $p \neq 3$ and $p \neq 2$.  Then $p \mid \tilde{e}_2$ and
-		$p \mid \tilde{e}_3$, contradicting $\gcd(\tilde{e}_2,\tilde{e}_3) = 1$
-		(Lemma~\ref{lem:etilde-coprime}).
-		
-		Suppose $p = 2$.  From $p \mid 3^n \tilde{e}_3$ and $2 \nmid 3^n$,
-		we get $2 \mid \tilde{e}_3 = e_3^n = (xyz)^n$.  But the parity
-		argument in Proposition~\ref{prop:d-divides-3} shows $K(n)$ is even
-		and $K(n+1)$ is odd; since $\gcd(K(n),K(n+1)) \mid 3$ is odd, the full
-		$2$-part of $K(n)$ is coprime to $K(n+1)$.  From $K(n) \mid K(n+1)
-		\cdot K(nm+1)$ (the shifted divisibility argument) the $2$-part of
-		$K(n)$ must divide $K(nm+1)$ for all $m$; but taking $m$ such that
-		$nm+1$ is odd gives a contradiction unless the $2$-part of $K(n)$ is
-		trivial.  Hence $2 \nmid K(n)$.
-		
-		Therefore every prime dividing $K(n)$ equals $3$.  Since the exact
-		$3$-power is bounded by both $3^{n-1}$ (from the first condition) and
-		$3^n$ (from the second), we conclude $K(n) \mid 3^{n-1}$.
-	\end{proof}
 	
 \end{document}
