@@ -159,13 +159,6 @@
 	recurrence as $f_n$, since $K$ inherits it from $f_n$, and $L$, $M$
 	are linear combinations of shifts of $K$.
 	
-	\begin{remark}
-		The explicit values of $K$ at small $n$ are
-		$K(2)=1$, $K(3)=e_1$, $K(4)=e_1^2-e_2$, and so on; $L$ and $M$ are
-		recovered from $K$ via the definitions above.  The backward extension
-		gives $K(-1) = 1/e_3$, consistent with $M(0) = e_3 K(-1) = 1$.
-	\end{remark}
-	
 	% -----------------------------------------------------------------------
 	\section{The Decomposition Theorem}
 	\label{sec:decomposition}
@@ -931,30 +924,5 @@
 		$3$-power is bounded by both $3^{n-1}$ (from the first condition) and
 		$3^n$ (from the second), we conclude $K(n) \mid 3^{n-1}$.
 	\end{proof}
-	
-	\begin{remark}
-		The conclusion $K(n) \mid 3^{n-1}$ is a strong constraint: a priori
-		$K(n)$ is a polynomial of degree $n-2$ in $x,y,z$ growing like
-		$\max(|x|,|y|,|z|)^{n-2}$, yet the Fermat assumption forces it to be
-		a power of $3$.  The key is that the two conditions
-		$K(n) \mid 2\cdot 3^{n-1}\tilde{e}_2$ and $K(n) \mid 3^n \tilde{e}_3$,
-		combined with $\gcd(\tilde{e}_2,\tilde{e}_3)=1$, eliminate every prime
-		other than $3$ entirely: any prime $p \notin \{2,3\}$ dividing $K(n)$
-		would have to divide both $\tilde{e}_2$ and $\tilde{e}_3$, which is
-		impossible.  The prime $2$ is ruled out separately by the parity
-		structure of the solution.
-	\end{remark}
-	
-	\begin{remark}
-		The earlier claim $K(n) \mid 18$ was an error arising from
-		underestimating the offset $j = n-1$ in the cascade: the indices
-		$K(2n-1)$ and $K(3n-1)$ sit at offset $n-1$ from their respective
-		block boundaries, not at $j \in \{0,1,2\}$ as was incorrectly assumed.
-		The full cascade (Theorem~\ref{thm:full-cascade}) gives the correct
-		factors $3^{n-1}$, which feed through to the weaker but honest bound
-		$K(n) \mid 3^{n-1}$.  The qualitative conclusion — that $K(n)$ is a
-		pure power of $3$ — survives and is arguably the more conceptually
-		natural statement.
-	\end{remark}
 	
 \end{document}
