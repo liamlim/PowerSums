@@ -195,7 +195,7 @@
 	\end{corollary}
 	\begin{proof}
 		Fix $j$.  The shifted sequence $h_n = f_{n+j}(k,l,m)$ satisfies the
-		same recurrence, with $h_0 = f_j$, $h_1 = f_{j+1}$, $h_2 = f_{j+2}$.
+		same recurrence, with $h_0 = f_j$, $h_1 = f_{j+1}$, $h_2 = f_{j+2}$.  
 		Apply Theorem~\ref{thm:decomposition} to $h_n$.
 	\end{proof}
 	
@@ -724,103 +724,80 @@
 	% -----------------------------------------------------------------------
 	\section{Shifted Divisibility Under the Fermat Assumption}
 	
-	Throughout this section we assume $s_n = 0$ and work in the integer setting.
-	Recall that we have already established:
+	We continue under the standing hypotheses (pairwise coprime integers $x,y,z$ with $s_n=0$ and $n \ge 3$ an odd prime).  The divisibility tower (Corollary~\ref{cor:tower}) and the bound $\gcd(K(n),K(n+1)) \mid 3$ (Proposition~\ref{prop:d-divides-3}) are now in force.
 	
-	\begin{enumerate}
-		\item $K(n) \mid K(nm)$ for all integers $m \ge 1$,
-		\item $\gcd(K(n),K(n+1)) \mid 3$.
-	\end{enumerate}
+	We strengthen the tower by incorporating shifts via the invariance formula for the sequence $K$.
 	
-	We now strengthen the divisibility tower by incorporating the shift-invariance identity.
-	
-	\begin{theorem}[Shifted Divisibility]
+	\begin{theorem}[Shifted divisibility]
 		For every integer $m \ge 1$,
 		\[
-		K(n) \mid 3K(nm+1).
+		K(n) \mid 3\, K(nm + 1).
 		\]
 	\end{theorem}
 	
 	\begin{proof}
-		From the shift-invariance formula applied to $f_t = K(t)$, we have
+		The sequence $K$ satisfies the shift-invariance formula
 		\[
-		K(n(m+1))
-		=
-		K(n)K(nm+2)
-		+
-		L(n)K(nm+1)
-		+
-		M(n)K(nm).
+		K\bigl(n + \ell\bigr) = K(n)\, K(\ell + 2) + L(n)\, K(\ell + 1) + M(n)\, K(\ell)
+		\]
+		for any integer $\ell$ (this follows by applying the Decomposition Theorem~\ref{thm:decomposition} to the basis sequence $K$ itself, whose initial values at three consecutive indices are $(K(0),K(1),K(2))=(0,0,1)$).
+		
+		Set $\ell = nm$:
+		\[
+		K\bigl(n(m+1)\bigr) = K(n)\, K(nm + 2) + L(n)\, K(nm + 1) + M(n)\, K(nm).
 		\]
 		
-		By the previously established divisibility tower,
+		By the divisibility tower, $K(n)$ divides both the left side and the term $M(n) K(nm)$.  Reducing modulo $K(n)$ therefore gives
 		\[
-		K(n) \mid K(n(m+1))
-		\quad\text{and}\quad
-		K(n) \mid K(nm).
+		0 \equiv L(n)\, K(nm + 1) \pmod{K(n)},
+		\]
+		i.e., $K(n) \mid L(n)\, K(nm + 1)$.
+		
+		Since $L(n) = K(n+1) - e_1 K(n)$, we have
+		\[
+		L(n) \equiv K(n+1) \pmod{K(n)}.
+		\]
+		Consequently,
+		\[
+		K(n) \mid K(n+1)\, K(nm + 1).
 		\]
 		
-		Reducing the identity modulo $K(n)$ therefore yields
-		\[
-		0 \equiv L(n)K(nm+1) \pmod{K(n)}.
-		\]
+		Let $d = \gcd(K(n), K(n+1))$.  By Proposition~\ref{prop:d-divides-3}, $d \mid 3$.
 		
-		Hence
+		Write $K(n) = d \cdot k'$ and $K(n+1) = d \cdot k''$ where $\gcd(k',k'')=1$.  Then
 		\[
-		K(n) \mid L(n)K(nm+1).
+		d k' \mid d k'' \cdot K(nm + 1).
 		\]
+		Dividing by $d$ yields $k' \mid k'' \cdot K(nm + 1)$.  Since $\gcd(k',k'')=1$, it follows that $k' \mid K(nm + 1)$.
 		
-		Using $L(n)=K(n+1)-e_1K(n)$, we obtain
+		Therefore $K(n) = d k' \mid d \cdot K(nm + 1)$.  As $d \mid 3$, we conclude
 		\[
-		L(n) \equiv K(n+1) \pmod{K(n)},
-		\]
-		so
-		\[
-		K(n) \mid K(n+1)K(nm+1).
-		\]
-		
-		Let $d=\gcd(K(n),K(n+1))$.  By Proposition~\ref{prop:gcd},
-		we have $d\mid 3$.  Writing $K(n)=dK_0$ with
-		$\gcd(K_0,K(n+1))=1$, it follows that
-		\[
-		K_0 \mid K(nm+1).
-		\]
-		
-		Multiplying by $d$ and using $d\mid 3$, we conclude
-		\[
-		K(n)\mid 3K(nm+1).
+		K(n) \mid 3\, K(nm + 1).
 		\]
 	\end{proof}
 	
-	\begin{corollary}[Three-Step Divisibility Cascade]
+	\begin{corollary}[Three-step divisibility cascade]
 		For each fixed $m\ge 1$ and $j\in\{0,1,2\}$,
 		\[
-		K(n) \mid 3^{\,j}K(nm+j).
+		K(n) \mid 3^{j} K(nm + j).
 		\]
 	\end{corollary}
 	
 	\begin{proof}
-		The case $j=0$ is the original divisibility tower.
-		The case $j=1$ is the theorem above.
-		The case $j=2$ follows from the recurrence
-		\[
-		K(t+3)
-		=
-		e_1K(t+2)
-		-
-		e_2K(t+1)
-		+
-		e_3K(t),
-		\]
-		using the previously established divisibility for $j=0,1$.
+		The case $j=0$ is the divisibility tower.
+		
+		The case $j=1$ is the preceding theorem.
+		
+		The case $j=2$ follows by a parallel reduction: apply the shift formula with offset $nm+1$ and reduce modulo $K(n)$, using the already-established divisibility for the $j=0$ and $j=1$ terms together with the bound on $\gcd(K(n),K(n+1))$.  An extra factor of $3$ appears exactly once more.
 	\end{proof}
 	
 	\medskip
 	
-	This result shows that under the Fermat-type assumption, the sequence
-	$\{K(kn)\}$ behaves as a strong divisibility sequence up to powers of $3$.
-	In particular, the only obstruction to full block divisibility
-	$K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
+	This shows that under the Fermat-type assumption the sequence $\{K(kn)\}_{k\in\mathbb{N}}$ behaves as a strong divisibility sequence up to powers of $3$.  In particular, the only obstruction to full block divisibility $K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
+	
+	% -----------------------------------------------------------------------
+	% (The exploratory bounding of d remains in its draft frame exactly as you had it;
+	% it is now referenced cleanly by the preceding section.)
 	
 	\begin{mdframed}[
 		linecolor=gray,
@@ -887,13 +864,24 @@
 		\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
 		From~\eqref{eq:d-3e3}, $a \mid 3e_3 K(n-1)$.  Since $p \nmid e_3$,
 		we get $a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and
-		$a \mid 3K(n+1)$, backward induction on the recurrence
+		$a \mid 3K(n+1)$, we proceed by induction on the recurrence.
+		
+		Forward induction (multiplying the recurrence by $3$) immediately shows
+		$a \mid 3K(m)$ for all $m \ge n$.
+		
+		Backward: assume $a \mid 3K(m+1)$, $a \mid 3K(m+2)$, $a \mid 3K(m+3)$.
+		From the recurrence rearranged as
 		\[
-		3K(m) = 3e_1\,K(m+1) - 3e_2\,K(m+2) + 3e_3\,K(m+3)
+		e_3 K(m) = K(m+3) - e_1 K(m+2) + e_2 K(m+1)
 		\]
-		(valid at each step since $p \nmid e_3$) gives $a \mid 3K(m)$ for all
-		$m \leq n$.  At $m = 2$: $a \mid 3K(2) = 3$, so $p^k \mid 3$, hence
-		$p = 3$ and $k = 1$.
+		multiply by $3$:
+		\[
+		3 e_3 K(m) = 3K(m+3) - 3 e_1 K(m+2) + 3 e_2 K(m+1).
+		\]
+		The right-hand side is divisible by $a$.  Since $a$ and $e_3$ are coprime
+		(case 2), it follows that $a \mid 3K(m)$.
+		
+		At $m=2$: $a \mid 3K(2)=3$, so $p=3$ and $k=1$.
 		
 		\medskip
 		Combining: $d$ is odd (parity), Case~1 is vacuous for odd primes, and
