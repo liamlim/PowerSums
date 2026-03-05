@@ -573,4 +573,136 @@
 	\end{remark}
 	
 	
+	\subsection*{Divisibility of $K(3n)$ and $K(3n+1)$}
+	
+	We now show directly that $K(n) \mid K(3n)$, with no assumption on $d$.
+	
+	\begin{theorem}
+		\label{thm:flt-divisibility}
+		If $s_n = 0$, then $K(n) \mid K(3n)$ and $K(n+1) \mid K(3n+1)$.
+		Moreover the two quotients are equal: writing $A = K(3n)/K(n)$,
+		\[
+		K(3n) = A\,K(n), \qquad K(3n+1) = A\,K(n+1).
+		\]
+	\end{theorem}
+	\begin{proof}
+		We compute $K(3n) \bmod K(n)$ using the addition formula
+		(Lemma~\ref{lem:addition}) twice.  First,
+		\begin{align*}
+			K(2n)   &\equiv L(n)\,K(n+1) \pmod{K(n)}, \\
+			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1) \pmod{K(n)},
+		\end{align*}
+		since every term involving $K(n)$ vanishes.  A second application gives
+		\[
+		K(3n) \equiv L(n)\,K(2n+1) + M(n)\,K(2n) \pmod{K(n)}.
+		\]
+		Substituting and using $L(n) \equiv K(n+1)$,
+		$M(n) \equiv e_3\,K(n-1)$, $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$
+		modulo $K(n)$:
+		\[
+		K(3n) \;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) \pmod{K(n)}.
+		\]
+		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
+		$e_1\,K(n+1) + 3e_3\,K(n-1) = 2e_2\,K(n) \equiv 0 \pmod{K(n)}$.
+		Therefore $K(3n) \equiv 0 \pmod{K(n)}$, so $K(n) \mid K(3n)$.
+		
+		Write $K(3n) = A\,K(n)$ and substitute into the ratio identity
+		(Corollary~\ref{cor:flt-ratio}):
+		\[
+		A\,K(n)\,K(n+1) \;=\; K(3n+1)\,K(n).
+		\]
+		Cancelling $K(n)$ gives $K(3n+1) = A\,K(n+1)$, so $K(n+1) \mid K(3n+1)$
+		with the same quotient $A$.
+	\end{proof}
+	
+	\subsection*{The master identity}
+	
+	Theorem~\ref{thm:flt-divisibility} gives two clean values, but leaves
+	$K(3n-1)$, $K(3n+2)$, and all other neighbours unaccounted for.
+	In fact all of them are governed by a single identity.
+	
+	\begin{theorem}[Master identity]
+		\label{thm:master}
+		If $s_n = 0$, then for all integers $j$,
+		\[
+		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j),
+		\]
+		where $A = K(3n)/K(n)$.
+	\end{theorem}
+	\begin{proof}
+		Fix $n$ and consider both sides as sequences in $j$.  Both satisfy the
+		same recurrence (in $j$) with coefficients $e_1, e_2, e_3$, since $K$
+		does.  It therefore suffices to verify agreement at $j = 0, 1, 2$.
+		
+		\medskip\noindent
+		$j=0$: $A\,K(n) + e_3^n\,K(0) = A\,K(n) + 0 = K(3n)$. \checkmark
+		
+		\medskip\noindent
+		$j=1$: $A\,K(n+1) + e_3^n\,K(1) = A\,K(n+1) + 0 = K(3n+1)$,
+		which holds by Theorem~\ref{thm:flt-divisibility}. \checkmark
+		
+		\medskip\noindent
+		$j=2$: we need $K(3n+2) = A\,K(n+2) + e_3^n$.  Apply the recurrence
+		at $3n+2$:
+		\[
+		K(3n+2) = e_1\,K(3n+1) - e_2\,K(3n) + e_3\,K(3n-1).
+		\]
+		We know $K(3n) = A\,K(n)$, $K(3n+1) = A\,K(n+1)$, and from the
+		$s_{3n}$ calculation (applying Lemma~\ref{lem:sn-formula} at index $3n$
+		and using $s_{3n} = 3e_3^n$) we have $K(3n-1) = A\,K(n-1) + e_3^{n-1}$.
+		Substituting:
+		\begin{align*}
+			K(3n+2)
+			&= e_1\,A\,K(n+1) - e_2\,A\,K(n) + e_3\,(A\,K(n-1)+e_3^{n-1})\\
+			&= A\,\bigl(e_1\,K(n+1) - e_2\,K(n) + e_3\,K(n-1)\bigr) + e_3^n\\
+			&= A\,K(n+2) + e_3^n. \quad\checkmark
+		\end{align*}
+		Uniqueness of recurrence solutions now gives equality for all $j$.
+	\end{proof}
+	
+	\begin{remark}
+		The proof makes it clear why the identity takes this form.  The sequence
+		$j \mapsto A\,K(n+j)$ satisfies the recurrence (it is a scalar multiple
+		of a shift of $K$), and so does $j \mapsto e_3^n\,K(j)$ (it is a scalar
+		multiple of $K$ itself).  Their sum therefore satisfies the recurrence
+		too, and matching at $j = 0,1,2$ forces it to equal $K(3n+j)$.  The
+		values $K(0) = K(1) = 0$ are what make $j = 0$ and $j=1$ trivially
+		correct with no computation: the correction term $e_3^n\,K(j)$ simply
+		vanishes there.  Only $j = 2$ requires work, and that is where $s_{3n}$
+		enters.
+	\end{remark}
+	
+	\subsection*{Two causes, not one}
+	
+	The master identity might suggest that $s_n = 0$ somehow collapses the
+	three-term recurrence.  The reality is more subtle: two entirely separate
+	mechanisms are at work.
+	
+	\medskip\noindent\textbf{Cause 1: $K(0) = K(1) = 0$ (no FLT needed).}
+	The correction term $e_3^n\,K(j)$ vanishes at $j = 0$ and $j = 1$
+	unconditionally, because $K$ is defined from the antisymmetric weights
+	$(y-z,z-x,x-y)$, which force $K(0)=K(1)=0$.  This is built into the
+	sequence, not into the counter-example hypothesis.
+	
+	\medskip\noindent\textbf{Cause 2: $s_n = 0$ supplies the common ratio $A$.}
+	Without the FLT assumption, the ratios $K(3n)/K(n)$ and $K(3n+1)/K(n+1)$
+	are in general different, and no single scalar $A$ makes the identity work
+	for all $j$ at once.  The ratio identity (Corollary~\ref{cor:flt-ratio})
+	says exactly that these two ratios are equal, and that equality is
+	equivalent to $s_n = 0$.  It is $s_n = 0$ that promotes the ratio from a
+	per-index quantity to a global constant $A$.
+	
+	\medskip
+	So the master identity is not a dimensional reduction: $K(3n+j)$ still
+	satisfies the full three-term recurrence in $j$.  What $s_n = 0$ does is
+	decompose the $3n$-shift into two structured pieces:
+	\begin{itemize}
+		\item $A \cdot K(n+j)$: a scaled copy of the original sequence, and
+		\item $e_3^n \cdot K(j)$: a copy of $K$ itself, scaled by $(xyz)^n$,
+		encoding $s_{3n} = 3e_3^n \neq 0$.
+	\end{itemize}
+	The correction is absent for $j = 0, 1$ and first appears at $j = 2$
+	(and $j = -1$), precisely mirroring the initial condition $K(2) = 1$
+	that seeds the entire sequence.
+	
 \end{document}
