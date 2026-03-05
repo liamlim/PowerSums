@@ -657,6 +657,68 @@
 		The identity is Theorem~\ref{thm:master}; divisibility follows immediately.
 	\end{proof}
 	
+	\subsection*{The divisibility tower: $K(n) \mid K(mn)$ for all $m \geq 1$}
+	
+	We first record a consequence of the addition formula that requires no
+	assumption on $s_n$.
+	
+	\begin{lemma}
+		\label{lem:K2n}
+		For any distinct nonzero $x,y,z$ and any integer $n$,
+		$K(n) \mid K(2n)$ unconditionally.
+	\end{lemma}
+	\begin{proof}
+		Set $m = n$ in the addition formula (Lemma~\ref{lem:addition}):
+		\[
+		K(2n) \;=\; K(n)\,K(n+1) \;+\; L(n)\,K(n) \;-\; M(n)\,K(n-1).
+		\]
+		Since $L(n) = K(n+1)-e_1 K(n)$ and $M(n) = e_3 K(n-1)$, substituting gives
+		\[
+		K(2n) \;=\; K(n)\,\bigl[2K(n+1) - e_1 K(n) - e_3 K(n-1)\bigr].
+		\]
+		The bracket is an integer whenever $x,y,z$ are integers, so $K(n) \mid K(2n)$.
+	\end{proof}
+	
+	\begin{corollary}[Divisibility tower]
+		\label{cor:tower}
+		Under the hypotheses of Corollary~\ref{cor:master-int}
+		(pairwise coprime integers, $s_n = 0$, $n \geq 3$ an odd prime),
+		\[
+		K(n) \;\mid\; K(mn) \qquad \text{for all integers } m \geq 1.
+		\]
+	\end{corollary}
+	\begin{proof}
+		We induct on $m$, with the inductive step consuming two previous cases.
+		
+		\textit{Base cases.}
+		$m = 1$: trivial.
+		$m = 2$: Lemma~\ref{lem:K2n}.
+		$m = 3$: Theorem~\ref{thm:flt-divisibility}.
+		
+		\textit{Inductive step.}
+		Suppose $m \geq 4$ and that $K(n) \mid K((m-2)n)$ and
+		$K(n) \mid K((m-3)n)$.  Apply the master identity
+		(Corollary~\ref{cor:master-int}) with $j = (m-3)n$:
+		\[
+		K(mn) \;=\; K\bigl(3n + (m-3)n\bigr)
+		\;=\; A\,K\bigl((m-2)n\bigr) \;+\; e_3^n\,K\bigl((m-3)n\bigr).
+		\]
+		Both terms on the right are divisible by $K(n)$ by hypothesis,
+		so $K(n) \mid K(mn)$.
+	\end{proof}
+	
+	\begin{remark}
+		The two components of the master identity play distinct roles in the
+		induction.  The term $A\,K((m-2)n)$ advances by two steps using the
+		ratio $A = K(3n)/K(n)$, while $e_3^n\,K((m-3)n)$ is the correction
+		inherited from $s_{3n} = 3e_3^n \neq 0$.  The hypothesis $s_n = 0$
+		enters only through the $m = 3$ base case
+		(Theorem~\ref{thm:flt-divisibility}); once secured, the induction
+		propagates by pure algebra.  In particular, $K(n) \mid K(2n)$
+		(Lemma~\ref{lem:K2n}) holds without any constraint on $s_n$ and would
+		remain true for any triple.
+	\end{remark}
+	
 	\begin{mdframed}[
 		linecolor=gray,
 		linewidth=1pt,
