@@ -376,17 +376,6 @@
 	K(3k)\,K(k+1) - K(3k+1)\,K(k).
 	\]
 	
-	\subsection*{Recovery of the squaring identity (Theorem~\ref{thm:squaring})}
-	
-	Set $k=2$.  Then $K(2)=1$ and $L(2)=K(3)-e_1K(2)=e_1-e_1=0$, so
-	$K(kn)\,L(k) - L(kn)\,K(k) = -L(2n)$.  Since
-	$\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3-e_1e_2)$,
-	Theorem~\ref{thm:power} gives
-	\[
-	-(e_3 - e_1 e_2)\cdot K_n(x^2,y^2,z^2) \;=\; -L(2n),
-	\]
-	which is exactly Theorem~\ref{thm:squaring}.
-	
 	
 	% -----------------------------------------------------------------------
 	\section{An Addition Formula for $K$}
@@ -578,15 +567,16 @@
 		The identity is Theorem~\ref{thm:master}; divisibility follows immediately.
 	\end{proof}
 	
-	\subsection*{The divisibility tower: $K(n) \mid K(mn)$ for all $m \geq 1$}
+	\subsection*{A congruence for $K(2n)$}
 	
-	We first record a consequence of the addition formula that requires no
-	assumption on $s_n$.
+	The following consequence of the addition formula requires no assumption on $s_n$.
 	
 	\begin{lemma}
 		\label{lem:K2n}
 		For any distinct nonzero $x,y,z$ and any integer $n$,
-		$K(n) \mid K(2n)$ unconditionally.
+		\[
+		K(2n) \;\equiv\; -e_3\,K(n-1)^2 \pmod{K(n)}.
+		\]
 	\end{lemma}
 	\begin{proof}
 		Set $m = n$ in the addition formula (Lemma~\ref{lem:addition}):
@@ -595,46 +585,16 @@
 		\]
 		Since $L(n) = K(n+1)-e_1 K(n)$ and $M(n) = e_3 K(n-1)$, substituting gives
 		\[
-		K(2n) \;=\; K(n)\,\bigl[2K(n+1) - e_1 K(n) - e_3 K(n-1)\bigr].
+		K(2n) \;=\; K(n)\,\bigl[2K(n+1) - e_1 K(n)\bigr] \;-\; e_3\,K(n-1)^2.
 		\]
-		The bracket is an integer whenever $x,y,z$ are integers, so $K(n) \mid K(2n)$.
+		The bracketed term is divisible by $K(n)$, so reducing modulo $K(n)$ gives
+		the result.
 	\end{proof}
 	
-	\begin{corollary}[Divisibility tower]
-		\label{cor:tower}
-		Under the hypotheses of Corollary~\ref{cor:master-int}
-		(pairwise coprime integers, $s_n = 0$, $n \geq 3$ an odd prime),
-		\[
-		K(n) \;\mid\; K(mn) \qquad \text{for all integers } m \geq 1.
-		\]
-	\end{corollary}
-	\begin{proof}
-		We induct on $m$, with the inductive step consuming two previous cases.
-		
-		\textit{Base cases.}
-		$m = 1$: trivial.
-		$m = 2$: Lemma~\ref{lem:K2n}.
-		$m = 3$: Theorem~\ref{thm:flt-divisibility}.
-		
-		\textit{Inductive step.}
-		Let $m \geq 4$ and assume the result holds for all positive integers
-		less than $m$; in particular $K(n) \mid K((m-2)n)$ and
-		$K(n) \mid K((m-3)n)$.  Apply the master identity
-		(Corollary~\ref{cor:master-int}) with $j = (m-3)n$:
-		\[
-		K(mn) \;=\; K\bigl(3n + (m-3)n\bigr)
-		\;=\; A\,K\bigl((m-2)n\bigr) \;+\; e_3^n\,K\bigl((m-3)n\bigr).
-		\]
-		Both terms on the right are divisible by $K(n)$ by hypothesis,
-		so $K(n) \mid K(mn)$.
-	\end{proof}
 	
 	% -----------------------------------------------------------------------
-	\section{Shifted Divisibility Under the Fermat Assumption}
+	\section{Bounding K(n) Under the Fermat Assumption}
 	
-	We continue under the standing hypotheses (pairwise coprime integers $x,y,z$ with $s_n=0$ and $n \ge 3$ an odd prime).  We begin by bounding $\gcd(K(n),K(n+1))$, a result needed in the proofs below, and then use it together with the divisibility tower (Corollary~\ref{cor:tower}) to obtain divisibility results for the shifted indices $nm+1$ and $nm+2$.
-	
-	\subsection{Bounding $d = \gcd(K(n),\, K(n+1))$}
 	
 	\begin{proposition}
 		\label{prop:d-divides-3}
@@ -703,233 +663,5 @@
 		Using the exact power $a = p^k$ automatically rules out higher powers such
 		as $9$: $p^k \mid 3$ forces $k=1$.
 	\end{remark}
-	
-	We now strengthen the divisibility tower by incorporating shifts via the shift-invariance formula for $K$.
-	
-	\begin{theorem}[Shifted divisibility]
-		For every integer $m \ge 1$,
-		\[
-		K(n) \mid 3\, K(nm + 1).
-		\]
-	\end{theorem}
-	
-	\begin{proof}
-		The sequence $K$ satisfies the shift-invariance formula
-		\[
-		K\bigl(n + \ell\bigr) = K(n)\, K(\ell + 2) + L(n)\, K(\ell + 1) + M(n)\, K(\ell)
-		\]
-		for any integer $\ell$ (this follows by applying the Decomposition Theorem~\ref{thm:decomposition} to the basis sequence $K$ itself, whose initial values at three consecutive indices are $(K(0),K(1),K(2))=(0,0,1)$).
-		
-		Set $\ell = nm$:
-		\[
-		K\bigl(n(m+1)\bigr) = K(n)\, K(nm + 2) + L(n)\, K(nm + 1) + M(n)\, K(nm).
-		\]
-		
-		By the divisibility tower, $K(n)$ divides both the left side and the term $M(n) K(nm)$.  Reducing modulo $K(n)$ therefore gives
-		\[
-		0 \equiv L(n)\, K(nm + 1) \pmod{K(n)},
-		\]
-		i.e., $K(n) \mid L(n)\, K(nm + 1)$.
-		
-		Since $L(n) = K(n+1) - e_1 K(n)$, we have
-		\[
-		L(n) \equiv K(n+1) \pmod{K(n)}.
-		\]
-		Consequently,
-		\[
-		K(n) \mid K(n+1)\, K(nm + 1).
-		\]
-		
-		Let $d = \gcd(K(n), K(n+1))$.  By Proposition~\ref{prop:d-divides-3}, $d \mid 3$.
-		
-		Therefore we conclude
-		\[
-		K(n) \mid 3\, K(nm + 1).
-		\]
-	\end{proof}
-	
-	\begin{theorem}[Full divisibility cascade]
-		\label{thm:full-cascade}
-		For all integers $m \ge 1$ and $j \ge 0$,
-		\[
-		K(n) \mid 3^{j}\, K(nm + j).
-		\]
-	\end{theorem}
-	
-	\begin{proof}
-		We induct on $j$, with $m \ge 1$ fixed throughout.
-		
-		\textit{Base cases.}
-		$j = 0$ is the divisibility tower (Corollary~\ref{cor:tower}).
-		$j = 1$ is the shifted divisibility theorem above.
-		
-		\textit{Inductive step.}
-		Let $j \ge 1$ and suppose the result holds for $j$ and for $j-1$,
-		uniformly in $m$.  Apply the shift formula
-		(Corollary~\ref{cor:shift} applied to $K$ itself) with $\ell = nm + j - 1$:
-		\[
-		K\bigl(n(m+1) + j - 1\bigr)
-		= K(n)\,K(nm+j+1) + L(n)\,K(nm+j) + M(n)\,K(nm+j-1).
-		\]
-		By the inductive hypothesis at $j-1$ (applied at block $m+1$), the
-		left side satisfies $K(n) \mid 3^{j-1}\,K(n(m+1)+j-1)$.
-		The term $K(n)\,K(nm+j+1)$ vanishes modulo $K(n)$.
-		By the inductive hypothesis at $j-1$ (at block $m$),
-		$K(n) \mid 3^{j-1} K(nm+j-1)$, so the $M(n)$ term is absorbed.
-		Reducing modulo $3^{j-1}$ leaves:
-		\[
-		0 \;\equiv\; L(n)\,K(nm+j) \pmod{K(n)/3^{j-1}},
-		\]
-		i.e.\ $K(n) \mid 3^{j-1}\cdot L(n)\cdot K(nm+j)$.
-		Since $L(n) \equiv K(n+1) \pmod{K(n)}$, this gives
-		\[
-		K(n) \mid 3^{j-1}\cdot K(n+1)\cdot K(nm+j).
-		\]
-		Write $K(n) = d\cdot k'$ and $K(n+1) = d\cdot k''$ with
-		$d = \gcd(K(n),K(n+1))$ and $\gcd(k',k'')=1$.
-		Then $k' \mid 3^{j-1}\cdot k''\cdot K(nm+j)$, and since
-		$\gcd(k',k'')=1$ we get $k' \mid 3^{j-1} K(nm+j)$.
-		Hence $K(n) = dk' \mid d\cdot 3^{j-1} K(nm+j)$.
-		Since $d \mid 3$ (Proposition~\ref{prop:d-divides-3}),
-		\[
-		K(n) \mid 3^j\, K(nm+j). \qedhere
-		\]
-	\end{proof}
-	
-	% -----------------------------------------------------------------------
-	\section{The Conditions on K(n)}
-	\label{sec:Kn-bound}
-	
-	We continue under the standing hypotheses: $x$, $y$, $z$ pairwise coprime
-	nonzero integers, $s_n = 0$, $n \geq 3$ an odd prime.
-	
-	The cascade of the previous section produces divisibility conditions on
-	$K(n)$ that, when combined with a coprimality observation about the
-	symmetric polynomials of $(x^n, y^n, z^n)$, force $K(n)$ to be
-	bounded by an absolute constant.
-	
-	\subsection{Symmetric polynomials of the $n$-th powers}
-	
-	Since $s_n = 0$, the triple $(x^n, y^n, z^n)$ has first symmetric
-	polynomial equal to zero.  We name the remaining two:
-	\[
-	\tilde{e}_2 \;:=\; x^ny^n + y^nz^n + z^nx^n, \qquad
-	\tilde{e}_3 \;:=\; (xyz)^n = e_3^n.
-	\]
-	Both are determined by the cascade via the power-sum identities at
-	$m = 2$ and $m = 3$.
-	
-	\begin{lemma}[Cascade values at $m=2$ and $m=3$]
-		\label{lem:cascade-values}
-		Under the standing hypotheses,
-		\[
-		s_{2n} = -2\tilde{e}_2, \qquad s_{3n} = 3\tilde{e}_3.
-		\]
-	\end{lemma}
-	\begin{proof}
-		Since $\tilde{e}_1 := x^n+y^n+z^n = s_n = 0$, Newton's identity for
-		$s_{2n}$ in terms of $(\tilde{e}_1, \tilde{e}_2)$ gives
-		$s_{2n} = \tilde{e}_1 s_n - 2\tilde{e}_2 = -2\tilde{e}_2$.
-		For $s_{3n}$, applying Newton's identity to the triple $(x^n,y^n,z^n)$:
-		$s_{3n} = \tilde{e}_1 s_{2n} - \tilde{e}_2 s_n + 3\tilde{e}_3 = 3\tilde{e}_3$.
-	\end{proof}
-	
-	\begin{lemma}[Coprimality of $\tilde{e}_2$ and $\tilde{e}_3$]
-		\label{lem:etilde-coprime}
-		$\gcd(\tilde{e}_2,\, \tilde{e}_3) = 1$.
-	\end{lemma}
-	\begin{proof}
-		Let $p$ be any prime dividing $\tilde{e}_3 = x^ny^nz^n$.  Since $x$, $y$,
-		$z$ are pairwise coprime, $p$ divides exactly one of them, say $x$.  Then
-		$p \mid x^ny^n$ and $p \mid z^nx^n$, but $p \nmid y^nz^n$.  Hence
-		$p \nmid \tilde{e}_2 = x^ny^n + y^nz^n + z^nx^n$.  Since no prime divides
-		both $\tilde{e}_2$ and $\tilde{e}_3$, they are coprime.
-	\end{proof}
-	
-	\subsection{Two divisibility conditions on $K(n)$}
-	
-	We now extract the two divisibility conditions that $K(n)$ must satisfy,
-	one from each value of $m$ in the cascade.
-	
-	\begin{theorem}
-		\label{prop:Kn-divides-etilde}
-		Under the standing hypotheses,
-		\begin{align*}
-			&K(n) \;\mid\; 2\cdot 3^{n-1}\,\tilde{e}_2 \\
-			&K(n) \;\mid\; 3^n\,\tilde{e}_3.
-		\end{align*}
-	\end{theorem}
-	\begin{proof}
-		Apply the $s_m$ formula (Lemma~\ref{lem:sn-formula}) at $m = 2n$ and $m = 3n$:
-		\begin{align*}
-			s_{2n} &= e_1\,K(2n+1) - 2e_2\,K(2n) + 3e_3\,K(2n-1), \\
-			s_{3n} &= e_1\,K(3n+1) - 2e_2\,K(3n) + 3e_3\,K(3n-1).
-		\end{align*}
-		
-		\textit{First condition.}
-		Write $2n - 1 = n \cdot 1 + (n-1)$, so $K(2n-1)$ is at offset $j = n-1$
-		from block $m = 1$.  By the full cascade (Theorem~\ref{thm:full-cascade}),
-		$K(n) \mid 3^{n-1} K(2n-1)$.  Similarly $K(n) \mid K(2n)$ ($j=0$,
-		$m=2$) and $K(n) \mid 3\,K(2n+1)$ ($j=1$, $m=2$).
-		Reducing the $s_{2n}$ formula modulo $K(n)$: the $K(2n)$ term vanishes,
-		and the remaining two terms contribute factors of $3$ and $3^{n-1}$
-		respectively, so
-		\[
-		K(n) \;\mid\; 3^{n-1}\, s_{2n}.
-		\]
-		By Lemma~\ref{lem:cascade-values}, $s_{2n} = -2\tilde{e}_2$, giving
-		$K(n) \mid 2\cdot 3^{n-1}\,\tilde{e}_2$.
-		
-		\textit{Second condition.}
-		Write $3n - 1 = n \cdot 2 + (n-1)$, so $K(3n-1)$ is at offset $j = n-1$
-		from block $m = 2$.  By the full cascade,
-		$K(n) \mid 3^{n-1} K(3n-1)$.  Combined with $K(n) \mid K(3n)$ and
-		$K(n) \mid 3\,K(3n+1)$, reducing the $s_{3n}$ formula gives
-		\[
-		K(n) \;\mid\; 3^{n-1}\, s_{3n}.
-		\]
-		By Lemma~\ref{lem:cascade-values}, $s_{3n} = 3\tilde{e}_3$, so
-		$K(n) \mid 3^n\,\tilde{e}_3$.
-	\end{proof}
-	
-	\begin{theorem}
-		\label{thm:Kn-bound}
-		Under the standing hypotheses, $K(n) \mid 2 \cdot 3^n$.
-	\end{theorem}
-	\begin{proof}
-		By Theorem~\ref{prop:Kn-divides-etilde}, $K(n)$ divides both
-		$2 \cdot 3^{n-1}\,\tilde{e}_2$ and $3^n\,\tilde{e}_3$, and hence also
-		their greatest common divisor:
-		\[
-		K(n) \;\mid\; \gcd\!\bigl(2\cdot 3^{n-1}\,\tilde{e}_2,\; 3^n\,\tilde{e}_3\bigr).
-		\]
-		Since $\gcd(\tilde{e}_2,\, \tilde{e}_3) = 1$
-		(Lemma~\ref{lem:etilde-coprime}), the factors $\tilde{e}_2$ and
-		$\tilde{e}_3$ contribute independently to the gcd.  Isolating the
-		power-of-$3$ and power-of-$2$ contributions:
-		\[
-		\gcd\!\bigl(2\cdot 3^{n-1}\,\tilde{e}_2,\; 3^n\,\tilde{e}_3\bigr)
-		\;\mid\; 2\cdot 3^n.
-		\]
-		Hence $K(n) \mid 2\cdot 3^n$.
-	\end{proof}
-	
-	
-	\begin{corollary}
-		\label{cor:A-divides-K3nm}
-		Under the standing hypotheses, $A \mid K(3nm)$ for all integers $m \geq 1$.
-	\end{corollary}
-	\begin{proof}
-		We induct on $m$.  The base case $m = 1$ holds by definition: $K(3n) = A\,K(n)$.
-		
-		For the inductive step, assume $A \mid K(3n(m-1))$.  Apply the master identity
-		(Corollary~\ref{cor:master-int}) with $j = 3n(m-1)$:
-		\[
-		K(3nm) \;=\; A\,K\bigl(n + 3n(m-1)\bigr) \;+\; e_3^n\,K\bigl(3n(m-1)\bigr).
-		\]
-		The first term is divisible by $A$ explicitly, and the second by the inductive
-		hypothesis.  Hence $A \mid K(3nm)$.
-	\end{proof}
-	
 	
 \end{document}
