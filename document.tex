@@ -494,6 +494,22 @@
 		Uniqueness of recurrence solutions gives equality for all $j$.
 	\end{proof}
 	
+	The $j = -1$ instance of the master identity is worth recording explicitly,
+	since it was already established inside the proof above:
+	
+	\begin{corollary}
+		\label{cor:K3n-1}
+		If $s_n = 0$ and $K(n) \neq 0$, then
+		\[
+		K(3n-1) \;=\; A\,K(n-1) \;+\; e_3^{n-1}.
+		\]
+	\end{corollary}
+	\begin{proof}
+		From the $s_{3n}$ calculation in the proof of Theorem~\ref{thm:master}:
+		$s_{3n} = 3e_3\,(K(3n-1) - A\,K(n-1))$ and $s_{3n} = 3e_3^n$,
+		so $K(3n-1) - A\,K(n-1) = e_3^{n-1}$.
+	\end{proof}
+	
 	% -----------------------------------------------------------------------
 	\section{Constraints on a hypothetical FLT counter-example}
 	\label{sec:flt}
@@ -567,17 +583,22 @@
 	
 	\begin{corollary}
 		\label{cor:A-divides-K3nm}
-		Under the standing hypotheses, $A \mid K(3nm)$ for all integers $m \geq 1$.
+		Under the standing hypotheses, $A \mid K(3nm)$ and $A \mid K(3nm+1)$
+		for all integers $m \geq 1$.
 	\end{corollary}
 	\begin{proof}
-		Induct on $m$.  The base case $m = 1$ holds by definition: $K(3n) = A\,K(n)$.
-		For the inductive step, assume $A \mid K(3n(m-1))$ and apply the master
-		identity (Corollary~\ref{cor:master-int}) with $j = 3n(m-1)$:
-		\[
-		K(3nm) \;=\; A\,K\bigl(n + 3n(m-1)\bigr) \;+\; e_3^n\,K\bigl(3n(m-1)\bigr).
-		\]
-		The first term is divisible by $A$ explicitly; the second by the inductive
-		hypothesis.  Hence $A \mid K(3nm)$.
+		Both claims follow by the same induction.  For $K(3nm)$: the base case
+		$m=1$ is $K(3n) = A\,K(n)$.  For $K(3nm+1)$: the base case $m=1$ is
+		$K(3n+1) = A\,K(n+1)$ (Theorem~\ref{thm:flt-divisibility}).  In each
+		case the inductive step applies the master identity
+		(Corollary~\ref{cor:master-int}) with $j = 3n(m-1)$ or $j = 3n(m-1)+1$
+		respectively:
+		\begin{align*}
+			K(3nm)   &= A\,K\bigl(3n(m-1)+n\bigr)   + e_3^n\,K\bigl(3n(m-1)\bigr), \\
+			K(3nm+1) &= A\,K\bigl(3n(m-1)+n+1\bigr) + e_3^n\,K\bigl(3n(m-1)+1\bigr).
+		\end{align*}
+		In both lines the first term carries an explicit factor of $A$ and the
+		second is divisible by $A$ by the inductive hypothesis.
 	\end{proof}
 	
 	
