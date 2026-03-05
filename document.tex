@@ -320,8 +320,12 @@
 		for Fibonacci numbers, where the right-hand side is a constant (up to sign).
 		Here the right-hand side is the richer object $K_n(yz,zx,xy)$,
 		which satisfies its own third-order recurrence with coefficients
-		$(e_2, e_1e_3, e_3^2)$.  In particular, $K(n)^2 - K(n+1)K(n-1)$
-		is a polynomial in $e_2$, $e_1 e_3$, $e_3^2$ only — $e_1$ never appears alone.
+		$(\varepsilon_1, \varepsilon_2, \varepsilon_3) = (e_2, e_1 e_3, e_3^2)$.
+		In particular, for the special case $(x,y,z) = (1,\omega,\omega^2)$ with
+		$\omega$ a primitive cube root of unity one has $e_1 = 0$, $e_2 = -3$,
+		$e_3 = 1$, and the right-hand side reduces to a polynomial in $e_2 = -3$
+		alone; in general, however, $K_n(yz,zx,xy)$ depends on all three
+		symmetric polynomials.
 	\end{remark}
 	
 	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
@@ -349,6 +353,11 @@
 	\end{proof}
 	
 	Note $e_3 - e_1 e_2 = -(x+y)(y+z)(z+x)$, the product of pairwise sums.
+	To see this, expand $(x+y)(y+z)(z+x) = e_1 e_2 - e_3$ directly: the
+	product contributes $xy^2 + y^2z + \cdots$ terms that collect into $e_1 e_2$
+	and a $-2xyz$ correction that combines with the $xyz$ terms to yield
+	$e_1 e_2 - e_3$.  In particular the prefactor vanishes if and only if
+	two of $x,y,z$ are negatives of each other, i.e.\ one pairwise sum is zero.
 	
 	% -----------------------------------------------------------------------
 	\section{General Power Substitution}
@@ -723,9 +732,79 @@
 	% -----------------------------------------------------------------------
 	\section{Shifted Divisibility Under the Fermat Assumption}
 	
-	We continue under the standing hypotheses (pairwise coprime integers $x,y,z$ with $s_n=0$ and $n \ge 3$ an odd prime).  The divisibility tower (Corollary~\ref{cor:tower}) and the bound $\gcd(K(n),K(n+1)) \mid 3$ (Proposition~\ref{prop:d-divides-3}) are now in force.
+	We continue under the standing hypotheses (pairwise coprime integers $x,y,z$ with $s_n=0$ and $n \ge 3$ an odd prime).  We begin by bounding $\gcd(K(n),K(n+1))$, a result needed in the proofs below, and then use it together with the divisibility tower (Corollary~\ref{cor:tower}) to obtain divisibility results for the shifted indices $nm+1$ and $nm+2$.
 	
-	We strengthen the tower by incorporating shifts via the invariance formula for the sequence $K$.
+	\subsection{Bounding $d = \gcd(K(n),\, K(n+1))$}
+	
+	\begin{proposition}
+		\label{prop:d-divides-3}
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
+		and $n$ an odd prime, then $\gcd(K(n),\, K(n+1))$ divides $3$.
+	\end{proposition}
+	
+	\begin{proof}
+		We use the identities
+		\begin{align}
+			s_n     &= e_1\,K(n+1) - 2e_2\,K(n) + 3e_3\,K(n-1), \label{eq:sn}\\
+			3K(n+2) &= 3e_1\,K(n+1) - 3e_2\,K(n) + 3e_3\,K(n-1). \label{eq:3Kn2}
+		\end{align}
+		Since $s_n = 0$ and $d \mid K(n), K(n+1)$, equation~\eqref{eq:sn} gives
+		\[
+		d \;\mid\; 3e_3\,K(n-1). \label{eq:d-3e3}
+		\]
+		Substituting into~\eqref{eq:3Kn2} gives $d \mid 3K(n+2)$.  So $d$
+		divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of
+		$3$.  Applying the recurrence inductively, $d \mid 3K(m)$ for all
+		$m \geq n$, and in particular $d \mid 3K(2n-1)$, $3K(2n)$, $3K(2n+1)$.
+		
+		Applying~\eqref{eq:sn} at index $2n$ gives $d \mid s_{2n}$.  Since
+		$s_n = 0$,
+		\[
+		s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n),
+		\]
+		so
+		\[
+		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n). \label{eq:d-cross}
+		\]
+		
+		\medskip\noindent\textbf{Parity.}
+		Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, exactly one is
+		even (if all odd then $s_n \equiv 3 \pmod{2} \neq 0$; if two even then
+		they share the factor 2, contradicting coprimeness).  Thus $e_1, e_3$
+		are even and $e_2$ is odd.  The recurrence mod 2 becomes
+		$K(m+3) \equiv K(m+1) \pmod{2}$, giving $K(\text{even}) \equiv 1$,
+		$K(\text{odd}) \equiv 0 \pmod{2}$ (by induction from $K(0)=K(1)=0$, $K(2)=1$).
+		Since $n$ is odd, $K(n)$ is even
+		and $K(n+1)$ is odd, so $2 \nmid d$.
+		
+		\medskip
+		Let $p$ be any odd prime dividing $d$ and $a = p^k$ the exact power in $d$.
+		
+		\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
+		Then $p$ divides exactly one of $x,y,z$, say $x$.  So $a \mid x^n$.  In
+		equation~\eqref{eq:d-cross} the terms $x^ny^n$ and $z^nx^n$ vanish mod $a$,
+		leaving $a \mid 2 y^n z^n$.  As $\gcd(a,2)=1$ and $\gcd(a,y^n z^n)=1$,
+		we get $a \mid 1$: contradiction.
+		
+		\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
+		From~\eqref{eq:d-3e3}, $a \mid 3e_3 K(n-1)$.  Since $p \nmid e_3$,
+		$a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and $a \mid 3K(n+1)$,
+		backward induction via the rearranged recurrence
+		\[
+		3e_3 K(m) = 3K(m+3) - 3e_1 K(m+2) + 3e_2 K(m+1)
+		\]
+		(valid since $p \nmid e_3$) shows $a \mid 3K(m)$ for all $m \le n$.  At $m=2$:
+		$a \mid 3K(2) = 3$, so $p=3$ and $k=1$.
+		
+		Thus $d$ is odd and every odd prime power in $d$ divides $3$, so $d \mid 3$.
+	\end{proof}
+	
+	\begin{remark}
+		Using the exact power $a = p^k$ automatically rules out higher powers such
+		as $9$: $p^k \mid 3$ forces $k=1$.
+	\end{remark}
+	
+	We now strengthen the divisibility tower by incorporating shifts via the shift-invariance formula for $K$.
 	
 	\begin{theorem}[Shifted divisibility]
 		For every integer $m \ge 1$,
@@ -787,81 +866,32 @@
 		
 		The case $j=1$ is the preceding theorem.
 		
-		The case $j=2$ follows by a parallel reduction: apply the shift formula with offset $nm+1$ and reduce modulo $K(n)$, using the already-established divisibility for the $j=0$ and $j=1$ terms together with the bound on $\gcd(K(n),K(n+1))$.  An extra factor of $3$ appears exactly once more.
+		For $j=2$, apply the shift formula with $\ell = nm + 1$:
+		\[
+		K\bigl(n(m+1)+1\bigr) = K(n)\,K(nm+3) + L(n)\,K(nm+2) + M(n)\,K(nm+1).
+		\]
+		By the divisibility tower $K(n) \mid K(n(m+1))$, so the left side
+		satisfies $K(n) \mid K(n(m+1))$; more precisely the left side is
+		$K(nm + n + 1)$, handled by the $j=1$ case.  Reducing modulo $K(n)$:
+		the left side contributes $0$ by $j=1$ (up to a factor of $3$), the
+		$K(n)$-term vanishes, $M(n) = e_3 K(n-1)$ is a fixed integer, and
+		the surviving term is $L(n)\,K(nm+2)$.  Since $L(n) \equiv K(n+1)
+		\pmod{K(n)}$ and $K(n) \mid 3K(nm+1)$, a further application of the
+		$\gcd(K(n),K(n+1)) \mid 3$ bound gives $K(n) \mid 9\,K(nm+2)$,
+		i.e., $K(n) \mid 3^2 K(nm+2)$.
 	\end{proof}
 	
 	\medskip
 	
 	This shows that under the Fermat-type assumption the sequence $\{K(kn)\}_{k\in\mathbb{N}}$ behaves as a strong divisibility sequence up to powers of $3$.  In particular, the only obstruction to full block divisibility $K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
 	
+	% -----------------------------------------------------------------------
+	\section*{Relation to Classical Sequences}
 	
-	\subsection{Bounding $d = \gcd(K(n),\, K(n+1))$}
-	
-	\begin{proposition}
-		\label{prop:d-divides-3}
-		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
-		and $n$ an odd prime, then $\gcd(K(n),\, K(n+1))$ divides $3$.
-	\end{proposition}
-	
-	\begin{proof}
-		We use the identities
-		\begin{align}
-			s_n     &= e_1\,K(n+1) - 2e_2\,K(n) + 3e_3\,K(n-1), \label{eq:sn}\\
-			3K(n+2) &= 3e_1\,K(n+1) - 3e_2\,K(n) + 3e_3\,K(n-1). \label{eq:3Kn2}
-		\end{align}
-		Since $s_n = 0$ and $d \mid K(n), K(n+1)$, equation~\eqref{eq:sn} gives
-		\[
-		d \;\mid\; 3e_3\,K(n-1). \label{eq:d-3e3}
-		\]
-		Substituting into~\eqref{eq:3Kn2} gives $d \mid 3K(n+2)$.  So $d$
-		divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of
-		$3$.  Applying the recurrence inductively, $d \mid 3K(m)$ for all
-		$m \geq n$, and in particular $d \mid 3K(2n-1)$, $3K(2n)$, $3K(2n+1)$.
-		
-		Applying~\eqref{eq:sn} at index $2n$ gives $d \mid s_{2n}$.  Since
-		$s_n = 0$,
-		\[
-		s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n),
-		\]
-		so
-		\[
-		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n). \label{eq:d-cross}
-		\]
-		
-		\medskip\noindent\textbf{Parity.}
-		Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, exactly one is
-		even (if all odd then $s_n \equiv 3 \pmod{2} \neq 0$; if two even then
-		they share the factor 2, contradicting coprimeness).  Thus $e_1, e_3$
-		are even and $e_2$ is odd.  The recurrence mod 2 becomes
-		$K(m+3) \equiv K(m+1) \pmod{2}$, giving $K(\text{even}) \equiv 1$,
-		$K(\text{odd}) \equiv 0 \pmod{2}$.  Since $n$ is odd, $K(n)$ is even
-		and $K(n+1)$ is odd, so $2 \nmid d$.
-		
-		\medskip
-		Let $p$ be any odd prime dividing $d$ and $a = p^k$ the exact power in $d$.
-		
-		\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
-		Then $p$ divides exactly one of $x,y,z$, say $x$.  So $a \mid x^n$.  In
-		equation~\eqref{eq:d-cross} the terms $x^ny^n$ and $z^nx^n$ vanish mod $a$,
-		leaving $a \mid 2 y^n z^n$.  As $\gcd(a,2)=1$ and $\gcd(a,y^n z^n)=1$,
-		we get $a \mid 1$: contradiction.
-		
-		\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
-		From~\eqref{eq:d-3e3}, $a \mid 3e_3 K(n-1)$.  Since $p \nmid e_3$,
-		$a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and $a \mid 3K(n+1)$,
-		backward induction via the rearranged recurrence
-		\[
-		3e_3 K(m) = 3K(m+3) - 3e_1 K(m+2) + 3e_2 K(m+1)
-		\]
-		(valid since $p \nmid e_3$) shows $a \mid 3K(m)$ for all $m \le n$.  At $m=2$:
-		$a \mid 3K(2) = 3$, so $p=3$ and $k=1$.
-		
-		Thus $d$ is odd and every odd prime power in $d$ divides $3$, so $d \mid 3$.
-	\end{proof}
-	
-	\begin{remark}
-		Using the exact power $a = p^k$ automatically rules out higher powers such
-		as $9$: $p^k \mid 3$ forces $k=1$.
-	\end{remark}
+	The sequence $K$ is not new: it is an instance of a \emph{Lucas sequence of the second kind}.  For a two-variable triple $(x, y, 0)$ the recurrence degenerates to a second-order relation with $e_3 = 0$, $e_1 = x+y$, $e_2 = xy$, and $K$ reduces to the sequence
+	\[
+	K(n) \;=\; \frac{x^n - y^n}{x - y},
+	\]
+	the standard Lucas $U_n(e_1, e_2)$.  The Fibonacci numbers arise as $U_n(1,-1)$ and the Chebyshev polynomials of the second kind as $U_n(2\cos\theta, 1)$.  The three-variable setting of this note is the natural generalisation to a third-order recurrence, with the antisymmetric weight construction replacing the two-term difference $x^n - y^n$.  The Cassini identity (Corollary~\ref{cor:cassini}) and the addition formula (Lemma~\ref{lem:addition}) are the three-variable analogues of the classical identities $U_n^2 - U_{n+1}U_{n-1} = -e_2^{n-1}$ and $U_{m+n} = U_m U_{n+1} - e_2 U_{m-1} U_n$ respectively.
 	
 \end{document}
