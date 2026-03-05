@@ -376,7 +376,6 @@
 	K(3k)\,K(k+1) - K(3k+1)\,K(k).
 	\]
 	
-	
 	% -----------------------------------------------------------------------
 	\section{An Addition Formula for $K$}
 	\label{sec:addition}
@@ -405,7 +404,6 @@
 		matching the left-hand side.  Uniqueness of recurrence solutions
 		(Theorem~\ref{thm:decomposition}) gives equality for all $n$.
 	\end{proof}
-	
 	
 	% -----------------------------------------------------------------------
 	\section{Consequences of $s_n = 0$ over the reals}
@@ -567,34 +565,23 @@
 		The identity is Theorem~\ref{thm:master}; divisibility follows immediately.
 	\end{proof}
 	
-	\subsection*{A congruence for $K(2n)$}
-	
-	The following consequence of the addition formula requires no assumption on $s_n$.
-	
-	\begin{lemma}
-		\label{lem:K2n}
-		For any distinct nonzero $x,y,z$ and any integer $n$,
-		\[
-		K(2n) \;\equiv\; -e_3\,K(n-1)^2 \pmod{K(n)}.
-		\]
-	\end{lemma}
+	\begin{corollary}
+		\label{cor:A-divides-K3nm}
+		Under the standing hypotheses, $A \mid K(3nm)$ for all integers $m \geq 1$.
+	\end{corollary}
 	\begin{proof}
-		Set $m = n$ in the addition formula (Lemma~\ref{lem:addition}):
+		Induct on $m$.  The base case $m = 1$ holds by definition: $K(3n) = A\,K(n)$.
+		For the inductive step, assume $A \mid K(3n(m-1))$ and apply the master
+		identity (Corollary~\ref{cor:master-int}) with $j = 3n(m-1)$:
 		\[
-		K(2n) \;=\; K(n)\,K(n+1) \;+\; L(n)\,K(n) \;-\; M(n)\,K(n-1).
+		K(3nm) \;=\; A\,K\bigl(n + 3n(m-1)\bigr) \;+\; e_3^n\,K\bigl(3n(m-1)\bigr).
 		\]
-		Since $L(n) = K(n+1)-e_1 K(n)$ and $M(n) = e_3 K(n-1)$, substituting gives
-		\[
-		K(2n) \;=\; K(n)\,\bigl[2K(n+1) - e_1 K(n)\bigr] \;-\; e_3\,K(n-1)^2.
-		\]
-		The bracketed term is divisible by $K(n)$, so reducing modulo $K(n)$ gives
-		the result.
+		The first term is divisible by $A$ explicitly; the second by the inductive
+		hypothesis.  Hence $A \mid K(3nm)$.
 	\end{proof}
 	
 	
-	% -----------------------------------------------------------------------
-	\section{Bounding K(n) Under the Fermat Assumption}
-	
+	\subsection*{Bounding $\gcd(K(n),\, K(n+1))$}
 	
 	\begin{proposition}
 		\label{prop:d-divides-3}
