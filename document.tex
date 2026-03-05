@@ -52,7 +52,7 @@
 	Since $e_3 = xyz \neq 0$ we may divide by any power of $x$, $y$, or $z$,
 	and in particular extend all recurrences to all integers $n \in \mathbb{Z}$.
 	
-	\subsection*{Cyclic sum notation}
+	\subsection{Cyclic sum notation}
 	
 	Many expressions in this paper are cyclic in $x, y, z$.  We write
 	\[
@@ -413,7 +413,7 @@
 	complex) numbers satisfying $s_n = x^n + y^n + z^n = 0$ for a fixed
 	integer $n \geq 3$.  No integrality is assumed.
 	
-	\subsection*{The ratio identity}
+	\subsection{The ratio identity}
 	
 	Setting $k = n$ and $m = 3$ in Theorem~\ref{thm:power} and using
 	$K_3(x^n, y^n, z^n) = s_n = 0$ gives immediately:
@@ -427,7 +427,7 @@
 	equal (whenever the denominators are nonzero).  We write their common
 	value $A = K(3n)/K(n)$.
 	
-	\subsection*{The common ratio $A$}
+	\subsection{The common ratio $A$}
 	
 	\begin{theorem}
 		\label{thm:sn-ratio}
@@ -442,7 +442,7 @@
 		and dividing both sides by $K(n)$ yields the result.
 	\end{proof}
 	
-	\subsection*{The master identity}
+	\subsection{The master identity}
 	
 	The two equalities above are the $j = 0$ and $j = 1$ cases of a
 	uniform identity covering every offset $j$.
@@ -581,24 +581,29 @@
 		The identity is Theorem~\ref{thm:master}; divisibility follows immediately.
 	\end{proof}
 	
-	\begin{corollary}
-		\label{cor:A-divides-K3nm}
-		Under the standing hypotheses, $A \mid K(3nm)$ and $A \mid K(3nm+1)$
-		for all integers $m \geq 1$.
-	\end{corollary}
+	\begin{theorem}
+		\label{thm:K-mod-A}
+		Under the standing hypotheses, for all integers $m \geq 1$ and all $k$,
+		\[
+		K(3nm + k) \;\equiv\; e_3^{nm}\,K(k) \pmod{A}.
+		\]
+		In particular, $A \mid K(3nm)$ and $A \mid K(3nm+1)$ for all $m \geq 1$,
+		since $K(0) = K(1) = 0$.
+	\end{theorem}
 	\begin{proof}
-		Both claims follow by the same induction.  For $K(3nm)$: the base case
-		$m=1$ is $K(3n) = A\,K(n)$.  For $K(3nm+1)$: the base case $m=1$ is
-		$K(3n+1) = A\,K(n+1)$ (Theorem~\ref{thm:flt-divisibility}).  In each
-		case the inductive step applies the master identity
-		(Corollary~\ref{cor:master-int}) with $j = 3n(m-1)$ or $j = 3n(m-1)+1$
-		respectively:
-		\begin{align*}
-			K(3nm)   &= A\,K\bigl(3n(m-1)+n\bigr)   + e_3^n\,K\bigl(3n(m-1)\bigr), \\
-			K(3nm+1) &= A\,K\bigl(3n(m-1)+n+1\bigr) + e_3^n\,K\bigl(3n(m-1)+1\bigr).
-		\end{align*}
-		In both lines the first term carries an explicit factor of $A$ and the
-		second is divisible by $A$ by the inductive hypothesis.
+		Induct on $m$.  For $m=1$, the master identity
+		(Corollary~\ref{cor:master-int}) with $j = k$ gives
+		\[
+		K(3n+k) = A\,K(n+k) + e_3^n\,K(k) \;\equiv\; e_3^n\,K(k) \pmod{A}.
+		\]
+		For the inductive step, apply the master identity with $j = 3n(m-1)+k$:
+		\[
+		K(3nm+k) = A\,K\bigl(3n(m-1)+n+k\bigr) + e_3^n\,K\bigl(3n(m-1)+k\bigr).
+		\]
+		Reducing mod $A$ and applying the inductive hypothesis to the second term:
+		\[
+		K(3nm+k) \;\equiv\; e_3^n \cdot e_3^{n(m-1)}\,K(k) = e_3^{nm}\,K(k) \pmod{A}. \qedhere
+		\]
 	\end{proof}
 	
 	
