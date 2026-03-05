@@ -2,7 +2,6 @@
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage{hyperref}
 \usepackage{geometry}
-\usepackage{mdframed}
 \usepackage{xcolor}
 \geometry{margin=1in}
 
@@ -812,7 +811,7 @@
 		\end{align}
 		Since $s_n = 0$ and $d \mid K(n), K(n+1)$, equation~\eqref{eq:sn} gives
 		\[
-		d \;\mid\; 3e_3\,K(n-1).
+		d \;\mid\; 3e_3\,K(n-1). \label{eq:d-3e3}
 		\]
 		Substituting into~\eqref{eq:3Kn2} gives $d \mid 3K(n+2)$.  So $d$
 		divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of
@@ -826,7 +825,7 @@
 		\]
 		so
 		\[
-		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
+		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n). \label{eq:d-cross}
 		\]
 		
 		\medskip\noindent\textbf{Parity.}
@@ -864,6 +863,5 @@
 		Using the exact power $a = p^k$ automatically rules out higher powers such
 		as $9$: $p^k \mid 3$ forces $k=1$.
 	\end{remark}
-	
 	
 \end{document}
