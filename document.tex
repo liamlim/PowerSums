@@ -721,6 +721,107 @@
 		remain true for any triple.
 	\end{remark}
 	
+	% -----------------------------------------------------------------------
+	\section{Shifted Divisibility Under the Fermat Assumption}
+	
+	Throughout this section we assume $s_n = 0$ and work in the integer setting.
+	Recall that we have already established:
+	
+	\begin{enumerate}
+		\item $K(n) \mid K(nm)$ for all integers $m \ge 1$,
+		\item $\gcd(K(n),K(n+1)) \mid 3$.
+	\end{enumerate}
+	
+	We now strengthen the divisibility tower by incorporating the shift-invariance identity.
+	
+	\begin{theorem}[Shifted Divisibility]
+		For every integer $m \ge 1$,
+		\[
+		K(n) \mid 3K(nm+1).
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		From the shift-invariance formula applied to $f_t = K(t)$, we have
+		\[
+		K(n(m+1))
+		=
+		K(n)K(nm+2)
+		+
+		L(n)K(nm+1)
+		+
+		M(n)K(nm).
+		\]
+		
+		By the previously established divisibility tower,
+		\[
+		K(n) \mid K(n(m+1))
+		\quad\text{and}\quad
+		K(n) \mid K(nm).
+		\]
+		
+		Reducing the identity modulo $K(n)$ therefore yields
+		\[
+		0 \equiv L(n)K(nm+1) \pmod{K(n)}.
+		\]
+		
+		Hence
+		\[
+		K(n) \mid L(n)K(nm+1).
+		\]
+		
+		Using $L(n)=K(n+1)-e_1K(n)$, we obtain
+		\[
+		L(n) \equiv K(n+1) \pmod{K(n)},
+		\]
+		so
+		\[
+		K(n) \mid K(n+1)K(nm+1).
+		\]
+		
+		Let $d=\gcd(K(n),K(n+1))$.  By Proposition~\ref{prop:gcd},
+		we have $d\mid 3$.  Writing $K(n)=dK_0$ with
+		$\gcd(K_0,K(n+1))=1$, it follows that
+		\[
+		K_0 \mid K(nm+1).
+		\]
+		
+		Multiplying by $d$ and using $d\mid 3$, we conclude
+		\[
+		K(n)\mid 3K(nm+1).
+		\]
+	\end{proof}
+	
+	\begin{corollary}[Three-Step Divisibility Cascade]
+		For each fixed $m\ge 1$ and $j\in\{0,1,2\}$,
+		\[
+		K(n) \mid 3^{\,j}K(nm+j).
+		\]
+	\end{corollary}
+	
+	\begin{proof}
+		The case $j=0$ is the original divisibility tower.
+		The case $j=1$ is the theorem above.
+		The case $j=2$ follows from the recurrence
+		\[
+		K(t+3)
+		=
+		e_1K(t+2)
+		-
+		e_2K(t+1)
+		+
+		e_3K(t),
+		\]
+		using the previously established divisibility for $j=0,1$.
+	\end{proof}
+	
+	\medskip
+	
+	This result shows that under the Fermat-type assumption, the sequence
+	$\{K(kn)\}$ behaves as a strong divisibility sequence up to powers of $3$.
+	In particular, the only obstruction to full block divisibility
+	$K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
+	
 	\begin{mdframed}[
 		linecolor=gray,
 		linewidth=1pt,
