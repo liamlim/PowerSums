@@ -457,169 +457,48 @@
 		(Theorem~\ref{thm:decomposition}) gives equality for all $n$.
 	\end{proof}
 	
+	
 	% -----------------------------------------------------------------------
-	\section{Constraints on a hypothetical FLT counter-example}
-	\label{sec:flt}
+	\section{Consequences of $s_n = 0$ over the reals}
+	\label{sec:sn-zero}
 	
-	\noindent\textit{Disclaimer.}
-	This section is purely exploratory.  Fermat's Last Theorem was proved by
-	Wiles in 1995, and nothing here comes close to an independent proof ---
-	nor is that the aim.  The tools developed in the preceding sections are
-	high-school level algebra, and the goal is simply to see what algebraic
-	constraints the framework imposes on a hypothetical primitive solution
-	$x^n + y^n + z^n = 0$. 
-	
-	\medskip
-	Throughout this section we assume that $x$, $y$, $z$ are pairwise coprime
-	nonzero integers satisfying $s_n = x^n + y^n + z^n = 0$ for a fixed integer
-	$n \geq 3$: the hypothesis of a primitive counter-example to Fermat's Last
-	Theorem.
+	Throughout this section $x$, $y$, $z$ are distinct nonzero real (or
+	complex) numbers satisfying $s_n = x^n + y^n + z^n = 0$ for a fixed
+	integer $n \geq 3$.  No integrality is assumed.
 	
 	\subsection*{The ratio identity}
 	
-	Setting $k = n$ and $m = 3$ in Theorem~\ref{thm:power}, and using
-	$K_3(x^n, y^n, z^n) = s_n = 0$, gives immediately:
+	Setting $k = n$ and $m = 3$ in Theorem~\ref{thm:power} and using
+	$K_3(x^n, y^n, z^n) = s_n = 0$ gives immediately:
 	
 	\begin{corollary}
-		\label{cor:flt-ratio}
+		\label{cor:sn-ratio}
 		If $s_n = 0$ then $K(3n)\,K(n+1) = K(3n+1)\,K(n)$.
 	\end{corollary}
 	
-	\subsection*{Bounding $d = \gcd(K(n),\, K(n+1))$}
+	In other words the two ratios $K(3n)/K(n)$ and $K(3n+1)/K(n+1)$ are
+	equal (whenever the denominators are nonzero).  We write their common
+	value $A = K(3n)/K(n)$.
 	
-	We use the two identities
-	\begin{align}
-		s_n     &= e_1\,K(n+1) - 2e_2\,K(n) + 3e_3\,K(n-1), \label{eq:sn}\\
-		3K(n+2) &= 3e_1\,K(n+1) - 3e_2\,K(n) + 3e_3\,K(n-1). \label{eq:3Kn2}
-	\end{align}
-	The first is Lemma~\ref{lem:sn-formula}; the second is the recurrence
-	multiplied by~$3$.  Since $s_n=0$ and $d \mid K(n),\,K(n+1)$,
-	equation~\eqref{eq:sn} gives
-	\begin{equation}
-		\label{eq:d-3e3}
-		d \;\mid\; 3e_3\,K(n-1).
-	\end{equation}
-	Substituting into~\eqref{eq:3Kn2} then gives $d \mid 3K(n+2)$.  So $d$
-	divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of $3$.
-	Applying the recurrence inductively forward, $d \mid 3K(m)$ for all
-	$m \geq n$, and in particular $d \mid 3K(2n-1)$, $3K(2n)$, $3K(2n+1)$.
-	
-	Applying~\eqref{eq:sn} at index $2n$, and using $d \mid 3K(2n)$ and
-	$d \mid 3K(2n+1)$, gives $d \mid s_{2n}$.  Since $s_n = 0$,
-	\[
-	s_{2n} = s_n^2 - 2(x^ny^n + y^nz^n + z^nx^n) = -2(x^ny^n + y^nz^n + z^nx^n),
-	\]
-	so
-	\begin{equation}
-		\label{eq:d-cross}
-		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
-	\end{equation}
-	
-	\medskip\noindent\textbf{Parity.}
-	Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, they cannot all
-	be odd (odd$+$odd$+$odd is odd, never zero), so exactly one is even.
-	Therefore $e_1 = x+y+z$ and $e_3 = xyz$ are both even, while
-	$e_2 = xy+yz+zx$ is odd.  The recurrence mod~$2$ then becomes
-	\[
-	K(m+3) \;\equiv\; e_1 K(m+2) - e_2 K(m+1) + e_3 K(m)
-	\;\equiv\; K(m+1) \pmod{2},
-	\]
-	since $e_1 \equiv e_3 \equiv 0$ and $e_2 \equiv 1$.  Starting from
-	$K(2) = 1$, $K(3) = e_1 \equiv 0$, this gives the strict alternating
-	pattern $K(\text{even}) \equiv 1$, $K(\text{odd}) \equiv 0 \pmod{2}$.
-	Since $n$ is an odd prime, $K(n)$ is even and $K(n+1)$ is odd, so
-	$2 \nmid d$.  Likewise $K(3n)$ is even and $K(3n+1)$ is odd.
-	
-	\medskip
-	We now analyse which odd prime powers can divide $d$.  Let $p$ be any
-	odd prime dividing $d$, and let $a = p^k$ be the exact power of $p$ in $d$.
-	Since $p$ is odd, either $p \mid e_3$ or $p \nmid e_3$.
-	
-	\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
-	Since $x$, $y$, $z$ are pairwise coprime, $p$ divides exactly one of them,
-	say $p \mid x$, so $a \mid x^n$.  From~\eqref{eq:d-cross},
-	$a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.  Since $a \mid x^n$, the first and
-	third cross terms vanish mod $a$, leaving $a \mid 2y^nz^n$.  Since $p$ is
-	odd, $\gcd(a, 2) = 1$, and $\gcd(x,y)=\gcd(x,z)=1$ gives
-	$\gcd(a,\,y^nz^n)=1$, so $a \mid 1$: contradiction.  No odd prime factor
-	of $d$ divides $e_3$.
-	
-	\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
-	From~\eqref{eq:d-3e3}, $a \mid 3e_3K(n-1)$.  Since $p$ is prime and
-	$p \nmid e_3$, we get $a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and
-	$a \mid 3K(n+1)$, we apply the recurrence backwards:
-	\[
-	3K(m) = 3e_1\,K(m+1) - 3e_2\,K(m+2) + 3e_3\,K(m+3).
-	\]
-	Since $p \nmid e_3$, at each backward step $a \mid 3K(m)$ follows from
-	$a \mid 3K(m+1)$, $3K(m+2)$, $3K(m+3)$.  Descending to $m = 2$ gives
-	$a \mid 3K(2) = 3$, so $p^k \mid 3$, hence $p = 3$ and $k = 1$.
-	
-	\medskip
-	Combining parity with the two cases: $d$ is odd (from the parity argument),
-	Case~1 is vacuous for odd primes, and Case~2 forces every prime power in
-	$d$ to divide $3$.  Therefore:
-	
-	\begin{proposition}
-		\label{prop:d-divides-3}
-		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
-		and $n$ an odd prime, then $\gcd(K(n),\, K(n+1))$ divides $3$.
-	\end{proposition}
-	
-	\begin{remark}
-		Working with the exact prime power $a = p^k$ handles higher powers such
-		as $9$ in the same stroke: $p^k \mid 3$ forces $k = 1$ immediately,
-		with no separate argument needed.
-	\end{remark}
-	
-	
-	\subsection*{Divisibility of $K(3n)$ and $K(3n+1)$}
-	
-	We now show directly that $K(n) \mid K(3n)$, with no assumption on $d$.
+	\subsection*{The common ratio $A$}
 	
 	\begin{theorem}
-		\label{thm:flt-divisibility}
-		If $s_n = 0$, then $K(n) \mid K(3n)$ and $K(n+1) \mid K(3n+1)$.
-		Moreover the two quotients are equal: writing $A = K(3n)/K(n)$,
+		\label{thm:sn-ratio}
+		If $s_n = 0$ and $K(n) \neq 0$, define $A = K(3n)/K(n)$.  Then
 		\[
-		K(3n) = A\,K(n), \qquad K(3n+1) = A\,K(n+1).
+		K(3n+1) = A\,K(n+1).
 		\]
 	\end{theorem}
 	\begin{proof}
-		We compute $K(3n) \bmod K(n)$ using the addition formula
-		(Lemma~\ref{lem:addition}) twice.  First,
-		\begin{align*}
-			K(2n)   &\equiv L(n)\,K(n+1) \pmod{K(n)}, \\
-			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1) \pmod{K(n)},
-		\end{align*}
-		since every term involving $K(n)$ vanishes.  A second application gives
-		\[
-		K(3n) \equiv L(n)\,K(2n+1) + M(n)\,K(2n) \pmod{K(n)}.
-		\]
-		Substituting and using $L(n) \equiv K(n+1)$,
-		$M(n) \equiv e_3\,K(n-1)$, $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$
-		modulo $K(n)$:
-		\[
-		K(3n) \;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) \pmod{K(n)}.
-		\]
-		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
-		$e_1\,K(n+1) + 3e_3\,K(n-1) = 2e_2\,K(n) \equiv 0 \pmod{K(n)}$.
-		Therefore $K(3n) \equiv 0 \pmod{K(n)}$, so $K(n) \mid K(3n)$.
-		
-		Write $K(3n) = A\,K(n)$ and substitute into the ratio identity
-		(Corollary~\ref{cor:flt-ratio}):
-		\[
-		A\,K(n)\,K(n+1) \;=\; K(3n+1)\,K(n).
-		\]
-		Cancelling $K(n)$ gives $K(3n+1) = A\,K(n+1)$, so $K(n+1) \mid K(3n+1)$
-		with the same quotient $A$.
+		The ratio identity (Corollary~\ref{cor:sn-ratio}) gives
+		$K(3n)\,K(n+1) = K(3n+1)\,K(n)$.  Substituting $K(3n) = A\,K(n)$
+		and dividing both sides by $K(n)$ yields the result.
 	\end{proof}
 	
 	\subsection*{The master identity}
 	
-	Theorem~\ref{thm:flt-divisibility} gives two clean values, but leaves
-	$K(3n-1)$, $K(3n+2)$, and all other neighbours unaccounted for.
-	In fact all of them are governed by a single identity.
+	The two equalities above are the $j = 0$ and $j = 1$ cases of a
+	uniform identity covering every offset $j$.
 	
 	\begin{theorem}[Master identity]
 		\label{thm:master}
@@ -630,79 +509,201 @@
 		where $A = K(3n)/K(n)$.
 	\end{theorem}
 	\begin{proof}
-		Fix $n$ and consider both sides as sequences in $j$.  Both satisfy the
-		same recurrence (in $j$) with coefficients $e_1, e_2, e_3$, since $K$
-		does.  It therefore suffices to verify agreement at $j = 0, 1, 2$.
+		Fix $n$.  The right-hand side, viewed as a function of $j$, is a sum
+		of two sequences: $j \mapsto A\,K(n+j)$ (a scalar multiple of a shift
+		of $K$) and $j \mapsto e_3^n\,K(j)$ (a scalar multiple of $K$ itself).
+		Both satisfy the recurrence with coefficients $e_1, e_2, e_3$, and
+		therefore so does their sum.  Since the left-hand side also satisfies
+		the same recurrence, it suffices to check agreement at $j = 0, 1, 2$.
 		
-		\medskip\noindent
-		$j=0$: $A\,K(n) + e_3^n\,K(0) = A\,K(n) + 0 = K(3n)$. \checkmark
+		\smallskip\noindent
+		$j = 0$: $A\,K(n) + e_3^n\cdot 0 = A\,K(n) = K(3n)$. \checkmark
 		
-		\medskip\noindent
-		$j=1$: $A\,K(n+1) + e_3^n\,K(1) = A\,K(n+1) + 0 = K(3n+1)$,
-		which holds by Theorem~\ref{thm:flt-divisibility}. \checkmark
+		\smallskip\noindent
+		$j = 1$: $A\,K(n+1) + e_3^n\cdot 0 = A\,K(n+1) = K(3n+1)$,
+		by Theorem~\ref{thm:sn-ratio}. \checkmark
 		
-		\medskip\noindent
-		$j=2$: we need $K(3n+2) = A\,K(n+2) + e_3^n$.  Apply the recurrence
-		at $3n+2$:
+		\smallskip\noindent
+		$j = 2$: we need $K(3n+2) = A\,K(n+2) + e_3^n$.
+		Apply the $s_n$ formula (Lemma~\ref{lem:sn-formula}) at index $3n$:
 		\[
-		K(3n+2) = e_1\,K(3n+1) - e_2\,K(3n) + e_3\,K(3n-1).
+		s_{3n} = e_1\,K(3n+1) - 2e_2\,K(3n) + 3e_3\,K(3n-1).
 		\]
-		We know $K(3n) = A\,K(n)$, $K(3n+1) = A\,K(n+1)$, and from the
-		$s_{3n}$ calculation (applying Lemma~\ref{lem:sn-formula} at index $3n$
-		and using $s_{3n} = 3e_3^n$) we have $K(3n-1) = A\,K(n-1) + e_3^{n-1}$.
-		Substituting:
+		Substituting $K(3n) = A\,K(n)$, $K(3n+1) = A\,K(n+1)$, and using
+		$s_n = 0$ to replace $e_1\,K(n+1) - 2e_2\,K(n) = -3e_3\,K(n-1)$:
+		\[
+		s_{3n} = 3e_3\,\bigl(K(3n-1) - A\,K(n-1)\bigr).
+		\]
+		Since $x^n + y^n + z^n = 0$, Newton's identity applied to
+		$(x^n, y^n, z^n)$ gives $s_{3n} = 3(xyz)^n = 3e_3^n$, so
+		$K(3n-1) = A\,K(n-1) + e_3^{n-1}$.  Now the recurrence at $3n+2$:
 		\begin{align*}
 			K(3n+2)
-			&= e_1\,A\,K(n+1) - e_2\,A\,K(n) + e_3\,(A\,K(n-1)+e_3^{n-1})\\
-			&= A\,\bigl(e_1\,K(n+1) - e_2\,K(n) + e_3\,K(n-1)\bigr) + e_3^n\\
-			&= A\,K(n+2) + e_3^n. \quad\checkmark
+			&= e_1\cdot A\,K(n+1) - e_2\cdot A\,K(n)
+			+ e_3\,(A\,K(n-1) + e_3^{n-1}) \\
+			&= A\,\bigl(e_1\,K(n+1) - e_2\,K(n) + e_3\,K(n-1)\bigr) + e_3^n
+			= A\,K(n+2) + e_3^n. \quad\checkmark
 		\end{align*}
-		Uniqueness of recurrence solutions now gives equality for all $j$.
+		Uniqueness of recurrence solutions gives equality for all $j$.
 	\end{proof}
 	
 	\begin{remark}
-		The proof makes it clear why the identity takes this form.  The sequence
-		$j \mapsto A\,K(n+j)$ satisfies the recurrence (it is a scalar multiple
-		of a shift of $K$), and so does $j \mapsto e_3^n\,K(j)$ (it is a scalar
-		multiple of $K$ itself).  Their sum therefore satisfies the recurrence
-		too, and matching at $j = 0,1,2$ forces it to equal $K(3n+j)$.  The
-		values $K(0) = K(1) = 0$ are what make $j = 0$ and $j=1$ trivially
-		correct with no computation: the correction term $e_3^n\,K(j)$ simply
-		vanishes there.  Only $j = 2$ requires work, and that is where $s_{3n}$
-		enters.
+		The values $K(0) = K(1) = 0$ are what make $j = 0$ and $j = 1$
+		trivially correct: the correction term $e_3^n\,K(j)$ simply vanishes
+		there, so no computation is needed.  This has nothing to do with
+		$s_n = 0$; it is a permanent feature of $K$ inherited from the
+		antisymmetric weights $(y-z, z-x, x-y)$.  The assumption $s_n = 0$
+		contributes exactly one thing: it makes the ratio $K(3n)/K(n)$ equal
+		to $K(3n+1)/K(n+1)$, promoting a per-index quantity into the single
+		global constant $A$ that the identity requires.  Without $s_n = 0$
+		no such $A$ exists.
 	\end{remark}
 	
-	\subsection*{Two causes, not one}
+	\begin{remark}
+		The master identity can be read as a decomposition of the $3n$-shift:
+		\begin{itemize}
+			\item $A \cdot K(n+j)$: a scaled copy of the original sequence,
+			\item $e_3^n \cdot K(j)$: a copy of $K$ scaled by $(xyz)^n$,
+			encoding $s_{3n} = 3e_3^n \neq 0$.
+		\end{itemize}
+		The natural basis window for this shift is $\{K(3n), K(3n+1), K(3n+2)\}$
+		(indices $j = 0, 1, 2$), since it is the standard initial window of $K$
+		translated by $3n$.  Within it, the correction $(0, 0, e_3^n)$ mirrors
+		exactly the initial condition $(K(0), K(1), K(2)) = (0, 0, 1)$.
+	\end{remark}
 	
-	The master identity might suggest that $s_n = 0$ somehow collapses the
-	three-term recurrence.  The reality is more subtle: two entirely separate
-	mechanisms are at work.
+	% -----------------------------------------------------------------------
+	\section{Constraints on a hypothetical FLT counter-example}
+	\label{sec:flt}
 	
-	\medskip\noindent\textbf{Cause 1: $K(0) = K(1) = 0$ (no FLT needed).}
-	The correction term $e_3^n\,K(j)$ vanishes at $j = 0$ and $j = 1$
-	unconditionally, because $K$ is defined from the antisymmetric weights
-	$(y-z,z-x,x-y)$, which force $K(0)=K(1)=0$.  This is built into the
-	sequence, not into the counter-example hypothesis.
-	
-	\medskip\noindent\textbf{Cause 2: $s_n = 0$ supplies the common ratio $A$.}
-	Without the FLT assumption, the ratios $K(3n)/K(n)$ and $K(3n+1)/K(n+1)$
-	are in general different, and no single scalar $A$ makes the identity work
-	for all $j$ at once.  The ratio identity (Corollary~\ref{cor:flt-ratio})
-	says exactly that these two ratios are equal, and that equality is
-	equivalent to $s_n = 0$.  It is $s_n = 0$ that promotes the ratio from a
-	per-index quantity to a global constant $A$.
+	\noindent\textit{Disclaimer.}
+	Fermat's Last Theorem was proved by Wiles in 1995, and nothing here
+	comes close to an independent proof --- nor is that the aim.  The goal
+	is to see what arithmetic constraints the framework imposes on a
+	hypothetical primitive solution $x^n + y^n + z^n = 0$ with
+	$x, y, z \in \mathbb{Z}$.
 	
 	\medskip
-	So the master identity is not a dimensional reduction: $K(3n+j)$ still
-	satisfies the full three-term recurrence in $j$.  What $s_n = 0$ does is
-	decompose the $3n$-shift into two structured pieces:
-	\begin{itemize}
-		\item $A \cdot K(n+j)$: a scaled copy of the original sequence, and
-		\item $e_3^n \cdot K(j)$: a copy of $K$ itself, scaled by $(xyz)^n$,
-		encoding $s_{3n} = 3e_3^n \neq 0$.
-	\end{itemize}
-	The correction is absent for $j = 0, 1$ and first appears at $j = 2$
-	(and $j = -1$), precisely mirroring the initial condition $K(2) = 1$
-	that seeds the entire sequence.
+	Throughout this section $x$, $y$, $z$ are pairwise coprime nonzero
+	integers with $s_n = 0$ and $n \geq 3$ an odd prime.  All results of
+	Section~\ref{sec:sn-zero} apply; in particular the ratio $A$ and the
+	master identity are in force.  The additional content here is purely
+	about divisibility.
+	
+	\subsection*{Divisibility consequences of the master identity}
+	
+	Since $x$, $y$, $z$ are integers, every $K(m)$ is an integer.
+	We now show $K(n) \mid K(3n)$, after which divisibility of $K(3n+1)$
+	and the full master identity follow with no further calculation.
+	
+	\begin{theorem}
+		\label{thm:flt-divisibility}
+		If $x$, $y$, $z$ are coprime integers with $s_n = 0$, then
+		$K(n) \mid K(3n)$, and consequently $K(n+1) \mid K(3n+1)$, with
+		the same integer quotient $A = K(3n)/K(n)$.
+	\end{theorem}
+	\begin{proof}
+		We show $K(3n) \equiv 0 \pmod{K(n)}$.  Applying the addition formula
+		(Lemma~\ref{lem:addition}) with $m = n$ and working modulo $K(n)$:
+		\begin{align*}
+			K(2n)   &\equiv L(n)\,K(n+1), \\
+			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1),
+		\end{align*}
+		since every term containing $K(n)$ as a factor vanishes.  A further
+		application modulo $K(n)$, substituting
+		$L(n) \equiv K(n+1)$, $M(n) \equiv e_3\,K(n-1)$,
+		and $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$, gives
+		\[
+		K(3n) \;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) \pmod{K(n)}.
+		\]
+		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
+		$e_1\,K(n+1) + 3e_3\,K(n-1) = 2e_2\,K(n) \equiv 0 \pmod{K(n)}$.
+		Hence $K(3n) \equiv 0 \pmod{K(n)}$, so $A = K(3n)/K(n)$ is an integer.
+		
+		Since $A$ is an integer, Theorem~\ref{thm:sn-ratio} gives
+		$K(3n+1) = A\,K(n+1)$, so $K(n+1) \mid K(3n+1)$ with the same
+		quotient $A$.
+	\end{proof}
+	
+	The master identity (Theorem~\ref{thm:master}) then gives integer
+	divisibility at every offset: $K(n) \mid K(3n+j) - e_3^n\,K(j)$
+	for all integers $j$.
+	
+	\subsection*{Bounding $d = \gcd(K(n),\, K(n+1))$}
+	
+	We use the identities
+	\begin{align}
+		s_n     &= e_1\,K(n+1) - 2e_2\,K(n) + 3e_3\,K(n-1), \label{eq:sn}\\
+		3K(n+2) &= 3e_1\,K(n+1) - 3e_2\,K(n) + 3e_3\,K(n-1). \label{eq:3Kn2}
+	\end{align}
+	Since $s_n = 0$ and $d \mid K(n), K(n+1)$, equation~\eqref{eq:sn} gives
+	\begin{equation}
+		\label{eq:d-3e3}
+		d \;\mid\; 3e_3\,K(n-1).
+	\end{equation}
+	Substituting into~\eqref{eq:3Kn2} gives $d \mid 3K(n+2)$.  So $d$
+	divides $3K(n)$, $3K(n+1)$, $3K(n+2)$: three consecutive multiples of
+	$3$.  Applying the recurrence inductively, $d \mid 3K(m)$ for all
+	$m \geq n$, and in particular $d \mid 3K(2n-1)$, $3K(2n)$, $3K(2n+1)$.
+	
+	Applying~\eqref{eq:sn} at index $2n$ gives $d \mid s_{2n}$.  Since
+	$s_n = 0$,
+	\[
+	s_{2n} = -2(x^ny^n + y^nz^n + z^nx^n),
+	\]
+	so
+	\begin{equation}
+		\label{eq:d-cross}
+		d \;\mid\; 2(x^ny^n + y^nz^n + z^nx^n).
+	\end{equation}
+	
+	\medskip\noindent\textbf{Parity.}
+	Since $x$, $y$, $z$ are pairwise coprime with $s_n = 0$, exactly one is
+	even.  Therefore $e_1, e_3$ are even and $e_2$ is odd.  The recurrence
+	mod~$2$ becomes $K(m+3) \equiv K(m+1) \pmod{2}$, giving the alternating
+	pattern $K(\text{even}) \equiv 1$, $K(\text{odd}) \equiv 0 \pmod{2}$.
+	Since $n$ is an odd prime, $K(n)$ is even and $K(n+1)$ is odd, so
+	$2 \nmid d$.
+	
+	\medskip
+	We now analyse which odd prime powers can divide $d$.  Let $p$ be any
+	odd prime dividing $d$, and let $a = p^k$ be the exact power of $p$ in
+	$d$.
+	
+	\medskip\noindent\textbf{Case 1: $p \mid e_3 = xyz$.}
+	Since $x$, $y$, $z$ are pairwise coprime, $p$ divides exactly one of
+	them, say $p \mid x$, so $a \mid x^n$.  From~\eqref{eq:d-cross},
+	$a \mid 2(x^ny^n + y^nz^n + z^nx^n)$.  Since $a \mid x^n$ the first and
+	third cross terms vanish mod $a$, leaving $a \mid 2y^nz^n$.  Since $p$
+	is odd, $\gcd(a,2)=1$, and $\gcd(x,y)=\gcd(x,z)=1$ gives
+	$\gcd(a,y^nz^n)=1$, so $a \mid 1$: contradiction.  No odd prime factor
+	of $d$ divides $e_3$.
+	
+	\medskip\noindent\textbf{Case 2: $p \nmid e_3$.}
+	From~\eqref{eq:d-3e3}, $a \mid 3e_3 K(n-1)$.  Since $p \nmid e_3$,
+	we get $a \mid 3K(n-1)$.  Together with $a \mid 3K(n)$ and
+	$a \mid 3K(n+1)$, backward induction on the recurrence
+	\[
+	3K(m) = 3e_1\,K(m+1) - 3e_2\,K(m+2) + 3e_3\,K(m+3)
+	\]
+	(valid at each step since $p \nmid e_3$) gives $a \mid 3K(m)$ for all
+	$m \leq n$.  At $m = 2$: $a \mid 3K(2) = 3$, so $p^k \mid 3$, hence
+	$p = 3$ and $k = 1$.
+	
+	\medskip
+	Combining: $d$ is odd (parity), Case~1 is vacuous for odd primes, and
+	Case~2 forces every prime power in $d$ to divide $3$.
+	
+	\begin{proposition}
+		\label{prop:d-divides-3}
+		If $x$, $y$, $z$ are pairwise coprime nonzero integers with $s_n = 0$
+		and $n$ an odd prime, then $\gcd(K(n),\, K(n+1))$ divides $3$.
+	\end{proposition}
+	
+	\begin{remark}
+		Working with the exact prime power $a = p^k$ handles higher powers
+		such as $9$ in the same stroke: $p^k \mid 3$ forces $k = 1$
+		immediately, with no separate argument needed.
+	\end{remark}
 	
 \end{document}
