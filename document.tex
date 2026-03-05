@@ -610,35 +610,39 @@
 	\end{proof}
 	
 	\begin{corollary}
-		\label{cor:s3nm-mod-A}
+		\label{cor:s3nr-mod-A}
+		Under the standing hypotheses, for all integers $r$,
+		\[
+		s_{3n+r} \;\equiv\; e_3^n\,s_r \pmod{A}.
+		\]
+		In particular, $s_{3nm+r} \equiv e_3^{nm}\,s_r \pmod{A}$ for all $m \geq 1$
+		by applying the formula iteratively.
+	\end{corollary}
+	\begin{proof}
+		Apply the shift corollary (Corollary~\ref{cor:shift}) with weights $(1,1,1)$
+		and shift $j = r$, reading off at index $3n$:
+		\[
+		s_{3n+r} \;=\; K(3n)\,s_{r+2} + L(3n)\,s_{r+1} + M(3n)\,s_r.
+		\]
+		Since $K(3n) \equiv 0$ and $K(3n+1) \equiv 0 \pmod{A}$,
+		we have $L(3n) = K(3n+1) - e_1\,K(3n) \equiv 0 \pmod{A}$.
+		For $M(3n) = e_3\,K(3n-1)$, Corollary~\ref{cor:K3n-1} gives
+		$K(3n-1) = A\,K(n-1) + e_3^{n-1}$, so $M(3n) \equiv e_3^n \pmod{A}$.
+		Hence $s_{3n+r} \equiv e_3^n\,s_r \pmod{A}$.
+	\end{proof}
+	
+	\begin{corollary}
+		\label{cor:s3nm-special}
 		Under the standing hypotheses, for all integers $m \geq 1$,
 		\begin{align*}
-			s_{3nm}   &\equiv\; 3e_3^{nm}      \pmod{A}, \\
-			s_{3nm+1} &\equiv\; e_1\,e_3^{nm}  \pmod{A}, \\
-			s_{3nm+2} &\equiv\; -2e_2\,e_3^{nm} \pmod{A}.
+			s_{3nm}   &\equiv\; 3e_3^{nm}             \pmod{A}, \\
+			s_{3nm+1} &\equiv\; e_1\,e_3^{nm}         \pmod{A}, \\
+			s_{3nm+2} &\equiv\; (e_1^2-2e_2)\,e_3^{nm} \pmod{A}.
 		\end{align*}
 	\end{corollary}
 	\begin{proof}
-		All three follow from Lemma~\ref{lem:sn-formula} and Theorem~\ref{thm:K-mod-A}.
-		Since $K(3nm) \equiv K(3nm+1) \equiv 0$ and $K(3nm+2) \equiv e_3^{nm} \pmod{A}$,
-		it remains to compute $K(3nm-1)$ modulo $A$.
-		Write $3nm-1 = 3n(m-1)+(3n-1)$ and apply Theorem~\ref{thm:K-mod-A}:
-		\[
-		K(3nm-1) \;\equiv\; e_3^{n(m-1)}\,K(3n-1) \;\equiv\; e_3^{n(m-1)} \cdot e_3^{n-1}
-		= e_3^{nm-1} \pmod{A},
-		\]
-		where we used $K(3n-1) \equiv e_3^{n-1} \pmod{A}$ from Corollary~\ref{cor:K3n-1}.
-		Applying Lemma~\ref{lem:sn-formula} at each index in turn:
-		\begin{align*}
-			s_{3nm}   &= e_1\,K(3nm+1) - 2e_2\,K(3nm) + 3e_3\,K(3nm-1)
-			\;\equiv\; 3e_3 \cdot e_3^{nm-1} = 3e_3^{nm}, \\
-			s_{3nm+1} &= e_1\,K(3nm+2) - 2e_2\,K(3nm+1) + 3e_3\,K(3nm)
-			\;\equiv\; e_1 \cdot e_3^{nm}, \\
-			s_{3nm+2} &= e_1\,K(3nm+3) - 2e_2\,K(3nm+2) + 3e_3\,K(3nm+1)
-			\;\equiv\; -2e_2 \cdot e_3^{nm},
-		\end{align*}
-		where in the last line $K(3nm+3) = K(3n(m+1)) \equiv 0 \pmod{A}$
-		by Theorem~\ref{thm:K-mod-A} with $k=0$.
+		Apply Corollary~\ref{cor:s3nr-mod-A} with $r = 0, 1, 2$ respectively,
+		using $s_0 = 3$, $s_1 = e_1$, and $s_2 = e_1^2 - 2e_2$.
 	\end{proof}
 	
 	
