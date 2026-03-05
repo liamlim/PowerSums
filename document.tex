@@ -855,8 +855,8 @@
 		\label{prop:Kn-divides-etilde}
 		Under the standing hypotheses,
 		\begin{align*}
-		&K(n) \;\mid\; 2\cdot 3^{n-1}\,\tilde{e}_2 \\
-		&K(n) \;\mid\; 3^n\,\tilde{e}_3.
+			&K(n) \;\mid\; 2\cdot 3^{n-1}\,\tilde{e}_2 \\
+			&K(n) \;\mid\; 3^n\,\tilde{e}_3.
 		\end{align*}
 	\end{theorem}
 	\begin{proof}
@@ -890,6 +890,28 @@
 		\]
 		By Lemma~\ref{lem:cascade-values}, $s_{3n} = 3\tilde{e}_3$, so
 		$K(n) \mid 3^n\,\tilde{e}_3$.
+	\end{proof}
+	
+	\begin{theorem}
+		\label{thm:Kn-bound}
+		Under the standing hypotheses, $K(n) \mid 2 \cdot 3^n$.
+	\end{theorem}
+	\begin{proof}
+		By Theorem~\ref{prop:Kn-divides-etilde}, $K(n)$ divides both
+		$2 \cdot 3^{n-1}\,\tilde{e}_2$ and $3^n\,\tilde{e}_3$, and hence also
+		their greatest common divisor:
+		\[
+		K(n) \;\mid\; \gcd\!\bigl(2\cdot 3^{n-1}\,\tilde{e}_2,\; 3^n\,\tilde{e}_3\bigr).
+		\]
+		Since $\gcd(\tilde{e}_2,\, \tilde{e}_3) = 1$
+		(Lemma~\ref{lem:etilde-coprime}), the factors $\tilde{e}_2$ and
+		$\tilde{e}_3$ contribute independently to the gcd.  Isolating the
+		power-of-$3$ and power-of-$2$ contributions:
+		\[
+		\gcd\!\bigl(2\cdot 3^{n-1}\,\tilde{e}_2,\; 3^n\,\tilde{e}_3\bigr)
+		\;\mid\; 2\cdot 3^n.
+		\]
+		Hence $K(n) \mid 2\cdot 3^n$.
 	\end{proof}
 	
 	
