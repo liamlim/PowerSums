@@ -288,8 +288,9 @@
 	\begin{itemize}
 		\item $f_0 = 0$ (the weights sum to zero),
 		\item $f_1 = \cyc{x^{n-1}(y-z)} = K(n-1)\cdot\Delta$,
-		\item $f_2 = \cyc{x^{n-1}(y^2-z^2)} = -L(n-1)\cdot\Delta$
-		\quad (both sides satisfy the same recurrence and agree at $n=2,3,4$).
+		\item $f_2 = \cyc{x^{n-1}(y^2-z^2)}$.  Writing $y^2-z^2=(y-z)(y+z)=w_x(y+z)$
+		and regrouping, $\cyc{x^{n-1}(y^2-z^2)} = e_1\,f_{n-1}(w_x,w_y,w_z)
+		- f_n(w_x,w_y,w_z) = (e_1 K(n-1)-K(n))\Delta = -L(n-1)\cdot\Delta$.
 	\end{itemize}
 	Therefore
 	\[
@@ -696,7 +697,8 @@
 		$m = 3$: Theorem~\ref{thm:flt-divisibility}.
 		
 		\textit{Inductive step.}
-		Suppose $m \geq 4$ and that $K(n) \mid K((m-2)n)$ and
+		Let $m \geq 4$ and assume the result holds for all positive integers
+		less than $m$; in particular $K(n) \mid K((m-2)n)$ and
 		$K(n) \mid K((m-3)n)$.  Apply the master identity
 		(Corollary~\ref{cor:master-int}) with $j = (m-3)n$:
 		\[
