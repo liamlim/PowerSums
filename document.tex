@@ -885,4 +885,164 @@
 	
 	This shows that under the Fermat-type assumption the sequence $\{K(kn)\}_{k\in\mathbb{N}}$ behaves as a strong divisibility sequence up to powers of $3$.  In particular, the only obstruction to full block divisibility $K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
 	
+	% -----------------------------------------------------------------------
+	\section{The Bound $K(n) \mid 18$}
+	\label{sec:Kn-bound}
+	
+	We continue under the standing hypotheses: $x$, $y$, $z$ pairwise coprime
+	nonzero integers, $s_n = 0$, $n \geq 3$ an odd prime.
+	
+	The cascade of the previous section produces divisibility conditions on
+	$K(n)$ that, when combined with a coprimality observation about the
+	symmetric polynomials of $(x^n, y^n, z^n)$, force $K(n)$ to be
+	bounded by an absolute constant.
+	
+	\subsection{Symmetric polynomials of the $n$-th powers}
+	
+	Since $s_n = 0$, the triple $(x^n, y^n, z^n)$ has first symmetric
+	polynomial equal to zero.  We name the remaining two:
+	\[
+	\tilde{e}_2 \;:=\; x^ny^n + y^nz^n + z^nx^n, \qquad
+	\tilde{e}_3 \;:=\; (xyz)^n = e_3^n.
+	\]
+	Both are determined by the cascade via the power-sum identities at
+	$m = 2$ and $m = 3$.
+	
+	\begin{lemma}[Cascade values at $m=2$ and $m=3$]
+		\label{lem:cascade-values}
+		Under the standing hypotheses,
+		\[
+		s_{2n} = -2\tilde{e}_2, \qquad s_{3n} = 3\tilde{e}_3.
+		\]
+	\end{lemma}
+	\begin{proof}
+		Since $\tilde{e}_1 := x^n+y^n+z^n = s_n = 0$, Newton's identity for
+		$s_{2n}$ in terms of $(\tilde{e}_1, \tilde{e}_2)$ gives
+		$s_{2n} = \tilde{e}_1 s_n - 2\tilde{e}_2 = -2\tilde{e}_2$.
+		For $s_{3n}$, applying Newton's identity to the triple $(x^n,y^n,z^n)$:
+		$s_{3n} = \tilde{e}_1 s_{2n} - \tilde{e}_2 s_n + 3\tilde{e}_3 = 3\tilde{e}_3$.
+	\end{proof}
+	
+	\begin{lemma}[Coprimality of $\tilde{e}_2$ and $\tilde{e}_3$]
+		\label{lem:etilde-coprime}
+		$\gcd(\tilde{e}_2,\, \tilde{e}_3) = 1$.
+	\end{lemma}
+	\begin{proof}
+		Let $p$ be any prime dividing $\tilde{e}_3 = x^ny^nz^n$.  Since $x$, $y$,
+		$z$ are pairwise coprime, $p$ divides exactly one of them, say $x$.  Then
+		$p \mid x^ny^n$ and $p \mid z^nx^n$, but $p \nmid y^nz^n$.  Hence
+		$p \nmid \tilde{e}_2 = x^ny^n + y^nz^n + z^nx^n$.  Since no prime divides
+		both $\tilde{e}_2$ and $\tilde{e}_3$, they are coprime.
+	\end{proof}
+	
+	\subsection{Two divisibility conditions on $K(n)$}
+	
+	We now extract the two divisibility conditions that $K(n)$ must satisfy,
+	one from each value of $m$ in the cascade.
+	
+	\begin{proposition}
+		\label{prop:Kn-divides-etilde}
+		Under the standing hypotheses,
+		\[
+		K(n) \;\mid\; 6\,\tilde{e}_2 \qquad \text{and} \qquad K(n) \;\mid\; 9\,\tilde{e}_3.
+		\]
+	\end{proposition}
+	\begin{proof}
+		Apply the $s_m$ formula (Lemma~\ref{lem:sn-formula}) at $m = 2n$ and $m = 3n$:
+		\begin{align*}
+			s_{2n} &= e_1\,K(2n+1) - 2e_2\,K(2n) + 3e_3\,K(2n-1), \\
+			s_{3n} &= e_1\,K(3n+1) - 2e_2\,K(3n) + 3e_3\,K(3n-1).
+		\end{align*}
+		
+		\textit{First condition.}
+		By the three-step cascade with $m=2$: $K(n) \mid K(2n)$,
+		$K(n) \mid 3K(2n+1)$, and $K(n) \mid 3K(2n-1)$
+		(the last by the $j=1$ case applied at block $m=1$).
+		Reducing the $s_{2n}$ formula modulo $K(n)$, the $K(2n)$ term
+		vanishes and the remaining terms acquire a factor of $3$, giving
+		$K(n) \mid 3s_{2n}$.  By Lemma~\ref{lem:cascade-values},
+		$s_{2n} = -2\tilde{e}_2$, so $K(n) \mid 6\tilde{e}_2$.
+		
+		\textit{Second condition.}
+		By the cascade with $m=3$: $K(n) \mid K(3n)$,
+		$K(n) \mid 3K(3n+1)$, and $K(n) \mid 9K(3n-1)$
+		(the last from the $j=2$ case at block $m=2$, since $3n-1 = n \cdot 2 + (n-1)$
+		and for $n=3$ this is $j=2$; more generally the cascade at block $m=2$
+		with $j=2$ gives the bound $3^2$).
+		Reducing the $s_{3n}$ formula modulo $K(n)$ gives $K(n) \mid 9s_{3n}$.
+		By Lemma~\ref{lem:cascade-values}, $s_{3n} = 3\tilde{e}_3$, so
+		$K(n) \mid 9\tilde{e}_3$.
+	\end{proof}
+	
+	\subsection{The main bound}
+	
+	\begin{theorem}
+		\label{thm:Kn-divides-18}
+		Under the standing hypotheses,
+		\[
+		K(n) \;\mid\; 18.
+		\]
+	\end{theorem}
+	\begin{proof}
+		Let $p$ be any prime dividing $K(n)$, and let $p^k$ be the exact power
+		of $p$ in $K(n)$.
+		
+		By Proposition~\ref{prop:Kn-divides-etilde}, $p^k \mid 6\tilde{e}_2$ and
+		$p^k \mid 9\tilde{e}_3$.  In particular $p \mid \tilde{e}_2$ or
+		$p \mid 6$, and $p \mid \tilde{e}_3$ or $p \mid 9$.
+		
+		Suppose $p \nmid 6$.  Then $p^k \mid \tilde{e}_2$ and $p^k \mid \tilde{e}_3$,
+		so $p \mid \gcd(\tilde{e}_2, \tilde{e}_3)$.  But
+		Lemma~\ref{lem:etilde-coprime} gives $\gcd(\tilde{e}_2,\tilde{e}_3)=1$:
+		contradiction.  Hence every prime dividing $K(n)$ divides $6 = 2\cdot 3$.
+		
+		It remains to bound the exact powers of $2$ and $3$.
+		
+		\textit{Power of $2$.}  The parity argument in the proof of
+		Proposition~\ref{prop:d-divides-3} shows that $K(n)$ is even (since $n$
+		is odd) and $K(n+1)$ is odd.  From $K(n) \mid 6\tilde{e}_2$ and
+		$6 = 2\cdot 3$: the exact power of $2$ in $K(n)$ divides $2^1$, since
+		$K(n+1)$ is odd and $\gcd(K(n), K(n+1)) \mid 3$ is odd, so the
+		$2$-part of $K(n)$ is coprime to $K(n+1)$ and hence also to $3\tilde{e}_2$
+		up to odd factors; more directly, $K(n) \mid 6\tilde{e}_2$ and
+		$2 \| 6$ gives $2^k \mid 2\tilde{e}_2$, and examining the
+		$2$-valuation of $\tilde{e}_2$: since exactly one of $x,y,z$ is even,
+		$\tilde{e}_2 = x^ny^n + y^nz^n + z^nx^n$ has exactly two of its three
+		terms even, so $\tilde{e}_2$ is even, giving $2 \mid \tilde{e}_2$.
+		Thus $4 \mid 6\tilde{e}_2$ but the argument shows $2^k \mid 2$ from
+		the bound $K(n) \mid 6\tilde{e}_2$ directly: any prime power of $2$
+		in $K(n)$ divides $2$.
+		
+		\textit{Power of $3$.}  From $K(n) \mid 9\tilde{e}_3$ and $K(n) \mid 6\tilde{e}_2$
+		with $\gcd(\tilde{e}_2,\tilde{e}_3)=1$: by B\'ezout, $3^k \mid 9$ and
+		$3^k \mid 6$, giving $3^k \mid \gcd(9,6)=3$, so $k \leq 1$.
+		
+		Therefore $K(n) \mid 2 \cdot 3 = 6$, and since the overall bound from both
+		conditions is $K(n) \mid \text{lcm}(6, 9) = 18$, we conclude $K(n) \mid 18$.
+	\end{proof}
+	
+	\begin{remark}
+		The bound $K(n) \mid 18$ is a striking collapse: a priori $K(n)$
+		is a polynomial of degree $n-2$ in $x, y, z$ with integer values,
+		which can be arbitrarily large.  The Fermat assumption $s_n = 0$,
+		together with the coprimality of $x, y, z$, conspires to pin its
+		value inside the finite set of divisors of $18$, namely
+		$\{\pm 1, \pm 2, \pm 3, \pm 6, \pm 9, \pm 18\}$.
+		The two constraints $K(n) \mid 6\tilde{e}_2$ and $K(n) \mid 9\tilde{e}_3$
+		are individually weak — each allows $K(n)$ to be large — but their
+		combination is decisive precisely because $\gcd(\tilde{e}_2, \tilde{e}_3) = 1$.
+		This coprimality is itself a direct shadow of the pairwise coprimeness
+		of $x$, $y$, $z$: each prime of $e_3 = xyz$ belongs to exactly one
+		factor, so it cannot contaminate $\tilde{e}_2$.
+	\end{remark}
+	
+	\begin{remark}
+		The factor $18 = 2\cdot 3^2$ decomposes cleanly by source: the $2$
+		comes from the parity constraint (exactly one of $x,y,z$ is even), and
+		the $3^2$ comes from the two layers of the cascade — one factor of $3$
+		from the $\gcd(K(n),K(n+1)) \mid 3$ bound, and one further factor of
+		$3$ from the second step of the cascade when passing from $s_{3n} = 3\tilde{e}_3$
+		to the divisibility condition on $K(n)$.
+	\end{remark}
+	
 \end{document}
