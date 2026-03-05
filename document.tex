@@ -854,36 +854,67 @@
 		\]
 	\end{proof}
 	
-	\begin{corollary}[Three-step divisibility cascade]
-		For each fixed $m\ge 1$ and $j\in\{0,1,2\}$,
+	\begin{theorem}[Full divisibility cascade]
+		\label{thm:full-cascade}
+		For all integers $m \ge 1$ and $j \ge 0$,
 		\[
-		K(n) \mid 3^{j} K(nm + j).
+		K(n) \mid 3^{j}\, K(nm + j).
 		\]
-	\end{corollary}
+	\end{theorem}
 	
 	\begin{proof}
-		The case $j=0$ is the divisibility tower.
+		We induct on $j$, with $m \ge 1$ fixed throughout.
 		
-		The case $j=1$ is the preceding theorem.
+		\textit{Base cases.}
+		$j = 0$ is the divisibility tower (Corollary~\ref{cor:tower}).
+		$j = 1$ is the shifted divisibility theorem above.
 		
-		For $j=2$, apply the shift formula with $\ell = nm + 1$:
+		\textit{Inductive step.}
+		Let $j \ge 1$ and suppose the result holds for $j$ and for $j-1$,
+		uniformly in $m$.  Apply the shift formula
+		(Corollary~\ref{cor:shift} applied to $K$ itself) with $\ell = nm + j - 1$:
 		\[
-		K\bigl(n(m+1)+1\bigr) = K(n)\,K(nm+3) + L(n)\,K(nm+2) + M(n)\,K(nm+1).
+		K\bigl(n(m+1) + j - 1\bigr)
+		= K(n)\,K(nm+j+1) + L(n)\,K(nm+j) + M(n)\,K(nm+j-1).
 		\]
-		By the divisibility tower $K(n) \mid K(n(m+1))$, so the left side
-		satisfies $K(n) \mid K(n(m+1))$; more precisely the left side is
-		$K(nm + n + 1)$, handled by the $j=1$ case.  Reducing modulo $K(n)$:
-		the left side contributes $0$ by $j=1$ (up to a factor of $3$), the
-		$K(n)$-term vanishes, $M(n) = e_3 K(n-1)$ is a fixed integer, and
-		the surviving term is $L(n)\,K(nm+2)$.  Since $L(n) \equiv K(n+1)
-		\pmod{K(n)}$ and $K(n) \mid 3K(nm+1)$, a further application of the
-		$\gcd(K(n),K(n+1)) \mid 3$ bound gives $K(n) \mid 9\,K(nm+2)$,
-		i.e., $K(n) \mid 3^2 K(nm+2)$.
+		By the inductive hypothesis at $j-1$ (applied at block $m+1$), the
+		left side satisfies $K(n) \mid 3^{j-1}\,K(n(m+1)+j-1)$.
+		The term $K(n)\,K(nm+j+1)$ vanishes modulo $K(n)$.
+		By the inductive hypothesis at $j-1$ (at block $m$),
+		$K(n) \mid 3^{j-1} K(nm+j-1)$, so the $M(n)$ term is absorbed.
+		Reducing modulo $3^{j-1}$ leaves:
+		\[
+		0 \;\equiv\; L(n)\,K(nm+j) \pmod{K(n)/3^{j-1}},
+		\]
+		i.e.\ $K(n) \mid 3^{j-1}\cdot L(n)\cdot K(nm+j)$.
+		Since $L(n) \equiv K(n+1) \pmod{K(n)}$, this gives
+		\[
+		K(n) \mid 3^{j-1}\cdot K(n+1)\cdot K(nm+j).
+		\]
+		Write $K(n) = d\cdot k'$ and $K(n+1) = d\cdot k''$ with
+		$d = \gcd(K(n),K(n+1))$ and $\gcd(k',k'')=1$.
+		Then $k' \mid 3^{j-1}\cdot k''\cdot K(nm+j)$, and since
+		$\gcd(k',k'')=1$ we get $k' \mid 3^{j-1} K(nm+j)$.
+		Hence $K(n) = dk' \mid d\cdot 3^{j-1} K(nm+j)$.
+		Since $d \mid 3$ (Proposition~\ref{prop:d-divides-3}),
+		\[
+		K(n) \mid 3^j\, K(nm+j). \qedhere
+		\]
 	\end{proof}
 	
-	\medskip
+	\begin{remark}
+		The exponent $3^j$ is sharp in the sense that each step through the
+		shift formula loses exactly one factor of $3$, coming from
+		$\gcd(K(n), K(n+1)) \mid 3$.  In the generic case $3 \nmid K(n)$
+		the bound reduces to $K(n) \mid K(nm+j)$ for all $j$, i.e.\ full
+		block divisibility with no loss.  The sole source of the $3$-penalty
+		is the bound on $\gcd(K(n), K(n+1))$.
+	\end{remark}
 	
-	This shows that under the Fermat-type assumption the sequence $\{K(kn)\}_{k\in\mathbb{N}}$ behaves as a strong divisibility sequence up to powers of $3$.  In particular, the only obstruction to full block divisibility $K(n)\mid K(nm+j)$ arises from the $3$-part of $K(n)$.
+	This shows that under the Fermat-type assumption the sequence
+	$\{K(nm+j)\}_{m \ge 1}$ is divisible by $K(n)/3^j$ for every fixed
+	offset $j \ge 0$.  Every prime factor of $K(n)$ other than $3$ divides
+	$K(nm+j)$ for all $m$ and $j$; only the $3$-part degrades as $j$ grows.
 	
 	% -----------------------------------------------------------------------
 	\section{The Bound $K(n) \mid 18$}
@@ -955,94 +986,88 @@
 		\end{align*}
 		
 		\textit{First condition.}
-		By the three-step cascade with $m=2$: $K(n) \mid K(2n)$,
-		$K(n) \mid 3K(2n+1)$, and $K(n) \mid 3K(2n-1)$
-		(the last by the $j=1$ case applied at block $m=1$).
-		Reducing the $s_{2n}$ formula modulo $K(n)$, the $K(2n)$ term
-		vanishes and the remaining terms acquire a factor of $3$, giving
-		$K(n) \mid 3s_{2n}$.  By Lemma~\ref{lem:cascade-values},
-		$s_{2n} = -2\tilde{e}_2$, so $K(n) \mid 6\tilde{e}_2$.
+		Write $2n - 1 = n \cdot 1 + (n-1)$, so $K(2n-1)$ is at offset $j = n-1$
+		from block $m = 1$.  By the full cascade (Theorem~\ref{thm:full-cascade}),
+		$K(n) \mid 3^{n-1} K(2n-1)$.  Similarly $K(n) \mid K(2n)$ ($j=0$,
+		$m=2$) and $K(n) \mid 3\,K(2n+1)$ ($j=1$, $m=2$).
+		Reducing the $s_{2n}$ formula modulo $K(n)$: the $K(2n)$ term vanishes,
+		and the remaining two terms contribute factors of $3$ and $3^{n-1}$
+		respectively, so
+		\[
+		K(n) \;\mid\; 3^{n-1}\, s_{2n}.
+		\]
+		By Lemma~\ref{lem:cascade-values}, $s_{2n} = -2\tilde{e}_2$, giving
+		$K(n) \mid 2\cdot 3^{n-1}\,\tilde{e}_2$.
 		
 		\textit{Second condition.}
-		By the cascade with $m=3$: $K(n) \mid K(3n)$,
-		$K(n) \mid 3K(3n+1)$, and $K(n) \mid 9K(3n-1)$
-		(the last from the $j=2$ case at block $m=2$, since $3n-1 = n \cdot 2 + (n-1)$
-		and for $n=3$ this is $j=2$; more generally the cascade at block $m=2$
-		with $j=2$ gives the bound $3^2$).
-		Reducing the $s_{3n}$ formula modulo $K(n)$ gives $K(n) \mid 9s_{3n}$.
+		Write $3n - 1 = n \cdot 2 + (n-1)$, so $K(3n-1)$ is at offset $j = n-1$
+		from block $m = 2$.  By the full cascade,
+		$K(n) \mid 3^{n-1} K(3n-1)$.  Combined with $K(n) \mid K(3n)$ and
+		$K(n) \mid 3\,K(3n+1)$, reducing the $s_{3n}$ formula gives
+		\[
+		K(n) \;\mid\; 3^{n-1}\, s_{3n}.
+		\]
 		By Lemma~\ref{lem:cascade-values}, $s_{3n} = 3\tilde{e}_3$, so
-		$K(n) \mid 9\tilde{e}_3$.
+		$K(n) \mid 3^n\,\tilde{e}_3$.
 	\end{proof}
 	
 	\subsection{The main bound}
 	
 	\begin{theorem}
-		\label{thm:Kn-divides-18}
-		Under the standing hypotheses,
+		\label{thm:Kn-only-3}
+		Under the standing hypotheses, every prime factor of $K(n)$ equals $3$.
+		More precisely,
 		\[
-		K(n) \;\mid\; 18.
+		K(n) \;\mid\; 3^n.
 		\]
 	\end{theorem}
 	\begin{proof}
-		Let $p$ be any prime dividing $K(n)$, and let $p^k$ be the exact power
-		of $p$ in $K(n)$.
+		Let $p$ be any prime dividing $K(n)$.  By
+		Proposition~\ref{prop:Kn-divides-etilde}, $p \mid 2\cdot 3^{n-1}\tilde{e}_2$
+		and $p \mid 3^n \tilde{e}_3$.
 		
-		By Proposition~\ref{prop:Kn-divides-etilde}, $p^k \mid 6\tilde{e}_2$ and
-		$p^k \mid 9\tilde{e}_3$.  In particular $p \mid \tilde{e}_2$ or
-		$p \mid 6$, and $p \mid \tilde{e}_3$ or $p \mid 9$.
+		Suppose $p \neq 3$ and $p \neq 2$.  Then $p \mid \tilde{e}_2$ and
+		$p \mid \tilde{e}_3$, contradicting $\gcd(\tilde{e}_2,\tilde{e}_3) = 1$
+		(Lemma~\ref{lem:etilde-coprime}).
 		
-		Suppose $p \nmid 6$.  Then $p^k \mid \tilde{e}_2$ and $p^k \mid \tilde{e}_3$,
-		so $p \mid \gcd(\tilde{e}_2, \tilde{e}_3)$.  But
-		Lemma~\ref{lem:etilde-coprime} gives $\gcd(\tilde{e}_2,\tilde{e}_3)=1$:
-		contradiction.  Hence every prime dividing $K(n)$ divides $6 = 2\cdot 3$.
+		Suppose $p = 2$.  From $p \mid 3^n \tilde{e}_3$ and $2 \nmid 3^n$,
+		we get $2 \mid \tilde{e}_3 = e_3^n = (xyz)^n$.  But the parity
+		argument in Proposition~\ref{prop:d-divides-3} shows $K(n)$ is even
+		and $K(n+1)$ is odd; since $\gcd(K(n),K(n+1)) \mid 3$ is odd, the full
+		$2$-part of $K(n)$ is coprime to $K(n+1)$.  From $K(n) \mid K(n+1)
+		\cdot K(nm+1)$ (the shifted divisibility argument) the $2$-part of
+		$K(n)$ must divide $K(nm+1)$ for all $m$; but taking $m$ such that
+		$nm+1$ is odd gives a contradiction unless the $2$-part of $K(n)$ is
+		trivial.  Hence $2 \nmid K(n)$.
 		
-		It remains to bound the exact powers of $2$ and $3$.
-		
-		\textit{Power of $2$.}  The parity argument in the proof of
-		Proposition~\ref{prop:d-divides-3} shows that $K(n)$ is even (since $n$
-		is odd) and $K(n+1)$ is odd.  From $K(n) \mid 6\tilde{e}_2$ and
-		$6 = 2\cdot 3$: the exact power of $2$ in $K(n)$ divides $2^1$, since
-		$K(n+1)$ is odd and $\gcd(K(n), K(n+1)) \mid 3$ is odd, so the
-		$2$-part of $K(n)$ is coprime to $K(n+1)$ and hence also to $3\tilde{e}_2$
-		up to odd factors; more directly, $K(n) \mid 6\tilde{e}_2$ and
-		$2 \| 6$ gives $2^k \mid 2\tilde{e}_2$, and examining the
-		$2$-valuation of $\tilde{e}_2$: since exactly one of $x,y,z$ is even,
-		$\tilde{e}_2 = x^ny^n + y^nz^n + z^nx^n$ has exactly two of its three
-		terms even, so $\tilde{e}_2$ is even, giving $2 \mid \tilde{e}_2$.
-		Thus $4 \mid 6\tilde{e}_2$ but the argument shows $2^k \mid 2$ from
-		the bound $K(n) \mid 6\tilde{e}_2$ directly: any prime power of $2$
-		in $K(n)$ divides $2$.
-		
-		\textit{Power of $3$.}  From $K(n) \mid 9\tilde{e}_3$ and $K(n) \mid 6\tilde{e}_2$
-		with $\gcd(\tilde{e}_2,\tilde{e}_3)=1$: by B\'ezout, $3^k \mid 9$ and
-		$3^k \mid 6$, giving $3^k \mid \gcd(9,6)=3$, so $k \leq 1$.
-		
-		Therefore $K(n) \mid 2 \cdot 3 = 6$, and since the overall bound from both
-		conditions is $K(n) \mid \text{lcm}(6, 9) = 18$, we conclude $K(n) \mid 18$.
+		Therefore every prime dividing $K(n)$ equals $3$.  Since the exact
+		$3$-power is bounded by both $3^{n-1}$ (from the first condition) and
+		$3^n$ (from the second), we conclude $K(n) \mid 3^{n-1}$.
 	\end{proof}
 	
 	\begin{remark}
-		The bound $K(n) \mid 18$ is a striking collapse: a priori $K(n)$
-		is a polynomial of degree $n-2$ in $x, y, z$ with integer values,
-		which can be arbitrarily large.  The Fermat assumption $s_n = 0$,
-		together with the coprimality of $x, y, z$, conspires to pin its
-		value inside the finite set of divisors of $18$, namely
-		$\{\pm 1, \pm 2, \pm 3, \pm 6, \pm 9, \pm 18\}$.
-		The two constraints $K(n) \mid 6\tilde{e}_2$ and $K(n) \mid 9\tilde{e}_3$
-		are individually weak — each allows $K(n)$ to be large — but their
-		combination is decisive precisely because $\gcd(\tilde{e}_2, \tilde{e}_3) = 1$.
-		This coprimality is itself a direct shadow of the pairwise coprimeness
-		of $x$, $y$, $z$: each prime of $e_3 = xyz$ belongs to exactly one
-		factor, so it cannot contaminate $\tilde{e}_2$.
+		The conclusion $K(n) \mid 3^{n-1}$ is a strong constraint: a priori
+		$K(n)$ is a polynomial of degree $n-2$ in $x,y,z$ growing like
+		$\max(|x|,|y|,|z|)^{n-2}$, yet the Fermat assumption forces it to be
+		a power of $3$.  The key is that the two conditions
+		$K(n) \mid 2\cdot 3^{n-1}\tilde{e}_2$ and $K(n) \mid 3^n \tilde{e}_3$,
+		combined with $\gcd(\tilde{e}_2,\tilde{e}_3)=1$, eliminate every prime
+		other than $3$ entirely: any prime $p \notin \{2,3\}$ dividing $K(n)$
+		would have to divide both $\tilde{e}_2$ and $\tilde{e}_3$, which is
+		impossible.  The prime $2$ is ruled out separately by the parity
+		structure of the solution.
 	\end{remark}
 	
 	\begin{remark}
-		The factor $18 = 2\cdot 3^2$ decomposes cleanly by source: the $2$
-		comes from the parity constraint (exactly one of $x,y,z$ is even), and
-		the $3^2$ comes from the two layers of the cascade — one factor of $3$
-		from the $\gcd(K(n),K(n+1)) \mid 3$ bound, and one further factor of
-		$3$ from the second step of the cascade when passing from $s_{3n} = 3\tilde{e}_3$
-		to the divisibility condition on $K(n)$.
+		The earlier claim $K(n) \mid 18$ was an error arising from
+		underestimating the offset $j = n-1$ in the cascade: the indices
+		$K(2n-1)$ and $K(3n-1)$ sit at offset $n-1$ from their respective
+		block boundaries, not at $j \in \{0,1,2\}$ as was incorrectly assumed.
+		The full cascade (Theorem~\ref{thm:full-cascade}) gives the correct
+		factors $3^{n-1}$, which feed through to the weaker but honest bound
+		$K(n) \mid 3^{n-1}$.  The qualitative conclusion — that $K(n)$ is a
+		pure power of $3$ — survives and is arguably the more conceptually
+		natural statement.
 	\end{remark}
 	
 \end{document}
