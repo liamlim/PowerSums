@@ -94,8 +94,7 @@
 		\]
 	\end{theorem}
 	\begin{proof}
-		Each of $x,y,z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$.  Multiply by
-		$t^n$, weight by $a, b, c$ respectively, and sum.
+		Since $t^3 = e_1 t^2 - e_2 t + e_3$ for each $t \in \{x,y,z\}$, multiplying the equation for $x$, $y$, $z$ by $a x^n$, $b y^n$, $c z^n$ respectively and summing gives the result.
 	\end{proof}
 	
 	Because $e_3 \neq 0$ the recurrence can also be run backwards, making
@@ -140,7 +139,7 @@
 		\]
 	\end{definition}
 	
-	The initial values follow immediately:
+	The initial values follow immediately from the definitions.  For $L$: $L(0)=K(1)-e_1K(0)=0$, $L(1)=K(2)-e_1K(1)=1$, $L(2)=K(3)-e_1K(2)=e_1-e_1=0$.  For $M$: $M(1)=e_3K(0)=0$, $M(2)=e_3K(1)=0$, and running the recurrence backwards gives $K(-1)=1/e_3$, so $M(0)=e_3K(-1)=1$.
 	
 	\[
 	\renewcommand{\arraystretch}{1.3}
@@ -240,11 +239,7 @@
 	\begin{proof}
 		Apply the Decomposition Theorem with weights $(1,1,1)$, substituting
 		$f_0(1,1,1)=3$, $f_1(1,1,1)=e_1$, $f_2(1,1,1)=e_1^2-2e_2$ and the
-		definitions $L(n) = K(n+1)-e_1 K(n)$, $M(n) = e_3 K(n-1)$:
-		\[
-		s_n = K(n)(e_1^2-2e_2) + L(n) \cdot e_1 + 3 \cdot M(n)
-		= K(n)(e_1^2-2e_2) + (K(n+1)-e_1 K(n))e_1 + 3e_3 K(n-1).
-		\]
+		definitions $L(n) = K(n+1)-e_1 K(n)$, $M(n) = e_3 K(n-1)$.
 		Expanding and cancelling the $e_1^2 K(n)$ terms gives the result.
 	\end{proof}
 	
@@ -447,13 +442,24 @@
 		\smallskip\noindent\textit{Modulo $K(n+1)$.}
 		The term $K(2n) \cdot K(n+1)$ vanishes, leaving
 		$\Delta_n/\Delta \equiv -K(2n+1) \cdot K(n) \pmod{K(n+1)}$.
-		From Lemma~\ref{lem:addition} with $m = n+1$, and reducing mod $K(n+1)$
-		using $L(n) \equiv -e_1 \cdot K(n)$ and
-		$K(n+2) \equiv e_3 \cdot K(n-1) - e_2 \cdot K(n) \pmod{K(n+1)}$:
+		From Lemma~\ref{lem:addition} with $m = n+1$, the $M(n)\cdot K(n+1)$ term vanishes, giving
 		\[
-		K(2n+1) \;\equiv\; K(n)\cdot K(n+3) + L(n) \cdot K(n+2) \;\equiv\; e_3\cdot K(n)^2 \pmod{K(n+1)},
+		K(2n+1) \;\equiv\; K(n)\cdot K(n+3) + L(n) \cdot K(n+2) \pmod{K(n+1)}.
 		\]
-		where the last expression uses the recurrence identity for $K(n+2)$ and $K(n+3)$.
+		We reduce each factor modulo $K(n+1)$ using:
+		$L(n) = K(n+1) - e_1 K(n) \equiv -e_1 K(n)$;
+		$K(n+2) \equiv -e_2 K(n) + e_3 K(n-1)$;
+		$K(n+3) \equiv e_1 K(n+2) + e_3 K(n)$. Substituting and collecting:
+		\begin{align*}
+			K(n)\cdot K(n+3) &\equiv K(n)\bigl((e_3-e_1 e_2) K(n) + e_1 e_3 K(n-1)\bigr) \\
+			&= (e_3 - e_1 e_2)K(n)^2 + e_1 e_3 K(n)K(n-1),\\
+			L(n)\cdot K(n+2) &\equiv -e_1 K(n)\bigl(-e_2 K(n)+e_3 K(n-1)\bigr)
+			= e_1 e_2 K(n)^2 - e_1 e_3 K(n)K(n-1).
+		\end{align*}
+		The $e_1 e_3 K(n)K(n-1)$ terms cancel and the $e_1 e_2 K(n)^2$ terms cancel, leaving
+		\[
+		K(2n+1) \;\equiv\; e_3\cdot K(n)^2 \pmod{K(n+1)}.
+		\]
 		Hence
 		\[
 		\frac{\Delta_n}{\Delta} \;\equiv\; -e_3 \cdot K(n)^3 \pmod{K(n+1)}.
@@ -461,9 +467,9 @@
 		Reducing~\eqref{eq:central} modulo $K(n+1)$ kills $K(jn) \cdot K(n+1)$,
 		giving
 		\[
-		e_3 \cdot K(n)^3 \cdot K_j \;\equiv\; -K(jn+1) \cdot K(n) \pmod{K(n+1)}.
+		-e_3 \cdot K(n)^3 \cdot K_j \;\equiv\; -K(jn+1) \cdot K(n) \pmod{K(n+1)}.
 		\]
-		Dividing by $K(n)$ — valid at the cost of replacing $K(n+1)$ by $C_n$
+		Dividing by $-K(n)$ — valid at the cost of replacing $K(n+1)$ by $C_n$
 		— yields~\eqref{eq:mod-Kn1}.
 	\end{proof}
 	
@@ -477,7 +483,7 @@
 		$d_n = \gcd(K(n), K(n+1))$.
 		
 		The scalars are not arbitrary: $K(n+1)^2$ in~\eqref{eq:mod-Kn} and
-		$e_1 \cdot K(n) \cdot K(n+2)$ in~\eqref{eq:mod-Kn1} are related by
+		$e_3 \cdot K(n)^2$ in~\eqref{eq:mod-Kn1} are related by
 		Cassini-type identities for $K$.
 		
 		Specialising at small $j$: both sides of each formula vanish at $j=0$
@@ -580,7 +586,7 @@
 		$\tilde{e}_2 = x^ny^n+y^nz^n+z^nx^n$, $\tilde{e}_3 = e_3^n$.  The Newton identity
 		$p_3 = \tilde{e}_1 p_2 - \tilde{e}_2 p_1 + 3\tilde{e}_3$ gives
 		$s_{3n} = 0 \cdot s_{2n} - \tilde{e}_2 \cdot 0 + 3e_3^n = 3e_3^n$, so
-		$K(3n-1) = A \cdot K(n-1) + e_3^{n-1}$.  Now the recurrence at $3n+2$:
+		$K(3n-1) = A \cdot K(n-1) + e_3^{n-1}$ (recorded as Corollary~\ref{cor:K3n-1} below).  Now the recurrence at $3n+2$:
 		\begin{align*}
 			K(3n+2)
 			&= e_1 \cdot A \cdot K(n+1) - e_2 \cdot A \cdot K(n)
