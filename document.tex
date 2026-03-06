@@ -413,8 +413,8 @@
 		\label{thm:modular-reduction}
 		For all integers $j \geq 0$,
 		\begin{align}
-			K(jn)   &\;\equiv\; K(n+1)^2 \cdot K_j(x^n,\,y^n,\,z^n) \pmod{B_n}, \label{eq:mod-Kn}\\
-			K(jn+1) &\;\equiv\; -e_1 \cdot K(n) \cdot K(n+2) \cdot K_j(x^n,\,y^n,\,z^n) \pmod{C_n}. \label{eq:mod-Kn1}
+			K(jn)   &\;\equiv\; K(n+1)^2 \cdot K_j(x^n,\,y^n,\,z^n) &\pmod{B_n}, \label{eq:mod-Kn}\\
+			K(jn+1) &\;\equiv\; e_3 \cdot K(n)^2 \cdot K_j(x^n,\,y^n,\,z^n) &\pmod{C_n}. \label{eq:mod-Kn1}
 		\end{align}
 	\end{theorem}
 	\begin{proof}
@@ -451,19 +451,17 @@
 		using $L(n) \equiv -e_1 \cdot K(n)$ and
 		$K(n+2) \equiv e_3 \cdot K(n-1) - e_2 \cdot K(n) \pmod{K(n+1)}$:
 		\[
-		K(2n+1) \;\equiv\; L(n) \cdot K(n+2) \;\equiv\; -e_1 \cdot K(n) \cdot K(n+2) \pmod{K(n+1)},
+		K(2n+1) \;\equiv\; K(n)\cdot K(n+3) + L(n) \cdot K(n+2) \;\equiv\; e_3\cdot K(n)^2 \pmod{K(n+1)},
 		\]
-		where the last expression uses the recurrence identity
-		$K(n+2) \equiv e_3 \cdot K(n-1) - e_2 \cdot K(n) \pmod{K(n+1)}$,
-		which is simply the recurrence for $K$ with the $K(n+1)$ term dropped.
+		where the last expression uses the recurrence identity for $K(n+2)$ and $K(n+3)$.
 		Hence
 		\[
-		\frac{\Delta_n}{\Delta} \;\equiv\; e_1 \cdot K(n)^2 \cdot K(n+2) \pmod{K(n+1)}.
+		\frac{\Delta_n}{\Delta} \;\equiv\; -e_3 \cdot K(n)^3 \pmod{K(n+1)}.
 		\]
 		Reducing~\eqref{eq:central} modulo $K(n+1)$ kills $K(jn) \cdot K(n+1)$,
 		giving
 		\[
-		e_1 \cdot K(n)^2 \cdot K(n+2) \cdot K_j \;\equiv\; -K(jn+1) \cdot K(n) \pmod{K(n+1)}.
+		e_3 \cdot K(n)^3 \cdot K_j \;\equiv\; -K(jn+1) \cdot K(n) \pmod{K(n+1)}.
 		\]
 		Dividing by $K(n)$ — valid at the cost of replacing $K(n+1)$ by $C_n$
 		— yields~\eqref{eq:mod-Kn1}.
