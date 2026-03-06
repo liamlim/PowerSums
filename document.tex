@@ -196,7 +196,7 @@
 	
 	\subsection{Addition formula for $K$}
 	
-	Since $K(n) = f_n(w_x,w_y,w_z)/\Delta$, applying the Shift Corollary to $K$ directly yields an addition formula that will be used in the divisibility arguments of Section~\ref{sec:flt}.
+	Since $K(n) = f_n(w_x,w_y,w_z)/\Delta$, applying the Shift Corollary to $K$ directly yields an addition formula that will be used in the modular reduction of Section~\ref{sec:modular-reduction} and the divisibility arguments of Section~\ref{sec:flt}.
 	
 	\begin{lemma}[Addition formula]
 		\label{lem:addition}
@@ -378,16 +378,18 @@
 		Combining signs gives the stated identity.
 	\end{proof}
 	
-	\subsection{Modular reduction along multiples of $n$}
+	% -----------------------------------------------------------------------
+	\section{Modular Reduction Along Multiples of $n$}
 	\label{sec:modular-reduction}
+	
+	Throughout this section $x$, $y$, $z$ are distinct nonzero integers, so
+	that all values $K(m)$ are integers.  The results here depend only on
+	Theorem~\ref{thm:power} and Lemma~\ref{lem:addition}; no hypothesis on
+	$s_n$ is required.
 	
 	The general power substitution theorem, applied with $k = n$, yields
 	congruences describing the two interleaved subsequences $K(jn)$ and
-	$K(jn+1)$ for all $j \geq 0$.  Both results are purely algebraic
-	consequences of Theorem~\ref{thm:power} and Lemma~\ref{lem:addition};
-	no hypothesis on $s_n$ is required.  Throughout this subsection $x$,
-	$y$, $z$ are distinct nonzero integers, so that all values $K(m)$ are
-	integers.
+	$K(jn+1)$ for all $j \geq 0$.
 	
 	\begin{definition}
 		\label{def:BnCn}
