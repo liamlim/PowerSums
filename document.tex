@@ -364,27 +364,23 @@
 	\section{An Addition Formula for $K$}
 	\label{sec:addition}
 	
-	The following identity is used in Section~\ref{sec:flt} to relate
-	$K(3n)$ and $K(3n+1)$ to $K(n)$ and $K(n+1)$.
 	
 	\begin{lemma}[Addition formula]
 		\label{lem:addition}
 		For all integers $m$ and $n$,
 		\[
-		K(m+n) \;=\; K(m)\,K(n+1) - e_3\,K(m-1)\,K(n-1) + \bigl(K(m+1)-e_1 K(m)\bigr)\,K(n).
-		\]
-		Equivalently, using $L(m) = K(m+1)-e_1 K(m)$ and $M(m)=e_3 K(m-1)$,
-		\[
-		K(m+n) \;=\; K(m)\,K(n+1) + L(m)\,K(n) - M(m)\,K(n-1).
+		K(n+m) \;=\; K(n)\,K(m+2) + L(n)\,K(m+1) - M(n)\,K(m).
 		\]
 	\end{lemma}
 	\begin{proof}
-		Fix $m$ and consider both sides as functions of $n$.  Both satisfy the
-		standard recurrence (in $n$) with coefficients $e_1, e_2, e_3$.  At
-		$n = 0, 1, 2$ the right-hand side gives, respectively,
-		\[
-		K(m+0)=K(m),\quad K(m+1),\quad K(m+2),
-		\]
+		Fix $n$ and consider both sides as functions of $m$.  Both satisfy the
+		standard recurrence (in $m$) with coefficients $e_1, e_2, e_3$.  At
+		$m = 0, 1, 2$ the right-hand side gives, respectively,
+		\begin{align*}
+			K(n+0) &= K(n)\\
+			K(n+1) &= K(n)\cdot K(3) + L(n)\\
+			K(n+2) &= K(n)\cdot K(4) + L(n)\cdot K(3) + M(n)
+		\end{align*}
 		matching the left-hand side.  Uniqueness of recurrence solutions
 		(Theorem~\ref{thm:decomposition}) gives equality for all $n$.
 	\end{proof}
@@ -526,18 +522,18 @@
 	\end{theorem}
 	\begin{proof}
 		We show $K(3n) \equiv 0 \pmod{K(n)}$.  Applying the addition formula
-		(Lemma~\ref{lem:addition}) with $m = n$ and working modulo $K(n)$:
+		(Lemma~\ref{lem:addition}) with $m = n$ and $m=n+1$:
 		\begin{align*}
-			K(2n)   &\equiv L(n)\,K(n+1), \\
-			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1),
+			K(2n)   &\equiv L(n)\,K(n+1) &\mod K(n), \\
+			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1) &\mod K(n).
 		\end{align*}
-		since every term containing $K(n)$ as a factor vanishes.  A further
-		application modulo $K(n)$, substituting
+		A further application modulo $K(n)$, substituting
 		$L(n) \equiv K(n+1)$, $M(n) \equiv e_3\,K(n-1)$,
 		and $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$, gives
-		\[
-		K(3n) \;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) \pmod{K(n)}.
-		\]
+		\begin{align*}
+			K(n+2n) &\;\equiv\; L(n) \cdot K(2n+1) + M(n)\cdot K(2n) &\mod K(n),\\
+			K(3n) &\;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) &\mod K(n).
+		\end{align*}
 		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
 		$e_1\,K(n+1) + 3e_3\,K(n-1) = 2e_2\,K(n) \equiv 0 \pmod{K(n)}$.
 		Hence $K(3n) \equiv 0 \pmod{K(n)}$, so $A = K(3n)/K(n)$ is an integer.
