@@ -238,8 +238,9 @@
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
-	\section{Generalised $K$ and Substitution Identities}
+	\section{Power Substitution Identities}
 	\label{sec:substitutions}
+	\label{sec:power}
 	
 	\subsection{The generalised function $K_n(a,b,c)$}
 	
@@ -262,43 +263,9 @@
 	
 	The power of this definition is that \emph{evaluating $K_n$ at a
 		specific triple reduces, via the Decomposition Theorem, to a clean
-		identity in $K$, $L$, $M$}.  The next three subsections illustrate
-	this with the three most natural substitutions.
+		identity in $K$, $L$, $M$}.
 	
-	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
-	
-	The triple $(x^2,y^2,z^2)$ has symmetric polynomials
-	\[
-	\varepsilon_1 = e_1^2-2e_2, \qquad \varepsilon_2 = e_2^2-2e_1e_3, \qquad \varepsilon_3 = e_3^2.
-	\]
-	
-	\begin{theorem}[Squaring-substitution identity]
-		\label{thm:squaring}
-		For all integers $n$,
-		\[
-		(e_3 - e_1 e_2)\cdot K_n(x^2,\,y^2,\,z^2) \;=\; L(2n).
-		\]
-	\end{theorem}
-	\begin{proof}
-		This is the special case $k=2$ of Theorem~\ref{thm:power} in
-		Section~\ref{sec:power}, proved there in full.  We verify the
-		prefactor: $\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3-e_1e_2)$,
-		and at $k=2$ the right-hand side of Theorem~\ref{thm:power} is
-		$K(2n)\,K(3) - K(2n+1)\,K(2) = e_1 K(2n) - K(2n+1) = -L(2n)$,
-		since $K(2)=1$, $K(3)=e_1$, and $L(2n) = K(2n+1)-e_1 K(2n)$.
-		Combining signs gives the stated identity.
-	\end{proof}
-	
-	Note $e_3 - e_1 e_2 = -(x+y)(y+z)(z+x)$, the product of pairwise sums.
-	To see this, expand $(x+y)(y+z)(z+x) = e_1 e_2 - e_3$ directly: the
-	product contributes $xy^2 + y^2z + \cdots$ terms that collect into $e_1 e_2$
-	and a $-2xyz$ correction that combines with the $xyz$ terms to yield
-	$e_1 e_2 - e_3$.  In particular the prefactor vanishes if and only if
-	two of $x,y,z$ are negatives of each other, i.e.\ one pairwise sum is zero.
-	
-	% -----------------------------------------------------------------------
-	\section{General Power Substitution}
-	\label{sec:power}
+	\subsection{General power substitution}
 	
 	For an integer $k \geq 1$, write the \emph{$k$-th difference discriminant} as
 	\[
@@ -349,12 +316,6 @@
 		expanding, the $e_1$ terms cancel, leaving $K(kn)\,K(k+1) - K(kn+1)\,K(k)$.
 	\end{proof}
 	
-	\subsection*{Special case $n=1$}
-	
-	Since $K_1(a,b,c) = 0$ for any triple, the left-hand side vanishes, and
-	the theorem gives $K(k)\,K(k+1) - K(k+1)\,K(k) = 0$: trivially true, and
-	a consistency check.
-	
 	\subsection*{Special case $n=2$}
 	
 	Since $K_2(a,b,c) = 1$ for any triple, the theorem gives the closed formula
@@ -375,6 +336,29 @@
 	\;=\;
 	K(3k)\,K(k+1) - K(3k+1)\,K(k).
 	\]
+	
+	\subsection{The squaring substitution: $(a,b,c) = (x^2, y^2, z^2)$}
+	
+	The triple $(x^2,y^2,z^2)$ has symmetric polynomials
+	\[
+	\varepsilon_1 = e_1^2-2e_2, \qquad \varepsilon_2 = e_2^2-2e_1e_3, \qquad \varepsilon_3 = e_3^2.
+	\]
+	
+	\begin{corollary}[Squaring-substitution identity]
+		\label{thm:squaring}
+		For all integers $n$,
+		\[
+		(e_3 - e_1 e_2)\cdot K_n(x^2,\,y^2,\,z^2) \;=\; L(2n).
+		\]
+	\end{corollary}
+	\begin{proof}
+		Set $k=2$ in Theorem~\ref{thm:power}.  The prefactor satisfies
+		$\Delta_2/\Delta = (x+y)(y+z)(z+x) = -(e_3-e_1e_2)$, and the
+		right-hand side becomes
+		$K(2n)\,K(3) - K(2n+1)\,K(2) = e_1 K(2n) - K(2n+1) = -L(2n)$,
+		since $K(2)=1$, $K(3)=e_1$, and $L(2n) = K(2n+1)-e_1 K(2n)$.
+		Combining signs gives the stated identity.
+	\end{proof}
 	
 	% -----------------------------------------------------------------------
 	\section{An Addition Formula for $K$}
