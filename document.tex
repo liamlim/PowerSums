@@ -30,7 +30,7 @@
 	
 	This note develops a self-contained algebraic framework for power sums
 	$s_n = x^n + y^n + z^n$ and their relatives.  The central object is a
-	sequence $K(n)$ built from the antisymmetric weights of $x, y, z$; together
+	sequence $K(n)$ built from the alternating difference weights $(y-z, z-x, x-y)$; together
 	with two companion sequences $L$ and $M$, it forms a basis for all sequences
 	satisfying the same linear recurrence as the power sums.
 	
@@ -49,8 +49,8 @@
 	\[
 	P(t) = t^3 - e_1 t^2 + e_2 t - e_3 = (t-x)(t-y)(t-z).
 	\]
-	Since $e_3 = xyz \neq 0$ we may divide by any power of $x$, $y$, or $z$,
-	and in particular extend all recurrences to all integers $n \in \mathbb{Z}$.
+	Since $e_3 = xyz \neq 0$ we may divide by any power of $x$, $y$, or $z$;
+	this allows the recurrence to be run backwards, and hence extended to all integers $n \in \mathbb{Z}$.
 	
 	\subsection{Cyclic sum notation}
 	
@@ -58,9 +58,8 @@
 	\[
 	\cyc{g(x)} \;:=\; g(x) + g(y) + g(z)
 	\]
-	for the cyclic sum of any expression $g$, where the implicit
-	substitution rule is $x \to y \to z \to x$.  For example,
-	$e_1 = \cyc{x}$, $e_2 = \cyc{xy}$, $e_3 = xyz$, and more usefully:
+	for the cyclic sum of any expression $g$, where the substitution rule is $x \to y \to z \to x$.  For example,
+	$e_1 = \cyc{x}$, $e_2 = \cyc{xy}$, $e_3 = xyz$, and in particular:
 	\[
 	\cyc{x^n(y-z)} \;=\; x^n(y-z) + y^n(z-x) + z^n(x-y).
 	\]
@@ -71,46 +70,45 @@
 	\section{Weighted Power Sums}
 	
 	\begin{definition}
-		For any integer $n$ and a weight triple $(k, l, m)$, define
+		For any integer $n$ and a weight triple $(a, b, c)$, define
 		\[
-		f_n(k,l,m) = k x^n + l y^n + m z^n = \cyc{k\, x^n},
+		f_n(a,b,c) = a x^n + b y^n + c z^n = \cyc{a\, x^n},
 		\]
 		where in the cyclic notation it is understood that the weights cycle
-		as $(k,l,m) \to (l,m,k)$ alongside $(x,y,z) \to (y,z,x)$.
+		as $(a,b,c) \to (b,c,a)$ alongside $(x,y,z) \to (y,z,x)$.
 	\end{definition}
 	
-	Special cases of immediate interest:
+	The special case of immediate interest is:
 	\[
 	s_n \;:=\; f_n(1,1,1) \;=\; x^n + y^n + z^n \;=\; \cyc{x^n}.
 	\]
 	
-	The key properties of $f_n$ are linearity in weights and the universal
+	The key properties of $f_n$ are linearity in the weights and the universal
 	recurrence inherited from $P(t)$.
 	
 	\begin{theorem}[Recurrence]
 		\label{thm:recurrence}
-		For any fixed weights $(k,l,m)$ and any integer $n$,
+		For any fixed weights $(a,b,c)$ and any integer $n$,
 		\[
-		f_{n+3}(k,l,m) = e_1\, f_{n+2}(k,l,m) - e_2\, f_{n+1}(k,l,m) + e_3\, f_n(k,l,m).
+		f_{n+3}(a,b,c) = e_1\, f_{n+2}(a,b,c) - e_2\, f_{n+1}(a,b,c) + e_3\, f_n(a,b,c).
 		\]
 	\end{theorem}
 	\begin{proof}
 		Each of $x,y,z$ satisfies $t^3 = e_1 t^2 - e_2 t + e_3$.  Multiply by
-		$t^n$, weight by $k, l, m$ respectively, and sum.
+		$t^n$, weight by $a, b, c$ respectively, and sum.
 	\end{proof}
 	
 	Because $e_3 \neq 0$ the recurrence can also be run backwards, making
-	$f_n(k,l,m)$ well-defined for all $n \in \mathbb{Z}$.
+	$f_n(a,b,c)$ well-defined for all $n \in \mathbb{Z}$.
 	
 	% -----------------------------------------------------------------------
 	\section{The Basis $K$, $L$, $M$}
 	
 	Any sequence satisfying the recurrence of Theorem~\ref{thm:recurrence}
 	is determined by its values at three consecutive integers.  We single
-	out the three basis sequences with initial values forming the identity
-	matrix at $n = 0, 1, 2$.
+	out three basis sequences whose values at $n = 0, 1, 2$ form the columns of the identity matrix.
 	
-	\subsection{Definition via the antisymmetric weights}
+	\subsection{Definition via the alternating difference weights}
 	
 	The triple of \emph{difference weights}
 	\[
@@ -122,8 +120,7 @@
 	f_0(w_x,w_y,w_z) = 0, \quad f_1(w_x,w_y,w_z) = 0, \quad
 	f_2(w_x,w_y,w_z) = \cyc{x^2(y-z)} =: \Delta,
 	\]
-	where $\Delta = -(y-z)(z-x)(x-y) \neq 0$.  (The $f_2$ identity follows
-	by straightforward algebra, or see Section~\ref{sec:substitutions}.)
+	where we define $\Delta := -(y-z)(z-x)(x-y) \neq 0$, which is nonzero since $x,y,z$ are distinct.  (The $f_2$ identity follows by direct expansion.)
 	
 	\begin{definition}
 		\label{def:K}
@@ -133,6 +130,8 @@
 		\;=\; \frac{\cyc{x^n(y-z)}}{\cyc{x^2(y-z)}}.
 		\]
 	\end{definition}
+	
+	We define two companion sequences so that $L$ and $M$ complete the standard basis with the correct initial values:
 	
 	\begin{definition}
 		\label{def:LM}
@@ -163,13 +162,13 @@
 	\section{The Decomposition Theorem}
 	\label{sec:decomposition}
 	
-	The following is the central engine of everything that follows.
+	The following is the central engine of the paper.
 	
 	\begin{theorem}[Decomposition]
 		\label{thm:decomposition}
-		For any weights $(k,l,m)$ and any integer $n$,
+		For any weights $(a,b,c)$ and any integer $n$,
 		\[
-		f_n(k,l,m) \;=\; K(n)\,f_2(k,l,m) \;+\; L(n)\,f_1(k,l,m) \;+\; M(n)\,f_0(k,l,m).
+		f_n(a,b,c) \;=\; K(n)\,f_2(a,b,c) \;+\; L(n)\,f_1(a,b,c) \;+\; M(n)\,f_0(a,b,c).
 		\]
 	\end{theorem}
 	\begin{proof}
@@ -180,14 +179,14 @@
 	
 	\begin{corollary}[Shift invariance]
 		\label{cor:shift}
-		For any weights $(k,l,m)$ and any integers $n$, $j$,
+		For any weights $(a,b,c)$ and any integers $n$, $j$,
 		\[
-		f_{n+j}(k,l,m) \;=\; K(n)\,f_{j+2}(k,l,m) \;+\; L(n)\,f_{j+1}(k,l,m) \;+\; M(n)\,f_j(k,l,m).
+		f_{n+j}(a,b,c) \;=\; K(n)\,f_{j+2}(a,b,c) \;+\; L(n)\,f_{j+1}(a,b,c) \;+\; M(n)\,f_j(a,b,c).
 		\]
 	\end{corollary}
 	\begin{proof}
-		Fix $j$.  The shifted sequence $h_n = f_{n+j}(k,l,m)$ satisfies the
-		same recurrence, with $h_0 = f_j$, $h_1 = f_{j+1}$, $h_2 = f_{j+2}$.  
+		Fix $j$.  The shifted sequence $h_n = f_{n+j}(a,b,c)$ satisfies the
+		same recurrence, with $h_0 = f_j$, $h_1 = f_{j+1}$, $h_2 = f_{j+2}$.
 		Apply Theorem~\ref{thm:decomposition} to $h_n$.
 	\end{proof}
 	
@@ -196,19 +195,43 @@
 		the coefficients are always $K(n)$, $L(n)$, $M(n)$, regardless of the
 		weights}.
 	
+	\subsection{Addition formula for $K$}
+	
+	Since $K(n) = f_n(w_x,w_y,w_z)/\Delta$, applying the Shift Corollary to $K$ directly yields an addition formula that will be used in the divisibility arguments of Section~\ref{sec:flt}.
+	
+	\begin{lemma}[Addition formula]
+		\label{lem:addition}
+		For all integers $m$ and $n$,
+		\[
+		K(n+m) \;=\; K(n)\,K(m+2) + L(n)\,K(m+1) + M(n)\,K(m).
+		\]
+	\end{lemma}
+	\begin{proof}
+		Fix $n$ and consider both sides as functions of $m$.  Both satisfy the
+		standard recurrence (in $m$) with coefficients $e_1, e_2, e_3$.  At
+		$m = 0, 1, 2$ the right-hand side evaluates, using $K(0)=K(1)=0$ and
+		$K(2)=1$, to
+		\begin{align*}
+			m=0: &\quad K(n)\cdot 1 + L(n)\cdot 0 + M(n)\cdot 0 = K(n),\\
+			m=1: &\quad K(n)\cdot K(3) + L(n)\cdot 1 + M(n)\cdot 0 = e_1 K(n) + L(n) = K(n+1),\\
+			m=2: &\quad K(n)\cdot K(4) + L(n)\cdot K(3) + M(n)\cdot 1,
+		\end{align*}
+		which equals $K(n+2)$ by the Decomposition Theorem applied to $K$.
+		Uniqueness of recurrence solutions gives equality for all $m$.
+	\end{proof}
+	
 	% -----------------------------------------------------------------------
 	\section{Applications and Key Lemmas}
 	\label{sec:applications}
 	
-	\subsection{Newton's identity: $s_n = x^n + y^n + z^n$}
+	\subsection{Power sums in the $K$-basis}
 	
 	Apply the decomposition with weights $(1,1,1)$, noting
 	$f_0(1,1,1)=3$, $f_1(1,1,1)=e_1$, $f_2(1,1,1)=e_1^2-2e_2$:
 	\[
 	s_n \;=\; K(n)\,(e_1^2-2e_2) \;+\; L(n)\,e_1 \;+\; 3\,M(n).
 	\]
-	In particular, $s_0=3$, $s_1=e_1$, $s_2=e_1^2-2e_2$ match the known
-	Newton values, and equality for all $n$ follows.  Expanding the
+	In particular, $s_0=3$, $s_1=e_1$, $s_2=e_1^2-2e_2$ match the standard values, and equality for all $n$ follows.  Expanding the
 	definitions yields the key formula:
 	
 	\begin{lemma}
@@ -240,7 +263,6 @@
 	% -----------------------------------------------------------------------
 	\section{Power Substitution Identities}
 	\label{sec:substitutions}
-	\label{sec:power}
 	
 	\subsection{The generalised function $K_n(a,b,c)$}
 	
@@ -261,7 +283,7 @@
 	place of $e_i$, and has initial values $K_0=K_1=0$, $K_2=1$ for any
 	admissible triple.
 	
-	The power of this definition is that \emph{evaluating $K_n$ at a
+	The utility of this definition is that \emph{evaluating $K_n$ at a
 		specific triple reduces, via the Decomposition Theorem, to a clean
 		identity in $K$, $L$, $M$}.
 	
@@ -361,37 +383,12 @@
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
-	\section{An Addition Formula for $K$}
-	\label{sec:addition}
-	
-	
-	\begin{lemma}[Addition formula]
-		\label{lem:addition}
-		For all integers $m$ and $n$,
-		\[
-		K(n+m) \;=\; K(n)\,K(m+2) + L(n)\,K(m+1) - M(n)\,K(m).
-		\]
-	\end{lemma}
-	\begin{proof}
-		Fix $n$ and consider both sides as functions of $m$.  Both satisfy the
-		standard recurrence (in $m$) with coefficients $e_1, e_2, e_3$.  At
-		$m = 0, 1, 2$ the right-hand side gives, respectively,
-		\begin{align*}
-			K(n+0) &= K(n)\\
-			K(n+1) &= K(n)\cdot K(3) + L(n)\\
-			K(n+2) &= K(n)\cdot K(4) + L(n)\cdot K(3) + M(n)
-		\end{align*}
-		matching the left-hand side.  Uniqueness of recurrence solutions
-		(Theorem~\ref{thm:decomposition}) gives equality for all $n$.
-	\end{proof}
-	
-	% -----------------------------------------------------------------------
 	\section{Consequences of $s_n = 0$ over the reals}
 	\label{sec:sn-zero}
 	
 	Throughout this section $x$, $y$, $z$ are distinct nonzero real (or
 	complex) numbers satisfying $s_n = x^n + y^n + z^n = 0$ for a fixed
-	integer $n \geq 3$.  No integrality is assumed.
+	integer $n \geq 3$.  No integrality of $x$, $y$, $z$ is assumed in this section.
 	
 	\subsection{The ratio identity}
 	
@@ -402,6 +399,9 @@
 		\label{cor:sn-ratio}
 		If $s_n = 0$ then $K(3n)\,K(n+1) = K(3n+1)\,K(n)$.
 	\end{corollary}
+	\begin{proof}
+		Set $k = n$ and use $K_3(x^n,y^n,z^n) = s_n = 0$ in Theorem~\ref{thm:power}; the right-hand side vanishes.
+	\end{proof}
 	
 	In other words the two ratios $K(3n)/K(n)$ and $K(3n+1)/K(n+1)$ are
 	equal (whenever the denominators are nonzero).  We write their common
@@ -411,7 +411,7 @@
 	
 	\begin{theorem}
 		\label{thm:sn-ratio}
-		If $s_n = 0$ and $K(n) \neq 0$, define $A = K(3n)/K(n)$.  Then
+		Suppose $s_n = 0$ and $K(n) \neq 0$.  Let $A = K(3n)/K(n)$.  Then
 		\[
 		K(3n+1) = A\,K(n+1).
 		\]
@@ -429,11 +429,10 @@
 	
 	\begin{theorem}[Master identity]
 		\label{thm:master}
-		If $s_n = 0$ and $K(n) \neq 0$, then for all integers $j$,
+		Suppose $s_n = 0$ and $K(n) \neq 0$.  Let $A = K(3n)/K(n)$.  Then for all integers $j$,
 		\[
-		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j),
+		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j).
 		\]
-		where $A = K(3n)/K(n)$.
 	\end{theorem}
 	\begin{proof}
 		Fix $n$.  The right-hand side, viewed as a function of $j$, is a sum
@@ -491,7 +490,7 @@
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
-	\section{Constraints on a hypothetical FLT counter-example}
+	\section{Constraints on a hypothetical counter-example to Fermat's Last Theorem}
 	\label{sec:flt}
 	
 	\noindent\textit{Disclaimer.}
@@ -504,9 +503,7 @@
 	\medskip
 	Throughout this section $x$, $y$, $z$ are pairwise coprime nonzero
 	integers with $s_n = 0$ and $n \geq 3$ an odd prime.  All results of
-	Section~\ref{sec:sn-zero} apply; in particular the ratio $A$ and the
-	master identity are in force.  The additional content here is purely
-	about divisibility.
+	Section~\ref{sec:sn-zero} apply; in particular, $A$ and the master identity (Theorem~\ref{thm:master}) remain valid.  The additional content here is purely about divisibility.
 	
 	\subsection{Divisibility consequences of the master identity}
 	
@@ -527,11 +524,11 @@
 			K(2n)   &\equiv L(n)\,K(n+1) &\mod K(n), \\
 			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1) &\mod K(n).
 		\end{align*}
-		A further application modulo $K(n)$, substituting
+		Applying the addition formula once more with $m = 2n$ and reducing modulo $K(n)$, and substituting
 		$L(n) \equiv K(n+1)$, $M(n) \equiv e_3\,K(n-1)$,
 		and $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$, gives
 		\begin{align*}
-			K(n+2n) &\;\equiv\; L(n) \cdot K(2n+1) + M(n)\cdot K(2n) &\mod K(n),\\
+			K(3n) &\;\equiv\; L(n) \cdot K(2n+1) + M(n)\cdot K(2n) &\mod K(n),\\
 			K(3n) &\;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) &\mod K(n).
 		\end{align*}
 		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
@@ -595,8 +592,8 @@
 		\[
 		s_{3n+r} \;\equiv\; e_3^n\,s_r \pmod{A}.
 		\]
-		In particular, $s_{3nm+r} \equiv e_3^{nm}\,s_r \pmod{A}$ for all $m \geq 1$
-		by applying the formula iteratively.
+		In particular, $s_{3nm+r} \equiv e_3^{nm}\,s_r \pmod{A}$ for all $m \geq 1$,
+		by Theorem~\ref{thm:K-mod-A} applied via the same reduction.
 	\end{corollary}
 	\begin{proof}
 		Apply the shift corollary (Corollary~\ref{cor:shift}) with weights $(1,1,1)$
