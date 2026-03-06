@@ -90,7 +90,7 @@
 		\label{thm:recurrence}
 		For any fixed weights $(a,b,c)$ and any integer $n$,
 		\[
-		f_{n+3}(a,b,c) = e_1\, f_{n+2}(a,b,c) - e_2\, f_{n+1}(a,b,c) + e_3\, f_n(a,b,c).
+		f_{n+3}(a,b,c) = e_1 \cdot f_{n+2}(a,b,c) - e_2 \cdot f_{n+1}(a,b,c) + e_3 \cdot f_n(a,b,c).
 		\]
 	\end{theorem}
 	\begin{proof}
@@ -136,7 +136,7 @@
 	\begin{definition}
 		\label{def:LM}
 		\[
-		L(n) = K(n+1) - e_1\,K(n), \qquad M(n) = e_3\,K(n-1).
+		L(n) = K(n+1) - e_1 \cdot K(n), \qquad M(n) = e_3 \cdot K(n-1).
 		\]
 	\end{definition}
 	
@@ -168,7 +168,7 @@
 		\label{thm:decomposition}
 		For any weights $(a,b,c)$ and any integer $n$,
 		\[
-		f_n(a,b,c) \;=\; K(n)\,f_2(a,b,c) \;+\; L(n)\,f_1(a,b,c) \;+\; M(n)\,f_0(a,b,c).
+		f_n(a,b,c) \;=\; K(n) \cdot f_2(a,b,c) \;+\; L(n) \cdot f_1(a,b,c) \;+\; M(n) \cdot f_0(a,b,c).
 		\]
 	\end{theorem}
 	\begin{proof}
@@ -181,7 +181,7 @@
 		\label{cor:shift}
 		For any weights $(a,b,c)$ and any integers $n$, $j$,
 		\[
-		f_{n+j}(a,b,c) \;=\; K(n)\,f_{j+2}(a,b,c) \;+\; L(n)\,f_{j+1}(a,b,c) \;+\; M(n)\,f_j(a,b,c).
+		f_{n+j}(a,b,c) \;=\; K(n) \cdot f_{j+2}(a,b,c) \;+\; L(n) \cdot f_{j+1}(a,b,c) \;+\; M(n) \cdot f_j(a,b,c).
 		\]
 	\end{corollary}
 	\begin{proof}
@@ -203,12 +203,11 @@
 		\label{lem:addition}
 		For all integers $m$ and $n$,
 		\[
-		K(n+m) \;=\; K(n)\,K(m+2) + L(n)\,K(m+1) + M(n)\,K(m).
+		K(n+m) \;=\; K(n) \cdot K(m+2) + L(n) \cdot K(m+1) + M(n) \cdot K(m).
 		\]
 	\end{lemma}
 	\begin{proof}
-		Fix $n$ and consider both sides as functions of $m$.  Both satisfy the
-		standard recurrence (in $m$) with coefficients $e_1, e_2, e_3$.  At
+		Fix $n$ and consider both sides as functions of $m$.  The left-hand side $K(n+m)$ satisfies the recurrence in $m$ because $K$ does.  The right-hand side is a linear combination (with fixed $n$-dependent coefficients) of the sequences $m \mapsto K(m+2)$, $m \mapsto K(m+1)$, $m \mapsto K(m)$, each of which satisfies the same recurrence; hence so does their combination.  At
 		$m = 0, 1, 2$ the right-hand side evaluates, using $K(0)=K(1)=0$ and
 		$K(2)=1$, to
 		\begin{align*}
@@ -229,7 +228,7 @@
 	Apply the decomposition with weights $(1,1,1)$, noting
 	$f_0(1,1,1)=3$, $f_1(1,1,1)=e_1$, $f_2(1,1,1)=e_1^2-2e_2$:
 	\[
-	s_n \;=\; K(n)\,(e_1^2-2e_2) \;+\; L(n)\,e_1 \;+\; 3\,M(n).
+	s_n \;=\; K(n) \cdot (e_1^2-2e_2) \;+\; L(n) \cdot e_1 \;+\; 3 \cdot M(n).
 	\]
 	In particular, $s_0=3$, $s_1=e_1$, $s_2=e_1^2-2e_2$ match the standard values, and equality for all $n$ follows.  Expanding the
 	definitions yields the key formula:
@@ -243,7 +242,7 @@
 		$f_0(1,1,1)=3$, $f_1(1,1,1)=e_1$, $f_2(1,1,1)=e_1^2-2e_2$ and the
 		definitions $L(n) = K(n+1)-e_1 K(n)$, $M(n) = e_3 K(n-1)$:
 		\[
-		s_n = K(n)(e_1^2-2e_2) + L(n)\,e_1 + 3M(n)
+		s_n = K(n)(e_1^2-2e_2) + L(n) \cdot e_1 + 3 \cdot M(n)
 		= K(n)(e_1^2-2e_2) + (K(n+1)-e_1 K(n))e_1 + 3e_3 K(n-1).
 		\]
 		Expanding and cancelling the $e_1^2 K(n)$ terms gives the result.
@@ -319,23 +318,24 @@
 			\item $f_1(p,q,r) = \cyc{x(y^k-z^k)}$.  Expanding the cyclic sum
 			and collecting the $x^k$ terms (each $x \cdot y^k$ pairs with
 			$-y \cdot x^k$ from the next term):
-			$\cyc{x(y^k-z^k)} = \cyc{x^k(z-y)} = -\cyc{x^k(y-z)} = -K(k)\,\Delta$.
+			$\cyc{x(y^k-z^k)} = \cyc{x^k(z-y)} = -\cyc{x^k(y-z)} = -K(k) \cdot \Delta$.
 			\item $f_2(p,q,r) = \cyc{x^2(y^k-z^k)} = -\cyc{x^k(y^2-z^2)}$.
-			Writing $y^2-z^2 = (y-z)(y+z) = -w_x(y+z)$ and expanding,
-			$\cyc{x^k(y^2-z^2)} = e_1\,f_k(w_x,w_y,w_z) - f_{k+1}(w_x,w_y,w_z)
-			= (e_1 K(k) - K(k+1))\Delta = -L(k)\,\Delta$,
-			so $f_2(p,q,r) = L(k)\,\Delta$.
+			Writing $y^2-z^2 = (y-z)(y+z) = -w_x(y+z)$ and noting that $e_1 - x = y+z$ (and cyclically), we get
+			$\cyc{x^k w_x(y+z)} = \cyc{x^k w_x(e_1-x)} = e_1 \cdot f_k(w_x,w_y,w_z) - f_{k+1}(w_x,w_y,w_z)$.
+			Hence $\cyc{x^k(y^2-z^2)} = e_1 \cdot f_k(w_x,w_y,w_z) - f_{k+1}(w_x,w_y,w_z)
+			= (e_1 K(k) - K(k+1))\Delta = -L(k) \cdot \Delta$,
+			so $f_2(p,q,r) = L(k) \cdot \Delta$.
 		\end{itemize}
 		Applying the Decomposition Theorem (with $kn$ in place of $n$):
 		\[
-		f_{kn}(p,q,r) \;=\; K(kn)\cdot L(k)\,\Delta \;+\; L(kn)\cdot(-K(k))\,\Delta,
+		f_{kn}(p,q,r) \;=\; K(kn) \cdot L(k) \cdot \Delta \;+\; L(kn) \cdot (-K(k)) \cdot \Delta,
 		\]
 		and since $f_{kn}(p,q,r) = K_n(x^k,y^k,z^k)\cdot\Delta_k$, dividing by $\Delta$:
 		\[
-		\frac{\Delta_k}{\Delta}\,K_n(x^k,y^k,z^k) = K(kn)\,L(k) - L(kn)\,K(k).
+		\frac{\Delta_k}{\Delta}\,K_n(x^k,y^k,z^k) = K(kn) \cdot L(k) - L(kn) \cdot K(k).
 		\]
 		Substituting $L(m) = K(m+1) - e_1 K(m)$ into both $L(k)$ and $L(kn)$ and
-		expanding, the $e_1$ terms cancel, leaving $K(kn)\,K(k+1) - K(kn+1)\,K(k)$.
+		expanding, the $e_1$ terms cancel, leaving $K(kn) \cdot K(k+1) - K(kn+1) \cdot K(k)$.
 	\end{proof}
 	
 	\subsection*{Special case $n=2$}
@@ -350,7 +350,8 @@
 	\subsection*{Special case $n=3$}
 	
 	For any triple $(a,b,c)$ one has $K_3(a,b,c) = a+b+c$ directly from the
-	closed form: the numerator $\cyc{a^3(b-c)}$ factors as
+	closed form.  To see this, note that $a^3(b-c) + b^3(c-a) + c^3(a-b)$
+	$= (a+b+c)(a^2(b-c)+b^2(c-a)+c^2(a-b))$, i.e.\ the numerator $\cyc{a^3(b-c)}$ factors as
 	$(a+b+c)\cdot\cyc{a^2(b-c)}$.  Applied to $(x^k,y^k,z^k)$ this gives
 	$K_3(x^k,y^k,z^k) = s_k$, and the theorem yields
 	\[
@@ -397,7 +398,7 @@
 	
 	\begin{corollary}
 		\label{cor:sn-ratio}
-		If $s_n = 0$ then $K(3n)\,K(n+1) = K(3n+1)\,K(n)$.
+		If $s_n = 0$ then $K(3n) \cdot K(n+1) = K(3n+1) \cdot K(n)$.
 	\end{corollary}
 	\begin{proof}
 		Set $k = n$ and use $K_3(x^n,y^n,z^n) = s_n = 0$ in Theorem~\ref{thm:power}; the right-hand side vanishes.
@@ -418,7 +419,7 @@
 	\end{theorem}
 	\begin{proof}
 		The ratio identity (Corollary~\ref{cor:sn-ratio}) gives
-		$K(3n)\,K(n+1) = K(3n+1)\,K(n)$.  Substituting $K(3n) = A\,K(n)$
+		$K(3n) \cdot K(n+1) = K(3n+1) \cdot K(n)$.  Substituting $K(3n) = A \cdot K(n)$
 		and dividing both sides by $K(n)$ yields the result.
 	\end{proof}
 	
@@ -431,44 +432,47 @@
 		\label{thm:master}
 		Suppose $s_n = 0$ and $K(n) \neq 0$.  Let $A = K(3n)/K(n)$.  Then for all integers $j$,
 		\[
-		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j).
+		K(3n+j) \;=\; A \cdot K(n+j) \;+\; e_3^n \cdot K(j).
 		\]
 	\end{theorem}
 	\begin{proof}
 		Fix $n$.  The right-hand side, viewed as a function of $j$, is a sum
-		of two sequences: $j \mapsto A\,K(n+j)$ (a scalar multiple of a shift
-		of $K$) and $j \mapsto e_3^n\,K(j)$ (a scalar multiple of $K$ itself).
+		of two sequences: $j \mapsto A \cdot K(n+j)$ (a scalar multiple of a shift
+		of $K$) and $j \mapsto e_3^n \cdot K(j)$ (a scalar multiple of $K$ itself).
 		Both satisfy the recurrence with coefficients $e_1, e_2, e_3$, and
 		therefore so does their sum.  Since the left-hand side also satisfies
 		the same recurrence, it suffices to check agreement at $j = 0, 1, 2$.
 		
 		\smallskip\noindent
-		$j = 0$: $A\,K(n) + e_3^n\cdot 0 = A\,K(n) = K(3n)$. \checkmark
+		$j = 0$: $A \cdot K(n) + e_3^n \cdot 0 = A \cdot K(n) = K(3n)$. \checkmark
 		
 		\smallskip\noindent
-		$j = 1$: $A\,K(n+1) + e_3^n\cdot 0 = A\,K(n+1) = K(3n+1)$,
+		$j = 1$: $A \cdot K(n+1) + e_3^n \cdot 0 = A \cdot K(n+1) = K(3n+1)$,
 		by Theorem~\ref{thm:sn-ratio}. \checkmark
 		
 		\smallskip\noindent
-		$j = 2$: we need $K(3n+2) = A\,K(n+2) + e_3^n$.
+		$j = 2$: we need $K(3n+2) = A \cdot K(n+2) + e_3^n$.
 		Apply the $s_n$ formula (Lemma~\ref{lem:sn-formula}) at index $3n$:
 		\[
-		s_{3n} = e_1\,K(3n+1) - 2e_2\,K(3n) + 3e_3\,K(3n-1).
+		s_{3n} = e_1 \cdot K(3n+1) - 2e_2 \cdot K(3n) + 3e_3 \cdot K(3n-1).
 		\]
 		Substituting $K(3n) = A\,K(n)$, $K(3n+1) = A\,K(n+1)$, and using
-		$s_n = 0$ to replace $e_1\,K(n+1) - 2e_2\,K(n) = -3e_3\,K(n-1)$:
+		$s_n = 0$ to replace $e_1 \cdot K(n+1) - 2e_2 \cdot K(n) = -3e_3 \cdot K(n-1)$:
 		\[
-		s_{3n} = 3e_3\,\bigl(K(3n-1) - A\,K(n-1)\bigr).
+		s_{3n} = 3e_3 \cdot \bigl(K(3n-1) - A \cdot K(n-1)\bigr).
 		\]
-		Since $x^n + y^n + z^n = 0$, Newton's identity applied to
-		$(x^n, y^n, z^n)$ gives $s_{3n} = 3(xyz)^n = 3e_3^n$, so
-		$K(3n-1) = A\,K(n-1) + e_3^{n-1}$.  Now the recurrence at $3n+2$:
+		Since $x^n + y^n + z^n = 0$, we apply Newton's identity to the triple
+		$(x^n, y^n, z^n)$ with elementary symmetric polynomials $\tilde{e}_1 = s_n = 0$,
+		$\tilde{e}_2 = x^ny^n+y^nz^n+z^nx^n$, $\tilde{e}_3 = e_3^n$.  The Newton identity
+		$p_3 = \tilde{e}_1 p_2 - \tilde{e}_2 p_1 + 3\tilde{e}_3$ gives
+		$s_{3n} = 0 \cdot s_{2n} - \tilde{e}_2 \cdot 0 + 3e_3^n = 3e_3^n$, so
+		$K(3n-1) = A \cdot K(n-1) + e_3^{n-1}$.  Now the recurrence at $3n+2$:
 		\begin{align*}
 			K(3n+2)
-			&= e_1\cdot A\,K(n+1) - e_2\cdot A\,K(n)
-			+ e_3\,(A\,K(n-1) + e_3^{n-1}) \\
-			&= A\,\bigl(e_1\,K(n+1) - e_2\,K(n) + e_3\,K(n-1)\bigr) + e_3^n
-			= A\,K(n+2) + e_3^n. \quad\checkmark
+			&= e_1 \cdot A \cdot K(n+1) - e_2 \cdot A \cdot K(n)
+			+ e_3 \cdot (A \cdot K(n-1) + e_3^{n-1}) \\
+			&= A \cdot \bigl(e_1 \cdot K(n+1) - e_2 \cdot K(n) + e_3 \cdot K(n-1)\bigr) + e_3^n
+			= A \cdot K(n+2) + e_3^n. \quad\checkmark
 		\end{align*}
 		Uniqueness of recurrence solutions gives equality for all $j$.
 	\end{proof}
@@ -480,13 +484,13 @@
 		\label{cor:K3n-1}
 		If $s_n = 0$ and $K(n) \neq 0$, then
 		\[
-		K(3n-1) \;=\; A\,K(n-1) \;+\; e_3^{n-1}.
+		K(3n-1) \;=\; A \cdot K(n-1) \;+\; e_3^{n-1}.
 		\]
 	\end{corollary}
 	\begin{proof}
 		From the $s_{3n}$ calculation in the proof of Theorem~\ref{thm:master}:
-		$s_{3n} = 3e_3\,(K(3n-1) - A\,K(n-1))$ and $s_{3n} = 3e_3^n$,
-		so $K(3n-1) - A\,K(n-1) = e_3^{n-1}$.
+		$s_{3n} = 3e_3 \cdot (K(3n-1) - A \cdot K(n-1))$ and $s_{3n} = 3e_3^n$,
+		so $K(3n-1) - A \cdot K(n-1) = e_3^{n-1}$.
 	\end{proof}
 	
 	% -----------------------------------------------------------------------
@@ -521,22 +525,22 @@
 		We show $K(3n) \equiv 0 \pmod{K(n)}$.  Applying the addition formula
 		(Lemma~\ref{lem:addition}) with $m = n$ and $m=n+1$:
 		\begin{align*}
-			K(2n)   &\equiv L(n)\,K(n+1) &\mod K(n), \\
-			K(2n+1) &\equiv L(n)\,K(n+2) + M(n)\,K(n+1) &\mod K(n).
+			K(2n)   &\equiv L(n) \cdot K(n+1) &\mod K(n), \\
+			K(2n+1) &\equiv L(n) \cdot K(n+2) + M(n) \cdot K(n+1) &\mod K(n).
 		\end{align*}
 		Applying the addition formula once more with $m = 2n$ and reducing modulo $K(n)$, and substituting
-		$L(n) \equiv K(n+1)$, $M(n) \equiv e_3\,K(n-1)$,
-		and $K(n+2) \equiv e_1\,K(n+1) + e_3\,K(n-1)$, gives
+		$L(n) \equiv K(n+1)$, $M(n) \equiv e_3 \cdot K(n-1)$,
+		and $K(n+2) \equiv e_1 \cdot K(n+1) + e_3 \cdot K(n-1)$, gives
 		\begin{align*}
-			K(3n) &\;\equiv\; L(n) \cdot K(2n+1) + M(n)\cdot K(2n) &\mod K(n),\\
-			K(3n) &\;\equiv\; K(n+1)^2\,\bigl(e_1\,K(n+1) + 3e_3\,K(n-1)\bigr) &\mod K(n).
+			K(3n) &\;\equiv\; L(n) \cdot K(2n+1) + M(n) \cdot K(2n) &\mod K(n),\\
+			K(3n) &\;\equiv\; K(n+1)^2 \cdot \bigl(e_1 \cdot K(n+1) + 3e_3 \cdot K(n-1)\bigr) &\mod K(n).
 		\end{align*}
 		Since $s_n = 0$, Lemma~\ref{lem:sn-formula} gives
-		$e_1\,K(n+1) + 3e_3\,K(n-1) = 2e_2\,K(n) \equiv 0 \pmod{K(n)}$.
+		$e_1 \cdot K(n+1) + 3e_3 \cdot K(n-1) = 2e_2 \cdot K(n) \equiv 0 \pmod{K(n)}$.
 		Hence $K(3n) \equiv 0 \pmod{K(n)}$, so $A = K(3n)/K(n)$ is an integer.
 		
 		Since $A$ is an integer, Theorem~\ref{thm:sn-ratio} gives
-		$K(3n+1) = A\,K(n+1)$, so $K(n+1) \mid K(3n+1)$ with the same
+		$K(3n+1) = A \cdot K(n+1)$, so $K(n+1) \mid K(3n+1)$ with the same
 		quotient $A$.
 	\end{proof}
 	
@@ -548,9 +552,9 @@
 		and $n \geq 3$ an odd prime, then all of $K(m)$, $e_3^n$, and
 		$A = K(3n)/K(n)$ are integers, and for all integers $j$,
 		\[
-		K(3n+j) \;=\; A\,K(n+j) \;+\; e_3^n\,K(j).
+		K(3n+j) \;=\; A \cdot K(n+j) \;+\; e_3^n \cdot K(j).
 		\]
-		In particular, $K(n) \mid K(3n+j) - e_3^n\,K(j)$ for all $j$.
+		In particular, $K(n) \mid K(3n+j) - e_3^n \cdot K(j)$ for all $j$.
 	\end{corollary}
 	\begin{proof}
 		Integrality of $K(m)$ follows since $x,y,z \in \mathbb{Z}$.
@@ -562,7 +566,7 @@
 		\label{thm:K-mod-A}
 		Under the standing hypotheses, for all integers $m \geq 1$ and all $k$,
 		\[
-		K(3nm + k) \;\equiv\; e_3^{nm}\,K(k) \pmod{A}.
+		K(3nm + k) \;\equiv\; e_3^{nm} \cdot K(k) \pmod{A}.
 		\]
 		In particular:
 		\begin{itemize}
@@ -574,15 +578,15 @@
 		Induct on $m$.  For $m=1$, the master identity
 		(Corollary~\ref{cor:master-int}) with $j = k$ gives
 		\[
-		K(3n+k) = A\,K(n+k) + e_3^n\,K(k) \;\equiv\; e_3^n\,K(k) \pmod{A}.
+		K(3n+k) = A \cdot K(n+k) + e_3^n \cdot K(k) \;\equiv\; e_3^n \cdot K(k) \pmod{A}.
 		\]
 		For the inductive step, apply the master identity with $j = 3n(m-1)+k$:
 		\[
-		K(3nm+k) = A\,K\bigl(3n(m-1)+n+k\bigr) + e_3^n\,K\bigl(3n(m-1)+k\bigr).
+		K(3nm+k) = A \cdot K\bigl(3n(m-1)+n+k\bigr) + e_3^n \cdot K\bigl(3n(m-1)+k\bigr).
 		\]
 		Reducing mod $A$ and applying the inductive hypothesis to the second term:
 		\[
-		K(3nm+k) \;\equiv\; e_3^n \cdot e_3^{n(m-1)}\,K(k) = e_3^{nm}\,K(k) \pmod{A}. \qedhere
+		K(3nm+k) \;\equiv\; e_3^n \cdot e_3^{n(m-1)} \cdot K(k) = e_3^{nm} \cdot K(k) \pmod{A}. \qedhere
 		\]
 	\end{proof}
 	
@@ -590,9 +594,9 @@
 		\label{cor:s3nr-mod-A}
 		Under the standing hypotheses, for all integers $r$,
 		\[
-		s_{3n+r} \;\equiv\; e_3^n\,s_r \pmod{A}.
+		s_{3n+r} \;\equiv\; e_3^n \cdot s_r \pmod{A}.
 		\]
-		In particular, $s_{3nm+r} \equiv e_3^{nm}\,s_r \pmod{A}$ for all $m \geq 1$,
+		In particular, $s_{3nm+r} \equiv e_3^{nm} \cdot s_r \pmod{A}$ for all $m \geq 1$,
 		by Theorem~\ref{thm:K-mod-A} applied via the same reduction.
 	\end{corollary}
 	\begin{proof}
@@ -604,8 +608,8 @@
 		Since $K(3n) \equiv 0$ and $K(3n+1) \equiv 0 \pmod{A}$,
 		we have $L(3n) = K(3n+1) - e_1\,K(3n) \equiv 0 \pmod{A}$.
 		For $M(3n) = e_3\,K(3n-1)$, Corollary~\ref{cor:K3n-1} gives
-		$K(3n-1) = A\,K(n-1) + e_3^{n-1}$, so $M(3n) \equiv e_3^n \pmod{A}$.
-		Hence $s_{3n+r} \equiv e_3^n\,s_r \pmod{A}$.
+		$K(3n-1) = A \cdot K(n-1) + e_3^{n-1}$, so $M(3n) \equiv e_3^n \pmod{A}$.
+		Hence $s_{3n+r} \equiv e_3^n \cdot s_r \pmod{A}$.
 	\end{proof}
 	
 	\begin{lemma}
@@ -630,9 +634,11 @@
 		\[
 		s_{4n} \;\equiv\; e_3^n\,s_n = 0 \pmod{A},
 		\]
-		so $A \mid s_{4n}$.  Applying Newton's identities to $(x^n, y^n, z^n)$
-		with $\tilde{e}_1 = s_n = 0$, $\tilde{e}_2 = x^ny^n+y^nz^n+z^nx^n$,
-		$\tilde{e}_3 = e_3^n$ gives $s_{4n} = 2\tilde{e}_2^2$, so
+		so $A \mid s_{4n}$.  To evaluate $s_{4n}$, apply Newton's identities to the triple $(x^n,y^n,z^n)$
+		with $\tilde{e}_1 = s_n = 0$, $\tilde{e}_2 = x^ny^n+y^nz^n+z^nx^n$, $\tilde{e}_3 = e_3^n$.
+		First, $s_{2n} = \tilde{e}_1^2 - 2\tilde{e}_2 = -2\tilde{e}_2$.
+		Then $s_{4n} = \tilde{e}_1 s_{3n} - \tilde{e}_2 s_{2n} + \tilde{e}_3 s_n
+		= 0 - \tilde{e}_2(-2\tilde{e}_2) + 0 = 2\tilde{e}_2^2$, so
 		$A \mid 2\tilde{e}_2^2$.  Since $\gcd(A, e_3)$ divides both
 		$A$ and $e_3 = xyz$, it divides
 		\[
