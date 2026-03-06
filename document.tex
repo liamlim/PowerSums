@@ -383,6 +383,122 @@
 		Combining signs gives the stated identity.
 	\end{proof}
 	
+	\subsection{Modular reduction along multiples of $n$}
+	\label{sec:modular-reduction}
+	
+	The general power substitution theorem, applied with $k = n$, yields
+	congruences describing the two interleaved subsequences $K(jn)$ and
+	$K(jn+1)$ for all $j \geq 0$.  Both results are purely algebraic
+	consequences of Theorem~\ref{thm:power} and Lemma~\ref{lem:addition};
+	no hypothesis on $s_n$ is required.  Throughout this subsection $x$,
+	$y$, $z$ are distinct nonzero integers, so that all values $K(m)$ are
+	integers.
+	
+	\begin{definition}
+		\label{def:BnCn}
+		For any integer $n$ with $K(n) \neq 0$ and $K(n+1) \neq 0$, let
+		$d_n = \gcd(K(n),\, K(n+1))$ and define
+		\[
+		B_n \;=\; \frac{K(n)}{d_n}, \qquad C_n \;=\; \frac{K(n+1)}{d_n}.
+		\]
+	\end{definition}
+	
+	Both $B_n$ and $C_n$ are positive integers, with $B_n \mid K(n)$ and
+	$C_n \mid K(n+1)$.  They are coprime by construction: any common
+	divisor of $B_n$ and $C_n$ would lift to a common divisor of $K(n)$
+	and $K(n+1)$ larger than $d_n$.  In the generic case $d_n = 1$ we
+	have $B_n = K(n)$ and $C_n = K(n+1)$.
+	
+	\begin{theorem}[Modular reduction formulas]
+		\label{thm:modular-reduction}
+		For all integers $j \geq 0$,
+		\begin{align}
+			K(jn)   &\;\equiv\; K(n+1)^2 \cdot K_j(x^n,\,y^n,\,z^n) \pmod{B_n}, \label{eq:mod-Kn}\\
+			K(jn+1) &\;\equiv\; -e_1 \cdot K(n) \cdot K(n+2) \cdot K_j(x^n,\,y^n,\,z^n) \pmod{C_n}. \label{eq:mod-Kn1}
+		\end{align}
+	\end{theorem}
+	\begin{proof}
+		Set $k = n$ in Theorem~\ref{thm:power} to obtain the central identity:
+		\begin{equation}
+			\frac{\Delta_n}{\Delta} \cdot K_j(x^n,y^n,z^n)
+			\;=\; K(jn) \cdot K(n+1) - K(jn+1) \cdot K(n).
+			\label{eq:central}
+		\end{equation}
+		We evaluate the prefactor $\Delta_n/\Delta$ modulo $K(n)$ and modulo
+		$K(n+1)$ separately, using the $j=2$ special case of
+		Theorem~\ref{thm:power} (recalling $K_2 = 1$ for any triple):
+		\[
+		\frac{\Delta_n}{\Delta} \;=\; K(2n) \cdot K(n+1) - K(2n+1) \cdot K(n).
+		\]
+		
+		\smallskip\noindent\textit{Modulo $K(n)$.}
+		The term $K(2n+1) \cdot K(n)$ vanishes, leaving
+		$\Delta_n/\Delta \equiv K(2n) \cdot K(n+1) \pmod{K(n)}$.
+		From Lemma~\ref{lem:addition} with $m = n$, we have
+		$K(2n) \equiv K(n+1)^2 \pmod{K(n)}$, so
+		\[
+		\frac{\Delta_n}{\Delta} \;\equiv\; K(n+1)^3 \pmod{K(n)}.
+		\]
+		Reducing~\eqref{eq:central} modulo $K(n)$ kills $K(jn+1) \cdot K(n)$,
+		giving $K(n+1)^3 \cdot K_j \equiv K(jn) \cdot K(n+1) \pmod{K(n)}$.
+		Dividing by $K(n+1)$ — valid at the cost of replacing the modulus
+		$K(n)$ by $B_n$ — yields~\eqref{eq:mod-Kn}.
+		
+		\smallskip\noindent\textit{Modulo $K(n+1)$.}
+		The term $K(2n) \cdot K(n+1)$ vanishes, leaving
+		$\Delta_n/\Delta \equiv -K(2n+1) \cdot K(n) \pmod{K(n+1)}$.
+		From Lemma~\ref{lem:addition} with $m = n+1$, and reducing mod $K(n+1)$
+		using $L(n) \equiv -e_1 \cdot K(n)$ and
+		$K(n+2) \equiv e_3 \cdot K(n-1) - e_2 \cdot K(n) \pmod{K(n+1)}$:
+		\[
+		K(2n+1) \;\equiv\; L(n) \cdot K(n+2) \;\equiv\; -e_1 \cdot K(n) \cdot K(n+2) \pmod{K(n+1)},
+		\]
+		where the last expression uses the recurrence identity
+		$K(n+2) \equiv e_3 \cdot K(n-1) - e_2 \cdot K(n) \pmod{K(n+1)}$,
+		which is simply the recurrence for $K$ with the $K(n+1)$ term dropped.
+		Hence
+		\[
+		\frac{\Delta_n}{\Delta} \;\equiv\; e_1 \cdot K(n)^2 \cdot K(n+2) \pmod{K(n+1)}.
+		\]
+		Reducing~\eqref{eq:central} modulo $K(n+1)$ kills $K(jn) \cdot K(n+1)$,
+		giving
+		\[
+		e_1 \cdot K(n)^2 \cdot K(n+2) \cdot K_j \;\equiv\; -K(jn+1) \cdot K(n) \pmod{K(n+1)}.
+		\]
+		Dividing by $K(n)$ — valid at the cost of replacing $K(n+1)$ by $C_n$
+		— yields~\eqref{eq:mod-Kn1}.
+	\end{proof}
+	
+	\begin{remark}
+		The two formulas are two faces of the same identity~\eqref{eq:central},
+		distinguished only by which modulus is used.  Together they give a
+		complete description of both interleaved subsequences $K(jn)$ and
+		$K(jn+1)$ in terms of the single sequence $K_j(x^n,y^n,z^n)$, scaled
+		by fixed scalars that depend only on $n$.  In this sense $K$ is
+		self-similar under index scaling by $n$, up to the correction factor
+		$d_n = \gcd(K(n), K(n+1))$.
+		
+		The scalars are not arbitrary: $K(n+1)^2$ in~\eqref{eq:mod-Kn} and
+		$e_1 \cdot K(n) \cdot K(n+2)$ in~\eqref{eq:mod-Kn1} are related by
+		Cassini-type identities for $K$.
+		
+		Specialising at small $j$: both sides of each formula vanish at $j=0$
+		and $j=1$, consistent with $K(0)=K(1)=0$ and $K_0=K_1=0$.  At $j=2$,
+		\eqref{eq:mod-Kn} gives $K(2n) \equiv K(n+1)^2 \pmod{B_n}$,
+		recovering the computation in the proof; \eqref{eq:mod-Kn1} gives
+		$K(2n+1) \equiv -e_1 \cdot K(n) \cdot K(n+2) \pmod{C_n}$.
+		For $j=3$ with the additional hypothesis $s_n = 0$, both
+		$K_3(x^n,y^n,z^n) = s_n = 0$ and $K_{3}$ vanish, so
+		$K(3n) \equiv 0 \pmod{B_n}$ and $K(3n+1) \equiv 0 \pmod{C_n}$,
+		strengthening the divisibility results of
+		Theorem~\ref{thm:flt-divisibility}.
+		
+		Once one establishes $d_n = \gcd(K(n), K(n+1)) \mid 3$ — a result
+		we plan to incorporate — both moduli satisfy $B_n \geq K(n)/3$ and
+		$C_n \geq K(n+1)/3$, so the loss from each cancellation step is at
+		most a factor of three.
+	\end{remark}
+	
 	% -----------------------------------------------------------------------
 	\section{Consequences of $s_n = 0$ over the reals}
 	\label{sec:sn-zero}
