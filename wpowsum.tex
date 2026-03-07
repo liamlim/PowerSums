@@ -241,6 +241,28 @@
 	The following proposition gives the first direct connection between the
 	lifted and unlifted spaces.
 	
+	\begin{proposition}[Lift is a ring homomorphism]
+		\label{prop:lift_homomorphism}
+		For any integer $k$ and any expressions $A$, $B$ built from $(x, y, z)$,
+		\begin{align*}
+			\lift{A + B}{k} &= \lift{A}{k} + \lift{B}{k}, \\
+			\lift{A \cdot B}{k} &= \lift{A}{k} \cdot \lift{B}{k}.
+		\end{align*}
+	\end{proposition}
+	
+	\begin{proposition}[Lift commutes with sequence evaluation]
+		\label{prop:lift_commutes_eval}
+		For any integers $k$ and $n$,
+		\[ \lift{K(n)}{k} = \lift{K}{k}(n), \]
+		and the same identity holds for $L(n)$ and $M(n)$.
+	\end{proposition}
+	
+	\begin{proposition}[Composition of lifts]
+		\label{prop:lift_composition}
+		For any integers $a$, $b$ and any expression $Q$ built from $(x, y, z)$,
+		\[ \lift{\lift{Q}{a}}{b} = \lift{Q}{ab}. \]
+	\end{proposition}
+	
 	\begin{proposition}
 		\label{prop:lifted_K_def}
 		For any integers $k$ and $n$,
