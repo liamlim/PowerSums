@@ -209,6 +209,40 @@
 		Apply (\ref{thm:decomposition}) with weights $(a,b,c) = (w_x, w_y, w_z)$ and divide throughout by $\Delta$.
 	\end{proof}
 	
+	\begin{lemma}[Antisymmetric weight evaluations]
+		\label{lem:antisym_weights}
+		For any integer $n$,
+		\begin{align*}
+			f_0(y^n-z^n,\, z^n-x^n,\, x^n-y^n) &= 0, \\
+			f_1(y^n-z^n,\, z^n-x^n,\, x^n-y^n) &= -\Delta\, K(n), \\
+			f_2(y^n-z^n,\, z^n-x^n,\, x^n-y^n) &= \Delta\, L(n).
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		The first line is (\ref{thm:vanishing}). For the second, expand directly and apply (\ref{cor:decomp_m0}) with weights $(w_x, w_y, w_z)$ to recognise the result as $-f_n(w_x, w_y, w_z) = -\Delta\,K(n)$. For the third, expand to get $f_n(z^2-y^2, x^2-z^2, y^2-x^2)$, then apply (\ref{cor:decomp_m0}) with weights $(z^2-y^2, x^2-z^2, y^2-x^2)$; one computes $f_1 = \Delta$ and $f_2 = 0$ for these weights by (\ref{thm:vanishing}) and direct substitution, so the decomposition reduces to $L(n)\cdot\Delta$.
+	\end{proof}
+	
+	\begin{theorem}[Negative index]
+		\label{thm:negative_index}
+		For any integer $n$,
+		\[ e_3^n \cdot K(-n) = K(n+1)\,L(n) - L(n+1)\,K(n). \]
+	\end{theorem}
+	\begin{proof}
+		One verifies directly that $\Delta \cdot e_3^n \cdot K(-n) = f_{n+1}(y^n-z^n,\, z^n-x^n,\, x^n-y^n)$.
+		Apply (\ref{cor:decomp_m0}) to the right-hand side with weights $(y^n-z^n, z^n-x^n, x^n-y^n)$; the $M(n+1)$ term vanishes by (\ref{thm:vanishing}), leaving
+		\[ \Delta \cdot e_3^n \cdot K(-n) = K(n+1)\,f_2(y^n-z^n, \ldots) + L(n+1)\,f_1(y^n-z^n, \ldots). \]
+		Substitute (\ref{lem:antisym_weights}) and divide by $\Delta$.
+	\end{proof}
+	
+	\begin{corollary}
+		\label{cor:negative_index_K}
+		For any integer $n$,
+		\[ e_3^n \cdot K(-n) = K(n+1)^2 - K(n+2)\,K(n). \]
+	\end{corollary}
+	\begin{proof}
+		Expand $L(n) = K(n+1) - e_1 K(n)$ and $L(n+1) = K(n+2) - e_1 K(n+1)$ in (\ref{thm:negative_index}); the $e_1$ terms cancel.
+	\end{proof}
+	
 	\begin{corollary}[$s_n$ in terms of $K$]
 		\label{cor:sn_K}
 		For any integer $n$,
@@ -283,7 +317,7 @@
 		\end{align*}
 	\end{lemma}
 	\begin{proof}
-		The first line is (\ref{thm:vanishing}) applied in the lifted triplet. For the second and third lines, apply (\ref{cor:decomp_m0}) in the lifted triplet with weights $(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})$ at $n=1$ and $n=2$ respectively, then use (\ref{prop:lift_commutes_eval}) and the definitions of $K$ and $L$ to simplify.
+		Since $\lift{w_x}{n} = y^n - z^n$, $\lift{w_y}{n} = z^n - x^n$, $\lift{w_z}{n} = x^n - y^n$, this is a direct restatement of (\ref{lem:antisym_weights}) in lift notation.
 	\end{proof}
 	
 	\begin{theorem}
@@ -433,7 +467,7 @@
 		Dividing by $\Gdelta{n} \cdot \lift{e_2}{n}^2$ yields $A = -\lift{e_2}{n}$.
 	\end{proof}
 	
-		\begin{theorem}
+	\begin{theorem}
 		\label{thm:master_identity}
 		For any integer $j$:
 		\[ K(3n+j) = A\cdot K(n+j) + e_3^n\cdot K(j) \]
