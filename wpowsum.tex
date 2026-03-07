@@ -266,16 +266,16 @@
 	\begin{proposition}
 		\label{prop:lifted_K_def}
 		For any integers $k$ and $n$,
-		\[ \lift{\Delta}{k}\lift{K}{k}(n) = f_{kn}(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}). \]
+		\[ \lift{\Delta}{n}\lift{K}{n}(k) = f_{kn}(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}). \]
 	\end{proposition}
 	
 	\begin{lemma}
 		\label{lem:lifted_weights_eval}
 		For any integer $k$,
 		\begin{align*}
-			f_0(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= 0, \\
-			f_1(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= -\Delta\, K(k), \\
-			f_2(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= \Delta\, L(k).
+			f_0(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= 0, \\
+			f_1(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= -\Delta\, K(n), \\
+			f_2(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= \Delta\, L(n).
 		\end{align*}
 	\end{lemma}
 	
@@ -283,22 +283,22 @@
 		\label{thm:lifted_K_connection}
 		For any integers $k$ and $n$,
 		\[
-		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
-		= K(kn)\,L(k) - L(kn)\,K(k).
+		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		= K(kn)\,L(n) - L(kn)\,K(n).
 		\]
 	\end{theorem}
 	
 	\begin{proof}
 		By Proposition~\ref{prop:lifted_K_def} and Corollary~\ref{cor:decomp_m0},
 		\begin{align*}
-			\lift{\Delta}{k} \cdot \lift{K}{k}(n) &= f_{kn}(\lift{w_x}{k}, \lift{w_y}{k}, \lift{w_z}{k})\\
-			&= K(kn)\,f_2(\lift{w_x}{k},\ldots) + L(kn)\,f_1(\lift{w_x}{k},\ldots) + M(kn)\,f_0(\lift{w_x}{k},\ldots).
+			\lift{\Delta}{n} \cdot \lift{K}{n}(k) &= f_{kn}(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})\\
+			&= K(kn)\,f_2(\lift{w_x}{n},\ldots) + L(kn)\,f_1(\lift{w_x}{n},\ldots) + M(kn)\,f_0(\lift{w_x}{n},\ldots).
 		\end{align*}
 		
 		Substituting Lemma~\ref{lem:lifted_weights_eval} and dividing by $\Delta$:
 		\[
-		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
-		= K(kn)\,L(k) - L(kn)\,K(k).
+		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		= K(kn)\,L(n) - L(kn)\,K(n).
 		\]
 	\end{proof}
 	
@@ -306,21 +306,44 @@
 		\label{cor:lifted_K_pure}
 		For any integers $k$ and $n$,
 		\[
-		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
-		= K(kn)\,K(k+1) - K(kn+1)\,K(k).
+		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		= K(kn)\,K(n+1) - K(kn+1)\,K(n).
 		\]
 	\end{corollary}
 	
 	\begin{corollary}[$\Delta$ ratio]
 		\label{cor:delta_ratio}
-		For any integer $k$,
-		\[ \frac{\lift{\Delta}{k}}{\Delta} = K(2k)\,K(k+1) - K(2k+1)\,K(k). \]
+		For any integer $n$,
+		\[ \frac{\lift{\Delta}{n}}{\Delta} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
 	\end{corollary}
 	
-	\begin{corollary}[$s_k$ via lifted $\Delta$]
+	\begin{corollary}[$s_n$ via lifted $\Delta$]
 		\label{cor:sk_lifted}
-		For any integer $k$,
-		\[ \frac{\lift{\Delta}{k}}{\Delta} \cdot s_k = K(3k)\,K(k+1) - K(3k+1)\,K(k). \]
+		For any integer $n$,
+		\[ \frac{\lift{\Delta}{n}}{\Delta} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
 	\end{corollary}
+
+% ---------------------------------------------------------------------------
+\section{The Zero Sum Assumption}
+\label{sec:sn_zero}
+% ---------------------------------------------------------------------------
+
+Throughout this section we will assume $s_n = 0$.
+
+\begin{theorem}
+	$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
+\end{theorem}
+
+\begin{theorem}
+	$$-\frac{\lift{\Delta}{n}}{\Delta}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n)$$
+\end{theorem}
+
+\begin{theorem}
+	$$\frac{\lift{\Delta}{n}}{\Delta}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n)$$
+\end{theorem}
+
+\begin{theorem}
+	$$\frac{\lift{\Delta}{n}}{\Delta}\cdot\lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = K(3nm)\cdot K(n+1) - K(3nm+1)\cdot K(n)$$
+\end{theorem}
 	
 \end{document}
