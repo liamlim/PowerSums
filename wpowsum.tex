@@ -431,4 +431,13 @@
 		Start with (\ref{cor:delta_ratio}) and set $n := 3n$. Apply (\ref{cor:A_shift}) and (\ref{def:A}). On the right side apply (\ref{cor:lifted_K_pure}) with $k := 6$. Then apply (\ref{cor:lifted_k_values}) on the right side to get the result.
 	\end{proof}
 	
+	\begin{theorem}
+		\label{thm:master_identity}
+		For any integer $j$:
+		\[ K(3n+j) = A\cdot K(n+j) + e_3^n\cdot K(j) \]
+	\end{theorem}
+	\begin{proof}
+		Both sides of equation follow the same recurrence, so they need to agree on three consecutive terms $j \in \{0,1,2\}$. For $j=2$ use (\ref{cor:A_shift}) and (\ref{def:A}).
+	\end{proof}
+	
 \end{document}
