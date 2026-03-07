@@ -40,7 +40,7 @@
 	\label{sec:setup}
 	% ---------------------------------------------------------------------------
 	
-	Throughout this section, let $(x,y,z)\in\mathbb{R}^3$ be a fixed triplet such that:
+	Throughout this document, let $(x,y,z)\in\mathbb{R}^3$ be a fixed triplet such that:
 	\begin{itemize}
 		\item $xyz \neq 0$,
 		\item $x \neq y, y \neq z, \text{ and } z \neq x$.
@@ -93,17 +93,6 @@
 		$\Delta = -w_x w_y w_z.$
 		In particular, $\Delta \neq 0$ since $x, y, z$ are pairwise distinct.
 	\end{lemma}
-	
-	\begin{proof}
-		Expanding $-w_x w_y w_z = -(y-z)(z-x)(x-y)$:
-		\begin{align*}
-			-(y-z)(z-x)(x-y)
-			&= -(y-z)\bigl(zx - zy - x^2 + xy\bigr) \\
-			&= -(zxy - zy^2 - x^2y + xy^2 - z^2x + z^2y + x^2z - xyz) \\
-			&= x^2(y-z) - y^2(x-z) + z^2(x-y) \\
-			&= w_x x^2 + w_y y^2 + w_z z^2 = \Delta. \qedhere
-		\end{align*}
-	\end{proof}
 	
 	\begin{definition}
 		For each $n \in \mathbb{Z}$, we define the normalized power sum $K(n)$ by
@@ -166,23 +155,11 @@
 		\[ M(n+3) = e_1 M(n+2) - e_2 M(n+1) + e_3 M(n). \]
 	\end{corollary}
 	
-	\begin{proof}
-		Since $L(n) = K(n+1) - e_1 K(n)$ is a linear combination of shifted copies of $K$, and each shifted copy satisfies the Universal Recurrence, so does $L(n)$. Similarly, $M(n) = e_3 K(n-1)$ is a constant scalar multiple of a shifted copy of $K$, and therefore satisfies the same recurrence.
-	\end{proof}
-	
 	\begin{corollary}[Alternative expression for $M$]
 		\label{m_by_kl}
 		For all $n \in \mathbb{Z}$,
 		\[ M(n) = L(n+1) + e_2 K(n). \]
 	\end{corollary}
-	
-	\begin{proof}
-		Expanding the right-hand side using the definitions of $L$ and $K$:
-		\[ L(n+1) + e_2 K(n) = K(n+2) - e_1 K(n+1) + e_2 K(n). \]
-		Shifting the Universal Recurrence $K(n+3) = e_1 K(n+2) - e_2 K(n+1) + e_3 K(n)$ by $n \mapsto n-1$ and rearranging gives:
-		\[ e_3 K(n-1) = K(n+2) - e_1 K(n+1) + e_2 K(n). \]
-		The left-hand side is exactly $M(n)$ by definition.
-	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\subsection{Initial Values for K, L, M}
@@ -204,31 +181,6 @@
 			\end{tabular}
 		\end{center}
 	\end{theorem}
-	
-	\begin{proof}
-		\textit{Values of $K$.}
-		$K(0) = 0$ and $K(1) = 0$ follow directly from Theorem~\ref{thm:vanishing},
-		since $f_0(w_x,w_y,w_z) = f_1(w_x,w_y,w_z) = 0$.
-		For $K(2)$, the numerator is $f_2(w_x,w_y,w_z) = \Delta$ by definition, so $K(2) = 1$.
-		
-		\textit{Values of $L$:}
-		Using $L(n) = K(n+1) - e_1 K(n)$:
-		\begin{align*}
-			L(0) &= K(1) - e_1 K(0) = 0, \\
-			L(1) &= K(2) - e_1 K(1) = 1, \\
-			L(2) &= K(3) - e_1 K(2).
-		\end{align*}
-		Applying the recurrence at $n=0$ gives $K(3) = e_1 K(2) - e_2 K(1) + e_3 K(0) = e_1$,
-		so $L(2) = e_1 - e_1 = 0$.
-		
-		\textit{Values of $M$:}
-		Using $M(n) = e_3 K(n-1)$:
-		\begin{align*}
-			M(1) &= e_3 K(0) = 0, \\
-			M(2) &= e_3 K(1) = 0.
-		\end{align*}
-		For $M(0)$, we use Corollary~\ref{m_by_kl}: $M(0) = L(1) + e_2 K(0) = 1 + 0 = 1$.
-	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\section{Decomposition Theorem}
@@ -271,40 +223,11 @@
 		\[ K(n+m) = K(n)\,K(m+2) + L(n)\,K(m+1) + M(n)\,K(m). \]
 	\end{corollary}
 	
-	\begin{proof}
-		Fix $m$ and regard both sides as sequences in $n$. Both satisfy the Universal
-		Recurrence in $n$: the left-hand side by Corollary~\ref{cor:recurrence_K}, and the right-hand side
-		since $K$, $L$, $M$ do by Corollaries~\ref{cor:recurrence_K} and~\ref{cor:recurrence_LM}.
-		Equality at $n = 0, 1, 2$ follows from Theorem~\ref{thm:initial_values}:
-		\begin{align*}
-			n=0: &\quad K(0)\,K(m+2) + L(0)\,K(m+1) + M(0)\,K(m) = K(m), \\
-			n=1: &\quad K(1)\,K(m+2) + L(1)\,K(m+1) + M(1)\,K(m) = K(m+1), \\
-			n=2: &\quad K(2)\,K(m+2) + L(2)\,K(m+1) + M(2)\,K(m) = K(m+2).
-		\end{align*}
-		Since the recurrence uniquely determines a sequence from three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
-	\end{proof}
-	
 	\begin{corollary}[$s_n$ in terms of $K$]
 		\label{cor:sn_K}
 		For any integer $n$,
 		\[ s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \]
 	\end{corollary}
-	
-	\begin{proof}
-		Since $s_n = f_n(1,1,1)$, Corollary~\ref{cor:decomp_m0} gives:
-		\[ s_n = K(n)\,s_2 + L(n)\,s_1 + M(n)\,s_0. \]
-		Substituting $s_0 = 3$, $s_1 = e_1$, $s_2 = e_1^2 - 2e_2$, and $L(n) = K(n+1) - e_1 K(n)$:
-		\begin{align*}
-			s_n &= K(n)(e_1^2 - 2e_2) + (K(n+1) - e_1 K(n))\,e_1 + M(n)\cdot 3 \\
-			&= e_1 K(n+1) - 2e_2 K(n) + 3M(n).
-		\end{align*}
-		Substituting $M(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$ from Corollary~\ref{m_by_kl}:
-		\begin{align*}
-			s_n &= e_1 K(n+1) - 2e_2 K(n) + 3\bigl(K(n+2) - e_1 K(n+1) + e_2 K(n)\bigr) \\
-			&= 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \qedhere
-		\end{align*}
-	\end{proof}
-	
 	
 	% ---------------------------------------------------------------------------
 	\section{The Lifted Space}
