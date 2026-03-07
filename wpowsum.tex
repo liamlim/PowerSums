@@ -178,6 +178,12 @@
 		\end{center}
 	\end{theorem}
 	
+	\begin{proposition}[Negative index reflection]
+		\label{prop:negative_index}
+		For any integer $n$,
+		\[ K(-n) = \frac{K(n)}{e_3^n}. \]
+	\end{proposition}
+	
 	% ---------------------------------------------------------------------------
 	\section{Decomposition Theorem}
 	\label{sec:decomposition}
@@ -280,26 +286,31 @@
 		\]
 	\end{proof}
 	
-	\begin{remark}
-		Running the recurrence backwards gives $K(-1) = \frac{1}{e_3}$.
-	\end{remark}
+	\begin{corollary}[Lifted $K$]
+		\label{cor:lifted_K_pure}
+		For any integers $k$ and $n$,
+		\[
+		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
+		= K(kn)\,K(k+1) - K(kn+1)\,K(k).
+		\]
+	\end{corollary}
 	
 	\begin{corollary}[$\Delta$ ratio via negative index]
 		\label{cor:delta_ratio_neg}
 		For any integer $k$,
-		\[ e_3^k\bigl(K(-k)\,L(k) - L(-k)\,K(k)\bigr) = \frac{\lift{\Delta}{k}}{\Delta}. \]
+		\[ e_3^k\cdot \bigl(K(-k)\,L(k) - L(-k)\,K(k)\bigr) = \frac{\lift{\Delta}{k}}{\Delta}. \]
 	\end{corollary}
 	
 	\begin{corollary}[$\Delta$ ratio]
 		\label{cor:delta_ratio}
 		For any integer $k$,
-		\[ \frac{\lift{\Delta}{k}}{\Delta} = K(2k)\,L(k) - L(2k)\,K(k). \]
+		\[ \frac{\lift{\Delta}{k}}{\Delta} = K(2k)\,K(k+1) - K(2k+1)\,K(k). \]
 	\end{corollary}
 	
 	\begin{corollary}[$s_k$ via lifted $\Delta$]
 		\label{cor:sk_lifted}
 		For any integer $k$,
-		\[ \frac{\lift{\Delta}{k}}{\Delta} \cdot s_k = K(3k)\,L(k) - L(3k)\,K(k). \]
+		\[ \frac{\lift{\Delta}{k}}{\Delta} \cdot s_k = K(3k)\,K(k+1) - K(3k+1)\,K(k). \]
 	\end{corollary}
 	
 \end{document}
