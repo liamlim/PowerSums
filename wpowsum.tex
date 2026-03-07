@@ -10,6 +10,7 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{remark}[theorem]{Remark}
@@ -23,6 +24,7 @@
 % ---------------------------------------------------------------------------
 
 \newcommand{\cycsum}[1]{\sum_{\mathrm{cyc}}#1}
+\newcommand{\lift}[2]{[#1]_{#2}}
 
 \begin{document}
 	\maketitle
@@ -75,32 +77,11 @@
 	\begin{theorem}[Vanishing Sums]
 		\label{thm:vanishing}
 		The following identities hold for the weighted power sums:
-		\begin{enumerate}
-			\item $f_0(w_x, w_y, w_z) = 0$
-			\item $f_1(w_x, w_y, w_z) = 0$
-		\end{enumerate}
+		\begin{align*}
+			f_0(w_x, w_y, w_z) &= 0\\
+			f_1(w_x, w_y, w_z) &= 0
+		\end{align*}
 	\end{theorem}
-	
-	\begin{proof}
-		For the first identity, by the definition of $s_0$, we have:
-		\[
-		f_0(w_x, w_y, w_z) = w_x x^0 + w_y y^0 + w_z z^0 = \cycsum{w_x}.
-		\]
-		Substituting the definitions of the weights:
-		\[
-		(y - z) + (z - x) + (x - y) = 0.
-		\]
-		
-		For the second identity, the definition of $f_1$ gives:
-		\[
-		f_1(w_x, w_y, w_z) = w_x x^1 + w_y y^1 + w_z z^1 = \cycsum{x(y-z)}.
-		\]
-		Expanding the terms:
-		\[
-		xy - xz + yz - yx + zx - zy = 0.
-		\]
-		This completes the proof.
-	\end{proof}
 	
 	\begin{definition}
 		We define $\Delta$ as the weighted power sum of degree 2:
@@ -271,9 +252,9 @@
 		It therefore suffices to check equality at $n = 0, 1, 2$, which follows immediately
 		from Theorem~\ref{thm:initial_values}:
 		\begin{align*}
-			n=0: &\quad K(0)\,f_{m+2} + L(0)\,f_{m+1} + M(0)\,f_m = f_m = f_{0+m}, \\
-			n=1: &\quad K(1)\,f_{m+2} + L(1)\,f_{m+1} + M(1)\,f_m = f_{m+1} = f_{1+m}, \\
-			n=2: &\quad K(2)\,f_{m+2} + L(2)\,f_{m+1} + M(2)\,f_m = f_{m+2} = f_{2+m}.
+			n=0: &\quad K(0)\,f_{m+2} + L(0)\,f_{m+1} + M(0)\,f_m = f_m, \\
+			n=1: &\quad K(1)\,f_{m+2} + L(1)\,f_{m+1} + M(1)\,f_m = f_{m+1}, \\
+			n=2: &\quad K(2)\,f_{m+2} + L(2)\,f_{m+1} + M(2)\,f_m = f_{m+2}.
 		\end{align*}
 		Since the recurrence uniquely determines a sequence from any three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
 	\end{proof}
@@ -282,8 +263,6 @@
 		\label{cor:decomp_m0}
 		For any weights $(a, b, c)$ and any integer $n$,
 		\[ f_n(a,b,c) = K(n)\,f_2(a,b,c) + L(n)\,f_1(a,b,c) + M(n)\,f_0(a,b,c). \]
-		In particular, every weighted power sum is a linear combination of $f_0$, $f_1$,
-		$f_2$ with coefficients drawn from $K$, $L$, $M$.
 	\end{corollary}
 	
 	\begin{corollary}[Decomposition for $K$]
@@ -298,9 +277,9 @@
 		since $K$, $L$, $M$ do by Corollaries~\ref{cor:recurrence_K} and~\ref{cor:recurrence_LM}.
 		Equality at $n = 0, 1, 2$ follows from Theorem~\ref{thm:initial_values}:
 		\begin{align*}
-			n=0: &\quad K(0)\,K(m+2) + L(0)\,K(m+1) + M(0)\,K(m) = K(m) = K(0+m), \\
-			n=1: &\quad K(1)\,K(m+2) + L(1)\,K(m+1) + M(1)\,K(m) = K(m+1) = K(1+m), \\
-			n=2: &\quad K(2)\,K(m+2) + L(2)\,K(m+1) + M(2)\,K(m) = K(m+2) = K(2+m).
+			n=0: &\quad K(0)\,K(m+2) + L(0)\,K(m+1) + M(0)\,K(m) = K(m), \\
+			n=1: &\quad K(1)\,K(m+2) + L(1)\,K(m+1) + M(1)\,K(m) = K(m+1), \\
+			n=2: &\quad K(2)\,K(m+2) + L(2)\,K(m+1) + M(2)\,K(m) = K(m+2).
 		\end{align*}
 		Since the recurrence uniquely determines a sequence from three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
 	\end{proof}
@@ -319,12 +298,67 @@
 			s_n &= K(n)(e_1^2 - 2e_2) + (K(n+1) - e_1 K(n))\,e_1 + M(n)\cdot 3 \\
 			&= e_1 K(n+1) - 2e_2 K(n) + 3M(n).
 		\end{align*}
-		Substituting $M(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$ from Corollary~\ref{m_by_kl}
-		(with the recurrence rearranged as $M(n) = L(n+1) + e_2 K(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$):
+		Substituting $M(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$ from Corollary~\ref{m_by_kl}:
 		\begin{align*}
 			s_n &= e_1 K(n+1) - 2e_2 K(n) + 3\bigl(K(n+2) - e_1 K(n+1) + e_2 K(n)\bigr) \\
 			&= 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \qedhere
 		\end{align*}
+	\end{proof}
+	
+	
+	% ---------------------------------------------------------------------------
+	\section{The Lifted Space}
+	\label{sec:lifted}
+	% ---------------------------------------------------------------------------
+	
+	For any integer $k$, the triplet $(x^k, y^k, z^k)$ is nonzero and
+	pairwise distinct (using $xyz \neq 0$ and $x, y, z$ pairwise distinct),
+	so it satisfies the same assumptions as $(x, y, z)$.
+	The entire framework of the preceding sections therefore applies verbatim
+	with $(x^k, y^k, z^k)$ in place of $(x, y, z)$. For any expression $Q$
+	built from the triplet $(x, y, z)$, we write $\lift{Q}{k}$ for the
+	corresponding expression in the triplet $(x^k, y^k, z^k)$. 
+	
+	The following proposition gives the first direct connection between the
+	lifted and unlifted spaces.
+	
+	\begin{proposition}
+		\label{prop:lifted_K_def}
+		For any integers $k$ and $n$,
+		\[ \lift{\Delta}{k}\lift{K}{k}(n) = f_{kn}(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}). \]
+	\end{proposition}
+	
+	\begin{lemma}
+		\label{lem:lifted_weights_eval}
+		For any integer $k$,
+		\begin{align*}
+			f_0(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= 0, \\
+			f_1(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= -\Delta\, K(k), \\
+			f_2(\lift{w_x}{k},\, \lift{w_y}{k},\, \lift{w_z}{k}) &= \Delta\, L(k).
+		\end{align*}
+	\end{lemma}
+	
+	\begin{theorem}
+		\label{thm:lifted_K_connection}
+		For any integers $k$ and $n$,
+		\[
+		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
+		= K(kn)\,L(k) - L(kn)\,K(k).
+		\]
+	\end{theorem}
+	
+	\begin{proof}
+		By Proposition~\ref{prop:lifted_K_def} and Corollary~\ref{cor:decomp_m0},
+		\begin{align*}
+			\lift{\Delta}{k} \cdot \lift{K}{k}(n) &= f_{kn}(\lift{w_x}{k}, \lift{w_y}{k}, \lift{w_z}{k})\\
+			&= K(kn)\,f_2(\lift{w_x}{k},\ldots) + L(kn)\,f_1(\lift{w_x}{k},\ldots) + M(kn)\,f_0(\lift{w_x}{k},\ldots).
+		\end{align*}
+
+		Substituting Lemma~\ref{lem:lifted_weights_eval} and dividing by $\Delta$:
+		\[
+		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
+		= K(kn)\,L(k) - L(kn)\,K(k).
+		\]
 	\end{proof}
 	
 \end{document}
