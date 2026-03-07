@@ -72,7 +72,8 @@
 		\end{align*}
 	\end{definition}
 	
-	\begin{theorem}
+	\begin{theorem}[Vanishing Sums]
+		\label{thm:vanishing}
 		The following identities hold for the weighted power sums:
 		\begin{enumerate}
 			\item $f_0(w_x, w_y, w_z) = 0$
@@ -106,11 +107,22 @@
 		\[ \Delta = f_2(w_x, w_y, w_z) = w_x x^2 + w_y y^2 + w_z z^2 = \cycsum{w_x x^2}. \]
 	\end{definition}
 	
-	\begin{remark}
-		Since $x, y, z$ are pairwise distinct, one can verify that
-		\[ \Delta = (x - y)(y - z)(z - x) \neq 0. \]
-		This ensures that $K(n)$ defined below is well-defined.
-	\end{remark}
+	\begin{lemma}
+		\label{lem:delta_factored}
+		$\Delta = -w_x w_y w_z.$
+		In particular, $\Delta \neq 0$ since $x, y, z$ are pairwise distinct.
+	\end{lemma}
+	
+	\begin{proof}
+		Expanding $-w_x w_y w_z = -(y-z)(z-x)(x-y)$:
+		\begin{align*}
+			-(y-z)(z-x)(x-y)
+			&= -(y-z)\bigl(zx - zy - x^2 + xy\bigr) \\
+			&= -(zxy - zy^2 - x^2y + xy^2 - z^2x + z^2y + x^2z - xyz) \\
+			&= x^2(y-z) - y^2(x-z) + z^2(x-y) \\
+			&= w_x x^2 + w_y y^2 + w_z z^2 = \Delta. \qedhere
+		\end{align*}
+	\end{proof}
 	
 	\begin{definition}
 		For each $n \in \mathbb{Z}$, we define the normalized power sum $K(n)$ by
@@ -128,6 +140,7 @@
 	\end{definition}
 	
 	\begin{theorem}[Universal Recurrence]
+		\label{thm:universal_recurrence}
 		For any fixed weights $(a, b, c)$ and any integer $n$, the weighted power sum $f_n(a, b, c)$ satisfies the linear recurrence:
 		\[ f_{n+3} = e_1 f_{n+2} - e_2 f_{n+1} + e_3 f_n. \]
 	\end{theorem}
@@ -147,12 +160,13 @@
 	\end{proof}
 	
 	\begin{corollary}[Recurrence of $K$]
+		\label{cor:recurrence_K}
 		The normalized sequence $K(n)$ satisfies the same recurrence:
 		\[ K(n+3) = e_1 K(n+2) - e_2 K(n+1) + e_3 K(n). \]
 	\end{corollary}
 	
 	\begin{proof}
-		Recall that $K(n) = f_n(w_x, w_y, w_z) / \Delta$. Since the Universal Recurrence is linear in the weights $(a, b, c)$ and $\Delta \neq 0$ is a constant, dividing throughout by $\Delta$ gives the same recurrence for $K(n)$.
+		Recall that $K(n) = f_n(w_x, w_y, w_z) / \Delta$. Since Theorem~\ref{thm:universal_recurrence} is linear in the weights $(a, b, c)$ and $\Delta \neq 0$ is a constant, dividing throughout by $\Delta$ gives the same recurrence for $K(n)$.
 	\end{proof}
 	
 	\subsection{Definition L, M}
@@ -165,6 +179,7 @@
 	\end{definition}
 	
 	\begin{corollary}[Recurrence of $L$ and $M$]
+		\label{cor:recurrence_LM}
 		Both companion sequences satisfy the same recurrence:
 		\[ L(n+3) = e_1 L(n+2) - e_2 L(n+1) + e_3 L(n), \]
 		\[ M(n+3) = e_1 M(n+2) - e_2 M(n+1) + e_3 M(n). \]
@@ -196,6 +211,7 @@
 	We now compute the values of $K$, $L$, and $M$ at indices $n = 0, 1, 2$.
 	
 	\begin{theorem}[Initial Values]
+		\label{thm:initial_values}
 		The sequences $K$, $L$, $M$ take the following values:
 		\begin{center}
 			\begin{tabular}{c|ccc}
@@ -210,7 +226,7 @@
 	
 	\begin{proof}
 		\textit{Values of $K$.}
-		$K(0) = 0$ and $K(1) = 0$ follow directly from Theorem~\ref{sec:setup}.1.5,
+		$K(0) = 0$ and $K(1) = 0$ follow directly from Theorem~\ref{thm:vanishing},
 		since $f_0(w_x,w_y,w_z) = f_1(w_x,w_y,w_z) = 0$.
 		For $K(2)$, the numerator is $f_2(w_x,w_y,w_z) = \Delta$ by definition, so $K(2) = 1$.
 		
@@ -230,7 +246,63 @@
 			M(1) &= e_3 K(0) = 0, \\
 			M(2) &= e_3 K(1) = 0.
 		\end{align*}
-		For $M(0)$, we use (\ref{m_by_kl}): $M(0) = L(1) + e_2 K(0) = 1 + 0 = 1$.
+		For $M(0)$, we use Corollary~\ref{m_by_kl}: $M(0) = L(1) + e_2 K(0) = 1 + 0 = 1$.
+	\end{proof}
+	
+	% ---------------------------------------------------------------------------
+	\section{Decomposition Theorem}
+	\label{sec:decomposition}
+	% ---------------------------------------------------------------------------
+	
+	\begin{theorem}[Decomposition]
+		\label{thm:decomposition}
+		For any weights $(a, b, c)$ and any integers $n, m$,
+		\[ f_{n+m}(a,b,c) = K(n)\,f_{m+2}(a,b,c) + L(n)\,f_{m+1}(a,b,c) + M(n)\,f_m(a,b,c). \]
+	\end{theorem}
+	
+	\begin{proof}
+		Fix $m$ and $(a,b,c)$, and regard both sides as sequences in $n$. The left-hand
+		side $f_{n+m}$ satisfies the Universal Recurrence in $n$ by Theorem~\ref{thm:universal_recurrence}.
+		The right-hand side is a linear combination of $K(n)$, $L(n)$, $M(n)$ with
+		constant coefficients $f_{m+2}$, $f_{m+1}$, $f_m$; since each of $K$, $L$, $M$
+		satisfies the same recurrence by Corollaries~\ref{cor:recurrence_K} and~\ref{cor:recurrence_LM},
+		so does the right-hand side.
+		
+		It therefore suffices to check equality at $n = 0, 1, 2$, which follows immediately
+		from Theorem~\ref{thm:initial_values}:
+		\begin{align*}
+			n=0: &\quad K(0)\,f_{m+2} + L(0)\,f_{m+1} + M(0)\,f_m = f_m = f_{0+m}, \\
+			n=1: &\quad K(1)\,f_{m+2} + L(1)\,f_{m+1} + M(1)\,f_m = f_{m+1} = f_{1+m}, \\
+			n=2: &\quad K(2)\,f_{m+2} + L(2)\,f_{m+1} + M(2)\,f_m = f_{m+2} = f_{2+m}.
+		\end{align*}
+		Since the recurrence uniquely determines a sequence from any three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
+	\end{proof}
+	
+	\begin{corollary}[Decomposition at $m = 0$]
+		\label{cor:decomp_m0}
+		For any weights $(a, b, c)$ and any integer $n$,
+		\[ f_n(a,b,c) = K(n)\,f_2(a,b,c) + L(n)\,f_1(a,b,c) + M(n)\,f_0(a,b,c). \]
+		In particular, every weighted power sum is a linear combination of $f_0$, $f_1$,
+		$f_2$ with coefficients drawn from $K$, $L$, $M$.
+	\end{corollary}
+	
+	\begin{corollary}[Decomposition for $K$]
+		\label{cor:decomp_K}
+		For any integers $n, m$,
+		\[ K(n+m) = K(n)\,K(m+2) + L(n)\,K(m+1) + M(n)\,K(m). \]
+	\end{corollary}
+	
+	\begin{proof}
+		Fix $m$ and regard both sides as sequences in $n$. Both satisfy the Universal
+		Recurrence in $n$: the left-hand side by Corollary~\ref{cor:recurrence_K}, and the right-hand side
+		since $K$, $L$, $M$ do by Corollaries~\ref{cor:recurrence_K} and~\ref{cor:recurrence_LM}.
+		Equality at $n = 0, 1, 2$ follows from Theorem~\ref{thm:initial_values}:
+		\begin{align*}
+			n=0: &\quad K(0)\,K(m+2) + L(0)\,K(m+1) + M(0)\,K(m) = K(m) = K(0+m), \\
+			n=1: &\quad K(1)\,K(m+2) + L(1)\,K(m+1) + M(1)\,K(m) = K(m+1) = K(1+m), \\
+			n=2: &\quad K(2)\,K(m+2) + L(2)\,K(m+1) + M(2)\,K(m) = K(m+2) = K(2+m).
+		\end{align*}
+		Since the recurrence uniquely determines a sequence from three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
 	\end{proof}
 	
 \end{document}
