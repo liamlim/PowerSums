@@ -307,7 +307,7 @@
 		\]
 	\end{corollary}
 	\begin{proof}
-		Apply (\ref{thm:lifted_K_connection}) and substitute $L(n) = K(n+1) - e_1 K(n)$; the $e_1 K(n)$ terms cancel after using (\ref{cor:decomp_K}) to rewrite $L(kn)\,K(n)$.
+		Apply (\ref{thm:lifted_K_connection}) and expand $L(n) = K(n+1) - e_1 K(n)$ and $L(kn) = K(kn+1) - e_1 K(kn)$; the $e_1 K(kn) K(n)$ terms cancel.
 	\end{proof}
 	
 	\begin{corollary}[$\Delta$ ratio]
@@ -325,7 +325,7 @@
 		\[ \Gdelta{n} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
 	\end{corollary}
 	\begin{proof}
-		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) applied in the lifted triplet to identify $\lift{K}{n}(3) = s_n$ up to the appropriate normalization.
+		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) in the lifted triplet to express $\lift{\Delta}{n} \cdot \lift{K}{n}(3) = \Gdelta{n} \cdot \Delta \cdot s_n$; dividing by $\Delta$ gives the result.
 	\end{proof}
 	
 	% ---------------------------------------------------------------------------
@@ -385,7 +385,7 @@
 		\[ -\Gdelta{n}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n). \]
 	\end{theorem}
 	\begin{proof}
-		Follows from (\ref{thm:zero_sum_3n}) by setting $m := 4$.
+		Set $k = 4$ in (\ref{cor:lifted_K_pure}) and simplify $\lift{K}{n}(4)$ using (\ref{cor:recurrence_K}) in the lifted triplet together with (\ref{thm:zero_sum_3n}) and (\ref{cor:lifted_e1e2}).
 	\end{proof}
 	
 	\begin{theorem}
@@ -393,7 +393,7 @@
 		\[ \Gdelta{n}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n). \]
 	\end{theorem}
 	\begin{proof}
-		Follows from (\ref{thm:zero_sum_3n}) by setting $m := 5$.
+		Set $k = 5$ in (\ref{cor:lifted_K_pure}) and simplify $\lift{K}{n}(5)$ using (\ref{cor:recurrence_K}) in the lifted triplet together with (\ref{thm:zero_sum_3n}), (\ref{cor:lifted_e1e2}), and $\lift{e_3}{n} = e_3^n$.
 	\end{proof}
 	
 	\begin{lemma}
@@ -410,7 +410,7 @@
 		\[ \Gdelta{n}\cdot \lift{e_2}{n}\cdot A = \Gdelta{3n}. \]
 	\end{theorem}
 	\begin{proof}
-		Multiply (\ref{lem:k3n}) by $\Gamma_{3n}\cdot\Gamma_n$ and apply (\ref{thm:zero_sum_3n}) on both sides. On the left, apply (\ref{cor:A_shift}) and (\ref{def:A}). Choose $m$ so that the common factor on both sides is nonzero and divide to obtain the result.
+		Multiply (\ref{lem:k3n}) by $\Gamma_{3n}\cdot\Gamma_n$ and apply (\ref{cor:lifted_K_pure}) on both sides. On the left, apply (\ref{cor:A_shift}) and (\ref{def:A}). Choose $m$ so that the common factor on both sides is nonzero and divide to obtain the result.
 	\end{proof}
 	
 \end{document}
