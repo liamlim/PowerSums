@@ -305,4 +305,26 @@
 		Since the recurrence uniquely determines a sequence from three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
 	\end{proof}
 	
+	\begin{corollary}[$s_n$ in terms of $K$]
+		\label{cor:sn_K}
+		For any integer $n$,
+		\[ s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \]
+	\end{corollary}
+	
+	\begin{proof}
+		Since $s_n = f_n(1,1,1)$, Corollary~\ref{cor:decomp_m0} gives:
+		\[ s_n = K(n)\,s_2 + L(n)\,s_1 + M(n)\,s_0. \]
+		Substituting $s_0 = 3$, $s_1 = e_1$, $s_2 = e_1^2 - 2e_2$, and $L(n) = K(n+1) - e_1 K(n)$:
+		\begin{align*}
+			s_n &= K(n)(e_1^2 - 2e_2) + (K(n+1) - e_1 K(n))\,e_1 + M(n)\cdot 3 \\
+			&= e_1 K(n+1) - 2e_2 K(n) + 3M(n).
+		\end{align*}
+		Substituting $M(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$ from Corollary~\ref{m_by_kl}
+		(with the recurrence rearranged as $M(n) = L(n+1) + e_2 K(n) = K(n+2) - e_1 K(n+1) + e_2 K(n)$):
+		\begin{align*}
+			s_n &= e_1 K(n+1) - 2e_2 K(n) + 3\bigl(K(n+2) - e_1 K(n+1) + e_2 K(n)\bigr) \\
+			&= 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \qedhere
+		\end{align*}
+	\end{proof}
+	
 \end{document}
