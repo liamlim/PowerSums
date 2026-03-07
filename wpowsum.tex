@@ -25,6 +25,7 @@
 
 \newcommand{\cycsum}[1]{\sum_{\mathrm{cyc}}#1}
 \newcommand{\lift}[2]{[#1]_{#2}}
+\newcommand{\Gdelta}[1]{\Gamma_{#1}}
 
 \begin{document}
 	\maketitle
@@ -238,8 +239,10 @@
 	built from the triplet $(x, y, z)$, we write $\lift{Q}{k}$ for the
 	corresponding expression in the triplet $(x^k, y^k, z^k)$. 
 	
-	The following proposition gives the first direct connection between the
-	lifted and unlifted spaces.
+	\begin{definition}
+		For any integer $n$, we define
+		\[ \Gdelta{k} = \frac{\lift{\Delta}{k}}{\Delta}. \]
+	\end{definition}
 	
 	\begin{proposition}[Lift is a ring homomorphism]
 		\label{prop:lift_homomorphism}
@@ -283,7 +286,7 @@
 		\label{thm:lifted_K_connection}
 		For any integers $k$ and $n$,
 		\[
-		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		\Gdelta{n} \cdot \lift{K}{n}(k)
 		= K(kn)\,L(n) - L(kn)\,K(n).
 		\]
 	\end{theorem}
@@ -297,7 +300,7 @@
 		
 		Substituting Lemma~\ref{lem:lifted_weights_eval} and dividing by $\Delta$:
 		\[
-		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		\Gdelta{n} \cdot \lift{K}{n}(k)
 		= K(kn)\,L(n) - L(kn)\,K(n).
 		\]
 	\end{proof}
@@ -306,7 +309,7 @@
 		\label{cor:lifted_K_pure}
 		For any integers $k$ and $n$,
 		\[
-		\frac{\lift{\Delta}{n}}{\Delta} \cdot \lift{K}{n}(k)
+		\Gdelta{n} \cdot \lift{K}{n}(k)
 		= K(kn)\,K(n+1) - K(kn+1)\,K(n).
 		\]
 	\end{corollary}
@@ -314,36 +317,49 @@
 	\begin{corollary}[$\Delta$ ratio]
 		\label{cor:delta_ratio}
 		For any integer $n$,
-		\[ \frac{\lift{\Delta}{n}}{\Delta} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
+		\[ \Gdelta{n} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
 	\end{corollary}
 	
 	\begin{corollary}[$s_n$ via lifted $\Delta$]
 		\label{cor:sk_lifted}
 		For any integer $n$,
-		\[ \frac{\lift{\Delta}{n}}{\Delta} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
+		\[ \Gdelta{n} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
 	\end{corollary}
-
-% ---------------------------------------------------------------------------
-\section{The Zero Sum Assumption}
-\label{sec:sn_zero}
-% ---------------------------------------------------------------------------
-
-Throughout this section we will assume $s_n = 0$.
-
-\begin{theorem}
-	$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
-\end{theorem}
-
-\begin{theorem}
-	$$-\frac{\lift{\Delta}{n}}{\Delta}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n)$$
-\end{theorem}
-
-\begin{theorem}
-	$$\frac{\lift{\Delta}{n}}{\Delta}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n)$$
-\end{theorem}
-
-\begin{theorem}
-	$$\frac{\lift{\Delta}{n}}{\Delta}\cdot\lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = K(3nm)\cdot K(n+1) - K(3nm+1)\cdot K(n)$$
-\end{theorem}
+	
+	% ---------------------------------------------------------------------------
+	\section{The Zero Sum Assumption}
+	\label{sec:sn_zero}
+	% ---------------------------------------------------------------------------
+	
+	Throughout this section we will assume $s_n = 0$.
+	
+	\begin{theorem}
+		$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
+	\end{theorem}
+	
+	\begin{definition}
+		Assuming $K(n)\ne 0$ let's define $A$ by formula
+		$$A \cdot K(n) = K(3n)$$
+	\end{definition}
+	
+	\begin{corollary}
+		$$A\cdot K(n+1) = K(3n+1)$$
+	\end{corollary}
+	
+	\begin{theorem}
+		$$-\Gdelta{n}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n)$$
+	\end{theorem}
+	
+	\begin{theorem}
+		$$\Gdelta{n}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n)$$
+	\end{theorem}
+	
+	\begin{theorem}
+		$$\Gdelta{n}\cdot\lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = K(3nm)\cdot K(n+1) - K(3nm+1)\cdot K(n)$$
+	\end{theorem}
+	
+	\begin{theorem}
+		$$\Gdelta{3n} = \Gdelta{n}\cdot \lift{e_2}{n}\cdot A$$
+	\end{theorem}
 	
 \end{document}
