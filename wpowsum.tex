@@ -32,10 +32,6 @@
 	\newpage
 	
 	% ---------------------------------------------------------------------------
-	\section*{Introduction}
-	% ---------------------------------------------------------------------------
-	
-	% ---------------------------------------------------------------------------
 	\section{Setup and Conventions}
 	\label{sec:setup}
 	% ---------------------------------------------------------------------------
@@ -116,7 +112,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		By definition, $x, y, \text{ and } z$ are the roots of $P(t) = 0$. Therefore, for each $t \in \{x, y, z\}$, we have:
+		By definition, $x, y, \text{ and } z$ are the roots of $P(t) = 0$. Since $xyz \neq 0$, each root is nonzero, so we may multiply by $t^n$ for any $n \in \mathbb{Z}$. Therefore, for each $t \in \{x, y, z\}$, we have:
 		\[ t^3 - e_1 t^2 + e_2 t - e_3 = 0 \implies t^{n+3} = e_1 t^{n+2} - e_2 t^{n+1} + e_3 t^n. \]
 		We multiply this equation by the respective weights $a, b, \text{ and } c$:
 		\begin{align*}
@@ -139,7 +135,7 @@
 		Recall that $K(n) = f_n(w_x, w_y, w_z) / \Delta$. Since Theorem~\ref{thm:universal_recurrence} is linear in the weights $(a, b, c)$ and $\Delta \neq 0$ is a constant, dividing throughout by $\Delta$ gives the same recurrence for $K(n)$.
 	\end{proof}
 	
-	\subsection{Definition L, M}
+	\subsection{Companion Sequences}
 	\begin{definition}
 		We define the companion sequences $L(n)$ and $M(n)$ for all $n \in \mathbb{Z}$ by:
 		\begin{align*}
@@ -276,7 +272,7 @@
 			\lift{\Delta}{k} \cdot \lift{K}{k}(n) &= f_{kn}(\lift{w_x}{k}, \lift{w_y}{k}, \lift{w_z}{k})\\
 			&= K(kn)\,f_2(\lift{w_x}{k},\ldots) + L(kn)\,f_1(\lift{w_x}{k},\ldots) + M(kn)\,f_0(\lift{w_x}{k},\ldots).
 		\end{align*}
-
+		
 		Substituting Lemma~\ref{lem:lifted_weights_eval} and dividing by $\Delta$:
 		\[
 		\frac{\lift{\Delta}{k}}{\Delta} \cdot \lift{K}{k}(n)
