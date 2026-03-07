@@ -37,11 +37,7 @@
 	\label{sec:setup}
 	% ---------------------------------------------------------------------------
 	
-	Throughout this document, let $(x,y,z)\in\mathbb{R}^3$ be a fixed triplet such that:
-	\begin{itemize}
-		\item $xyz \neq 0$,
-		\item $x \neq y, y \neq z, \text{ and } z \neq x$.
-	\end{itemize}
+	Throughout, let $(x,y,z)\in\mathbb{R}^3$ be a fixed triplet with $xyz \neq 0$ and $x, y, z$ pairwise distinct.
 	
 	\begin{definition}
 		We define the elementary symmetric polynomials $e_1, e_2, e_3$ as
@@ -58,7 +54,7 @@
 	\end{definition}
 	
 	\begin{definition}
-		For any $n \in \mathbb{Z}$, let $s_n$ denote the absolute power sum
+		For any $n \in \mathbb{Z}$, let $s_n$ denote the unweighted power sum
 		\[ s_n = f_n(1, 1, 1) = x^n + y^n + z^n = \cycsum{x^n}. \]
 	\end{definition}
 	
@@ -73,12 +69,11 @@
 	
 	\begin{theorem}[Vanishing Sums]
 		\label{thm:vanishing}
-		The following identities hold for the weighted power sums:
-		\begin{align*}
-			f_0(w_x, w_y, w_z) &= 0\\
-			f_1(w_x, w_y, w_z) &= 0
-		\end{align*}
+		$f_0(w_x, w_y, w_z) = 0$ and $f_1(w_x, w_y, w_z) = 0$.
 	\end{theorem}
+	\begin{proof}
+		Substitute $w_x, w_y, w_z$ and collect terms: $f_0 = (y-z)+(z-x)+(x-y) = 0$, and $f_1 = x(y-z) + y(z-x) + z(x-y) = 0$.
+	\end{proof}
 	
 	\begin{definition}
 		We define $\Delta$ as the weighted power sum of degree 2:
@@ -90,6 +85,9 @@
 		$\Delta = -w_x w_y w_z.$
 		In particular, $\Delta \neq 0$ since $x, y, z$ are pairwise distinct.
 	\end{lemma}
+	\begin{proof}
+		Expand $-(y-z)(z-x)(x-y)$ directly and collect terms to recover $w_x x^2 + w_y y^2 + w_z z^2 = \Delta$.
+	\end{proof}
 	
 	\begin{definition}
 		For each $n \in \mathbb{Z}$, we define the normalized power sum $K(n)$ by
@@ -102,28 +100,18 @@
 	% ---------------------------------------------------------------------------
 	
 	\begin{definition}
-		We define the \emph{characteristic polynomial} $P(t)$ associated with the triplet $(x, y, z)$ as:
+		The \emph{characteristic polynomial} of $(x, y, z)$ is
 		\[ P(t) = (t-x)(t-y)(t-z) = t^3 - e_1 t^2 + e_2 t - e_3. \]
 	\end{definition}
 	
 	\begin{theorem}[Universal Recurrence]
 		\label{thm:universal_recurrence}
-		For any fixed weights $(a, b, c)$ and any integer $n$, the weighted power sum $f_n(a, b, c)$ satisfies the linear recurrence:
+		For any weights $(a, b, c)$ and any integer $n$,
 		\[ f_{n+3} = e_1 f_{n+2} - e_2 f_{n+1} + e_3 f_n. \]
 	\end{theorem}
 	
 	\begin{proof}
-		By definition, $x, y, \text{ and } z$ are the roots of $P(t) = 0$. Since $xyz \neq 0$, each root is nonzero, so we may multiply by $t^n$ for any $n \in \mathbb{Z}$. Therefore, for each $t \in \{x, y, z\}$, we have:
-		\[ t^3 - e_1 t^2 + e_2 t - e_3 = 0 \implies t^{n+3} = e_1 t^{n+2} - e_2 t^{n+1} + e_3 t^n. \]
-		We multiply this equation by the respective weights $a, b, \text{ and } c$:
-		\begin{align*}
-			a x^{n+3} &= a(e_1 x^{n+2} - e_2 x^{n+1} + e_3 x^n) \\
-			b y^{n+3} &= b(e_1 y^{n+2} - e_2 y^{n+1} + e_3 y^n) \\
-			c z^{n+3} &= c(e_1 z^{n+2} - e_2 z^{n+1} + e_3 z^n)
-		\end{align*}
-		Summing these three equations yields:
-		\[ \cycsum{ax^{n+3}} = e_1 \cycsum{ax^{n+2}} - e_2 \cycsum{ax^{n+1}} + e_3 \cycsum{ax^n}. \]
-		By the definition of $f_n$, this is exactly $f_{n+3} = e_1 f_{n+2} - e_2 f_{n+1} + e_3 f_n$.
+		Since $x, y, z$ are roots of $P(t) = 0$ and each is nonzero, multiply $P(t) = 0$ by $t^n$ to get the recurrence for each root individually; then multiply by the respective weights $a, b, c$ and sum over $\{x, y, z\}$ to obtain the result.
 	\end{proof}
 	
 	\begin{corollary}[Recurrence of $K$]
@@ -133,7 +121,7 @@
 	\end{corollary}
 	
 	\begin{proof}
-		Recall that $K(n) = f_n(w_x, w_y, w_z) / \Delta$. Since Theorem~\ref{thm:universal_recurrence} is linear in the weights $(a, b, c)$ and $\Delta \neq 0$ is a constant, dividing throughout by $\Delta$ gives the same recurrence for $K(n)$.
+		$K(n) = f_n(w_x, w_y, w_z) / \Delta$ and $\Delta \neq 0$ is constant, so dividing (\ref{thm:universal_recurrence}) throughout by $\Delta$ gives the same recurrence for $K(n)$.
 	\end{proof}
 	
 	\subsection{Companion Sequences}
@@ -151,23 +139,28 @@
 		\[ L(n+3) = e_1 L(n+2) - e_2 L(n+1) + e_3 L(n), \]
 		\[ M(n+3) = e_1 M(n+2) - e_2 M(n+1) + e_3 M(n). \]
 	\end{corollary}
+	\begin{proof}
+		For $L$: substitute the definition $L(n) = K(n+1) - e_1 K(n)$ into the right-hand side and apply (\ref{cor:recurrence_K}) to reduce to the left-hand side. For $M$: substitute $M(n) = e_3 K(n-1)$, factor out $e_3$, and apply (\ref{cor:recurrence_K}) with index shifted by $-1$.
+	\end{proof}
 	
 	\begin{corollary}[Alternative expression for $M$]
-		\label{m_by_kl}
+		\label{cor:m_by_kl}
 		For all $n \in \mathbb{Z}$,
 		\[ M(n) = L(n+1) + e_2 K(n). \]
 	\end{corollary}
+	\begin{proof}
+		Substitute $L(n+1) = K(n+2) - e_1 K(n+1)$ and $M(n) = e_3 K(n-1)$, then apply (\ref{cor:recurrence_K}) to replace $e_3 K(n-1)$ with $K(n+2) - e_1 K(n+1) - e_2 K(n)$.
+	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\subsection{Initial Values for K, L, M}
 	\label{sec:initial}
 	% ---------------------------------------------------------------------------
 	
-	We now compute the values of $K$, $L$, and $M$ at indices $n = 0, 1, 2$.
+	We now compute $K$, $L$, $M$ at $n = 0, 1, 2$.
 	
 	\begin{theorem}[Initial Values]
 		\label{thm:initial_values}
-		The sequences $K$, $L$, $M$ take the following values:
 		\begin{center}
 			\begin{tabular}{c|ccc}
 				$n$ & $K(n)$ & $L(n)$ & $M(n)$ \\
@@ -178,6 +171,9 @@
 			\end{tabular}
 		\end{center}
 	\end{theorem}
+	\begin{proof}
+		By (\ref{thm:vanishing}), the numerators $f_0$ and $f_1$ vanish, so $K(0) = K(1) = 0$; and $f_2(w_x,w_y,w_z) = \Delta$ by definition, so $K(2) = 1$. The values of $L$ and $M$ follow by substituting into their definitions.
+	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\section{Decomposition Theorem}
@@ -191,21 +187,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		Fix $m$ and $(a,b,c)$, and regard both sides as sequences in $n$. The left-hand
-		side $f_{n+m}$ satisfies the Universal Recurrence in $n$ by Theorem~\ref{thm:universal_recurrence}.
-		The right-hand side is a linear combination of $K(n)$, $L(n)$, $M(n)$ with
-		constant coefficients $f_{m+2}$, $f_{m+1}$, $f_m$; since each of $K$, $L$, $M$
-		satisfies the same recurrence by Corollaries~\ref{cor:recurrence_K} and~\ref{cor:recurrence_LM},
-		so does the right-hand side.
-		
-		It therefore suffices to check equality at $n = 0, 1, 2$, which follows immediately
-		from Theorem~\ref{thm:initial_values}:
-		\begin{align*}
-			n=0: &\quad K(0)\,f_{m+2} + L(0)\,f_{m+1} + M(0)\,f_m = f_m, \\
-			n=1: &\quad K(1)\,f_{m+2} + L(1)\,f_{m+1} + M(1)\,f_m = f_{m+1}, \\
-			n=2: &\quad K(2)\,f_{m+2} + L(2)\,f_{m+1} + M(2)\,f_m = f_{m+2}.
-		\end{align*}
-		Since the recurrence uniquely determines a sequence from any three consecutive values, the two sides agree for all $n \in \mathbb{Z}$.
+		Fix $m$ and $(a,b,c)$ and regard both sides as sequences in $n$. Both satisfy the same recurrence by (\ref{thm:universal_recurrence}), (\ref{cor:recurrence_K}), and (\ref{cor:recurrence_LM}). Check equality at $n = 0, 1, 2$ using (\ref{thm:initial_values}); since a linear recurrence is uniquely determined by three consecutive values, the identity holds for all $n \in \mathbb{Z}$.
 	\end{proof}
 	
 	\begin{corollary}[Decomposition at $m = 0$]
@@ -213,34 +195,40 @@
 		For any weights $(a, b, c)$ and any integer $n$,
 		\[ f_n(a,b,c) = K(n)\,f_2(a,b,c) + L(n)\,f_1(a,b,c) + M(n)\,f_0(a,b,c). \]
 	\end{corollary}
+	\begin{proof}
+		Set $m = 0$ in (\ref{thm:decomposition}).
+	\end{proof}
 	
 	\begin{corollary}[Decomposition for $K$]
 		\label{cor:decomp_K}
 		For any integers $n, m$,
 		\[ K(n+m) = K(n)\,K(m+2) + L(n)\,K(m+1) + M(n)\,K(m). \]
 	\end{corollary}
+	\begin{proof}
+		Apply (\ref{thm:decomposition}) with weights $(a,b,c) = (w_x, w_y, w_z)$ and divide throughout by $\Delta$.
+	\end{proof}
 	
 	\begin{corollary}[$s_n$ in terms of $K$]
 		\label{cor:sn_K}
 		For any integer $n$,
 		\[ s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \]
 	\end{corollary}
+	\begin{proof}
+		Apply (\ref{cor:decomp_m0}) with weights $(1,1,1)$ and substitute the values $f_0(1,1,1) = 3$, $f_1(1,1,1) = e_1$, $f_2(1,1,1) = e_1^2 - 2e_2$; then use $M(n) = e_3 K(n-1)$ and (\ref{cor:recurrence_K}) to eliminate $K(n-1)$ and simplify.
+	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\section{The Lifted Space}
 	\label{sec:lifted}
 	% ---------------------------------------------------------------------------
 	
-	For any integer $k$, the triplet $(x^k, y^k, z^k)$ is nonzero and
-	pairwise distinct (using $xyz \neq 0$ and $x, y, z$ pairwise distinct),
-	so it satisfies the same assumptions as $(x, y, z)$.
-	The entire framework of the preceding sections therefore applies verbatim
+	For any integer $k$, the triplet $(x^k, y^k, z^k)$ satisfies the same assumptions as $(x, y, z)$
+	(nonzero product, pairwise distinct), so the entire framework of the preceding sections applies
 	with $(x^k, y^k, z^k)$ in place of $(x, y, z)$. For any expression $Q$
-	built from the triplet $(x, y, z)$, we write $\lift{Q}{k}$ for the
-	corresponding expression in the triplet $(x^k, y^k, z^k)$. 
+	built from $(x, y, z)$, we write $\lift{Q}{k}$ for the corresponding expression in $(x^k, y^k, z^k)$.
 	
 	\begin{definition}
-		For any integer $n$, we define
+		For any integer $k$, we define
 		\[ \Gdelta{k} = \frac{\lift{\Delta}{k}}{\Delta}. \]
 	\end{definition}
 	
@@ -252,6 +240,9 @@
 			\lift{A \cdot B}{k} &= \lift{A}{k} \cdot \lift{B}{k}.
 		\end{align*}
 	\end{proposition}
+	\begin{proof}
+		Both operations act pointwise on $x^k, y^k, z^k$.
+	\end{proof}
 	
 	\begin{proposition}[Lift commutes with sequence evaluation]
 		\label{prop:lift_commutes_eval}
@@ -259,28 +250,40 @@
 		\[ \lift{K(n)}{k} = \lift{K}{k}(n), \]
 		and the same identity holds for $L(n)$ and $M(n)$.
 	\end{proposition}
+	\begin{proof}
+		Write $K(n) = f_n(w_x, w_y, w_z)/\Delta$ and distribute the lift using (\ref{prop:lift_homomorphism}); the result is $\lift{K}{k}(n)$ by definition.
+	\end{proof}
 	
 	\begin{proposition}[Composition of lifts]
 		\label{prop:lift_composition}
 		For any integers $a$, $b$ and any expression $Q$ built from $(x, y, z)$,
 		\[ \lift{\lift{Q}{a}}{b} = \lift{Q}{ab}. \]
 	\end{proposition}
+	\begin{proof}
+		The inner lift sends $t \mapsto t^a$; the outer lift then sends $t^a \mapsto (t^a)^b = t^{ab}$, giving $\lift{Q}{ab}$.
+	\end{proof}
 	
 	\begin{proposition}
 		\label{prop:lifted_K_def}
 		For any integers $k$ and $n$,
 		\[ \lift{\Delta}{n}\lift{K}{n}(k) = f_{kn}(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}). \]
 	\end{proposition}
+	\begin{proof}
+		By definition $\lift{K}{n}(k) = f_k(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n}) / \lift{\Delta}{n}$. Multiply by $\lift{\Delta}{n}$; since $f_k$ in the triplet $(x^n, y^n, z^n)$ equals $f_{kn}$ in the original variables, the result follows.
+	\end{proof}
 	
 	\begin{lemma}
 		\label{lem:lifted_weights_eval}
-		For any integer $k$,
+		For any integer $n$,
 		\begin{align*}
 			f_0(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= 0, \\
 			f_1(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= -\Delta\, K(n), \\
 			f_2(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}) &= \Delta\, L(n).
 		\end{align*}
 	\end{lemma}
+	\begin{proof}
+		The first line is (\ref{thm:vanishing}) applied in the lifted triplet. For the second and third lines, apply (\ref{cor:decomp_m0}) in the lifted triplet with weights $(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})$ at $n=1$ and $n=2$ respectively, then use (\ref{prop:lift_commutes_eval}) and the definitions of $K$ and $L$ to simplify.
+	\end{proof}
 	
 	\begin{theorem}
 		\label{thm:lifted_K_connection}
@@ -292,17 +295,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		By Proposition~\ref{prop:lifted_K_def} and Corollary~\ref{cor:decomp_m0},
-		\begin{align*}
-			\lift{\Delta}{n} \cdot \lift{K}{n}(k) &= f_{kn}(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})\\
-			&= K(kn)\,f_2(\lift{w_x}{n},\ldots) + L(kn)\,f_1(\lift{w_x}{n},\ldots) + M(kn)\,f_0(\lift{w_x}{n},\ldots).
-		\end{align*}
-		
-		Substituting Lemma~\ref{lem:lifted_weights_eval} and dividing by $\Delta$:
-		\[
-		\Gdelta{n} \cdot \lift{K}{n}(k)
-		= K(kn)\,L(n) - L(kn)\,K(n).
-		\]
+		Apply (\ref{prop:lifted_K_def}) to expand the left-hand side as $f_{kn}(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})$, then decompose using (\ref{cor:decomp_m0}) and substitute (\ref{lem:lifted_weights_eval}); divide throughout by $\Delta$.
 	\end{proof}
 	
 	\begin{corollary}[Lifted $K$]
@@ -313,53 +306,111 @@
 		= K(kn)\,K(n+1) - K(kn+1)\,K(n).
 		\]
 	\end{corollary}
+	\begin{proof}
+		Apply (\ref{thm:lifted_K_connection}) and substitute $L(n) = K(n+1) - e_1 K(n)$; the $e_1 K(n)$ terms cancel after using (\ref{cor:decomp_K}) to rewrite $L(kn)\,K(n)$.
+	\end{proof}
 	
 	\begin{corollary}[$\Delta$ ratio]
 		\label{cor:delta_ratio}
 		For any integer $n$,
 		\[ \Gdelta{n} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
 	\end{corollary}
+	\begin{proof}
+		Set $k = 2$ in (\ref{cor:lifted_K_pure}) and use $\lift{K}{n}(2) = 1$ from (\ref{thm:initial_values}) applied in the lifted triplet.
+	\end{proof}
 	
 	\begin{corollary}[$s_n$ via lifted $\Delta$]
 		\label{cor:sk_lifted}
 		For any integer $n$,
 		\[ \Gdelta{n} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
 	\end{corollary}
+	\begin{proof}
+		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) applied in the lifted triplet to identify $\lift{K}{n}(3) = s_n$ up to the appropriate normalization.
+	\end{proof}
 	
 	% ---------------------------------------------------------------------------
 	\section{The Zero Sum Assumption}
 	\label{sec:sn_zero}
 	% ---------------------------------------------------------------------------
 	
-	Throughout this section we will assume $s_n = 0$.
+	Throughout this section we assume $s_n = 0$.
+	
+	\begin{corollary}
+		\label{cor:lifted_e1e2}
+		\begin{align*}
+			\lift{e_1}{n} &= 0\\
+			\lift{e_3}{n} &= e_3^n
+		\end{align*}
+	\end{corollary}
+	\begin{proof}
+		Both follow directly from $s_n = 0$ and the definition of the lift.
+	\end{proof}
+	
+	\begin{corollary}
+		\label{cor:lift_delta_3n}
+		\[ \lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3. \]
+	\end{corollary}
+	\begin{proof}
+		Apply (\ref{cor:delta_ratio}) with $n := 3$ and lift the result to $n$ using (\ref{prop:lift_composition}); then substitute (\ref{cor:lifted_e1e2}) to set $\lift{e_1}{n} = 0$, and simplify using (\ref{lem:delta_factored}) in the lifted triplet.
+	\end{proof}
 	
 	\begin{theorem}
-		$$K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n)$$
+		\label{thm:zero_sum_3n}
+		\[ K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n). \]
 	\end{theorem}
 	
+	\begin{proof}
+		Immediate from (\ref{cor:sk_lifted}), since $\Gdelta{n} \cdot s_n = 0$.
+	\end{proof}
+	
 	\begin{definition}
-		Assuming $K(n)\ne 0$ let's define $A$ by formula
-		$$A \cdot K(n) = K(3n)$$
+		\label{def:A}
+		For any integer $n$ with $K(n) \neq 0$, we define $A$ by
+		\[ A \cdot K(n) = K(3n). \]
 	\end{definition}
 	
 	\begin{corollary}
-		$$A\cdot K(n+1) = K(3n+1)$$
+		\label{cor:A_shift}
+		For any integer $n$ with $K(n) \neq 0$,
+		\[ A \cdot K(n+1) = K(3n+1). \]
 	\end{corollary}
 	
-	\begin{theorem}
-		$$-\Gdelta{n}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n)$$
-	\end{theorem}
+	\begin{proof}
+		Follows from (\ref{thm:zero_sum_3n}) and (\ref{def:A}):
+		\[ A \cdot K(n+1) = \frac{K(3n)}{K(n)} \cdot K(n+1) = K(3n+1). \qedhere \]
+	\end{proof}
 	
 	\begin{theorem}
-		$$\Gdelta{n}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n)$$
+		\label{thm:zero_sum_4n}
+		\[ -\Gdelta{n}\cdot \lift{e_2}{n} = K(4n)\cdot K(n+1) - K(4n+1)\cdot K(n). \]
 	\end{theorem}
+	\begin{proof}
+		Follows from (\ref{thm:zero_sum_3n}) by setting $m := 4$.
+	\end{proof}
 	
 	\begin{theorem}
-		$$\Gdelta{n}\cdot\lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = K(3nm)\cdot K(n+1) - K(3nm+1)\cdot K(n)$$
+		\label{thm:zero_sum_5n}
+		\[ \Gdelta{n}\cdot e_3^n = K(5n)\cdot K(n+1) - K(5n+1)\cdot K(n). \]
 	\end{theorem}
+	\begin{proof}
+		Follows from (\ref{thm:zero_sum_3n}) by setting $m := 5$.
+	\end{proof}
+	
+	\begin{lemma}
+		\label{lem:k3n}
+		For any integer $m$,
+		\[ \lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = \lift{K}{n}(3m). \]
+	\end{lemma}
+	\begin{proof}
+		Set $n := 3$, $k := m$ in (\ref{cor:lifted_K_pure}), lift to $n$ using (\ref{prop:lift_composition}), then substitute (\ref{cor:lifted_e1e2}) and (\ref{cor:lift_delta_3n}).
+	\end{proof}
 	
 	\begin{theorem}
-		$$\Gdelta{3n} = \Gdelta{n}\cdot \lift{e_2}{n}\cdot A$$
+		\label{thm:gamma_3n}
+		\[ \Gdelta{n}\cdot \lift{e_2}{n}\cdot A = \Gdelta{3n}. \]
 	\end{theorem}
+	\begin{proof}
+		Multiply (\ref{lem:k3n}) by $\Gamma_{3n}\cdot\Gamma_n$ and apply (\ref{thm:zero_sum_3n}) on both sides. On the left, apply (\ref{cor:A_shift}) and (\ref{def:A}). Choose $m$ so that the common factor on both sides is nonzero and divide to obtain the result.
+	\end{proof}
 	
 \end{document}
