@@ -459,6 +459,14 @@
 		Start with (\ref{cor:delta_ratio}) and set $n := 3n$. Apply (\ref{cor:A_shift}) and (\ref{def:A}). On the right side apply (\ref{cor:lifted_K_pure}) with $k := 6$. Then apply (\ref{cor:lifted_k_values}) on the right side to get the result.
 	\end{proof}
 	
+	\begin{lemma}
+		\label{lem:gamma_3}
+		\[ \lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3. \]
+	\end{lemma}
+	\begin{proof}
+		TODO
+	\end{proof}
+	
 	\begin{theorem}
 		\label{thm:A_identity}
 		The scaling constant $A$ is given by
@@ -466,7 +474,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		Apply (\ref{thm:gamma_mult}) with $m := 3$ to get $\Gdelta{3n} = \lift{\Gdelta{3}}{n} \cdot \Gdelta{n}$. Since $\Gdelta{3}$ will be lifted to $n$, and the lift sends $s_1 \mapsto s_n = 0$, we may set $s_1 = 0$ when computing $\Gdelta{3}$; one then verifies $\Gdelta{3} = -e_2^3$. Lifting to $n$ gives $\lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3$. Substituting into (\ref{thm:gamma_3n}):
+		Apply (\ref{thm:gamma_mult}) with $m := 3$ to get $\Gdelta{3n} = \lift{\Gdelta{3}}{n} \cdot \Gdelta{n}$. Substitute (\ref{lem:gamma_3}). Substituting into (\ref{thm:gamma_3n}):
 		\[ \Gdelta{n} \cdot \lift{e_2}{n}^2 \cdot A = -\lift{e_2}{n}^3 \cdot \Gdelta{n}. \]
 		Dividing by $\Gdelta{n} \cdot \lift{e_2}{n}^2$ yields $A = -\lift{e_2}{n}$.
 	\end{proof}
