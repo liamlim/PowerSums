@@ -372,6 +372,14 @@
 		Expand each factor using the definition $\Gdelta{k} = \lift{\Delta}{k}/\Delta$ and (\ref{prop:lift_composition}): $\lift{\Gdelta{m}}{n} = \lift{\Delta}{nm}/\lift{\Delta}{n}$ and $\Gdelta{n} = \lift{\Delta}{n}/\Delta$; their product telescopes to $\lift{\Delta}{nm}/\Delta = \Gdelta{nm}$.
 	\end{proof}
 	
+	\begin{lemma}
+		\label{lem:gdelta3_two_variables}
+		\[ \Gdelta{3} = (x^2+xy+y^2)(y^2+yz+z^2)(z^2+zx+x^2). \]
+	\end{lemma}
+	\begin{proof}
+		It follows directly from the definition of $\Gdelta{}$ and the definition of $\Delta$.
+	\end{proof}
+	
 	% ---------------------------------------------------------------------------
 	\section{The Zero Sum Assumption}
 	\label{sec:sn_zero}
@@ -460,11 +468,23 @@
 	\end{proof}
 	
 	\begin{lemma}
+		\label{lem:e2lift_two_variables}
+		\begin{align*}
+			-\lift{e_2}{n} &= x^{2n} + x^ny^n + y^{2n}\\
+			&= y^{2n}+y^nz^n+z^{2n}\\
+			&= z^{2n}+z^nx^n+x^{2n}
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		It follows directly from (\ref{cor:lifted_e1e2}) using $s_n = 0$.
+	\end{proof}
+	
+	\begin{lemma}
 		\label{lem:gamma_3}
 		\[ \lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3. \]
 	\end{lemma}
 	\begin{proof}
-		TODO
+		It follows directly by multiplying all formulas from (\ref{lem:e2lift_two_variables}) and lifting \ref{lem:gdelta3_two_variables}.
 	\end{proof}
 	
 	\begin{theorem}
