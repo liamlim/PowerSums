@@ -595,10 +595,12 @@
 		Substitute the definition $H_j(m) = K(nm+j)$ and apply (\ref{thm:master_identity}) with $j$ replaced by $nm+j$.
 	\end{proof}
 	
-	\begin{remark}
-		The sequence $K(m)$ has polynomial degree $m-2$ in $(x,y,z)$, so $\lift{K}{n}(m)$
-		has degree $n(m-2)$. On the other hand, $H_j(m) = K(nm+j)$ has degree $nm + (j-2)$.
-		These match precisely when $j = 2 - 2n$.
-	\end{remark}
+	\begin{theorem}
+		For any integer $j$:
+		\[ H_j(m) = \lift{K}{n}(m)\cdot H_j(2) + \lift{L}{n}(m)\cdot H_j(1) + \lift{M}{n}(m)\cdot H_j(0)\]
+	\end{theorem}
+	\begin{proof}
+		TODO: Is it even true? Investigate
+	\end{proof}
 	
 \end{document}
