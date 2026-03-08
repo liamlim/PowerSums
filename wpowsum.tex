@@ -380,6 +380,18 @@
 		It follows directly from the definition of $\Gdelta{}$ and the definition of $\Delta$.
 	\end{proof}
 	
+	\begin{lemma}[Negative lift of elementary symmetrics]
+		\label{lem:neg_lift_esym}
+		\begin{align*}
+			e_3 \cdot \lift{e_2}{-1} &= e_1, \\
+			e_3 \cdot \lift{e_1}{-1} &= e_2, \\
+			e_3 \cdot \lift{e_3}{-1} &= 1.
+		\end{align*}
+	\end{lemma}
+	\begin{proof}
+		Substitute $(x^{-1}, y^{-1}, z^{-1})$ into each $e_k$ and multiply through by $e_3 = xyz$.
+	\end{proof}
+	
 	% ---------------------------------------------------------------------------
 	\section{The Zero Sum Assumption}
 	\label{sec:sn_zero}
@@ -423,6 +435,19 @@
 	\end{corollary}
 	\begin{proof}
 		Apply (\ref{cor:sn_K}) in the lifted triplet $(x^n, y^n, z^n)$ using $\lift{e_1}{n} = 0$ and the values of $\lift{s_k}{n}$ from the preceding corollary.
+	\end{proof}
+	
+	\begin{corollary}
+		\label{cor:neg_lift_esym_zero_sum}
+		\begin{align*}
+			e_3^n \cdot \lift{e_1}{-n} &= \lift{e_2}{n}, \\
+			\lift{e_2}{-n} &= 0, \\
+			e_3^n \cdot \lift{e_3}{-n} &= 1.
+		\end{align*}
+	\end{corollary}
+	\begin{proof}
+		Lift each identity in (\ref{lem:neg_lift_esym}) to $n$ using (\ref{prop:lift_homomorphism}). Then use $s_n = 0$ and $\lift{e_3}{n} = e_3^n$
+		from (\ref{cor:lifted_e1e2}).
 	\end{proof}
 	
 	\begin{theorem}
