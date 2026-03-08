@@ -80,7 +80,7 @@
 		\[ \Delta = f_2(w_x, w_y, w_z) = w_x x^2 + w_y y^2 + w_z z^2 = \cycsum{w_x x^2}. \]
 	\end{definition}
 	
-	\begin{lemma}
+	\begin{lemma}[Factored Form of $\Delta$]
 		\label{lem:delta_factored}
 		$\Delta = -w_x w_y w_z.$
 		In particular, $\Delta \neq 0$ since $x, y, z$ are pairwise distinct.
@@ -99,6 +99,7 @@
 	\label{sec:recurrence}
 	% ---------------------------------------------------------------------------
 	
+	\subsection{The Recurrence}
 	\begin{definition}
 		The \emph{characteristic polynomial} of $(x, y, z)$ is
 		\[ P(t) = (t-x)(t-y)(t-z) = t^3 - e_1 t^2 + e_2 t - e_3. \]
@@ -181,6 +182,7 @@
 	\label{sec:decomposition}
 	% ---------------------------------------------------------------------------
 	
+	\subsection{The Decomposition}
 	\begin{theorem}[Decomposition]
 		\label{thm:decomposition}
 		For any weights $(a, b, c)$ and any integers $n, m$,
@@ -218,6 +220,7 @@
 		Apply (\ref{thm:decomposition}) with weights $(a,b,c) = (w_x, w_y, w_z)$ and divide throughout by $\Delta$.
 	\end{proof}
 	
+	\subsection{Negative Index}
 	\begin{lemma}[Antisymmetric weight evaluations]
 		\label{lem:antisym_weights}
 		For any integer $n$,
@@ -243,7 +246,7 @@
 		Substitute (\ref{lem:antisym_weights}) and divide by $\Delta$.
 	\end{proof}
 	
-	\begin{corollary}
+	\begin{corollary}[Negative Index via $K$ Only]
 		\label{cor:negative_index_K}
 		For any integer $n$,
 		\[ e_3^n \cdot K(-n) = K(n+1)^2 - K(n+2)\,K(n). \]
@@ -267,6 +270,7 @@
 		\[ \Gdelta{k} = \frac{\lift{\Delta}{k}}{\Delta}. \]
 	\end{definition}
 	
+	\subsection{Lift Properties}
 	\begin{proposition}[Lift is a ring homomorphism]
 		\label{prop:lift_homomorphism}
 		For any integer $k$ and any expressions $A$, $B$ built from $(x, y, z)$,
@@ -298,7 +302,8 @@
 		The inner lift sends $t \mapsto t^a$; the outer lift then sends $t^a \mapsto (t^a)^b = t^{ab}$, giving $\lift{Q}{ab}$.
 	\end{proof}
 	
-	\begin{proposition}
+	\subsection{Lifted $K$ and $\Delta$}
+	\begin{proposition}[Weighted Power Sum under Lift]
 		\label{prop:lifted_K_def}
 		For any integers $k$ and $n$,
 		\[ \lift{\Delta}{n}\lift{K}{n}(k) = f_{kn}(\lift{w_x}{n},\, \lift{w_y}{n},\, \lift{w_z}{n}). \]
@@ -307,7 +312,7 @@
 		By definition $\lift{K}{n}(k) = f_k(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n}) / \lift{\Delta}{n}$. Multiply by $\lift{\Delta}{n}$; since $f_k$ in the triplet $(x^n, y^n, z^n)$ equals $f_{kn}$ in the original variables, the result follows.
 	\end{proof}
 	
-	\begin{lemma}
+	\begin{lemma}[Lifted Weight Evaluations]
 		\label{lem:lifted_weights_eval}
 		For any integer $n$,
 		\begin{align*}
@@ -320,7 +325,7 @@
 		Since $\lift{w_x}{n} = y^n - z^n$, $\lift{w_y}{n} = z^n - x^n$, $\lift{w_z}{n} = x^n - y^n$, this is a direct restatement of (\ref{lem:antisym_weights}) in lift notation.
 	\end{proof}
 	
-	\begin{theorem}
+	\begin{theorem}[Lifted $K$ Connection]
 		\label{thm:lifted_K_connection}
 		For any integers $k$ and $n$,
 		\[
@@ -333,7 +338,7 @@
 		Apply (\ref{prop:lifted_K_def}) to expand the left-hand side as $f_{kn}(\lift{w_x}{n}, \lift{w_y}{n}, \lift{w_z}{n})$, then decompose using (\ref{cor:decomp_m0}) and substitute (\ref{lem:lifted_weights_eval}); divide throughout by $\Delta$.
 	\end{proof}
 	
-	\begin{corollary}[Lifted $K$]
+	\begin{corollary}[Lifted $K$ in Terms of $K$ Only]
 		\label{cor:lifted_K_pure}
 		For any integers $k$ and $n$,
 		\[
@@ -345,7 +350,7 @@
 		Apply (\ref{thm:lifted_K_connection}) and expand $L(n) = K(n+1) - e_1 K(n)$ and $L(kn) = K(kn+1) - e_1 K(kn)$; the $e_1 K(kn) K(n)$ terms cancel.
 	\end{proof}
 	
-	\begin{corollary}[$\Delta$ ratio]
+	\begin{corollary}[$\Gamma$ via $K$]
 		\label{cor:delta_ratio}
 		For any integer $n$,
 		\[ \Gdelta{n} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
@@ -363,6 +368,7 @@
 		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) in the lifted triplet via (\ref{prop:lift_commutes_eval}) to express $\lift{\Delta}{n} \cdot \lift{K}{n}(3) = \Gdelta{n} \cdot \Delta \cdot s_n$; dividing by $\Delta$ gives the result.
 	\end{proof}
 	
+	\subsection{$\Gamma$ Multiplicativity}
 	\begin{theorem}[$\Gamma$ multiplicativity]
 		\label{thm:gamma_mult}
 		For any integers $n$ and $m$,
@@ -372,7 +378,7 @@
 		Expand each factor using the definition $\Gdelta{k} = \lift{\Delta}{k}/\Delta$ and (\ref{prop:lift_composition}): $\lift{\Gdelta{m}}{n} = \lift{\Delta}{nm}/\lift{\Delta}{n}$ and $\Gdelta{n} = \lift{\Delta}{n}/\Delta$; their product telescopes to $\lift{\Delta}{nm}/\Delta = \Gdelta{nm}$.
 	\end{proof}
 	
-	\begin{lemma}
+	\begin{lemma}[Factored Form of $\Gdelta{3}$]
 		\label{lem:gdelta3_two_variables}
 		\[ \Gdelta{3} = (x^2+xy+y^2)(y^2+yz+z^2)(z^2+zx+x^2). \]
 	\end{lemma}
@@ -399,7 +405,8 @@
 	
 	Throughout this section we assume $s_n = 0$.
 	
-	\begin{corollary}
+	\subsection{Lifted Symmetrics at Zero Sum}
+	\begin{corollary}[Lifted Symmetrics under Zero Sum]
 		\label{cor:lifted_e1e2}
 		\begin{align*}
 			\lift{e_1}{n} &= 0\\
@@ -411,7 +418,7 @@
 		Both follow directly from $s_n = 0$ and the definition of the lift.
 	\end{proof}
 	
-	\begin{corollary}
+	\begin{corollary}[Lifted Power Sums under Zero Sum]
 		\label{cor:lifted_s_values}
 		\begin{align*}
 			\lift{s_1}{n} &= 0\\
@@ -424,7 +431,7 @@
 		Follows directly from lifting and using $s_n = 0$.
 	\end{proof}
 	
-	\begin{corollary}
+	\begin{corollary}[Lifted $K$ Values under Zero Sum]
 		\label{cor:lifted_k_values}
 		\begin{align*}
 			\lift{K(3)}{n} &= 0\\
@@ -437,7 +444,7 @@
 		Apply (\ref{cor:sn_K}) in the lifted triplet $(x^n, y^n, z^n)$ using $\lift{e_1}{n} = 0$ and the values of $\lift{s_k}{n}$ from the preceding corollary.
 	\end{proof}
 	
-	\begin{corollary}
+	\begin{corollary}[Negative Lift under Zero Sum]
 		\label{cor:neg_lift_esym_zero_sum}
 		\begin{align*}
 			e_3^n \cdot \lift{e_1}{-n} &= \lift{e_2}{n}, \\
@@ -450,7 +457,8 @@
 		from (\ref{cor:lifted_e1e2}).
 	\end{proof}
 	
-	\begin{theorem}
+	\subsection{The Scaling Constant $A$}
+	\begin{theorem}[$K(3n)$ Proportionality]
 		\label{thm:zero_sum_3n}
 		\[ K(3n)\cdot K(n+1) = K(3n+1)\cdot K(n). \]
 	\end{theorem}
@@ -465,7 +473,7 @@
 		\[ A \cdot K(n) = K(3n). \]
 	\end{definition}
 	
-	\begin{corollary}
+	\begin{corollary}[Shift of $A$]
 		\label{cor:A_shift}
 		For any integer $n$ with $K(n) \neq 0$,
 		\[ A \cdot K(n+1) = K(3n+1). \]
@@ -475,7 +483,7 @@
 		Follows from (\ref{thm:zero_sum_3n}) and (\ref{def:A}).
 	\end{proof}
 	
-	\begin{lemma}
+	\begin{lemma}[Tripling Lemma]
 		\label{lem:k3n}
 		For any integer $m$,
 		\[ \lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = \lift{K}{n}(3m). \]
@@ -484,7 +492,7 @@
 		Set $n := 3$, $k := m$ in (\ref{cor:lifted_K_pure}), lift to $n$ using (\ref{prop:lift_composition}), then substitute (\ref{cor:lifted_e1e2}) and (\ref{cor:lifted_k_values}).
 	\end{proof}
 	
-	\begin{theorem}
+	\begin{theorem}[$\Gamma$ Tripling Formula]
 		\label{thm:gamma_3n}
 		\[ \Gdelta{n}\cdot \lift{e_2}{n}^2\cdot A = \Gdelta{3n}. \]
 	\end{theorem}
@@ -492,7 +500,7 @@
 		Start with (\ref{cor:delta_ratio}) and set $n := 3n$. Apply (\ref{cor:A_shift}) and (\ref{def:A}). On the right side apply (\ref{cor:lifted_K_pure}) with $k := 6$. Then apply (\ref{cor:lifted_k_values}) on the right side to get the result.
 	\end{proof}
 	
-	\begin{lemma}
+	\begin{lemma}[Two-Variable Form of $\lift{e_2}{n}$]
 		\label{lem:e2lift_two_variables}
 		\begin{align*}
 			-\lift{e_2}{n} &= x^{2n} + x^ny^n + y^{2n}\\
@@ -504,7 +512,7 @@
 		It follows directly from (\ref{cor:lifted_e1e2}) using $s_n = 0$.
 	\end{proof}
 	
-	\begin{lemma}
+	\begin{lemma}[Lifted $\Gdelta{3}$ under Zero Sum]
 		\label{lem:gamma_3}
 		\[ \lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3. \]
 	\end{lemma}
@@ -524,7 +532,7 @@
 		Dividing by $\Gdelta{n} \cdot \lift{e_2}{n}^2$ yields $A = -\lift{e_2}{n}$.
 	\end{proof}
 	
-	\begin{corollary}
+	\begin{corollary}[Recurrence under Zero Sum]
 		\label{cor:sn_zero_K}
 		\[ 2e_1\,K(n+1) - e_2\,K(n) = 3K(n+2). \]
 	\end{corollary}
@@ -532,6 +540,7 @@
 		Set $s_n = 0$ in (\ref{cor:sn_K}) and rearrange.
 	\end{proof}
 	
+	\subsection{The Master Identity}
 	\begin{lemma}
 		\label{lem:K_3n2}
 		\[ K(3n+2) = A \cdot K(n+2) + e_3^n. \]
