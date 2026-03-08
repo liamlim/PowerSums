@@ -200,6 +200,15 @@
 		Set $m = 0$ in (\ref{thm:decomposition}).
 	\end{proof}
 	
+	\begin{corollary}[$s_n$ in terms of $K$]
+		\label{cor:sn_K}
+		For any integer $n$,
+		\[ s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \]
+	\end{corollary}
+	\begin{proof}
+		Apply (\ref{cor:decomp_m0}) with weights $(1,1,1)$ and simplify.
+	\end{proof}
+	
 	\begin{corollary}[Decomposition for $K$]
 		\label{cor:decomp_K}
 		For any integers $n, m$,
@@ -229,7 +238,7 @@
 	\end{theorem}
 	\begin{proof}
 		One verifies directly that $\Delta \cdot e_3^n \cdot K(-n) = f_{n+1}(y^n-z^n,\, z^n-x^n,\, x^n-y^n)$.
-		Apply (\ref{cor:decomp_m0}) to the right-hand side with weights $(y^n-z^n, z^n-x^n, x^n-y^n)$; the $M(n+1)$ term vanishes by (\ref{thm:vanishing}), leaving
+		Apply (\ref{cor:decomp_m0}) to the right-hand side with weights $(y^n-z^n, z^n-x^n, x^n-y^n)$; the $M(n+1)$ term vanishes by the first line of (\ref{lem:antisym_weights}), leaving
 		\[ \Delta \cdot e_3^n \cdot K(-n) = K(n+1)\,f_2(y^n-z^n, \ldots) + L(n+1)\,f_1(y^n-z^n, \ldots). \]
 		Substitute (\ref{lem:antisym_weights}) and divide by $\Delta$.
 	\end{proof}
@@ -241,15 +250,6 @@
 	\end{corollary}
 	\begin{proof}
 		Expand $L(n) = K(n+1) - e_1 K(n)$ and $L(n+1) = K(n+2) - e_1 K(n+1)$ in (\ref{thm:negative_index}); the $e_1$ terms cancel.
-	\end{proof}
-	
-	\begin{corollary}[$s_n$ in terms of $K$]
-		\label{cor:sn_K}
-		For any integer $n$,
-		\[ s_n = 3K(n+2) - 2e_1 K(n+1) + e_2 K(n). \]
-	\end{corollary}
-	\begin{proof}
-		Apply (\ref{cor:decomp_m0}) with weights $(1,1,1)$ and simplify.
 	\end{proof}
 	
 	% ---------------------------------------------------------------------------
@@ -351,16 +351,16 @@
 		\[ \Gdelta{n} = K(2n)\,K(n+1) - K(2n+1)\,K(n). \]
 	\end{corollary}
 	\begin{proof}
-		Set $k = 2$ in (\ref{cor:lifted_K_pure}) and use $\lift{K}{n}(2) = 1$ from (\ref{thm:initial_values}) applied in the lifted triplet.
+		Set $k = 2$ in (\ref{cor:lifted_K_pure}) and use $\lift{K}{n}(2) = 1$ from (\ref{thm:initial_values}) applied in the lifted triplet via (\ref{prop:lift_commutes_eval}).
 	\end{proof}
 	
 	\begin{corollary}[$s_n$ via lifted $\Delta$]
-		\label{cor:sk_lifted}
+		\label{cor:sn_lifted}
 		For any integer $n$,
 		\[ \Gdelta{n} \cdot s_n = K(3n)\,K(n+1) - K(3n+1)\,K(n). \]
 	\end{corollary}
 	\begin{proof}
-		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) in the lifted triplet to express $\lift{\Delta}{n} \cdot \lift{K}{n}(3) = \Gdelta{n} \cdot \Delta \cdot s_n$; dividing by $\Delta$ gives the result.
+		Set $k = 3$ in (\ref{cor:lifted_K_pure}) and use (\ref{cor:sn_K}) in the lifted triplet via (\ref{prop:lift_commutes_eval}) to express $\lift{\Delta}{n} \cdot \lift{K}{n}(3) = \Gdelta{n} \cdot \Delta \cdot s_n$; dividing by $\Delta$ gives the result.
 	\end{proof}
 	
 	\begin{theorem}[$\Gamma$ multiplicativity]
@@ -392,6 +392,7 @@
 	\end{proof}
 	
 	\begin{corollary}
+		\label{cor:lifted_s_values}
 		\begin{align*}
 			\lift{s_1}{n} &= 0\\
 			\lift{s_2}{n} &= -2\lift{e_2}{n}\\
@@ -406,12 +407,15 @@
 	\begin{corollary}
 		\label{cor:lifted_k_values}
 		\begin{align*}
-			\lift{K_3}{n} &= 0\\
-			\lift{K_4}{n} &= -\lift{e_2}{n}\\
-			\lift{K_5}{n} &= e_3^n\\
-			\lift{K_6}{n} &= \lift{e_2}{n}^n\\
+			\lift{K(3)}{n} &= 0\\
+			\lift{K(4)}{n} &= -\lift{e_2}{n}\\
+			\lift{K(5)}{n} &= e_3^n\\
+			\lift{K(6)}{n} &= \lift{e_2}{n}^2\\
 		\end{align*}
 	\end{corollary}
+	\begin{proof}
+		Apply (\ref{cor:sn_K}) in the lifted triplet $(x^n, y^n, z^n)$ using $\lift{e_1}{n} = 0$ and the values of $\lift{s_k}{n}$ from the preceding corollary.
+	\end{proof}
 	
 	\begin{theorem}
 		\label{thm:zero_sum_3n}
@@ -419,7 +423,7 @@
 	\end{theorem}
 	
 	\begin{proof}
-		Immediate from (\ref{cor:sk_lifted}), since $\Gdelta{n} \cdot s_n = 0$.
+		Immediate from (\ref{cor:sn_lifted}), since $\Gdelta{n} \cdot s_n = 0$.
 	\end{proof}
 	
 	\begin{definition}
@@ -444,7 +448,7 @@
 		\[ \lift{e_2}{n}^2\cdot \lift{K}{3n}(m) = \lift{K}{n}(3m). \]
 	\end{lemma}
 	\begin{proof}
-		Set $n := 3$, $k := m$ in (\ref{cor:lifted_K_pure}), lift to $n$ using (\ref{prop:lift_composition}), then substitute (\ref{cor:lifted_e1e2}).
+		Set $n := 3$, $k := m$ in (\ref{cor:lifted_K_pure}), lift to $n$ using (\ref{prop:lift_composition}), then substitute (\ref{cor:lifted_e1e2}) and (\ref{cor:lifted_k_values}).
 	\end{proof}
 	
 	\begin{theorem}
@@ -462,9 +466,25 @@
 	\end{theorem}
 	
 	\begin{proof}
-		Apply (\ref{thm:gamma_mult}) with $m := 3$ to get $\Gdelta{3n} = \lift{\Gdelta{3}}{n} \cdot \Gdelta{n}$. Under $s_1 = 0$ one verifies $\Gdelta{3} = -e_2^3$; lifting to $n$ gives $\lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3$. Substituting into (\ref{thm:gamma_3n}):
+		Apply (\ref{thm:gamma_mult}) with $m := 3$ to get $\Gdelta{3n} = \lift{\Gdelta{3}}{n} \cdot \Gdelta{n}$. Since $\Gdelta{3}$ will be lifted to $n$, and the lift sends $s_1 \mapsto s_n = 0$, we may set $s_1 = 0$ when computing $\Gdelta{3}$; one then verifies $\Gdelta{3} = -e_2^3$. Lifting to $n$ gives $\lift{\Gdelta{3}}{n} = -\lift{e_2}{n}^3$. Substituting into (\ref{thm:gamma_3n}):
 		\[ \Gdelta{n} \cdot \lift{e_2}{n}^2 \cdot A = -\lift{e_2}{n}^3 \cdot \Gdelta{n}. \]
 		Dividing by $\Gdelta{n} \cdot \lift{e_2}{n}^2$ yields $A = -\lift{e_2}{n}$.
+	\end{proof}
+	
+	\begin{corollary}
+		\label{cor:sn_zero_K}
+		\[ 2e_1\,K(n+1) - e_2\,K(n) = 3K(n+2). \]
+	\end{corollary}
+	\begin{proof}
+		Set $s_n = 0$ in (\ref{cor:sn_K}) and rearrange.
+	\end{proof}
+	
+	\begin{lemma}
+		\label{lem:K_3n2}
+		\[ K(3n+2) = A \cdot K(n+2) + e_3^n. \]
+	\end{lemma}
+	\begin{proof}
+		Apply (\ref{cor:sn_K}) at index $3n$. Substitute $s_{3n}$ from (\ref{cor:lifted_s_values}). Apply (\ref{def:A}) and (\ref{cor:A_shift}). Then apply (\ref{cor:sn_zero_K}). Dividing by 3 will get the result.
 	\end{proof}
 	
 	\begin{theorem}
@@ -473,7 +493,7 @@
 		\[ K(3n+j) = A\cdot K(n+j) + e_3^n\cdot K(j) \]
 	\end{theorem}
 	\begin{proof}
-		Both sides of equation follow the same recurrence, so they need to agree on three consecutive terms $j \in \{0,1,2\}$. For $j=2$ use (\ref{cor:A_shift}) and (\ref{def:A}).
+		Both sides satisfy the same recurrence in $j$ (by (\ref{thm:universal_recurrence})), so it suffices to check equality at $j = 0, 1, 2$. For $j = 0$: both sides equal $K(3n)$ by (\ref{def:A}). For $j = 1$: both sides equal $K(3n+1)$ by (\ref{cor:A_shift}). For $j = 2$: this is (\ref{lem:K_3n2}), noting $K(2) = 1$ from (\ref{thm:initial_values}).
 	\end{proof}
 	
 \end{document}
