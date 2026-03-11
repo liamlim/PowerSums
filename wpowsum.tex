@@ -25,6 +25,7 @@
 
 \newcommand{\cycsum}[1]{\sum_{\mathrm{cyc}}#1}
 \newcommand{\lift}[2]{[#1]_{#2}}
+\newcommand{\wlift}[2]{[#1]^{(#2)}}
 \newcommand{\Gdelta}[1]{\Gamma_{#1}}
 
 \begin{document}
@@ -256,8 +257,129 @@
 	\end{proof}
 	
 	% ---------------------------------------------------------------------------
-	\section{The Lifted Space}
-	\label{sec:lifted}
+	\section{The Weight Lift}
+	\label{sec:weight_lift}
+	% ---------------------------------------------------------------------------
+	
+	The \emph{weight lift} is the substitution $x \mapsto w_x,\, y \mapsto w_y,\, z \mapsto w_z$.
+	For any expression $Q$ built from $(x, y, z)$, we write $\wlift{Q}{r}$ for the result of
+	applying the weight lift $r$ times, with $\wlift{Q}{0} = Q$.  In particular,
+	$\wlift{Q}{1}$ denotes the expression obtained by replacing every occurrence of
+	$x$ by $w_x$, every $y$ by $w_y$, and every $z$ by $w_z$.
+	
+	\begin{proposition}[Weight lift is a ring homomorphism]
+		\label{prop:wlift_homomorphism}
+		For any expressions $A$, $B$ built from $(x, y, z)$,
+		\begin{align*}
+			\wlift{(A + B)}{1} &= \wlift{A}{1} + \wlift{B}{1}, \\
+			\wlift{(A \cdot B)}{1} &= \wlift{A}{1} \cdot \wlift{B}{1}.
+		\end{align*}
+	\end{proposition}
+	\begin{proof}
+		Both identities hold because the weight lift is a substitution, and substitutions
+		distribute over addition and multiplication.
+	\end{proof}
+	
+	\begin{remark}
+		Unlike the power lift (Section~\ref{sec:power_lift}), the weight lift does not
+		change the total degree of a polynomial: each variable $x, y, z$ is replaced by a
+		linear expression, so a homogeneous polynomial of degree $d$ maps to another
+		homogeneous polynomial of degree $d$.
+	\end{remark}
+	
+	\subsection{Elementary Symmetrics under the Weight Lift}
+	
+	\begin{proposition}[Weight lift of elementary symmetrics]
+		\label{prop:wlift_esym}
+		\begin{align*}
+			\wlift{e_1}{1} &= 0, \\
+			\wlift{e_2}{1} &= 3e_2 - e_1^2, \\
+			\wlift{e_3}{1} &= -\Delta.
+		\end{align*}
+	\end{proposition}
+	\begin{proof}
+		The first identity is (\ref{thm:vanishing}).
+		For the second, expand $\wlift{e_2}{1} = w_x w_y + w_y w_z + w_z w_x$ directly:
+		each term $w_i w_j = (y-z)(z-x)$ cyclically gives $\sum_{\mathrm{cyc}}(yz - yx - z^2 + zx) = e_2 - e_2 - s_2 + e_2 = e_2 - s_2$.
+		Since $s_2 = e_1^2 - 2e_2$, we obtain $\wlift{e_2}{1} = 3e_2 - e_1^2$.
+		The third identity is (\ref{lem:delta_factored}): $w_x w_y w_z = -\Delta$.
+	\end{proof}
+	
+	\begin{corollary}[Weight-lifted triplet is zero-sum]
+		\label{cor:wlift_zero_sum}
+		For any triplet $(x, y, z)$, the weight-lifted triplet $(w_x, w_y, w_z)$
+		satisfies $\wlift{e_1}{1} = 0$.  In particular, the entire zero-sum machinery
+		of Section~\ref{sec:sn_zero} applies to $(w_x, w_y, w_z)$.
+	\end{corollary}
+	\begin{proof}
+		Immediate from (\ref{prop:wlift_esym}).
+	\end{proof}
+	
+	\subsection{Iteration of the Weight Lift}
+	
+	\begin{proposition}[Second weight lift of elementary symmetrics]
+		\label{prop:wlift2_esym}
+		\begin{align*}
+			\wlift{e_1}{2} &= 0, \\
+			\wlift{e_2}{2} &= 3\,\wlift{e_2}{1}, \\
+			\wlift{e_3}{2} &= -\wlift{e_3}{1}.
+		\end{align*}
+	\end{proposition}
+	\begin{proof}
+		Apply (\ref{prop:wlift_esym}) to the triplet $(w_x, w_y, w_z)$.
+		Since $\wlift{e_1}{1} = 0$, the formula for $\wlift{e_1}{2}$ is clear.
+		For $\wlift{e_2}{2}$: apply the second line of (\ref{prop:wlift_esym})
+		with $e_1 = 0$, giving $3\wlift{e_2}{1} - 0 = 3\wlift{e_2}{1}$.
+		For $\wlift{e_3}{2}$: the weight-lifted triplet has $e_3 = \wlift{e_3}{1} = -\Delta$,
+		so $\wlift{e_3}{2} = -[{\Delta}]^{(1)}$.
+		Now $[\Delta]^{(1)} = -\wlift{w_x}{1}\wlift{w_y}{1}\wlift{w_z}{1}$ by (\ref{lem:delta_factored})
+		applied in $(w_x, w_y, w_z)$.
+		Since $\wlift{w_x}{1} = w_y - w_z$ and cyclically, this equals $-\Delta$
+		evaluated at $(w_x, w_y, w_z)$, which is $\wlift{e_3}{1}$.
+		Hence $\wlift{e_3}{2} = -\wlift{e_3}{1}$.
+	\end{proof}
+	
+	\begin{theorem}[Weight lift periodicity]
+		\label{thm:wlift_period}
+		For all $r \geq 1$,
+		\begin{align*}
+			\wlift{e_1}{r} &= 0, \\
+			\wlift{e_2}{r} &= 3^{r-1}\,\wlift{e_2}{1}, \\
+			\wlift{e_3}{r} &= (-1)^{r-1}\,\wlift{e_3}{1}.
+		\end{align*}
+		In particular, the recurrence governing $\wlift{s_n}{r}$ depends only on
+		$\wlift{e_2}{1} = 3e_2 - e_1^2$ and $\wlift{e_3}{1} = -\Delta$, scaled by
+		powers of $3$ and $\pm 1$ respectively.
+	\end{theorem}
+	\begin{proof}
+		Induction on $r$.  The base case $r = 1$ is (\ref{prop:wlift_esym}).
+		The inductive step follows from (\ref{prop:wlift2_esym}) applied repeatedly:
+		at each step $\wlift{e_1}{r} = 0$ ensures that the formula $3e_2 - e_1^2$
+		simplifies to $3e_2$, multiplying $\wlift{e_2}{1}$ by an extra factor of $3$,
+		while $\wlift{e_3}{r}$ alternates sign.
+	\end{proof}
+	
+	\subsection{Weight-Lifted Power Sums}
+	
+	\begin{definition}
+		For any $n \in \mathbb{Z}$, we write
+		\[ \wlift{s_n}{1} = w_x^n + w_y^n + w_z^n = (y-z)^n + (z-x)^n + (x-y)^n. \]
+	\end{definition}
+	
+	\begin{remark}
+		Since $(w_x, w_y, w_z)$ is a zero-sum triplet by (\ref{cor:wlift_zero_sum}),
+		all results of Section~\ref{sec:sn_zero} apply immediately to $\wlift{s_n}{1}$
+		with elementary symmetrics $\wlift{e_1}{1} = 0$,
+		$\wlift{e_2}{1} = 3e_2 - e_1^2$, and $\wlift{e_3}{1} = -\Delta$.
+		In particular, the universal recurrence gives
+		\[ \wlift{s_{n+3}}{1} = \wlift{e_2}{1}\cdot\wlift{s_{n+1}}{1}
+		- \wlift{e_3}{1}\cdot\wlift{s_n}{1}
+		= (3e_2-e_1^2)\,\wlift{s_{n+1}}{1} + \Delta\,\wlift{s_n}{1}. \]
+	\end{remark}
+	
+	% ---------------------------------------------------------------------------
+	\section{The Power Lift}
+	\label{sec:power_lift}
 	% ---------------------------------------------------------------------------
 	
 	For any integer $k$, the triplet $(x^k, y^k, z^k)$ satisfies the same assumptions as $(x, y, z)$
@@ -270,9 +392,9 @@
 		\[ \Gdelta{k} = \frac{\lift{\Delta}{k}}{\Delta}. \]
 	\end{definition}
 	
-	\subsection{Lift Properties}
-	\begin{proposition}[Lift is a ring homomorphism]
-		\label{prop:lift_homomorphism}
+	\subsection{Power Lift Properties}
+	\begin{proposition}[Power lift is a ring homomorphism]
+		\label{prop:plift_homomorphism}
 		For any integer $k$ and any expressions $A$, $B$ built from $(x, y, z)$,
 		\begin{align*}
 			\lift{A + B}{k} &= \lift{A}{k} + \lift{B}{k}, \\
@@ -290,7 +412,7 @@
 		and the same identity holds for $L(n)$ and $M(n)$.
 	\end{proposition}
 	\begin{proof}
-		Write $K(n) = f_n(w_x, w_y, w_z)/\Delta$ and distribute the lift using (\ref{prop:lift_homomorphism}); the result is $\lift{K}{k}(n)$ by definition.
+		Write $K(n) = f_n(w_x, w_y, w_z)/\Delta$ and distribute the lift using (\ref{prop:plift_homomorphism}); the result is $\lift{K}{k}(n)$ by definition.
 	\end{proof}
 	
 	\begin{proposition}[Composition of lifts]
@@ -415,7 +537,7 @@
 		\end{align*}
 	\end{corollary}
 	\begin{proof}
-		Both follow directly from $s_n = 0$ and the definition of the lift.
+		Both follow directly from $s_n = 0$ and the definition of the power lift.
 	\end{proof}
 	
 	\begin{corollary}[Lifted Power Sums under Zero Sum]
@@ -453,7 +575,7 @@
 		\end{align*}
 	\end{corollary}
 	\begin{proof}
-		Lift each identity in (\ref{lem:neg_lift_esym}) to $n$ using (\ref{prop:lift_homomorphism}). Then use $s_n = 0$ and $\lift{e_3}{n} = e_3^n$
+		Lift each identity in (\ref{lem:neg_lift_esym}) to $n$ using (\ref{prop:plift_homomorphism}). Then use $s_n = 0$ and $\lift{e_3}{n} = e_3^n$
 		from (\ref{cor:lifted_e1e2}).
 	\end{proof}
 	
