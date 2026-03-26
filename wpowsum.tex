@@ -110,7 +110,7 @@
 	\begin{definition}
 		\label{def:M}
 		For each $n \in \mathbb{Z}$, we define $M(n)$ by
-		\[ \Delta \cdot M(n) = f_n(yz\,w_x,\, zx\,w_y,\, xy\,w_z). \]
+		\[ \Delta \cdot M(n) = f_n(yz\cdot w_x,\, zx\cdot w_y,\, xy\cdot w_z). \]
 	\end{definition}
 
 	\begin{theorem}[Initial Values]
@@ -135,7 +135,7 @@
 			\Delta K(1) &= \cycsum{x\,w_x} = 0, &
 			\Delta L(1) &= \cycsum{x(z^2-y^2)} = \Delta, &
 			\Delta M(1) &= e_3\cycsum{w_x} = 0, \\
-			\Delta K(2) &= \Delta, &
+			\Delta K(2) &= \cycsum{x^2 w_x} = \Delta, &
 			\Delta L(2) &= \cycsum{x^2(z^2-y^2)} = 0, &
 			\Delta M(2) &= e_3\cycsum{x\,w_x} = 0.
 		\end{align*}
@@ -342,29 +342,6 @@
 	\end{corollary}
 	\begin{proof}
 		Add the three definitions directly.
-	\end{proof}
-
-	\begin{theorem}[$D$-Complement Identity]
-		\label{lem:D_complement}
-		For any integers $k$ and $n$, and any weights $(a, b, c) \in \mathbb{R}^3$,
-		\begin{align*}
-			K(k)^n\, f_n(a,b,c)
-			&= a\,(K(k+1) - d_x(k))^n \\
-			&\quad+ b\,(K(k+1) - d_y(k))^n \\
-			&\quad+ c\,(K(k+1) - d_z(k))^n.
-		\end{align*}
-	\end{theorem}
-	\begin{proof}
-		By definition $K(k+1) - d_x(k) = x\,K(k)$ and cyclically, so the right-hand side equals $K(k)^n\,\cycsum{ax^n} = K(k)^n\,f_n(a,b,c)$.
-	\end{proof}
-
-	\begin{corollary}[$D$-Complement, Unweighted]
-		\label{cor:D_complement_unweighted}
-		For any integers $k$ and $n$,
-		\[ \cycsum{(K(k+1) - d_x(k))^n} = K(k)^n\, s_n. \]
-	\end{corollary}
-	\begin{proof}
-		Set $a = b = c = 1$ in Theorem~\ref{lem:D_complement}.
 	\end{proof}
 
 	\begin{definition}
@@ -651,15 +628,6 @@
 		Apply (\ref{cor:D_sum}) in the lifted triplet $(x^n, y^n, z^n)$ and use $\lift{e_1}{n} = 0$ from (\ref{cor:lifted_e1e2}).
 	\end{proof}
 
-	\begin{corollary}[$D$-Complement Zero Sum]
-		\label{cor:D_complement_zero}
-		For any integer $k$,
-		\[ \cycsum{(K(k+1) - d_x(k))^n} = 0. \]
-	\end{corollary}
-	\begin{proof}
-		Immediate from (\ref{cor:D_complement_unweighted}), since $s_n = 0$.
-	\end{proof}
-
 	\subsection{The Master Identity}
 
 	\begin{corollary}[Master Identity under Zero Sum]
@@ -737,8 +705,5 @@
 	\begin{proof}
 		Multiply (\ref{cor:K_doubling_near}) by $3$ and substitute $3K(n+2) = 2e_1 K(n+1) - e_2 K(n)$ from (\ref{cor:sn_zero_K}).
 	\end{proof}
-
-
-
 
 \end{document}
